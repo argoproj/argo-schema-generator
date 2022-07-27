@@ -190,7 +190,7 @@ func generateOpenApiSchema(outputPath string, GetOpenAPIDefinitions func(ref com
 
 // Generate CRD spec for Rollout Resource
 func main() {
-	err := generateOpenApiSchema("schema/argo_kustomize_schema.json", apis.GetOpenAPIDefinitions)
+	err := generateOpenApiSchema("schema/argo_all_k8s_kustomize_schema.json", apis.GetOpenAPIDefinitions)
 	checkErr(err)
 	err = generateOpenApiSchema("schema/argo_workflows_kustomize_schema.json", workflows.GetOpenAPIDefinitions)
 	checkErr(err)
