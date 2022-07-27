@@ -186,6 +186,6 @@ func generateOpenApiSchema(outputPath string) error {
 
 // Generate CRD spec for Rollout Resource
 func main() {
-	err := generateOpenApiSchema("schema/rollout_cr_schema.json")
+	err := generateOpenApiSchema("schema/argo_kustomize_schema.json")
 	checkErr(err)
 }

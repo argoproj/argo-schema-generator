@@ -13,5 +13,5 @@ In your kustomization.yaml file add a config block like
 
 ```
 openapi:
-  path: https://raw.githubusercontent.com/zachaller/argo-schema-generator/main/schema/rollout_cr_schema.json
+  path: https://raw.githubusercontent.com/zachaller/argo-schema-generator/main/schema/argo_kustomize_schema.json
 ```
