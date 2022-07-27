@@ -1,0 +1,3223 @@
+{
+    "definitions": {
+        "io.argoproj.argocd.v1alpha1.AWSAuthConfig": {
+            "description": "AWSAuthConfig is an AWS IAM authentication configuration",
+            "type": "object",
+            "properties": {
+                "clusterName": {
+                    "description": "ClusterName contains AWS cluster name",
+                    "type": "string"
+                },
+                "roleARN": {
+                    "description": "RoleARN contains optional role ARN. If set then AWS IAM Authenticator assume a role to perform cluster operations instead of the default AWS credential provider chain.",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AWSAuthConfig",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.AppProject": {
+            "description": "AppProject provides a logical grouping of applications, providing controls for: * where the apps may deploy to (cluster whitelist) * what may be deployed (repository whitelist, resource whitelist/blacklist) * who can access these applications (roles, OIDC group claims bindings) * and what they can do (RBAC policies) * automation access to these roles (JWT tokens)",
+            "type": "object",
+            "required": [
+                "metadata",
+                "spec"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+                },
+                "spec": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.AppProjectSpec"
+                },
+                "status": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.AppProjectStatus"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AppProject",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.AppProjectList": {
+            "description": "AppProjectList is list of AppProject resources",
+            "type": "object",
+            "required": [
+                "metadata",
+                "items"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.AppProject"
+                    }
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AppProjectList",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.AppProjectSpec": {
+            "description": "AppProjectSpec is the specification of an AppProject",
+            "type": "object",
+            "properties": {
+                "clusterResourceBlacklist": {
+                    "description": "ClusterResourceBlacklist contains list of blacklisted cluster level resources",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.GroupKind"
+                    }
+                },
+                "clusterResourceWhitelist": {
+                    "description": "ClusterResourceWhitelist contains list of whitelisted cluster level resources",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.GroupKind"
+                    }
+                },
+                "description": {
+                    "description": "Description contains optional project description",
+                    "type": "string"
+                },
+                "destinations": {
+                    "description": "Destinations contains list of destinations available for deployment",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationDestination"
+                    }
+                },
+                "namespaceResourceBlacklist": {
+                    "description": "NamespaceResourceBlacklist contains list of blacklisted namespace level resources",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.GroupKind"
+                    }
+                },
+                "namespaceResourceWhitelist": {
+                    "description": "NamespaceResourceWhitelist contains list of whitelisted namespace level resources",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.GroupKind"
+                    }
+                },
+                "orphanedResources": {
+                    "description": "OrphanedResources specifies if controller should monitor orphaned resources of apps in this project",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.OrphanedResourcesMonitorSettings"
+                },
+                "roles": {
+                    "description": "Roles are user defined RBAC roles associated with this project",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ProjectRole"
+                    }
+                },
+                "signatureKeys": {
+                    "description": "SignatureKeys contains a list of PGP key IDs that commits in Git must be signed with in order to be allowed for sync",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SignatureKey"
+                    }
+                },
+                "sourceRepos": {
+                    "description": "SourceRepos contains list of repository URLs which can be used for deployment",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "syncWindows": {
+                    "description": "SyncWindows controls when syncs can be run for apps in this project",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SyncWindow"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AppProjectSpec",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.AppProjectStatus": {
+            "description": "AppProjectStatus contains status information for AppProject CRs",
+            "type": "object",
+            "properties": {
+                "jwtTokensByRole": {
+                    "description": "JWTTokensByRole contains a list of JWT tokens issued for a given role",
+                    "type": "object",
+                    "additionalProperties": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.JWTTokens"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AppProjectStatus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.Application": {
+            "description": "Application is a definition of Application resource.",
+            "type": "object",
+            "required": [
+                "metadata",
+                "spec"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+                },
+                "operation": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.Operation"
+                },
+                "spec": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSpec"
+                },
+                "status": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationStatus"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "Application",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationCondition": {
+            "description": "ApplicationCondition contains details about an application condition, which is usally an error or warning",
+            "type": "object",
+            "required": [
+                "type",
+                "message"
+            ],
+            "properties": {
+                "lastTransitionTime": {
+                    "description": "LastTransitionTime is the time the condition was last observed",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "message": {
+                    "description": "Message contains human-readable message indicating details about condition",
+                    "type": "string",
+                    "default": ""
+                },
+                "type": {
+                    "description": "Type is an application condition type",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationCondition",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationDestination": {
+            "description": "ApplicationDestination holds information about the application's destination",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Name is an alternate way of specifying the target cluster by its symbolic name",
+                    "type": "string"
+                },
+                "namespace": {
+                    "description": "Namespace specifies the target namespace for the application's resources. The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace",
+                    "type": "string"
+                },
+                "server": {
+                    "description": "Server specifies the URL of the target cluster and must be set to the Kubernetes control plane API",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationDestination",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationList": {
+            "description": "ApplicationList is list of Application resources",
+            "type": "object",
+            "required": [
+                "metadata",
+                "items"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.Application"
+                    }
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationList",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSource": {
+            "description": "ApplicationSource contains all required information about the source of an application",
+            "type": "object",
+            "required": [
+                "repoURL"
+            ],
+            "properties": {
+                "chart": {
+                    "description": "Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo.",
+                    "type": "string"
+                },
+                "directory": {
+                    "description": "Directory holds path/directory specific options",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSourceDirectory"
+                },
+                "helm": {
+                    "description": "Helm holds helm specific options",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSourceHelm"
+                },
+                "kustomize": {
+                    "description": "Kustomize holds kustomize specific options",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSourceKustomize"
+                },
+                "path": {
+                    "description": "Path is a directory path within the Git repository, and is only valid for applications sourced from Git.",
+                    "type": "string"
+                },
+                "plugin": {
+                    "description": "ConfigManagementPlugin holds config management plugin specific options",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSourcePlugin"
+                },
+                "repoURL": {
+                    "description": "RepoURL is the URL to the repository (Git or Helm) that contains the application manifests",
+                    "type": "string",
+                    "default": ""
+                },
+                "targetRevision": {
+                    "description": "TargetRevision defines the revision of the source to sync the application to. In case of Git, this can be commit, tag, or branch. If omitted, will equal to HEAD. In case of Helm, this is a semver tag for the Chart's version.",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSource",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSourceDirectory": {
+            "description": "ApplicationSourceDirectory holds options for applications of type plain YAML or Jsonnet",
+            "type": "object",
+            "properties": {
+                "exclude": {
+                    "description": "Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation",
+                    "type": "string"
+                },
+                "include": {
+                    "description": "Include contains a glob pattern to match paths against that should be explicitly included during manifest generation",
+                    "type": "string"
+                },
+                "jsonnet": {
+                    "description": "Jsonnet holds options specific to Jsonnet",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSourceJsonnet"
+                },
+                "recurse": {
+                    "description": "Recurse specifies whether to scan a directory recursively for manifests",
+                    "type": "boolean"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSourceDirectory",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSourceHelm": {
+            "description": "ApplicationSourceHelm holds helm specific options",
+            "type": "object",
+            "properties": {
+                "fileParameters": {
+                    "description": "FileParameters are file parameters to the helm template",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.HelmFileParameter"
+                    }
+                },
+                "ignoreMissingValueFiles": {
+                    "description": "IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values",
+                    "type": "boolean"
+                },
+                "parameters": {
+                    "description": "Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.HelmParameter"
+                    }
+                },
+                "passCredentials": {
+                    "description": "PassCredentials pass credentials to all domains (Helm's --pass-credentials)",
+                    "type": "boolean"
+                },
+                "releaseName": {
+                    "description": "ReleaseName is the Helm release name to use. If omitted it will use the application name",
+                    "type": "string"
+                },
+                "skipCrds": {
+                    "description": "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)",
+                    "type": "boolean"
+                },
+                "valueFiles": {
+                    "description": "ValuesFiles is a list of Helm value files to use when generating a template",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "values": {
+                    "description": "Values specifies Helm values to be passed to helm template, typically defined as a block",
+                    "type": "string"
+                },
+                "version": {
+                    "description": "Version is the Helm version to use for templating (\"3\")",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSourceHelm",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSourceJsonnet": {
+            "description": "ApplicationSourceJsonnet holds options specific to applications of type Jsonnet",
+            "type": "object",
+            "properties": {
+                "extVars": {
+                    "description": "ExtVars is a list of Jsonnet External Variables",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.JsonnetVar"
+                    }
+                },
+                "libs": {
+                    "description": "Additional library search dirs",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "tlas": {
+                    "description": "TLAS is a list of Jsonnet Top-level Arguments",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.JsonnetVar"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSourceJsonnet",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSourceKustomize": {
+            "description": "ApplicationSourceKustomize holds options specific to an Application source specific to Kustomize",
+            "type": "object",
+            "properties": {
+                "commonAnnotations": {
+                    "description": "CommonAnnotations is a list of additional annotations to add to rendered manifests",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "commonLabels": {
+                    "description": "CommonLabels is a list of additional labels to add to rendered manifests",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "forceCommonAnnotations": {
+                    "description": "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps",
+                    "type": "boolean"
+                },
+                "forceCommonLabels": {
+                    "description": "ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps",
+                    "type": "boolean"
+                },
+                "images": {
+                    "description": "Images is a list of Kustomize image override specifications",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "namePrefix": {
+                    "description": "NamePrefix is a prefix appended to resources for Kustomize apps",
+                    "type": "string"
+                },
+                "nameSuffix": {
+                    "description": "NameSuffix is a suffix appended to resources for Kustomize apps",
+                    "type": "string"
+                },
+                "version": {
+                    "description": "Version controls which version of Kustomize to use for rendering manifests",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSourceKustomize",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSourcePlugin": {
+            "description": "ApplicationSourcePlugin holds options specific to config management plugins",
+            "type": "object",
+            "properties": {
+                "env": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.EnvEntry"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSourcePlugin",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSpec": {
+            "description": "ApplicationSpec represents desired application state. Contains link to repository with application definition and additional parameters link definition revision.",
+            "type": "object",
+            "required": [
+                "source",
+                "destination",
+                "project"
+            ],
+            "properties": {
+                "destination": {
+                    "description": "Destination is a reference to the target Kubernetes server and namespace",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationDestination"
+                },
+                "ignoreDifferences": {
+                    "description": "IgnoreDifferences is a list of resources and their fields which should be ignored during comparison",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ResourceIgnoreDifferences"
+                    }
+                },
+                "info": {
+                    "description": "Info contains a list of information (URLs, email addresses, and plain text) that relates to the application",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.Info"
+                    }
+                },
+                "project": {
+                    "description": "Project is a reference to the project this application belongs to. The empty string means that application belongs to the 'default' project.",
+                    "type": "string",
+                    "default": ""
+                },
+                "revisionHistoryLimit": {
+                    "description": "RevisionHistoryLimit limits the number of items kept in the application's revision history, which is used for informational purposes as well as for rollbacks to previous versions. This should only be changed in exceptional circumstances. Setting to zero will store no history. This will reduce storage used. Increasing will increase the space used to store the history, so we do not recommend increasing it. Default is 10.",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "source": {
+                    "description": "Source is a reference to the location of the application's manifests or chart",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSource"
+                },
+                "syncPolicy": {
+                    "description": "SyncPolicy controls when and how a sync will be performed",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SyncPolicy"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSpec",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationStatus": {
+            "description": "ApplicationStatus contains status information for the application",
+            "type": "object",
+            "properties": {
+                "conditions": {
+                    "description": "Conditions is a list of currently observed application conditions",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationCondition"
+                    }
+                },
+                "health": {
+                    "description": "Health contains information about the application's current health status",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.HealthStatus"
+                },
+                "history": {
+                    "description": "History contains information about the application's sync history",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.RevisionHistory"
+                    }
+                },
+                "observedAt": {
+                    "description": "ObservedAt indicates when the application state was updated without querying latest git state Deprecated: controller no longer updates ObservedAt field",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "operationState": {
+                    "description": "OperationState contains information about any ongoing operations, such as a sync",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.OperationState"
+                },
+                "reconciledAt": {
+                    "description": "ReconciledAt indicates when the application state was reconciled using the latest git version",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "resources": {
+                    "description": "Resources is a list of Kubernetes resources managed by this application",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ResourceStatus"
+                    }
+                },
+                "sourceType": {
+                    "description": "SourceType specifies the type of this application",
+                    "type": "string"
+                },
+                "summary": {
+                    "description": "Summary contains a list of URLs and container images used by this application",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSummary"
+                },
+                "sync": {
+                    "description": "Sync contains information about the application's current sync status",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SyncStatus"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationStatus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSummary": {
+            "description": "ApplicationSummary contains information about URLs and container images used by an application",
+            "type": "object",
+            "properties": {
+                "externalURLs": {
+                    "description": "ExternalURLs holds all external URLs of application child resources.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "images": {
+                    "description": "Images holds all images of application child resources.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSummary",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationTree": {
+            "description": "ApplicationTree holds nodes which belongs to the application",
+            "type": "object",
+            "properties": {
+                "hosts": {
+                    "description": "Hosts holds list of Kubernetes nodes that run application related pods",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.HostInfo"
+                    }
+                },
+                "nodes": {
+                    "description": "Nodes contains list of nodes which either directly managed by the application and children of directly managed nodes.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ResourceNode"
+                    }
+                },
+                "orphanedNodes": {
+                    "description": "OrphanedNodes contains if or orphaned nodes: nodes which are not managed by the app but in the same namespace. List is populated only if orphaned resources enabled in app project.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ResourceNode"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationTree",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationWatchEvent": {
+            "description": "ApplicationWatchEvent contains information about application change.",
+            "type": "object",
+            "required": [
+                "type",
+                "application"
+            ],
+            "properties": {
+                "application": {
+                    "description": "Application is:\n * If Type is Added or Modified: the new state of the object.\n * If Type is Deleted: the state of the object immediately before deletion.\n * If Type is Error: *api.Status is recommended; other types may make sense\n   depending on context.",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.Application"
+                },
+                "type": {
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationWatchEvent",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.Backoff": {
+            "description": "Backoff is the backoff strategy to use on subsequent retries for failing syncs",
+            "type": "object",
+            "properties": {
+                "duration": {
+                    "description": "Duration is the amount to back off. Default unit is seconds, but could also be a duration (e.g. \"2m\", \"1h\")",
+                    "type": "string"
+                },
+                "factor": {
+                    "description": "Factor is a factor to multiply the base duration after each failed retry",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "maxDuration": {
+                    "description": "MaxDuration is the maximum amount of time allowed for the backoff strategy",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "Backoff",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.Cluster": {
+            "description": "Cluster is the definition of a cluster resource",
+            "type": "object",
+            "required": [
+                "server",
+                "name",
+                "config"
+            ],
+            "properties": {
+                "annotations": {
+                    "description": "Annotations for cluster secret metadata",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "clusterResources": {
+                    "description": "Indicates if cluster level resources should be managed. This setting is used only if cluster is connected in a namespaced mode.",
+                    "type": "boolean"
+                },
+                "config": {
+                    "description": "Config holds cluster information for connecting to a cluster",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ClusterConfig"
+                },
+                "connectionState": {
+                    "description": "DEPRECATED: use Info.ConnectionState field instead. ConnectionState contains information about cluster connection state",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ConnectionState"
+                },
+                "info": {
+                    "description": "Info holds information about cluster cache and state",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ClusterInfo"
+                },
+                "labels": {
+                    "description": "Labels for cluster secret metadata",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "name": {
+                    "description": "Name of the cluster. If omitted, will use the server address",
+                    "type": "string",
+                    "default": ""
+                },
+                "namespaces": {
+                    "description": "Holds list of namespaces which are accessible in that cluster. Cluster level resources will be ignored if namespace list is not empty.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "project": {
+                    "description": "Reference between project and cluster that allow you automatically to be added as item inside Destinations project entity",
+                    "type": "string"
+                },
+                "refreshRequestedAt": {
+                    "description": "RefreshRequestedAt holds time when cluster cache refresh has been requested",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "server": {
+                    "description": "Server is the API server URL of the Kubernetes cluster",
+                    "type": "string",
+                    "default": ""
+                },
+                "serverVersion": {
+                    "description": "DEPRECATED: use Info.ServerVersion field instead. The server version",
+                    "type": "string"
+                },
+                "shard": {
+                    "description": "Shard contains optional shard number. Calculated on the fly by the application controller if not specified.",
+                    "type": "integer",
+                    "format": "int64"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "Cluster",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ClusterCacheInfo": {
+            "description": "ClusterCacheInfo contains information about the cluster cache",
+            "type": "object",
+            "properties": {
+                "apisCount": {
+                    "description": "APIsCount holds number of observed Kubernetes API count",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "lastCacheSyncTime": {
+                    "description": "LastCacheSyncTime holds time of most recent cache synchronization",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "resourcesCount": {
+                    "description": "ResourcesCount holds number of observed Kubernetes resources",
+                    "type": "integer",
+                    "format": "int64"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ClusterCacheInfo",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ClusterConfig": {
+            "description": "ClusterConfig is the configuration attributes. This structure is subset of the go-client rest.Config with annotations added for marshalling.",
+            "type": "object",
+            "required": [
+                "tlsClientConfig"
+            ],
+            "properties": {
+                "awsAuthConfig": {
+                    "description": "AWSAuthConfig contains IAM authentication configuration",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.AWSAuthConfig"
+                },
+                "bearerToken": {
+                    "description": "Server requires Bearer authentication. This client will not attempt to use refresh tokens for an OAuth2 flow.",
+                    "type": "string"
+                },
+                "execProviderConfig": {
+                    "description": "ExecProviderConfig contains configuration for an exec provider",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ExecProviderConfig"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "tlsClientConfig": {
+                    "description": "TLSClientConfig contains settings to enable transport layer security",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.TLSClientConfig"
+                },
+                "username": {
+                    "description": "Server requires Basic authentication",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ClusterConfig",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ClusterInfo": {
+            "description": "ClusterInfo contains information about the cluster",
+            "type": "object",
+            "required": [
+                "applicationsCount"
+            ],
+            "properties": {
+                "apiVersions": {
+                    "description": "APIVersions contains list of API versions supported by the cluster",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "applicationsCount": {
+                    "description": "ApplicationsCount is the number of applications managed by Argo CD on the cluster",
+                    "type": "integer",
+                    "format": "int64",
+                    "default": 0
+                },
+                "cacheInfo": {
+                    "description": "CacheInfo contains information about the cluster cache",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ClusterCacheInfo"
+                },
+                "connectionState": {
+                    "description": "ConnectionState contains information about the connection to the cluster",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ConnectionState"
+                },
+                "serverVersion": {
+                    "description": "ServerVersion contains information about the Kubernetes version of the cluster",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ClusterInfo",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ClusterList": {
+            "description": "ClusterList is a collection of Clusters.",
+            "type": "object",
+            "required": [
+                "items"
+            ],
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.Cluster"
+                    }
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ClusterList",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.Command": {
+            "description": "Command holds binary path and arguments list",
+            "type": "object",
+            "properties": {
+                "args": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "command": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "Command",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ComparedTo": {
+            "description": "ComparedTo contains application source and target which was used for resources comparison",
+            "type": "object",
+            "required": [
+                "source",
+                "destination"
+            ],
+            "properties": {
+                "destination": {
+                    "description": "Destination is a reference to the application's destination used for comparison",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationDestination"
+                },
+                "source": {
+                    "description": "Source is a reference to the application's source used for comparison",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSource"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ComparedTo",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ComponentParameter": {
+            "description": "ComponentParameter contains information about component parameter value",
+            "type": "object",
+            "required": [
+                "name",
+                "value"
+            ],
+            "properties": {
+                "component": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "default": ""
+                },
+                "value": {
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ComponentParameter",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ConfigManagementPlugin": {
+            "description": "ConfigManagementPlugin contains config management plugin configuration",
+            "type": "object",
+            "required": [
+                "name",
+                "generate"
+            ],
+            "properties": {
+                "generate": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.Command"
+                },
+                "init": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.Command"
+                },
+                "lockRepo": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ConfigManagementPlugin",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ConnectionState": {
+            "description": "ConnectionState contains information about remote resource connection state, currently used for clusters and repositories",
+            "type": "object",
+            "required": [
+                "status",
+                "message",
+                "attemptedAt"
+            ],
+            "properties": {
+                "attemptedAt": {
+                    "description": "ModifiedAt contains the timestamp when this connection status has been determined",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "message": {
+                    "description": "Message contains human readable information about the connection status",
+                    "type": "string",
+                    "default": ""
+                },
+                "status": {
+                    "description": "Status contains the current status indicator for the connection",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ConnectionState",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.EnvEntry": {
+            "description": "EnvEntry represents an entry in the application's environment",
+            "type": "object",
+            "required": [
+                "name",
+                "value"
+            ],
+            "properties": {
+                "name": {
+                    "description": "Name is the name of the variable, usually expressed in uppercase",
+                    "type": "string",
+                    "default": ""
+                },
+                "value": {
+                    "description": "Value is the value of the variable",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "EnvEntry",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ExecProviderConfig": {
+            "description": "ExecProviderConfig is config used to call an external command to perform cluster authentication See: https://godoc.org/k8s.io/client-go/tools/clientcmd/api#ExecConfig",
+            "type": "object",
+            "properties": {
+                "apiVersion": {
+                    "description": "Preferred input version of the ExecInfo",
+                    "type": "string"
+                },
+                "args": {
+                    "description": "Arguments to pass to the command when executing it",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "command": {
+                    "description": "Command to execute",
+                    "type": "string"
+                },
+                "env": {
+                    "description": "Env defines additional environment variables to expose to the process",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "installHint": {
+                    "description": "This text is shown to the user when the executable doesn't seem to be present",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ExecProviderConfig",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.GnuPGPublicKey": {
+            "description": "GnuPGPublicKey is a representation of a GnuPG public key",
+            "type": "object",
+            "required": [
+                "keyID"
+            ],
+            "properties": {
+                "fingerprint": {
+                    "description": "Fingerprint is the fingerprint of the key",
+                    "type": "string"
+                },
+                "keyData": {
+                    "description": "KeyData holds the raw key data, in base64 encoded format",
+                    "type": "string"
+                },
+                "keyID": {
+                    "description": "KeyID specifies the key ID, in hexadecimal string format",
+                    "type": "string",
+                    "default": ""
+                },
+                "owner": {
+                    "description": "Owner holds the owner identification, e.g. a name and e-mail address",
+                    "type": "string"
+                },
+                "subType": {
+                    "description": "SubType holds the key's sub type (e.g. rsa4096)",
+                    "type": "string"
+                },
+                "trust": {
+                    "description": "Trust holds the level of trust assigned to this key",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "GnuPGPublicKey",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.GnuPGPublicKeyList": {
+            "description": "GnuPGPublicKeyList is a collection of GnuPGPublicKey objects",
+            "type": "object",
+            "required": [
+                "items"
+            ],
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.GnuPGPublicKey"
+                    }
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "GnuPGPublicKeyList",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.HealthStatus": {
+            "description": "HealthStatus contains information about the currently observed health state of an application or resource",
+            "type": "object",
+            "properties": {
+                "message": {
+                    "description": "Message is a human-readable informational message describing the health status",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "Status holds the status code of the application or resource",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "HealthStatus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.HelmFileParameter": {
+            "description": "HelmFileParameter is a file parameter that's passed to helm template during manifest generation",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Name is the name of the Helm parameter",
+                    "type": "string"
+                },
+                "path": {
+                    "description": "Path is the path to the file containing the values for the Helm parameter",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "HelmFileParameter",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.HelmOptions": {
+            "description": "HelmOptions holds helm options",
+            "type": "object",
+            "required": [
+                "ValuesFileSchemes"
+            ],
+            "properties": {
+                "ValuesFileSchemes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "HelmOptions",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.HelmParameter": {
+            "description": "HelmParameter is a parameter that's passed to helm template during manifest generation",
+            "type": "object",
+            "properties": {
+                "forceString": {
+                    "description": "ForceString determines whether to tell Helm to interpret booleans and numbers as strings",
+                    "type": "boolean"
+                },
+                "name": {
+                    "description": "Name is the name of the Helm parameter",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Value is the value for the Helm parameter",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "HelmParameter",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.HostInfo": {
+            "description": "HostInfo holds host name and resources metrics",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "resourcesInfo": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.HostResourceInfo"
+                    }
+                },
+                "systemInfo": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.api.core.v1.NodeSystemInfo"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "HostInfo",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.HostResourceInfo": {
+            "type": "object",
+            "properties": {
+                "capacity": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "requestedByApp": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "requestedByNeighbors": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "resourceName": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "HostResourceInfo",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.Info": {
+            "type": "object",
+            "required": [
+                "name",
+                "value"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "default": ""
+                },
+                "value": {
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "Info",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.InfoItem": {
+            "description": "InfoItem contains arbitrary, human readable information about an application",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Name is a human readable title for this piece of information.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Value is human readable content.",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "InfoItem",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.JWTToken": {
+            "description": "JWTToken holds the issuedAt and expiresAt values of a token",
+            "type": "object",
+            "required": [
+                "iat"
+            ],
+            "properties": {
+                "exp": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "iat": {
+                    "type": "integer",
+                    "format": "int64",
+                    "default": 0
+                },
+                "id": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "JWTToken",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.JWTTokens": {
+            "description": "JWTTokens represents a list of JWT tokens",
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.JWTToken"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "JWTTokens",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.JsonnetVar": {
+            "description": "JsonnetVar represents a variable to be passed to jsonnet during manifest generation",
+            "type": "object",
+            "required": [
+                "name",
+                "value"
+            ],
+            "properties": {
+                "code": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string",
+                    "default": ""
+                },
+                "value": {
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "JsonnetVar",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.KnownTypeField": {
+            "description": "KnownTypeField contains mapping between CRD field and known Kubernetes type. This is mainly used for unit conversion in unknown resources (e.g. 0.1 == 100mi)",
+            "type": "object",
+            "properties": {
+                "field": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "KnownTypeField",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.KustomizeOptions": {
+            "description": "KustomizeOptions are options for kustomize to use when building manifests",
+            "type": "object",
+            "required": [
+                "BuildOptions",
+                "BinaryPath"
+            ],
+            "properties": {
+                "BinaryPath": {
+                    "description": "BinaryPath holds optional path to kustomize binary",
+                    "type": "string",
+                    "default": ""
+                },
+                "BuildOptions": {
+                    "description": "BuildOptions is a string of build parameters to use when calling `kustomize build`",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "KustomizeOptions",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.Operation": {
+            "description": "Operation contains information about a requested or running operation",
+            "type": "object",
+            "properties": {
+                "info": {
+                    "description": "Info is a list of informational items for this operation",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.Info"
+                    }
+                },
+                "initiatedBy": {
+                    "description": "InitiatedBy contains information about who initiated the operations",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.OperationInitiator"
+                },
+                "retry": {
+                    "description": "Retry controls the strategy to apply if a sync fails",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.RetryStrategy"
+                },
+                "sync": {
+                    "description": "Sync contains parameters for the operation",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SyncOperation"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "Operation",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.OperationInitiator": {
+            "description": "OperationInitiator contains information about the initiator of an operation",
+            "type": "object",
+            "properties": {
+                "automated": {
+                    "description": "Automated is set to true if operation was initiated automatically by the application controller.",
+                    "type": "boolean"
+                },
+                "username": {
+                    "description": "Username contains the name of a user who started operation",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "OperationInitiator",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.OperationState": {
+            "description": "OperationState contains information about state of a running operation",
+            "type": "object",
+            "required": [
+                "operation",
+                "phase",
+                "startedAt"
+            ],
+            "properties": {
+                "finishedAt": {
+                    "description": "FinishedAt contains time of operation completion",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "message": {
+                    "description": "Message holds any pertinent messages when attempting to perform operation (typically errors).",
+                    "type": "string"
+                },
+                "operation": {
+                    "description": "Operation is the original requested operation",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.Operation"
+                },
+                "phase": {
+                    "description": "Phase is the current phase of the operation",
+                    "type": "string",
+                    "default": ""
+                },
+                "retryCount": {
+                    "description": "RetryCount contains time of operation retries",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "startedAt": {
+                    "description": "StartedAt contains time of operation start",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "syncResult": {
+                    "description": "SyncResult is the result of a Sync operation",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SyncOperationResult"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "OperationState",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.OrphanedResourceKey": {
+            "description": "OrphanedResourceKey is a reference to a resource to be ignored from",
+            "type": "object",
+            "properties": {
+                "group": {
+                    "type": "string"
+                },
+                "kind": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "OrphanedResourceKey",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.OrphanedResourcesMonitorSettings": {
+            "description": "OrphanedResourcesMonitorSettings holds settings of orphaned resources monitoring",
+            "type": "object",
+            "properties": {
+                "ignore": {
+                    "description": "Ignore contains a list of resources that are to be excluded from orphaned resources monitoring",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.OrphanedResourceKey"
+                    }
+                },
+                "warn": {
+                    "description": "Warn indicates if warning condition should be created for apps which have orphaned resources",
+                    "type": "boolean"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "OrphanedResourcesMonitorSettings",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.OverrideIgnoreDiff": {
+            "description": "OverrideIgnoreDiff contains configurations about how fields should be ignored during diffs between the desired state and live state",
+            "type": "object",
+            "required": [
+                "jsonPointers",
+                "jqPathExpressions",
+                "managedFieldsManagers"
+            ],
+            "properties": {
+                "jqPathExpressions": {
+                    "description": "JQPathExpressions is a JQ path list that will be evaludated during the diff process",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "jsonPointers": {
+                    "description": "JSONPointers is a JSON path list following the format defined in RFC4627 (https://datatracker.ietf.org/doc/html/rfc6902#section-3)",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "managedFieldsManagers": {
+                    "description": "ManagedFieldsManagers is a list of trusted managers. Fields mutated by those managers will take precedence over the desired state defined in the SCM and won't be displayed in diffs",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "OverrideIgnoreDiff",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ProjectRole": {
+            "description": "ProjectRole represents a role that has access to a project",
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "description": {
+                    "description": "Description is a description of the role",
+                    "type": "string"
+                },
+                "groups": {
+                    "description": "Groups are a list of OIDC group claims bound to this role",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "jwtTokens": {
+                    "description": "JWTTokens are a list of generated JWT tokens bound to this role",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.JWTToken"
+                    }
+                },
+                "name": {
+                    "description": "Name is a name for this role",
+                    "type": "string",
+                    "default": ""
+                },
+                "policies": {
+                    "description": "Policies Stores a list of casbin formatted strings that define access policies for the role in the project",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ProjectRole",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.RepoCreds": {
+            "description": "RepoCreds holds the definition for repository credentials",
+            "type": "object",
+            "required": [
+                "url"
+            ],
+            "properties": {
+                "enableOCI": {
+                    "description": "EnableOCI specifies whether helm-oci support should be enabled for this repo",
+                    "type": "boolean"
+                },
+                "githubAppEnterpriseBaseUrl": {
+                    "description": "GithubAppEnterpriseBaseURL specifies the GitHub API URL for GitHub app authentication. If empty will default to https://api.github.com",
+                    "type": "string"
+                },
+                "githubAppID": {
+                    "description": "GithubAppId specifies the Github App ID of the app used to access the repo for GitHub app authentication",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "githubAppInstallationID": {
+                    "description": "GithubAppInstallationId specifies the ID of the installed GitHub App for GitHub app authentication",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "githubAppPrivateKey": {
+                    "description": "GithubAppPrivateKey specifies the private key PEM data for authentication via GitHub app",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "Password for authenticating at the repo server",
+                    "type": "string"
+                },
+                "sshPrivateKey": {
+                    "description": "SSHPrivateKey contains the private key data for authenticating at the repo server using SSH (only Git repos)",
+                    "type": "string"
+                },
+                "tlsClientCertData": {
+                    "description": "TLSClientCertData specifies the TLS client cert data for authenticating at the repo server",
+                    "type": "string"
+                },
+                "tlsClientCertKey": {
+                    "description": "TLSClientCertKey specifies the TLS client cert key for authenticating at the repo server",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Type specifies the type of the repoCreds. Can be either \"git\" or \"helm. \"git\" is assumed if empty or absent.",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "URL is the URL that this credentials matches to",
+                    "type": "string",
+                    "default": ""
+                },
+                "username": {
+                    "description": "Username for authenticating at the repo server",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RepoCreds",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.RepoCredsList": {
+            "description": "RepositoryList is a collection of Repositories.",
+            "type": "object",
+            "required": [
+                "items"
+            ],
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.RepoCreds"
+                    }
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RepoCredsList",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.Repository": {
+            "description": "Repository is a repository holding application configurations",
+            "type": "object",
+            "required": [
+                "repo"
+            ],
+            "properties": {
+                "connectionState": {
+                    "description": "ConnectionState contains information about the current state of connection to the repository server",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ConnectionState"
+                },
+                "enableLfs": {
+                    "description": "EnableLFS specifies whether git-lfs support should be enabled for this repo. Only valid for Git repositories.",
+                    "type": "boolean"
+                },
+                "enableOCI": {
+                    "description": "EnableOCI specifies whether helm-oci support should be enabled for this repo",
+                    "type": "boolean"
+                },
+                "githubAppEnterpriseBaseUrl": {
+                    "description": "GithubAppEnterpriseBaseURL specifies the base URL of GitHub Enterprise installation. If empty will default to https://api.github.com",
+                    "type": "string"
+                },
+                "githubAppID": {
+                    "description": "GithubAppId specifies the ID of the GitHub app used to access the repo",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "githubAppInstallationID": {
+                    "description": "GithubAppInstallationId specifies the installation ID of the GitHub App used to access the repo",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "githubAppPrivateKey": {
+                    "description": "Github App Private Key PEM data",
+                    "type": "string"
+                },
+                "inheritedCreds": {
+                    "description": "Whether credentials were inherited from a credential set",
+                    "type": "boolean"
+                },
+                "insecure": {
+                    "description": "Insecure specifies whether the connection to the repository ignores any errors when verifying TLS certificates or SSH host keys",
+                    "type": "boolean"
+                },
+                "insecureIgnoreHostKey": {
+                    "description": "InsecureIgnoreHostKey should not be used anymore, Insecure is favoured Used only for Git repos",
+                    "type": "boolean"
+                },
+                "name": {
+                    "description": "Name specifies a name to be used for this repo. Only used with Helm repos",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "Password contains the password or PAT used for authenticating at the remote repository",
+                    "type": "string"
+                },
+                "project": {
+                    "description": "Reference between project and repository that allow you automatically to be added as item inside SourceRepos project entity",
+                    "type": "string"
+                },
+                "proxy": {
+                    "description": "Proxy specifies the HTTP/HTTPS proxy used to access the repo",
+                    "type": "string"
+                },
+                "repo": {
+                    "description": "Repo contains the URL to the remote repository",
+                    "type": "string",
+                    "default": ""
+                },
+                "sshPrivateKey": {
+                    "description": "SSHPrivateKey contains the PEM data for authenticating at the repo server. Only used with Git repos.",
+                    "type": "string"
+                },
+                "tlsClientCertData": {
+                    "description": "TLSClientCertData contains a certificate in PEM format for authenticating at the repo server",
+                    "type": "string"
+                },
+                "tlsClientCertKey": {
+                    "description": "TLSClientCertKey contains a private key in PEM format for authenticating at the repo server",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Type specifies the type of the repo. Can be either \"git\" or \"helm. \"git\" is assumed if empty or absent.",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "Username contains the user name used for authenticating at the remote repository",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "Repository",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.RepositoryCertificate": {
+            "description": "A RepositoryCertificate is either SSH known hosts entry or TLS certificate",
+            "type": "object",
+            "required": [
+                "serverName",
+                "certType",
+                "certSubType",
+                "certData",
+                "certInfo"
+            ],
+            "properties": {
+                "certData": {
+                    "description": "CertData contains the actual certificate data, dependent on the certificate type",
+                    "type": "string",
+                    "format": "byte"
+                },
+                "certInfo": {
+                    "description": "CertInfo will hold additional certificate info, depdendent on the certificate type (e.g. SSH fingerprint, X509 CommonName)",
+                    "type": "string",
+                    "default": ""
+                },
+                "certSubType": {
+                    "description": "CertSubType specifies the sub type of the cert, i.e. \"ssh-rsa\"",
+                    "type": "string",
+                    "default": ""
+                },
+                "certType": {
+                    "description": "CertType specifies the type of the certificate - currently one of \"https\" or \"ssh\"",
+                    "type": "string",
+                    "default": ""
+                },
+                "serverName": {
+                    "description": "ServerName specifies the DNS name of the server this certificate is intended for",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RepositoryCertificate",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.RepositoryCertificateList": {
+            "description": "RepositoryCertificateList is a collection of RepositoryCertificates",
+            "type": "object",
+            "required": [
+                "items"
+            ],
+            "properties": {
+                "items": {
+                    "description": "List of certificates to be processed",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.RepositoryCertificate"
+                    }
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RepositoryCertificateList",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.RepositoryList": {
+            "description": "RepositoryList is a collection of Repositories.",
+            "type": "object",
+            "required": [
+                "items"
+            ],
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.Repository"
+                    }
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RepositoryList",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ResourceAction": {
+            "type": "object",
+            "properties": {
+                "disabled": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "params": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ResourceActionParam"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ResourceAction",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ResourceActionDefinition": {
+            "type": "object",
+            "required": [
+                "name",
+                "action.lua"
+            ],
+            "properties": {
+                "action.lua": {
+                    "type": "string",
+                    "default": ""
+                },
+                "name": {
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ResourceActionDefinition",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ResourceActionParam": {
+            "type": "object",
+            "properties": {
+                "default": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ResourceActionParam",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ResourceActions": {
+            "type": "object",
+            "properties": {
+                "definitions": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ResourceActionDefinition"
+                    }
+                },
+                "discovery.lua": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ResourceActions",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ResourceDiff": {
+            "description": "ResourceDiff holds the diff of a live and target resource object",
+            "type": "object",
+            "properties": {
+                "diff": {
+                    "description": "Diff contains the JSON patch between target and live resource Deprecated: use NormalizedLiveState and PredictedLiveState to render the difference",
+                    "type": "string"
+                },
+                "group": {
+                    "type": "string"
+                },
+                "hook": {
+                    "type": "boolean"
+                },
+                "kind": {
+                    "type": "string"
+                },
+                "liveState": {
+                    "description": "TargetState contains the JSON live resource manifest",
+                    "type": "string"
+                },
+                "modified": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "namespace": {
+                    "type": "string"
+                },
+                "normalizedLiveState": {
+                    "description": "NormalizedLiveState contains JSON serialized live resource state with applied normalizations",
+                    "type": "string"
+                },
+                "predictedLiveState": {
+                    "description": "PredictedLiveState contains JSON serialized resource state that is calculated based on normalized and target resource state",
+                    "type": "string"
+                },
+                "resourceVersion": {
+                    "type": "string"
+                },
+                "targetState": {
+                    "description": "TargetState contains the JSON serialized resource manifest defined in the Git/Helm",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ResourceDiff",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ResourceIgnoreDifferences": {
+            "description": "ResourceIgnoreDifferences contains resource filter and list of json paths which should be ignored during comparison with live state.",
+            "type": "object",
+            "required": [
+                "kind"
+            ],
+            "properties": {
+                "group": {
+                    "type": "string"
+                },
+                "jqPathExpressions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "jsonPointers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "kind": {
+                    "type": "string",
+                    "default": ""
+                },
+                "managedFieldsManagers": {
+                    "description": "ManagedFieldsManagers is a list of trusted managers. Fields mutated by those managers will take precedence over the desired state defined in the SCM and won't be displayed in diffs",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "namespace": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ResourceIgnoreDifferences",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ResourceNetworkingInfo": {
+            "description": "ResourceNetworkingInfo holds networking resource related information",
+            "type": "object",
+            "properties": {
+                "externalURLs": {
+                    "description": "ExternalURLs holds list of URLs which should be available externally. List is populated for ingress resources using rules hostnames.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "ingress": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.api.core.v1.LoadBalancerIngress"
+                    }
+                },
+                "labels": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "targetLabels": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "targetRefs": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ResourceRef"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ResourceNetworkingInfo",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ResourceNode": {
+            "description": "ResourceNode contains information about live resource and its children",
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "group": {
+                    "type": "string"
+                },
+                "health": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.HealthStatus"
+                },
+                "images": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "info": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.InfoItem"
+                    }
+                },
+                "kind": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "namespace": {
+                    "type": "string"
+                },
+                "networkingInfo": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ResourceNetworkingInfo"
+                },
+                "parentRefs": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ResourceRef"
+                    }
+                },
+                "resourceVersion": {
+                    "type": "string"
+                },
+                "uid": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ResourceNode",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ResourceOverride": {
+            "description": "ResourceOverride holds configuration to customize resource diffing and health assessment",
+            "type": "object",
+            "required": [
+                "HealthLua",
+                "UseOpenLibs",
+                "Actions",
+                "IgnoreDifferences",
+                "KnownTypeFields"
+            ],
+            "properties": {
+                "Actions": {
+                    "type": "string",
+                    "default": ""
+                },
+                "HealthLua": {
+                    "type": "string",
+                    "default": ""
+                },
+                "IgnoreDifferences": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.OverrideIgnoreDiff"
+                },
+                "KnownTypeFields": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.KnownTypeField"
+                    }
+                },
+                "UseOpenLibs": {
+                    "type": "boolean",
+                    "default": false
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ResourceOverride",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ResourceRef": {
+            "description": "ResourceRef includes fields which uniquely identify a resource",
+            "type": "object",
+            "properties": {
+                "group": {
+                    "type": "string"
+                },
+                "kind": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "namespace": {
+                    "type": "string"
+                },
+                "uid": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ResourceRef",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ResourceResult": {
+            "description": "ResourceResult holds the operation result details of a specific resource",
+            "type": "object",
+            "required": [
+                "group",
+                "version",
+                "kind",
+                "namespace",
+                "name"
+            ],
+            "properties": {
+                "group": {
+                    "description": "Group specifies the API group of the resource",
+                    "type": "string",
+                    "default": ""
+                },
+                "hookPhase": {
+                    "description": "HookPhase contains the state of any operation associated with this resource OR hook This can also contain values for non-hook resources.",
+                    "type": "string"
+                },
+                "hookType": {
+                    "description": "HookType specifies the type of the hook. Empty for non-hook resources",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "Kind specifies the API kind of the resource",
+                    "type": "string",
+                    "default": ""
+                },
+                "message": {
+                    "description": "Message contains an informational or error message for the last sync OR operation",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name specifies the name of the resource",
+                    "type": "string",
+                    "default": ""
+                },
+                "namespace": {
+                    "description": "Namespace specifies the target namespace of the resource",
+                    "type": "string",
+                    "default": ""
+                },
+                "status": {
+                    "description": "Status holds the final result of the sync. Will be empty if the resources is yet to be applied/pruned and is always zero-value for hooks",
+                    "type": "string"
+                },
+                "syncPhase": {
+                    "description": "SyncPhase indicates the particular phase of the sync that this result was acquired in",
+                    "type": "string"
+                },
+                "version": {
+                    "description": "Version specifies the API version of the resource",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ResourceResult",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ResourceStatus": {
+            "description": "ResourceStatus holds the current sync and health status of a resource",
+            "type": "object",
+            "properties": {
+                "group": {
+                    "type": "string"
+                },
+                "health": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.HealthStatus"
+                },
+                "hook": {
+                    "type": "boolean"
+                },
+                "kind": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "namespace": {
+                    "type": "string"
+                },
+                "requiresPruning": {
+                    "type": "boolean"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ResourceStatus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.RetryStrategy": {
+            "description": "RetryStrategy contains information about the strategy to apply when a sync failed",
+            "type": "object",
+            "properties": {
+                "backoff": {
+                    "description": "Backoff controls how to backoff on subsequent retries of failed syncs",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.Backoff"
+                },
+                "limit": {
+                    "description": "Limit is the maximum number of attempts for retrying a failed sync. If set to 0, no retries will be performed.",
+                    "type": "integer",
+                    "format": "int64"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RetryStrategy",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.RevisionHistory": {
+            "description": "RevisionHistory contains history information about a previous sync",
+            "type": "object",
+            "required": [
+                "revision",
+                "deployedAt",
+                "id"
+            ],
+            "properties": {
+                "deployStartedAt": {
+                    "description": "DeployStartedAt holds the time the sync operation started",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "deployedAt": {
+                    "description": "DeployedAt holds the time the sync operation completed",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "id": {
+                    "description": "ID is an auto incrementing identifier of the RevisionHistory",
+                    "type": "integer",
+                    "format": "int64",
+                    "default": 0
+                },
+                "revision": {
+                    "description": "Revision holds the revision the sync was performed against",
+                    "type": "string",
+                    "default": ""
+                },
+                "source": {
+                    "description": "Source is a reference to the application source used for the sync operation",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSource"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RevisionHistory",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.RevisionMetadata": {
+            "description": "RevisionMetadata contains metadata for a specific revision in a Git repository",
+            "type": "object",
+            "required": [
+                "date"
+            ],
+            "properties": {
+                "author": {
+                    "description": "who authored this revision, typically their name and email, e.g. \"John Doe \u003cjohn_doe@my-company.com\u003e\", but might not match this example",
+                    "type": "string"
+                },
+                "date": {
+                    "description": "Date specifies when the revision was authored",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "message": {
+                    "description": "Message contains the message associated with the revision, most likely the commit message. The message is truncated to the first newline or 64 characters (which ever comes first)",
+                    "type": "string"
+                },
+                "signatureInfo": {
+                    "description": "SignatureInfo contains a hint on the signer if the revision was signed with GPG, and signature verification is enabled.",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "Tags specifies any tags currently attached to the revision Floating tags can move from one revision to another",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RevisionMetadata",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.SignatureKey": {
+            "description": "SignatureKey is the specification of a key required to verify commit signatures with",
+            "type": "object",
+            "required": [
+                "keyID"
+            ],
+            "properties": {
+                "keyID": {
+                    "description": "The ID of the key in hexadecimal notation",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SignatureKey",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.SyncOperation": {
+            "description": "SyncOperation contains details about a sync operation.",
+            "type": "object",
+            "properties": {
+                "dryRun": {
+                    "description": "DryRun specifies to perform a `kubectl apply --dry-run` without actually performing the sync",
+                    "type": "boolean"
+                },
+                "manifests": {
+                    "description": "Manifests is an optional field that overrides sync source with a local directory for development",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "prune": {
+                    "description": "Prune specifies to delete resources from the cluster that are no longer tracked in git",
+                    "type": "boolean"
+                },
+                "resources": {
+                    "description": "Resources describes which resources shall be part of the sync",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SyncOperationResource"
+                    }
+                },
+                "revision": {
+                    "description": "Revision is the revision (Git) or chart version (Helm) which to sync the application to If omitted, will use the revision specified in app spec.",
+                    "type": "string"
+                },
+                "source": {
+                    "description": "Source overrides the source definition set in the application. This is typically set in a Rollback operation and is nil during a Sync operation",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSource"
+                },
+                "syncOptions": {
+                    "description": "SyncOptions provide per-sync sync-options, e.g. Validate=false",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "syncStrategy": {
+                    "description": "SyncStrategy describes how to perform the sync",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SyncStrategy"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SyncOperation",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.SyncOperationResource": {
+            "description": "SyncOperationResource contains resources to sync.",
+            "type": "object",
+            "required": [
+                "kind",
+                "name"
+            ],
+            "properties": {
+                "group": {
+                    "type": "string"
+                },
+                "kind": {
+                    "type": "string",
+                    "default": ""
+                },
+                "name": {
+                    "type": "string",
+                    "default": ""
+                },
+                "namespace": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SyncOperationResource",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.SyncOperationResult": {
+            "description": "SyncOperationResult represent result of sync operation",
+            "type": "object",
+            "required": [
+                "revision"
+            ],
+            "properties": {
+                "resources": {
+                    "description": "Resources contains a list of sync result items for each individual resource in a sync operation",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ResourceResult"
+                    }
+                },
+                "revision": {
+                    "description": "Revision holds the revision this sync operation was performed to",
+                    "type": "string",
+                    "default": ""
+                },
+                "source": {
+                    "description": "Source records the application source information of the sync, used for comparing auto-sync",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSource"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SyncOperationResult",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.SyncPolicy": {
+            "description": "SyncPolicy controls when a sync will be performed in response to updates in git",
+            "type": "object",
+            "properties": {
+                "automated": {
+                    "description": "Automated will keep an application synced to the target revision",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SyncPolicyAutomated"
+                },
+                "retry": {
+                    "description": "Retry controls failed sync retry behavior",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.RetryStrategy"
+                },
+                "syncOptions": {
+                    "description": "Options allow you to specify whole app sync-options",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SyncPolicy",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.SyncPolicyAutomated": {
+            "description": "SyncPolicyAutomated controls the behavior of an automated sync",
+            "type": "object",
+            "properties": {
+                "allowEmpty": {
+                    "description": "AllowEmpty allows apps have zero live resources (default: false)",
+                    "type": "boolean"
+                },
+                "prune": {
+                    "description": "Prune specifies whether to delete resources from the cluster that are not found in the sources anymore as part of automated sync (default: false)",
+                    "type": "boolean"
+                },
+                "selfHeal": {
+                    "description": "SelfHeal specifes whether to revert resources back to their desired state upon modification in the cluster (default: false)",
+                    "type": "boolean"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SyncPolicyAutomated",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.SyncStatus": {
+            "description": "SyncStatus contains information about the currently observed live and desired states of an application",
+            "type": "object",
+            "required": [
+                "status"
+            ],
+            "properties": {
+                "comparedTo": {
+                    "description": "ComparedTo contains information about what has been compared",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ComparedTo"
+                },
+                "revision": {
+                    "description": "Revision contains information about the revision the comparison has been performed to",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "Status is the sync state of the comparison",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SyncStatus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.SyncStrategy": {
+            "description": "SyncStrategy controls the manner in which a sync is performed",
+            "type": "object",
+            "properties": {
+                "apply": {
+                    "description": "Apply will perform a `kubectl apply` to perform the sync.",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SyncStrategyApply"
+                },
+                "hook": {
+                    "description": "Hook will submit any referenced resources to perform the sync. This is the default strategy",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SyncStrategyHook"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SyncStrategy",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.SyncStrategyApply": {
+            "description": "SyncStrategyApply uses `kubectl apply` to perform the apply",
+            "type": "object",
+            "properties": {
+                "force": {
+                    "description": "Force indicates whether or not to supply the --force flag to `kubectl apply`. The --force flag deletes and re-create the resource, when PATCH encounters conflict and has retried for 5 times.",
+                    "type": "boolean"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SyncStrategyApply",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.SyncStrategyHook": {
+            "description": "SyncStrategyHook will perform a sync using hooks annotations. If no hook annotation is specified falls back to `kubectl apply`.",
+            "type": "object",
+            "properties": {
+                "force": {
+                    "description": "Force indicates whether or not to supply the --force flag to `kubectl apply`. The --force flag deletes and re-create the resource, when PATCH encounters conflict and has retried for 5 times.",
+                    "type": "boolean"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SyncStrategyHook",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.SyncWindow": {
+            "description": "SyncWindow contains the kind, time, duration and attributes that are used to assign the syncWindows to apps",
+            "type": "object",
+            "properties": {
+                "applications": {
+                    "description": "Applications contains a list of applications that the window will apply to",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "clusters": {
+                    "description": "Clusters contains a list of clusters that the window will apply to",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "duration": {
+                    "description": "Duration is the amount of time the sync window will be open",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "Kind defines if the window allows or blocks syncs",
+                    "type": "string"
+                },
+                "manualSync": {
+                    "description": "ManualSync enables manual syncs when they would otherwise be blocked",
+                    "type": "boolean"
+                },
+                "namespaces": {
+                    "description": "Namespaces contains a list of namespaces that the window will apply to",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "schedule": {
+                    "description": "Schedule is the time the window will begin, specified in cron format",
+                    "type": "string"
+                },
+                "timeZone": {
+                    "description": "TimeZone of the sync that will be applied to the schedule",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SyncWindow",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.TLSClientConfig": {
+            "description": "TLSClientConfig contains settings to enable transport layer security",
+            "type": "object",
+            "required": [
+                "insecure"
+            ],
+            "properties": {
+                "caData": {
+                    "description": "CAData holds PEM-encoded bytes (typically read from a root certificates bundle). CAData takes precedence over CAFile",
+                    "type": "string",
+                    "format": "byte"
+                },
+                "certData": {
+                    "description": "CertData holds PEM-encoded bytes (typically read from a client certificate file). CertData takes precedence over CertFile",
+                    "type": "string",
+                    "format": "byte"
+                },
+                "insecure": {
+                    "description": "Insecure specifies that the server should be accessed without verifying the TLS certificate. For testing only.",
+                    "type": "boolean",
+                    "default": false
+                },
+                "keyData": {
+                    "description": "KeyData holds PEM-encoded bytes (typically read from a client certificate key file). KeyData takes precedence over KeyFile",
+                    "type": "string",
+                    "format": "byte"
+                },
+                "serverName": {
+                    "description": "ServerName is passed to the server for SNI and is used in the client to check server certificates against. If ServerName is empty, the hostname used to contact the server is used.",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "TLSClientConfig",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.objectMeta": {
+            "description": "objectMeta and corresponding GetMetadata() methods is a hack to allow us to use grpc-gateway side-by-side with k8s protobuf codegen. The grpc-gateway generated .gw.pb.go files expect a GetMetadata() method to be generated because it assumes the .proto files were generated from protoc --go_out=plugins=grpc. Instead, kubernetes uses go-to-protobuf to generate .proto files from go types, and this method is not auto-generated (presumably since ObjectMeta is embedded but is nested in the 'metadata' field in JSON form).",
+            "type": "object",
+            "required": [
+                "Name"
+            ],
+            "properties": {
+                "Name": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "objectMeta",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.rawResourceOverride": {
+            "type": "object",
+            "properties": {
+                "actions": {
+                    "type": "string"
+                },
+                "health.lua": {
+                    "type": "string"
+                },
+                "health.lua.useOpenLibs": {
+                    "type": "boolean"
+                },
+                "ignoreDifferences": {
+                    "type": "string"
+                },
+                "knownTypeFields": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.KnownTypeField"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "rawResourceOverride",
+                    "version": "v1alpha1"
+                }
+            ]
+        }
+    }
+}

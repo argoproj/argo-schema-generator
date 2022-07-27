@@ -3,7 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/zachaller/argo-schema-generator/pkg/cd"
+	"github.com/zachaller/argo-schema-generator/pkg/events"
+	"github.com/zachaller/argo-schema-generator/pkg/workflows"
 	"io/ioutil"
+	"k8s.io/kube-openapi/pkg/common"
 	"net/http"
 	"os/exec"
 	"strings"
@@ -112,7 +116,7 @@ func loadK8SDefinitions(versions []int) (*k8sGvkMapping, error) {
 	return &schemaGoMod, nil
 }
 
-func generateOpenApiSchema(outputPath string) error {
+func generateOpenApiSchema(outputPath string, GetOpenAPIDefinitions func(ref common.ReferenceCallback) map[string]common.OpenAPIDefinition) error {
 	// We replace the generated names with group specific names aka argocd is `argocd.argoproj.io` instead of the real
 	// group kind because within all the argo projects we have overlapping types due to all argo projects being under the same
 	// argoproj.io group. Kustomize does not care about the name as long as all the links match up and the `x-kubernetes-group-version-kind`
@@ -126,7 +130,7 @@ func generateOpenApiSchema(outputPath string) error {
 		"github.com/argoproj/argo-workflows/v3/pkg/apis/workflow": "workflow.argoproj.io",
 	}
 
-	d := apis.GetOpenAPIDefinitions(func(path string) kOpenAPISpec.Ref {
+	d := GetOpenAPIDefinitions(func(path string) kOpenAPISpec.Ref {
 		for k, v := range argoMappings {
 			path = strings.ReplaceAll(path, k, v)
 		}
@@ -186,6 +190,12 @@ func generateOpenApiSchema(outputPath string) error {
 
 // Generate CRD spec for Rollout Resource
 func main() {
-	err := generateOpenApiSchema("schema/argo_kustomize_schema.json")
+	err := generateOpenApiSchema("schema/argo_kustomize_schema.json", apis.GetOpenAPIDefinitions)
+	checkErr(err)
+	err = generateOpenApiSchema("schema/argo_workflows_kustomize_schema.json", workflows.GetOpenAPIDefinitions)
+	checkErr(err)
+	err = generateOpenApiSchema("schema/argo_events_kustomize_schema.json", events.GetOpenAPIDefinitions)
+	checkErr(err)
+	err = generateOpenApiSchema("schema/argo_cd_kustomize_schema.json", cd.GetOpenAPIDefinitions)
 	checkErr(err)
 }
