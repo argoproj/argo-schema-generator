@@ -3,11 +3,11 @@ CURRENT_DIR=$(shell pwd)
 DIST_DIR=${CURRENT_DIR}/dist
 
 .PHONY: gen-schema
-gen-schema: install-tools gen-openapi
+gen-schema: gen-openapi
 	go run cmd/gen-schema/main.go
 
 .PHONY: gen-openapi
-gen-openapi: install-tools
+gen-openapi: install-tools $(DIST_DIR)/openapi-gen
 	PATH=${DIST_DIR}:$$PATH openapi-gen \
     		pkg/apis/rollouts/... \
     		--go-header-file hack/custom-boilerplate.go.txt \
