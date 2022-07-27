@@ -3,7 +3,7 @@ CURRENT_DIR=$(shell pwd)
 DIST_DIR=${CURRENT_DIR}/dist
 
 .PHONY: gen-schema
-gen-schema: gen-openapi
+gen-schema: install-tools gen-openapi
 	go run cmd/gen-schema/main.go
 
 .PHONY: gen-openapi
