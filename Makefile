@@ -7,7 +7,7 @@ gen-schema: gen-openapi
 	go run cmd/gen-schema/main.go
 
 .PHONY: gen-openapi
-gen-openapi: $(DIST_DIR)/openapi-gen install-tools
+gen-openapi: install-tools
 	PATH=${DIST_DIR}:$$PATH openapi-gen \
     		pkg/apis/rollouts/... \
     		--go-header-file hack/custom-boilerplate.go.txt \
