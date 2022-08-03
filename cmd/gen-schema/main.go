@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/zachaller/argo-schema-generator/pkg/cd"
 	"github.com/zachaller/argo-schema-generator/pkg/events"
+	"github.com/zachaller/argo-schema-generator/pkg/rollouts"
 	"github.com/zachaller/argo-schema-generator/pkg/workflows"
 	"io/ioutil"
 	"k8s.io/kube-openapi/pkg/common"
@@ -197,5 +198,7 @@ func main() {
 	err = generateOpenApiSchema("schema/argo_events_kustomize_schema.json", events.GetOpenAPIDefinitions)
 	checkErr(err)
 	err = generateOpenApiSchema("schema/argo_cd_kustomize_schema.json", cd.GetOpenAPIDefinitions)
+	checkErr(err)
+	err = generateOpenApiSchema("schema/argo_rollouts_kustomize_schema.json", rollouts.GetOpenAPIDefinitions)
 	checkErr(err)
 }

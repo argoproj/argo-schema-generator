@@ -1,0 +1,3409 @@
+{
+    "definitions": {
+        "io.argoproj.rollouts.v1alpha1.ALBStatus": {
+            "type": "object",
+            "properties": {
+                "canaryTargetGroup": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AwsResourceRef"
+                },
+                "loadBalancer": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AwsResourceRef"
+                },
+                "stableTargetGroup": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AwsResourceRef"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ALBStatus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.ALBTrafficRouting": {
+            "description": "ALBTrafficRouting configuration for ALB ingress controller to control traffic routing",
+            "type": "object",
+            "required": [
+                "ingress",
+                "servicePort"
+            ],
+            "properties": {
+                "annotationPrefix": {
+                    "description": "AnnotationPrefix has to match the configured annotation prefix on the alb ingress controller",
+                    "type": "string"
+                },
+                "ingress": {
+                    "description": "Ingress refers to the name of an `Ingress` resource in the same namespace as the `Rollout`",
+                    "type": "string",
+                    "default": ""
+                },
+                "rootService": {
+                    "description": "RootService references the service in the ingress to the controller should add the action to",
+                    "type": "string"
+                },
+                "servicePort": {
+                    "description": "ServicePort refers to the port that the Ingress action should route traffic to",
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 0
+                },
+                "stickinessConfig": {
+                    "description": "AdditionalForwardConfig allows to specify further settings on the ForwaredConfig",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.StickinessConfig"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ALBTrafficRouting",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.AmbassadorTrafficRouting": {
+            "description": "AmbassadorTrafficRouting defines the configuration required to use Ambassador as traffic router",
+            "type": "object",
+            "required": [
+                "mappings"
+            ],
+            "properties": {
+                "mappings": {
+                    "description": "Mappings refer to the name of the Ambassador Mappings used to route traffic to the service",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AmbassadorTrafficRouting",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.AnalysisRun": {
+            "description": "AnalysisRun is an instantiation of an AnalysisTemplate",
+            "type": "object",
+            "required": [
+                "spec"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+                },
+                "spec": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisRunSpec"
+                },
+                "status": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisRunStatus"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AnalysisRun",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.AnalysisRunArgument": {
+            "description": "AnalysisRunArgument argument to add to analysisRun",
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "description": "Name argument name",
+                    "type": "string",
+                    "default": ""
+                },
+                "value": {
+                    "description": "Value a hardcoded value for the argument. This field is a one of field with valueFrom",
+                    "type": "string"
+                },
+                "valueFrom": {
+                    "description": "ValueFrom A reference to where the value is stored. This field is a one of field with valueFrom",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ArgumentValueFrom"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AnalysisRunArgument",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.AnalysisRunList": {
+            "description": "AnalysisRunList is a list of AnalysisTemplate resources",
+            "type": "object",
+            "required": [
+                "metadata",
+                "items"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisRun"
+                    }
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AnalysisRunList",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.AnalysisRunSpec": {
+            "description": "AnalysisRunSpec is the spec for a AnalysisRun resource",
+            "type": "object",
+            "required": [
+                "metrics"
+            ],
+            "properties": {
+                "args": {
+                    "description": "Args are the list of arguments used in this run",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Argument"
+                    },
+                    "x-kubernetes-patch-merge-key": "name",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "dryRun": {
+                    "description": "DryRun object contains the settings for running the analysis in Dry-Run mode",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.DryRun"
+                    },
+                    "x-kubernetes-patch-merge-key": "metricName",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "measurementRetention": {
+                    "description": "MeasurementRetention object contains the settings for retaining the number of measurements during the analysis",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.MeasurementRetention"
+                    },
+                    "x-kubernetes-patch-merge-key": "metricName",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "metrics": {
+                    "description": "Metrics contains the list of metrics to query as part of an analysis run",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Metric"
+                    },
+                    "x-kubernetes-patch-merge-key": "name",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "terminate": {
+                    "description": "Terminate is used to prematurely stop the run (e.g. rollout completed and analysis is no longer desired)",
+                    "type": "boolean"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AnalysisRunSpec",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.AnalysisRunStatus": {
+            "description": "AnalysisRunStatus is the status for a AnalysisRun resource",
+            "type": "object",
+            "required": [
+                "phase"
+            ],
+            "properties": {
+                "dryRunSummary": {
+                    "description": "DryRunSummary contains the final results from the metric executions in the dry-run mode",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RunSummary"
+                },
+                "message": {
+                    "description": "Message is a message explaining current status",
+                    "type": "string"
+                },
+                "metricResults": {
+                    "description": "MetricResults contains the metrics collected during the run",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.MetricResult"
+                    }
+                },
+                "phase": {
+                    "description": "Phase is the status of the analysis run",
+                    "type": "string",
+                    "default": ""
+                },
+                "runSummary": {
+                    "description": "RunSummary contains the final results from the metric executions",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RunSummary"
+                },
+                "startedAt": {
+                    "description": "StartedAt indicates when the analysisRun first started",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AnalysisRunStatus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.AnalysisRunStrategy": {
+            "description": "AnalysisRunStrategy configuration for the analysis runs and experiments to retain",
+            "type": "object",
+            "properties": {
+                "successfulRunHistoryLimit": {
+                    "description": "SuccessfulRunHistoryLimit limits the number of old successful analysis runs and experiments to be retained in a history",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "unsuccessfulRunHistoryLimit": {
+                    "description": "UnsuccessfulRunHistoryLimit limits the number of old unsuccessful analysis runs and experiments to be retained in a history. Stages for unsuccessful: \"Error\", \"Failed\", \"Inconclusive\"",
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AnalysisRunStrategy",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.AnalysisTemplate": {
+            "description": "AnalysisTemplate holds the template for performing canary analysis",
+            "type": "object",
+            "required": [
+                "spec"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+                },
+                "spec": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisTemplateSpec"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AnalysisTemplate",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.AnalysisTemplateList": {
+            "description": "AnalysisTemplateList is a list of AnalysisTemplate resources",
+            "type": "object",
+            "required": [
+                "metadata",
+                "items"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisTemplate"
+                    }
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AnalysisTemplateList",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.AnalysisTemplateSpec": {
+            "description": "AnalysisTemplateSpec is the specification for a AnalysisTemplate resource",
+            "type": "object",
+            "required": [
+                "metrics"
+            ],
+            "properties": {
+                "args": {
+                    "description": "Args are the list of arguments to the template",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Argument"
+                    },
+                    "x-kubernetes-patch-merge-key": "name",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "dryRun": {
+                    "description": "DryRun object contains the settings for running the analysis in Dry-Run mode",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.DryRun"
+                    },
+                    "x-kubernetes-patch-merge-key": "metricName",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "measurementRetention": {
+                    "description": "MeasurementRetention object contains the settings for retaining the number of measurements during the analysis",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.MeasurementRetention"
+                    },
+                    "x-kubernetes-patch-merge-key": "metricName",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "metrics": {
+                    "description": "Metrics contains the list of metrics to query as part of an analysis run",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Metric"
+                    },
+                    "x-kubernetes-patch-merge-key": "name",
+                    "x-kubernetes-patch-strategy": "merge"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AnalysisTemplateSpec",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.AntiAffinity": {
+            "description": "AntiAffinity defines which inter-pod scheduling rule to use for anti-affinity injection",
+            "type": "object",
+            "properties": {
+                "preferredDuringSchedulingIgnoredDuringExecution": {
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.PreferredDuringSchedulingIgnoredDuringExecution"
+                },
+                "requiredDuringSchedulingIgnoredDuringExecution": {
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RequiredDuringSchedulingIgnoredDuringExecution"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AntiAffinity",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.AppMeshTrafficRouting": {
+            "description": "AppMeshTrafficRouting configuration for AWS AppMesh service mesh to enable fine grain configuration",
+            "type": "object",
+            "properties": {
+                "virtualNodeGroup": {
+                    "description": "VirtualNodeGroup references an AppMesh Route targets that are formed by a set of VirtualNodes that are used to shape traffic",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AppMeshVirtualNodeGroup"
+                },
+                "virtualService": {
+                    "description": "VirtualService references an AppMesh VirtualService and VirtualRouter to modify to shape traffic",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AppMeshVirtualService"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AppMeshTrafficRouting",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.AppMeshVirtualNodeGroup": {
+            "description": "AppMeshVirtualNodeGroup holds information about targets used for routing traffic to a virtual service",
+            "type": "object",
+            "required": [
+                "canaryVirtualNodeRef",
+                "stableVirtualNodeRef"
+            ],
+            "properties": {
+                "canaryVirtualNodeRef": {
+                    "description": "CanaryVirtualNodeRef is the virtual node ref to modify labels with canary ReplicaSet pod template hash value",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AppMeshVirtualNodeReference"
+                },
+                "stableVirtualNodeRef": {
+                    "description": "StableVirtualNodeRef is the virtual node name to modify labels with stable ReplicaSet pod template hash value",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AppMeshVirtualNodeReference"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AppMeshVirtualNodeGroup",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.AppMeshVirtualNodeReference": {
+            "description": "AppMeshVirtualNodeReference holds a reference to VirtualNode.appmesh.k8s.aws",
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "description": "Name is the name of VirtualNode CR",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AppMeshVirtualNodeReference",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.AppMeshVirtualService": {
+            "description": "AppMeshVirtualService holds information on the virtual service the rollout needs to modify",
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "description": "Name is the name of virtual service",
+                    "type": "string",
+                    "default": ""
+                },
+                "routes": {
+                    "description": "Routes is list of HTTP routes within virtual router associated with virtual service to edit. If omitted, virtual service must have a single route of this type.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AppMeshVirtualService",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.Argument": {
+            "description": "Argument is an argument to an AnalysisRun",
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "description": "Name is the name of the argument",
+                    "type": "string",
+                    "default": ""
+                },
+                "value": {
+                    "description": "Value is the value of the argument",
+                    "type": "string"
+                },
+                "valueFrom": {
+                    "description": "ValueFrom is a reference to where a secret is stored. This field is one of the fields with valueFrom",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ValueFrom"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "Argument",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.ArgumentValueFrom": {
+            "description": "ArgumentValueFrom defines references to fields within resources to grab for the value (i.e. Pod Template Hash)",
+            "type": "object",
+            "properties": {
+                "fieldRef": {
+                    "description": "FieldRef",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.FieldRef"
+                },
+                "podTemplateHashValue": {
+                    "description": "PodTemplateHashValue gets the value from one of the children ReplicaSet's Pod Template Hash",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ArgumentValueFrom",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.AwsResourceRef": {
+            "type": "object",
+            "required": [
+                "name",
+                "arn"
+            ],
+            "properties": {
+                "arn": {
+                    "type": "string",
+                    "default": ""
+                },
+                "name": {
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AwsResourceRef",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.BlueGreenStatus": {
+            "description": "BlueGreenStatus status fields that only pertain to the blueGreen rollout",
+            "type": "object",
+            "properties": {
+                "activeSelector": {
+                    "description": "ActiveSelector indicates which replicas set the active service is serving traffic to",
+                    "type": "string"
+                },
+                "postPromotionAnalysisRunStatus": {
+                    "description": "PostPromotionAnalysisRunStatus indicates the status of the current post promotion analysis run",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutAnalysisRunStatus"
+                },
+                "prePromotionAnalysisRunStatus": {
+                    "description": "PrePromotionAnalysisRunStatus indicates the status of the current prepromotion analysis run",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutAnalysisRunStatus"
+                },
+                "previewSelector": {
+                    "description": "PreviewSelector indicates which replicas set the preview service is serving traffic to",
+                    "type": "string"
+                },
+                "scaleUpPreviewCheckPoint": {
+                    "description": "ScaleUpPreviewCheckPoint indicates that the Replicaset receiving traffic from the preview service is ready to be scaled up after the rollout is unpaused",
+                    "type": "boolean"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "BlueGreenStatus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.BlueGreenStrategy": {
+            "description": "BlueGreenStrategy defines parameters for Blue Green deployment",
+            "type": "object",
+            "required": [
+                "activeService"
+            ],
+            "properties": {
+                "abortScaleDownDelaySeconds": {
+                    "description": "AbortScaleDownDelaySeconds adds a delay in second before scaling down the preview replicaset if update is aborted. 0 means not to scale down. Default is 30 second",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "activeMetadata": {
+                    "description": "ActiveMetadata specify labels and annotations which will be attached to the active pods for the duration which they act as a active pod, and will be removed after",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.PodTemplateMetadata"
+                },
+                "activeService": {
+                    "description": "Name of the service that the rollout modifies as the active service.",
+                    "type": "string",
+                    "default": ""
+                },
+                "antiAffinity": {
+                    "description": "AntiAffinity enables anti-affinity rules for Blue Green deployment",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AntiAffinity"
+                },
+                "autoPromotionEnabled": {
+                    "description": "AutoPromotionEnabled indicates if the rollout should automatically promote the new ReplicaSet to the active service or enter a paused state. If not specified, the default value is true.",
+                    "type": "boolean"
+                },
+                "autoPromotionSeconds": {
+                    "description": "AutoPromotionSeconds is a duration in seconds in which to delay auto-promotion (default: 0). The countdown begins after the preview ReplicaSet have reached full availability. This option is ignored if autoPromotionEnabled is set to false.",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "maxUnavailable": {
+                    "description": "MaxUnavailable The maximum number of pods that can be unavailable during a restart operation. Defaults to 25% of total replicas.",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+                },
+                "postPromotionAnalysis": {
+                    "description": "PostPromotionAnalysis configuration to run analysis after a selector switch",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutAnalysis"
+                },
+                "prePromotionAnalysis": {
+                    "description": "PrePromotionAnalysis configuration to run analysis before a selector switch",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutAnalysis"
+                },
+                "previewMetadata": {
+                    "description": "PreviewMetadata specify labels and annotations which will be attached to the preview pods for the duration which they act as a preview pod, and will be removed after",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.PodTemplateMetadata"
+                },
+                "previewReplicaCount": {
+                    "description": "PreviewReplicaCount is the number of replicas to run for the preview stack before the switchover. Once the rollout is resumed the desired replicaset will be full scaled up before the switch occurs",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "previewService": {
+                    "description": "Name of the service that the rollout modifies as the preview service.",
+                    "type": "string"
+                },
+                "scaleDownDelayRevisionLimit": {
+                    "description": "ScaleDownDelayRevisionLimit limits the number of old RS that can run at one time before getting scaled down",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "scaleDownDelaySeconds": {
+                    "description": "ScaleDownDelaySeconds adds a delay before scaling down the previous replicaset. If omitted, the Rollout waits 30 seconds before scaling down the previous ReplicaSet. A minimum of 30 seconds is recommended to ensure IP table propagation across the nodes in a cluster. See https://github.com/argoproj/argo-rollouts/issues/19#issuecomment-476329960 for more information",
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "BlueGreenStrategy",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.CanaryStatus": {
+            "description": "CanaryStatus status fields that only pertain to the canary rollout",
+            "type": "object",
+            "properties": {
+                "currentBackgroundAnalysisRunStatus": {
+                    "description": "CurrentBackgroundAnalysisRunStatus indicates the status of the current background analysis run",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutAnalysisRunStatus"
+                },
+                "currentExperiment": {
+                    "description": "CurrentExperiment indicates the running experiment",
+                    "type": "string"
+                },
+                "currentStepAnalysisRunStatus": {
+                    "description": "CurrentStepAnalysisRunStatus indicates the status of the current step analysis run",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutAnalysisRunStatus"
+                },
+                "stablePingPong": {
+                    "description": "StablePingPong For the ping-pong feature holds the current stable service, ping or pong",
+                    "type": "string"
+                },
+                "weights": {
+                    "description": "Weights records the weights which have been set on traffic provider. Only valid when using traffic routing",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.TrafficWeights"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "CanaryStatus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.CanaryStep": {
+            "description": "CanaryStep defines a step of a canary deployment.",
+            "type": "object",
+            "properties": {
+                "analysis": {
+                    "description": "Analysis defines the AnalysisRun that will run for a step",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutAnalysis"
+                },
+                "experiment": {
+                    "description": "Experiment defines the experiment object that should be created",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutExperimentStep"
+                },
+                "pause": {
+                    "description": "Pause freezes the rollout by setting spec.Paused to true. A Rollout will resume when spec.Paused is reset to false.",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutPause"
+                },
+                "setCanaryScale": {
+                    "description": "SetCanaryScale defines how to scale the newRS without changing traffic weight",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.SetCanaryScale"
+                },
+                "setWeight": {
+                    "description": "SetWeight sets what percentage of the newRS should receive",
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "CanaryStep",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.CanaryStrategy": {
+            "description": "CanaryStrategy defines parameters for a Replica Based Canary",
+            "type": "object",
+            "properties": {
+                "abortScaleDownDelaySeconds": {
+                    "description": "AbortScaleDownDelaySeconds adds a delay in second before scaling down the canary pods when update is aborted for canary strategy with traffic routing (not applicable for basic canary). 0 means canary pods are not scaled down. Default is 30 seconds.",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "analysis": {
+                    "description": "Analysis runs a separate analysisRun while all the steps execute. This is intended to be a continuous validation of the new ReplicaSet",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutAnalysisBackground"
+                },
+                "antiAffinity": {
+                    "description": "AntiAffinity enables anti-affinity rules for Canary deployment",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AntiAffinity"
+                },
+                "canaryMetadata": {
+                    "description": "CanaryMetadata specify labels and annotations which will be attached to the canary pods for the duration which they act as a canary, and will be removed after",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.PodTemplateMetadata"
+                },
+                "canaryService": {
+                    "description": "CanaryService holds the name of a service which selects pods with canary version and don't select any pods with stable version.",
+                    "type": "string"
+                },
+                "dynamicStableScale": {
+                    "description": "DynamicStableScale is a traffic routing feature which dynamically scales the stable ReplicaSet to minimize total pods which are running during an update. This is calculated by scaling down the stable as traffic is increased to canary. When disabled (the default behavior) the stable ReplicaSet remains fully scaled to support instantaneous aborts.",
+                    "type": "boolean"
+                },
+                "maxSurge": {
+                    "description": "MaxSurge The maximum number of pods that can be scheduled above the original number of pods. Value can be an absolute number (ex: 5) or a percentage of total pods at the start of the update (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. By default, a value of 25% is used. Example: when this is set to 30%, the new RC can be scaled up by 30% immediately when the rolling update starts. Once old pods have been killed, new RC can be scaled up further, ensuring that total number of pods running at any time during the update is at most 130% of original pods.",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+                },
+                "maxUnavailable": {
+                    "description": "MaxUnavailable The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of total pods at the start of update (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. By default, a fixed value of 25% is used. Example: when this is set to 30%, the old RC can be scaled down by 30% immediately when the rolling update starts. Once new pods are ready, old RC can be scaled down further, followed by scaling up the new RC, ensuring that at least 70% of original number of pods are available at all times during the update.",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+                },
+                "pingPong": {
+                    "description": "PingPongSpec holds the ping and pong services",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.PingPongSpec"
+                },
+                "scaleDownDelayRevisionLimit": {
+                    "description": "ScaleDownDelayRevisionLimit limits the number of old RS that can run at one time before getting scaled down",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "scaleDownDelaySeconds": {
+                    "description": "ScaleDownDelaySeconds adds a delay before scaling down the previous ReplicaSet when the canary strategy is used with traffic routing (default 30 seconds). A delay in scaling down the previous ReplicaSet is needed after switching the stable service selector to point to the new ReplicaSet, in order to give time for traffic providers to re-target the new pods. This value is ignored with basic, replica-weighted canary without traffic routing.",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "stableMetadata": {
+                    "description": "StableMetadata specify labels and annotations which will be attached to the stable pods for the duration which they act as a canary, and will be removed after",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.PodTemplateMetadata"
+                },
+                "stableService": {
+                    "description": "StableService holds the name of a service which selects pods with stable version and don't select any pods with canary version.",
+                    "type": "string"
+                },
+                "steps": {
+                    "description": "Steps define the order of phases to execute the canary deployment",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.CanaryStep"
+                    }
+                },
+                "trafficRouting": {
+                    "description": "TrafficRouting hosts all the supported service meshes supported to enable more fine-grained traffic routing",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutTrafficRouting"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "CanaryStrategy",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.CloudWatchMetric": {
+            "description": "CloudWatchMetric defines the cloudwatch query to perform canary analysis",
+            "type": "object",
+            "required": [
+                "metricDataQueries"
+            ],
+            "properties": {
+                "interval": {
+                    "type": "string"
+                },
+                "metricDataQueries": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.CloudWatchMetricDataQuery"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "CloudWatchMetric",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.CloudWatchMetricDataQuery": {
+            "description": "CloudWatchMetricDataQuery defines the cloudwatch query",
+            "type": "object",
+            "properties": {
+                "expression": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "metricStat": {
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.CloudWatchMetricStat"
+                },
+                "period": {
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+                },
+                "returnData": {
+                    "type": "boolean"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "CloudWatchMetricDataQuery",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.CloudWatchMetricStat": {
+            "type": "object",
+            "properties": {
+                "metric": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.CloudWatchMetricStatMetric"
+                },
+                "period": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+                },
+                "stat": {
+                    "type": "string"
+                },
+                "unit": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "CloudWatchMetricStat",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.CloudWatchMetricStatMetric": {
+            "type": "object",
+            "properties": {
+                "dimensions": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.CloudWatchMetricStatMetricDimension"
+                    }
+                },
+                "metricName": {
+                    "type": "string"
+                },
+                "namespace": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "CloudWatchMetricStatMetric",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.CloudWatchMetricStatMetricDimension": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "CloudWatchMetricStatMetricDimension",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.ClusterAnalysisTemplate": {
+            "description": "ClusterAnalysisTemplate holds the template for performing canary analysis",
+            "type": "object",
+            "required": [
+                "spec"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+                },
+                "spec": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisTemplateSpec"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ClusterAnalysisTemplate",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.ClusterAnalysisTemplateList": {
+            "description": "AnalysisTemplateList is a list of AnalysisTemplate resources",
+            "type": "object",
+            "required": [
+                "metadata",
+                "items"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ClusterAnalysisTemplate"
+                    }
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ClusterAnalysisTemplateList",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.DatadogMetric": {
+            "type": "object",
+            "required": [
+                "query"
+            ],
+            "properties": {
+                "interval": {
+                    "type": "string"
+                },
+                "query": {
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "DatadogMetric",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.DryRun": {
+            "description": "DryRun defines the settings for running the analysis in Dry-Run mode.",
+            "type": "object",
+            "required": [
+                "metricName"
+            ],
+            "properties": {
+                "metricName": {
+                    "description": "Name of the metric which needs to be evaluated in the Dry-Run mode. Wildcard '*' is supported and denotes all the available metrics.",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "DryRun",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.Experiment": {
+            "description": "Experiment is a specification for an Experiment resource",
+            "type": "object",
+            "required": [
+                "spec"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+                },
+                "spec": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ExperimentSpec"
+                },
+                "status": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ExperimentStatus"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "Experiment",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.ExperimentAnalysisRunStatus": {
+            "type": "object",
+            "required": [
+                "name",
+                "analysisRun",
+                "phase"
+            ],
+            "properties": {
+                "analysisRun": {
+                    "description": "AnalysisRun is the name of the AnalysisRun",
+                    "type": "string",
+                    "default": ""
+                },
+                "message": {
+                    "description": "Message is a message explaining the current status",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name is the name of the analysis",
+                    "type": "string",
+                    "default": ""
+                },
+                "phase": {
+                    "description": "Phase is the status of the AnalysisRun",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ExperimentAnalysisRunStatus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.ExperimentAnalysisTemplateRef": {
+            "type": "object",
+            "required": [
+                "name",
+                "templateName"
+            ],
+            "properties": {
+                "args": {
+                    "description": "Args are the arguments that will be added to the AnalysisRuns",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Argument"
+                    },
+                    "x-kubernetes-patch-merge-key": "name",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "clusterScope": {
+                    "description": "Whether to look for the templateName at cluster scope or namespace scope",
+                    "type": "boolean"
+                },
+                "name": {
+                    "description": "Name is the name of the analysis",
+                    "type": "string",
+                    "default": ""
+                },
+                "requiredForCompletion": {
+                    "description": "RequiredForCompletion blocks the Experiment from completing until the analysis has completed",
+                    "type": "boolean"
+                },
+                "templateName": {
+                    "description": "TemplateName reference of the AnalysisTemplate name used by the Experiment to create the run",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ExperimentAnalysisTemplateRef",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.ExperimentCondition": {
+            "description": "ExperimentCondition describes the state of a experiment at a certain point.",
+            "type": "object",
+            "required": [
+                "type",
+                "status",
+                "lastUpdateTime",
+                "lastTransitionTime",
+                "reason",
+                "message"
+            ],
+            "properties": {
+                "lastTransitionTime": {
+                    "description": "Last time the condition transitioned from one status to another.",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "lastUpdateTime": {
+                    "description": "The last time this condition was updated.",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "message": {
+                    "description": "A human readable message indicating details about the transition.",
+                    "type": "string",
+                    "default": ""
+                },
+                "reason": {
+                    "description": "The reason for the condition's last transition.",
+                    "type": "string",
+                    "default": ""
+                },
+                "status": {
+                    "description": "Phase of the condition, one of True, False, Unknown.",
+                    "type": "string",
+                    "default": ""
+                },
+                "type": {
+                    "description": "Type of deployment condition.",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ExperimentCondition",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.ExperimentList": {
+            "description": "ExperimentList is a list of Experiment resources",
+            "type": "object",
+            "required": [
+                "metadata",
+                "items"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Experiment"
+                    }
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ExperimentList",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.ExperimentSpec": {
+            "description": "ExperimentSpec is the spec for a Experiment resource",
+            "type": "object",
+            "required": [
+                "templates"
+            ],
+            "properties": {
+                "analyses": {
+                    "description": "Analyses references AnalysisTemplates to run during the experiment",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ExperimentAnalysisTemplateRef"
+                    },
+                    "x-kubernetes-patch-merge-key": "name",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "dryRun": {
+                    "description": "DryRun object contains the settings for running the analysis in Dry-Run mode",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.DryRun"
+                    },
+                    "x-kubernetes-patch-merge-key": "metricName",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "duration": {
+                    "description": "Duration the amount of time for the experiment to run as a duration string (e.g. 30s, 5m, 1h). If omitted, the experiment will run indefinitely, stopped either via termination, or a failed analysis run.",
+                    "type": "string"
+                },
+                "measurementRetention": {
+                    "description": "MeasurementRetention object contains the settings for retaining the number of measurements during the analysis",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.MeasurementRetention"
+                    },
+                    "x-kubernetes-patch-merge-key": "metricName",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "progressDeadlineSeconds": {
+                    "description": "ProgressDeadlineSeconds The maximum time in seconds for a experiment to make progress before it is considered to be failed. Argo Rollouts will continue to process failed experiments and a condition with a ProgressDeadlineExceeded reason will be surfaced in the experiment status. Defaults to 600s.",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "scaleDownDelaySeconds": {
+                    "description": "ScaleDownDelaySeconds adds a delay before scaling down the Experiment. If omitted, the Experiment waits 30 seconds before scaling down. A minimum of 30 seconds is recommended to ensure IP table propagation across the nodes in a cluster. See https://github.com/argoproj/argo-rollouts/issues/19#issuecomment-476329960 for more information",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "templates": {
+                    "description": "Templates are a list of PodSpecs that define the ReplicaSets that should be run during an experiment.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.TemplateSpec"
+                    },
+                    "x-kubernetes-patch-merge-key": "name",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "terminate": {
+                    "description": "Terminate is used to prematurely stop the experiment",
+                    "type": "boolean"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ExperimentSpec",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.ExperimentStatus": {
+            "description": "ExperimentStatus is the status for a Experiment resource",
+            "type": "object",
+            "properties": {
+                "analysisRuns": {
+                    "description": "AnalysisRuns tracks the status of AnalysisRuns associated with this Experiment",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ExperimentAnalysisRunStatus"
+                    }
+                },
+                "availableAt": {
+                    "description": "AvailableAt the time when all the templates become healthy and the experiment should start tracking the time to run for the duration of specificed in the spec.",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "conditions": {
+                    "description": "Conditions a list of conditions a experiment can have.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ExperimentCondition"
+                    }
+                },
+                "message": {
+                    "description": "Message is an explanation for the current status",
+                    "type": "string"
+                },
+                "phase": {
+                    "description": "Phase is the status of the experiment. Takes into consideration ReplicaSet degradations and AnalysisRun statuses",
+                    "type": "string"
+                },
+                "templateStatuses": {
+                    "description": "TemplateStatuses holds the ReplicaSet related statuses for individual templates",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.TemplateStatus"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ExperimentStatus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.FieldRef": {
+            "type": "object",
+            "required": [
+                "fieldPath"
+            ],
+            "properties": {
+                "fieldPath": {
+                    "description": "Required: Path of the field to select in the specified API version",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "FieldRef",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.GraphiteMetric": {
+            "description": "GraphiteMetric defines the Graphite query to perform canary analysis",
+            "type": "object",
+            "properties": {
+                "address": {
+                    "description": "Address is the HTTP address and port of the Graphite server",
+                    "type": "string"
+                },
+                "query": {
+                    "description": "Query is a raw Graphite query to perform",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "GraphiteMetric",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.IstioDestinationRule": {
+            "description": "IstioDestinationRule is a reference to an Istio DestinationRule to modify and shape traffic",
+            "type": "object",
+            "required": [
+                "name",
+                "canarySubsetName",
+                "stableSubsetName"
+            ],
+            "properties": {
+                "canarySubsetName": {
+                    "description": "CanarySubsetName is the subset name to modify labels with canary ReplicaSet pod template hash value",
+                    "type": "string",
+                    "default": ""
+                },
+                "name": {
+                    "description": "Name holds the name of the DestinationRule",
+                    "type": "string",
+                    "default": ""
+                },
+                "stableSubsetName": {
+                    "description": "StableSubsetName is the subset name to modify labels with stable ReplicaSet pod template hash value",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "IstioDestinationRule",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.IstioTrafficRouting": {
+            "description": "IstioTrafficRouting configuration for Istio service mesh to enable fine grain configuration",
+            "type": "object",
+            "properties": {
+                "destinationRule": {
+                    "description": "DestinationRule references an Istio DestinationRule to modify to shape traffic",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.IstioDestinationRule"
+                },
+                "virtualService": {
+                    "description": "VirtualService references an Istio VirtualService to modify to shape traffic",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.IstioVirtualService"
+                },
+                "virtualServices": {
+                    "description": "VirtualServices references a list of Istio VirtualService to modify to shape traffic",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.IstioVirtualService"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "IstioTrafficRouting",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.IstioVirtualService": {
+            "description": "IstioVirtualService holds information on the virtual service the rollout needs to modify",
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "description": "Name holds the name of the VirtualService",
+                    "type": "string",
+                    "default": ""
+                },
+                "routes": {
+                    "description": "A list of HTTP routes within VirtualService to edit. If omitted, VirtualService must have a single route of this type.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "tlsRoutes": {
+                    "description": "A list of TLS/HTTPS routes within VirtualService to edit. If omitted, VirtualService must have a single route of this type.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.TLSRoute"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "IstioVirtualService",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.JobMetric": {
+            "description": "JobMetric defines a job to run which acts as a metric",
+            "type": "object",
+            "required": [
+                "spec"
+            ],
+            "properties": {
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+                },
+                "spec": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.api.batch.v1.JobSpec"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "JobMetric",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.KayentaMetric": {
+            "type": "object",
+            "required": [
+                "address",
+                "application",
+                "canaryConfigName",
+                "metricsAccountName",
+                "configurationAccountName",
+                "storageAccountName",
+                "threshold",
+                "scopes"
+            ],
+            "properties": {
+                "address": {
+                    "type": "string",
+                    "default": ""
+                },
+                "application": {
+                    "type": "string",
+                    "default": ""
+                },
+                "canaryConfigName": {
+                    "type": "string",
+                    "default": ""
+                },
+                "configurationAccountName": {
+                    "type": "string",
+                    "default": ""
+                },
+                "metricsAccountName": {
+                    "type": "string",
+                    "default": ""
+                },
+                "scopes": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.KayentaScope"
+                    }
+                },
+                "storageAccountName": {
+                    "type": "string",
+                    "default": ""
+                },
+                "threshold": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.KayentaThreshold"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "KayentaMetric",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.KayentaScope": {
+            "type": "object",
+            "required": [
+                "name",
+                "controlScope",
+                "experimentScope"
+            ],
+            "properties": {
+                "controlScope": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ScopeDetail"
+                },
+                "experimentScope": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ScopeDetail"
+                },
+                "name": {
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "KayentaScope",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.KayentaThreshold": {
+            "type": "object",
+            "required": [
+                "pass",
+                "marginal"
+            ],
+            "properties": {
+                "marginal": {
+                    "type": "integer",
+                    "format": "int64",
+                    "default": 0
+                },
+                "pass": {
+                    "type": "integer",
+                    "format": "int64",
+                    "default": 0
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "KayentaThreshold",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.Measurement": {
+            "description": "Measurement is a point in time result value of a single metric, and the time it was measured",
+            "type": "object",
+            "required": [
+                "phase"
+            ],
+            "properties": {
+                "finishedAt": {
+                    "description": "FinishedAt is the timestamp in which this measurement completed and value was collected",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "message": {
+                    "description": "Message contains a message describing current condition (e.g. error messages)",
+                    "type": "string"
+                },
+                "metadata": {
+                    "description": "Metadata stores additional metadata about this metric result, used by the different providers (e.g. kayenta run ID, job name)",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "phase": {
+                    "description": "Phase is the status of this single measurement",
+                    "type": "string",
+                    "default": ""
+                },
+                "resumeAt": {
+                    "description": "ResumeAt is the  timestamp when the analysisRun should try to resume the measurement",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "startedAt": {
+                    "description": "StartedAt is the timestamp in which this measurement started to be measured",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "value": {
+                    "description": "Value is the measured value of the metric",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "Measurement",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.MeasurementRetention": {
+            "description": "MeasurementRetention defines the settings for retaining the number of measurements during the analysis.",
+            "type": "object",
+            "required": [
+                "metricName",
+                "limit"
+            ],
+            "properties": {
+                "limit": {
+                    "description": "Limit is the maximum number of measurements to be retained for this given metric.",
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 0
+                },
+                "metricName": {
+                    "description": "MetricName is the name of the metric on which this retention policy should be applied.",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "MeasurementRetention",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.Metric": {
+            "description": "Metric defines a metric in which to perform analysis",
+            "type": "object",
+            "required": [
+                "name",
+                "provider"
+            ],
+            "properties": {
+                "consecutiveErrorLimit": {
+                    "description": "ConsecutiveErrorLimit is the maximum number of times the measurement is allowed to error in succession, before the metric is considered error (default: 4)",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+                },
+                "count": {
+                    "description": "Count is the number of times to run the measurement. If both interval and count are omitted, the effective count is 1. If only interval is specified, metric runs indefinitely. If count \u003e 1, interval must be specified.",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+                },
+                "failureCondition": {
+                    "description": "FailureCondition is an expression which determines if a measurement is considered failed If both success and failure conditions are specified, and the measurement does not fall into either condition, the measurement is considered Inconclusive",
+                    "type": "string"
+                },
+                "failureLimit": {
+                    "description": "FailureLimit is the maximum number of times the measurement is allowed to fail, before the entire metric is considered Failed (default: 0)",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+                },
+                "inconclusiveLimit": {
+                    "description": "InconclusiveLimit is the maximum number of times the measurement is allowed to measure Inconclusive, before the entire metric is considered Inconclusive (default: 0)",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+                },
+                "initialDelay": {
+                    "description": "InitialDelay how long the AnalysisRun should wait before starting this metric",
+                    "type": "string"
+                },
+                "interval": {
+                    "description": "Interval defines an interval string (e.g. 30s, 5m, 1h) between each measurement. If omitted, will perform a single measurement",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name is the name of the metric",
+                    "type": "string",
+                    "default": ""
+                },
+                "provider": {
+                    "description": "Provider configuration to the external system to use to verify the analysis",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.MetricProvider"
+                },
+                "successCondition": {
+                    "description": "SuccessCondition is an expression which determines if a measurement is considered successful Expression is a goevaluate expression. The keyword `result` is a variable reference to the value of measurement. Results can be both structured data or primitive. Examples:\n  result \u003e 10\n  (result.requests_made * result.requests_succeeded / 100) \u003e= 90",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "Metric",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.MetricProvider": {
+            "description": "MetricProvider which external system to use to verify the analysis Only one of the fields in this struct should be non-nil",
+            "type": "object",
+            "properties": {
+                "cloudWatch": {
+                    "description": "CloudWatch specifies the cloudWatch metric to query",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.CloudWatchMetric"
+                },
+                "datadog": {
+                    "description": "Datadog specifies a datadog metric to query",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.DatadogMetric"
+                },
+                "graphite": {
+                    "description": "Graphite specifies the Graphite metric to query",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.GraphiteMetric"
+                },
+                "job": {
+                    "description": "Job specifies the job metric run",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.JobMetric"
+                },
+                "kayenta": {
+                    "description": "Kayenta specifies a Kayenta metric",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.KayentaMetric"
+                },
+                "newRelic": {
+                    "description": "NewRelic specifies the newrelic metric to query",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.NewRelicMetric"
+                },
+                "prometheus": {
+                    "description": "Prometheus specifies the prometheus metric to query",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.PrometheusMetric"
+                },
+                "wavefront": {
+                    "description": "Wavefront specifies the wavefront metric to query",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.WavefrontMetric"
+                },
+                "web": {
+                    "description": "Web specifies a generic HTTP web metric",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.WebMetric"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "MetricProvider",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.MetricResult": {
+            "description": "MetricResult contain a list of the most recent measurements for a single metric along with counters on how often the measurement",
+            "type": "object",
+            "required": [
+                "name",
+                "phase"
+            ],
+            "properties": {
+                "consecutiveError": {
+                    "description": "ConsecutiveError is the number of times an error was encountered during measurement in succession Resets to zero when non-errors are encountered",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "count": {
+                    "description": "Count is the number of times the metric was measured without Error This is equal to the sum of Successful, Failed, Inconclusive",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "dryRun": {
+                    "description": "DryRun indicates whether this metric is running in a dry-run mode or not",
+                    "type": "boolean"
+                },
+                "error": {
+                    "description": "Error is the number of times an error was encountered during measurement",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "failed": {
+                    "description": "Failed is the number of times the metric was measured Failed",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "inconclusive": {
+                    "description": "Inconclusive is the number of times the metric was measured Inconclusive",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "measurements": {
+                    "description": "Measurements holds the most recent measurements collected for the metric",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Measurement"
+                    }
+                },
+                "message": {
+                    "description": "Message contains a message describing current condition (e.g. error messages)",
+                    "type": "string"
+                },
+                "metadata": {
+                    "description": "Metadata stores additional metadata about this metric. It is used by different providers to store the final state which gets used while taking measurements. For example, Prometheus uses this field to store the final resolved query after substituting the template arguments.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "name": {
+                    "description": "Name is the name of the metric",
+                    "type": "string",
+                    "default": ""
+                },
+                "phase": {
+                    "description": "Phase is the overall aggregate status of the metric",
+                    "type": "string",
+                    "default": ""
+                },
+                "successful": {
+                    "description": "Successful is the number of times the metric was measured Successful",
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "MetricResult",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.NewRelicMetric": {
+            "description": "NewRelicMetric defines the newrelic query to perform canary analysis",
+            "type": "object",
+            "required": [
+                "query"
+            ],
+            "properties": {
+                "profile": {
+                    "description": "Profile is the name of the secret holding NR account configuration",
+                    "type": "string"
+                },
+                "query": {
+                    "description": "Query is a raw newrelic NRQL query to perform",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "NewRelicMetric",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.NginxTrafficRouting": {
+            "description": "NginxTrafficRouting configuration for Nginx ingress controller to control traffic routing",
+            "type": "object",
+            "required": [
+                "stableIngress"
+            ],
+            "properties": {
+                "additionalIngressAnnotations": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "annotationPrefix": {
+                    "description": "AnnotationPrefix has to match the configured annotation prefix on the nginx ingress controller",
+                    "type": "string"
+                },
+                "stableIngress": {
+                    "description": "StableIngress refers to the name of an `Ingress` resource in the same namespace as the `Rollout`",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "NginxTrafficRouting",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.ObjectRef": {
+            "description": "ObjectRef holds a references to the Kubernetes object",
+            "type": "object",
+            "properties": {
+                "apiVersion": {
+                    "description": "API Version of the referent",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "Kind of the referent",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name of the referent",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ObjectRef",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.PauseCondition": {
+            "description": "PauseCondition the reason for a pause and when it started",
+            "type": "object",
+            "required": [
+                "reason",
+                "startTime"
+            ],
+            "properties": {
+                "reason": {
+                    "type": "string",
+                    "default": ""
+                },
+                "startTime": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "PauseCondition",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.PingPongSpec": {
+            "description": "PingPongSpec holds the ping and pong service name.",
+            "type": "object",
+            "required": [
+                "pingService",
+                "pongService"
+            ],
+            "properties": {
+                "pingService": {
+                    "description": "name of the ping service",
+                    "type": "string",
+                    "default": ""
+                },
+                "pongService": {
+                    "description": "name of the pong service",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "PingPongSpec",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.PodTemplateMetadata": {
+            "description": "PodTemplateMetadata extra labels to add to the template",
+            "type": "object",
+            "properties": {
+                "annotations": {
+                    "description": "Annotations additional annotations to add to the experiment",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "labels": {
+                    "description": "Labels Additional labels to add to the experiment",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "PodTemplateMetadata",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.PreferredDuringSchedulingIgnoredDuringExecution": {
+            "description": "PreferredDuringSchedulingIgnoredDuringExecution defines the weight of the anti-affinity injection",
+            "type": "object",
+            "required": [
+                "weight"
+            ],
+            "properties": {
+                "weight": {
+                    "description": "Weight associated with matching the corresponding podAffinityTerm, in the range 1-100.",
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 0
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "PreferredDuringSchedulingIgnoredDuringExecution",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.PrometheusMetric": {
+            "description": "PrometheusMetric defines the prometheus query to perform canary analysis",
+            "type": "object",
+            "properties": {
+                "address": {
+                    "description": "Address is the HTTP address and port of the prometheus server",
+                    "type": "string"
+                },
+                "query": {
+                    "description": "Query is a raw prometheus query to perform",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "PrometheusMetric",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.RequiredDuringSchedulingIgnoredDuringExecution": {
+            "description": "RequiredDuringSchedulingIgnoredDuringExecution defines inter-pod scheduling rule to be RequiredDuringSchedulingIgnoredDuringExecution",
+            "type": "object",
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RequiredDuringSchedulingIgnoredDuringExecution",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.Rollout": {
+            "description": "Rollout is a specification for a Rollout resource",
+            "type": "object",
+            "required": [
+                "spec"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+                },
+                "spec": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutSpec"
+                },
+                "status": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutStatus"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "Rollout",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.RolloutAnalysis": {
+            "description": "RolloutAnalysis defines a template that is used to create a analysisRun",
+            "type": "object",
+            "properties": {
+                "args": {
+                    "description": "Args the arguments that will be added to the AnalysisRuns",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisRunArgument"
+                    },
+                    "x-kubernetes-patch-merge-key": "name",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "dryRun": {
+                    "description": "DryRun object contains the settings for running the analysis in Dry-Run mode",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.DryRun"
+                    },
+                    "x-kubernetes-patch-merge-key": "metricName",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "measurementRetention": {
+                    "description": "MeasurementRetention object contains the settings for retaining the number of measurements during the analysis",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.MeasurementRetention"
+                    },
+                    "x-kubernetes-patch-merge-key": "metricName",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "templates": {
+                    "description": "Templates reference to a list of analysis templates to combine for an AnalysisRun",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutAnalysisTemplate"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RolloutAnalysis",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.RolloutAnalysisBackground": {
+            "description": "RolloutAnalysisBackground defines a template that is used to create a background analysisRun",
+            "type": "object",
+            "properties": {
+                "args": {
+                    "description": "Args the arguments that will be added to the AnalysisRuns",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisRunArgument"
+                    },
+                    "x-kubernetes-patch-merge-key": "name",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "dryRun": {
+                    "description": "DryRun object contains the settings for running the analysis in Dry-Run mode",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.DryRun"
+                    },
+                    "x-kubernetes-patch-merge-key": "metricName",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "measurementRetention": {
+                    "description": "MeasurementRetention object contains the settings for retaining the number of measurements during the analysis",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.MeasurementRetention"
+                    },
+                    "x-kubernetes-patch-merge-key": "metricName",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "startingStep": {
+                    "description": "StartingStep indicates which step the background analysis should start on If not listed, controller defaults to 0",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "templates": {
+                    "description": "Templates reference to a list of analysis templates to combine for an AnalysisRun",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutAnalysisTemplate"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RolloutAnalysisBackground",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.RolloutAnalysisRunStatus": {
+            "type": "object",
+            "required": [
+                "name",
+                "status"
+            ],
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "default": ""
+                },
+                "status": {
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RolloutAnalysisRunStatus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.RolloutAnalysisTemplate": {
+            "type": "object",
+            "properties": {
+                "clusterScope": {
+                    "description": "Whether to look for the templateName at cluster scope or namespace scope",
+                    "type": "boolean"
+                },
+                "templateName": {
+                    "description": "TemplateName name of template to use in AnalysisRun",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RolloutAnalysisTemplate",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.RolloutCondition": {
+            "description": "RolloutCondition describes the state of a rollout at a certain point.",
+            "type": "object",
+            "required": [
+                "type",
+                "status",
+                "lastUpdateTime",
+                "lastTransitionTime",
+                "reason",
+                "message"
+            ],
+            "properties": {
+                "lastTransitionTime": {
+                    "description": "Last time the condition transitioned from one status to another.",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "lastUpdateTime": {
+                    "description": "The last time this condition was updated.",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "message": {
+                    "description": "A human readable message indicating details about the transition.",
+                    "type": "string",
+                    "default": ""
+                },
+                "reason": {
+                    "description": "The reason for the condition's last transition.",
+                    "type": "string",
+                    "default": ""
+                },
+                "status": {
+                    "description": "Phase of the condition, one of True, False, Unknown.",
+                    "type": "string",
+                    "default": ""
+                },
+                "type": {
+                    "description": "Type of deployment condition.",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RolloutCondition",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.RolloutExperimentStep": {
+            "description": "RolloutExperimentStep defines a template that is used to create a experiment for a step",
+            "type": "object",
+            "required": [
+                "templates"
+            ],
+            "properties": {
+                "analyses": {
+                    "description": "Analyses reference which analysis templates to run with the experiment",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutExperimentStepAnalysisTemplateRef"
+                    },
+                    "x-kubernetes-patch-merge-key": "name",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "duration": {
+                    "description": "Duration is a duration string (e.g. 30s, 5m, 1h) that the experiment should run for",
+                    "type": "string"
+                },
+                "templates": {
+                    "description": "Templates what templates that should be added to the experiment. Should be non-nil",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutExperimentTemplate"
+                    },
+                    "x-kubernetes-patch-merge-key": "name",
+                    "x-kubernetes-patch-strategy": "merge"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RolloutExperimentStep",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.RolloutExperimentStepAnalysisTemplateRef": {
+            "type": "object",
+            "required": [
+                "name",
+                "templateName"
+            ],
+            "properties": {
+                "args": {
+                    "description": "Args the arguments that will be added to the AnalysisRuns",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisRunArgument"
+                    },
+                    "x-kubernetes-patch-merge-key": "name",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "clusterScope": {
+                    "description": "Whether to look for the templateName at cluster scope or namespace scope",
+                    "type": "boolean"
+                },
+                "name": {
+                    "description": "Name is a name for this analysis template invocation",
+                    "type": "string",
+                    "default": ""
+                },
+                "requiredForCompletion": {
+                    "description": "RequiredForCompletion blocks the Experiment from completing until the analysis has completed",
+                    "type": "boolean"
+                },
+                "templateName": {
+                    "description": "TemplateName reference of the AnalysisTemplate name used by the Experiment to create the run",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RolloutExperimentStepAnalysisTemplateRef",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.RolloutExperimentTemplate": {
+            "description": "RolloutExperimentTemplate defines the template used to create experiments for the Rollout's experiment canary step",
+            "type": "object",
+            "required": [
+                "name",
+                "specRef"
+            ],
+            "properties": {
+                "metadata": {
+                    "description": "Metadata sets labels and annotations to use for the RS created from the template",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.PodTemplateMetadata"
+                },
+                "name": {
+                    "description": "Name description of template that passed to the template",
+                    "type": "string",
+                    "default": ""
+                },
+                "replicas": {
+                    "description": "Replicas replica count for the template",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "selector": {
+                    "description": "Selector overrides the selector to be used for the template's ReplicaSet. If omitted, will use the same selector as the Rollout",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
+                },
+                "specRef": {
+                    "description": "SpecRef indicates where the rollout should get the RS template from",
+                    "type": "string",
+                    "default": ""
+                },
+                "weight": {
+                    "description": "Weight sets the percentage of traffic the template's replicas should receive",
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RolloutExperimentTemplate",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.RolloutList": {
+            "description": "RolloutList is a list of Rollout resources",
+            "type": "object",
+            "required": [
+                "metadata",
+                "items"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Rollout"
+                    }
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RolloutList",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.RolloutPause": {
+            "description": "RolloutPause defines a pause stage for a rollout",
+            "type": "object",
+            "properties": {
+                "duration": {
+                    "description": "Duration the amount of time to wait before moving to the next step.",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RolloutPause",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.RolloutSpec": {
+            "description": "RolloutSpec is the spec for a Rollout resource",
+            "type": "object",
+            "properties": {
+                "analysis": {
+                    "description": "Analysis configuration for the analysis runs to retain",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisRunStrategy"
+                },
+                "minReadySeconds": {
+                    "description": "Minimum number of seconds for which a newly created pod should be ready without any of its container crashing, for it to be considered available. Defaults to 0 (pod will be considered available as soon as it is ready)",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "paused": {
+                    "description": "Paused pauses the rollout at its current step.",
+                    "type": "boolean"
+                },
+                "progressDeadlineAbort": {
+                    "description": "ProgressDeadlineAbort is whether to abort the update when ProgressDeadlineSeconds is exceeded if analysis is not used. Default is false.",
+                    "type": "boolean"
+                },
+                "progressDeadlineSeconds": {
+                    "description": "ProgressDeadlineSeconds The maximum time in seconds for a rollout to make progress before it is considered to be failed. Argo Rollouts will continue to process failed rollouts and a condition with a ProgressDeadlineExceeded reason will be surfaced in the rollout status. Note that progress will not be estimated during the time a rollout is paused. Defaults to 600s.",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "replicas": {
+                    "description": "Number of desired pods. This is a pointer to distinguish between explicit zero and not specified. Defaults to 1.",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "restartAt": {
+                    "description": "RestartAt indicates when all the pods of a Rollout should be restarted",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "revisionHistoryLimit": {
+                    "description": "The number of old ReplicaSets to retain. If unspecified, will retain 10 old ReplicaSets",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "selector": {
+                    "description": "Label selector for pods. Existing ReplicaSets whose pods are selected by this will be the ones affected by this rollout. It must match the pod template's labels.",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
+                },
+                "strategy": {
+                    "description": "The deployment strategy to use to replace existing pods with new ones.",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutStrategy"
+                },
+                "template": {
+                    "description": "Template describes the pods that will be created.",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.api.core.v1.PodTemplateSpec"
+                },
+                "workloadRef": {
+                    "description": "WorkloadRef holds a references to a workload that provides Pod template",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ObjectRef"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RolloutSpec",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.RolloutStatus": {
+            "description": "RolloutStatus is the status for a Rollout resource",
+            "type": "object",
+            "properties": {
+                "HPAReplicas": {
+                    "description": "HPAReplicas the number of non-terminated replicas that are receiving active traffic",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "abort": {
+                    "description": "Abort cancel the current rollout progression",
+                    "type": "boolean"
+                },
+                "abortedAt": {
+                    "description": "AbortedAt indicates the controller reconciled an aborted rollout. The controller uses this to understand if the controller needs to do some specific work when a Rollout is aborted. For example, the reconcileAbort is used to indicate if the Rollout should enter an aborted state when the latest AnalysisRun is a failure, or the controller has already put the Rollout into an aborted and should create a new AnalysisRun.",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "alb": {
+                    "description": "/ ALB keeps information regarding the ALB and TargetGroups",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ALBStatus"
+                },
+                "availableReplicas": {
+                    "description": "Total number of available pods (ready for at least minReadySeconds) targeted by this rollout.",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "blueGreen": {
+                    "description": "BlueGreen describes the state of the bluegreen rollout",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.BlueGreenStatus"
+                },
+                "canary": {
+                    "description": "Canary describes the state of the canary rollout",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.CanaryStatus"
+                },
+                "collisionCount": {
+                    "description": "Count of hash collisions for the Rollout. The Rollout controller uses this field as a collision avoidance mechanism when it needs to create the name for the newest ReplicaSet.",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "conditions": {
+                    "description": "Conditions a list of conditions a rollout can have.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutCondition"
+                    }
+                },
+                "controllerPause": {
+                    "description": "ControllerPause indicates the controller has paused the rollout. It is set to true when the controller adds a pause condition. This field helps to discern the scenario where a rollout was resumed after being paused by the controller (e.g. via the plugin). In that situation, the pauseConditions would have been cleared , but controllerPause would still be set to true.",
+                    "type": "boolean"
+                },
+                "currentPodHash": {
+                    "description": "CurrentPodHash the hash of the current pod template",
+                    "type": "string"
+                },
+                "currentStepHash": {
+                    "description": "CurrentStepHash the hash of the current list of steps for the current strategy. This is used to detect when the list of current steps change",
+                    "type": "string"
+                },
+                "currentStepIndex": {
+                    "description": "CurrentStepIndex defines the current step of the rollout is on. If the current step index is null, the controller will execute the rollout.",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "description": "Message provides details on why the rollout is in its current phase",
+                    "type": "string"
+                },
+                "observedGeneration": {
+                    "description": "The generation observed by the rollout controller from metadata.generation",
+                    "type": "string"
+                },
+                "pauseConditions": {
+                    "description": "PauseConditions is a list of reasons why rollout became automatically paused (e.g. CanaryPauseStep, BlueGreenPause, InconclusiveAnalysis). The items in this list are populated by the controller but are cleared by the user (e.g. plugin, argo-cd resume action) when they wish to unpause. If pause conditions is empty, but controllerPause is true, it indicates the user manually unpaused the Rollout",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.PauseCondition"
+                    }
+                },
+                "phase": {
+                    "description": "Phase is the rollout phase. Clients should only rely on the value if status.observedGeneration equals metadata.generation",
+                    "type": "string"
+                },
+                "promoteFull": {
+                    "description": "PromoteFull indicates if the rollout should perform a full promotion, skipping analysis and pauses.",
+                    "type": "boolean"
+                },
+                "readyReplicas": {
+                    "description": "Total number of ready pods targeted by this rollout.",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "replicas": {
+                    "description": "Total number of non-terminated pods targeted by this rollout (their labels match the selector).",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "restartedAt": {
+                    "description": "RestartedAt indicates last time a Rollout was restarted",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "selector": {
+                    "description": "Selector that identifies the pods that are receiving active traffic",
+                    "type": "string"
+                },
+                "stableRS": {
+                    "description": "StableRS indicates the replicaset that has successfully rolled out",
+                    "type": "string"
+                },
+                "updatedReplicas": {
+                    "description": "Total number of non-terminated pods targeted by this rollout that have the desired template spec.",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "workloadObservedGeneration": {
+                    "description": "The generation of referenced workload observed by the rollout controller",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RolloutStatus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.RolloutStrategy": {
+            "description": "RolloutStrategy defines strategy to apply during next rollout",
+            "type": "object",
+            "properties": {
+                "blueGreen": {
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.BlueGreenStrategy"
+                },
+                "canary": {
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.CanaryStrategy"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RolloutStrategy",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.RolloutTrafficRouting": {
+            "description": "RolloutTrafficRouting hosts all the different configuration for supported service meshes to enable more fine-grained traffic routing",
+            "type": "object",
+            "properties": {
+                "alb": {
+                    "description": "Nginx holds ALB Ingress specific configuration to route traffic",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ALBTrafficRouting"
+                },
+                "ambassador": {
+                    "description": "Ambassador holds specific configuration to use Ambassador to route traffic",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AmbassadorTrafficRouting"
+                },
+                "appMesh": {
+                    "description": "AppMesh holds specific configuration to use AppMesh to route traffic",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AppMeshTrafficRouting"
+                },
+                "istio": {
+                    "description": "Istio holds Istio specific configuration to route traffic",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.IstioTrafficRouting"
+                },
+                "nginx": {
+                    "description": "Nginx holds Nginx Ingress specific configuration to route traffic",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.NginxTrafficRouting"
+                },
+                "smi": {
+                    "description": "SMI holds TrafficSplit specific configuration to route traffic",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.SMITrafficRouting"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RolloutTrafficRouting",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.RunSummary": {
+            "description": "RunSummary contains the final results from the metric executions",
+            "type": "object",
+            "properties": {
+                "count": {
+                    "description": "This is equal to the sum of Successful, Failed, Inconclusive",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "error": {
+                    "description": "Error is the number of times an error was encountered during measurement",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "failed": {
+                    "description": "Failed is the number of times the metric was measured Failed",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "inconclusive": {
+                    "description": "Inconclusive is the number of times the metric was measured Inconclusive",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "successful": {
+                    "description": "Successful is the number of times the metric was measured Successful",
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RunSummary",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.SMITrafficRouting": {
+            "description": "SMITrafficRouting configuration for TrafficSplit Custom Resource to control traffic routing",
+            "type": "object",
+            "properties": {
+                "rootService": {
+                    "description": "RootService holds the name of that clients use to communicate.",
+                    "type": "string"
+                },
+                "trafficSplitName": {
+                    "description": "TrafficSplitName holds the name of the TrafficSplit.",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SMITrafficRouting",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.ScopeDetail": {
+            "type": "object",
+            "required": [
+                "scope",
+                "region",
+                "step",
+                "start",
+                "end"
+            ],
+            "properties": {
+                "end": {
+                    "type": "string",
+                    "default": ""
+                },
+                "region": {
+                    "type": "string",
+                    "default": ""
+                },
+                "scope": {
+                    "type": "string",
+                    "default": ""
+                },
+                "start": {
+                    "type": "string",
+                    "default": ""
+                },
+                "step": {
+                    "type": "integer",
+                    "format": "int64",
+                    "default": 0
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ScopeDetail",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.SecretKeyRef": {
+            "type": "object",
+            "required": [
+                "name",
+                "key"
+            ],
+            "properties": {
+                "key": {
+                    "description": "Key is the key of the secret to select from.",
+                    "type": "string",
+                    "default": ""
+                },
+                "name": {
+                    "description": "Name is the name of the secret",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SecretKeyRef",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.SetCanaryScale": {
+            "description": "SetCanaryScale defines how to scale the newRS without changing traffic weight",
+            "type": "object",
+            "properties": {
+                "matchTrafficWeight": {
+                    "description": "MatchTrafficWeight cancels out previously set Replicas or Weight, effectively activating SetWeight",
+                    "type": "boolean"
+                },
+                "replicas": {
+                    "description": "Replicas sets the number of replicas the newRS should have",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "weight": {
+                    "description": "Weight sets the percentage of replicas the newRS should have",
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SetCanaryScale",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.StickinessConfig": {
+            "type": "object",
+            "required": [
+                "enabled",
+                "durationSeconds"
+            ],
+            "properties": {
+                "durationSeconds": {
+                    "type": "integer",
+                    "format": "int64",
+                    "default": 0
+                },
+                "enabled": {
+                    "type": "boolean",
+                    "default": false
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "StickinessConfig",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.TLSRoute": {
+            "description": "TLSRoute holds the information on the virtual service's TLS/HTTPS routes that are desired to be matched for changing weights.",
+            "type": "object",
+            "properties": {
+                "port": {
+                    "description": "Port number of the TLS Route desired to be matched in the given Istio VirtualService.",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "sniHosts": {
+                    "description": "A list of all the SNI Hosts of the TLS Route desired to be matched in the given Istio VirtualService.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "TLSRoute",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.TemplateService": {
+            "type": "object",
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "TemplateService",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.TemplateSpec": {
+            "type": "object",
+            "required": [
+                "name",
+                "selector",
+                "template"
+            ],
+            "properties": {
+                "minReadySeconds": {
+                    "description": "Minimum number of seconds for which a newly created pod should be ready without any of its container crashing, for it to be considered available. Defaults to 0 (pod will be considered available as soon as it is ready)",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "name": {
+                    "description": "Name of the template used to identity replicaset running for this experiment",
+                    "type": "string",
+                    "default": ""
+                },
+                "replicas": {
+                    "description": "Number of desired pods. This is a pointer to distinguish between explicit zero and not specified. Defaults to 1.",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "selector": {
+                    "description": "Label selector for pods. Existing ReplicaSets whose pods are selected by this will be the ones affected by this experiment. It must match the pod template's labels. Each selector must be unique to the other selectors in the other templates",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
+                },
+                "service": {
+                    "description": "TemplateService describes how a service should be generated for template",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.TemplateService"
+                },
+                "template": {
+                    "description": "Template describes the pods that will be created.",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.api.core.v1.PodTemplateSpec"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "TemplateSpec",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.TemplateStatus": {
+            "description": "TemplateStatus is the status of a specific template of an Experiment",
+            "type": "object",
+            "required": [
+                "name",
+                "replicas",
+                "updatedReplicas",
+                "readyReplicas",
+                "availableReplicas"
+            ],
+            "properties": {
+                "availableReplicas": {
+                    "description": "Total number of available pods (ready for at least minReadySeconds) targeted by this experiment.",
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 0
+                },
+                "collisionCount": {
+                    "description": "CollisionCount count of hash collisions for the Experiment. The Experiment controller uses this field as a collision avoidance mechanism when it needs to create the name for the newest ReplicaSet.",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "lastTransitionTime": {
+                    "description": "LastTransitionTime is the last time the replicaset transitioned, which resets the countdown on the ProgressDeadlineSeconds check.",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "message": {
+                    "description": "Message is a message explaining the current status",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name of the template used to identity which hash to compare to the hash",
+                    "type": "string",
+                    "default": ""
+                },
+                "podTemplateHash": {
+                    "description": "PodTemplateHash is the value of the Replicas' PodTemplateHash",
+                    "type": "string"
+                },
+                "readyReplicas": {
+                    "description": "Total number of ready pods targeted by this experiment.",
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 0
+                },
+                "replicas": {
+                    "description": "Total number of non-terminated pods targeted by this experiment (their labels match the selector).",
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 0
+                },
+                "serviceName": {
+                    "description": "ServiceName is the name of the service which corresponds to this experiment",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "Phase is the status of the ReplicaSet associated with the template",
+                    "type": "string"
+                },
+                "updatedReplicas": {
+                    "description": "Total number of non-terminated pods targeted by this experiment that have the desired template spec.",
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 0
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "TemplateStatus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.TrafficWeights": {
+            "description": "TrafficWeights describes the current status of how traffic has been split",
+            "type": "object",
+            "required": [
+                "canary",
+                "stable"
+            ],
+            "properties": {
+                "additional": {
+                    "description": "Additional holds the weights split to additional ReplicaSets such as experiment ReplicaSets",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.WeightDestination"
+                    }
+                },
+                "canary": {
+                    "description": "Canary is the current traffic weight split to canary ReplicaSet",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.WeightDestination"
+                },
+                "stable": {
+                    "description": "Stable is the current traffic weight split to stable ReplicaSet",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.WeightDestination"
+                },
+                "verified": {
+                    "description": "Verified is an optional indicator that the weight has been verified to have taken effect. This is currently only applicable to ALB traffic router",
+                    "type": "boolean"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "TrafficWeights",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.ValueFrom": {
+            "type": "object",
+            "properties": {
+                "fieldRef": {
+                    "description": "FieldRef is a reference to the fields in metadata which we are referencing. This field is one of the fields with valueFrom",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.FieldRef"
+                },
+                "secretKeyRef": {
+                    "description": "Secret is a reference to where a secret is stored. This field is one of the fields with valueFrom",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.SecretKeyRef"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ValueFrom",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.WavefrontMetric": {
+            "description": "WavefrontMetric defines the wavefront query to perform canary analysis",
+            "type": "object",
+            "properties": {
+                "address": {
+                    "description": "Address is the HTTP address and port of the wavefront server",
+                    "type": "string"
+                },
+                "query": {
+                    "description": "Query is a raw wavefront query to perform",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "WavefrontMetric",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.WebMetric": {
+            "type": "object",
+            "required": [
+                "url"
+            ],
+            "properties": {
+                "body": {
+                    "description": "Body is the body of the we metric (must be POST/PUT)",
+                    "type": "string"
+                },
+                "headers": {
+                    "description": "Headers are optional HTTP headers to use in the request",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.WebMetricHeader"
+                    },
+                    "x-kubernetes-patch-merge-key": "key",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "insecure": {
+                    "description": "Insecure skips host TLS verification",
+                    "type": "boolean"
+                },
+                "jsonPath": {
+                    "description": "JSONPath is a JSON Path to use as the result variable (default: \"{$}\")",
+                    "type": "string"
+                },
+                "method": {
+                    "description": "Method is the method of the web metric (empty defaults to GET)",
+                    "type": "string"
+                },
+                "timeoutSeconds": {
+                    "description": "TimeoutSeconds is the timeout for the request in seconds (default: 10)",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "url": {
+                    "description": "URL is the address of the web metric",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "WebMetric",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.WebMetricHeader": {
+            "type": "object",
+            "required": [
+                "key",
+                "value"
+            ],
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "default": ""
+                },
+                "value": {
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "WebMetricHeader",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.WeightDestination": {
+            "type": "object",
+            "required": [
+                "weight"
+            ],
+            "properties": {
+                "podTemplateHash": {
+                    "description": "PodTemplateHash is the pod template hash label for this destination",
+                    "type": "string"
+                },
+                "serviceName": {
+                    "description": "ServiceName is the Kubernetes service name traffic is being sent to",
+                    "type": "string"
+                },
+                "weight": {
+                    "description": "Weight is an percentage of traffic being sent to this destination",
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 0
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "WeightDestination",
+                    "version": "v1alpha1"
+                }
+            ]
+        }
+    }
+}

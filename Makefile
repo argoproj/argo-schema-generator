@@ -7,7 +7,7 @@ gen-schema-only:
 	go run cmd/gen-schema/main.go
 
 .PHONY: gen-all-schema
-gen-all-schema: gen-all-openapi gen-workflows-openapi gen-events-openapi gen-cd-openapi gen-rollouts-openapi
+gen-openapi-schema: gen-all-openapi gen-workflows-openapi gen-events-openapi gen-cd-openapi gen-rollouts-openapi
 	go run cmd/gen-schema/main.go
 
 .PHONY: gen-all-openapi
