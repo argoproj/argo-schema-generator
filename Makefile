@@ -6,7 +6,7 @@ DIST_DIR=${CURRENT_DIR}/dist
 gen-schema-only:
 	go run cmd/gen-schema/main.go
 
-.PHONY: gen-schema
+.PHONY: gen-all-schema
 gen-schema: gen-openapi gen-workflows-schema gen-events-schema gen-cd-schema
 	go run cmd/gen-schema/main.go
 
@@ -42,6 +42,15 @@ gen-cd-schema: install-tools $(DIST_DIR)/openapi-gen
 	PATH=${DIST_DIR}:$$PATH openapi-gen \
 		--go-header-file hack/custom-boilerplate.go.txt \
 		--input-dirs github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1 \
+		--output-package pkg/cd/ \
+		--report-filename pkg/cd/violation_exceptions.list \
+		-o ${CURRENT_DIR}
+
+.PHONY: gen-rollouts-schema
+gen-rollouts-schema: install-tools $(DIST_DIR)/openapi-gen
+	PATH=${DIST_DIR}:$$PATH openapi-gen \
+		--go-header-file hack/custom-boilerplate.go.txt \
+		--input-dirs github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1 \
 		--output-package pkg/cd/ \
 		--report-filename pkg/cd/violation_exceptions.list \
 		-o ${CURRENT_DIR}

@@ -5,7 +5,7 @@ argoproj name including Argo CD, Argo Rollouts, Argo Workflows, and Argo Events.
 ### How to run
 To run the tool, run the following command:
 ```
-make gen-schema
+make gen-all-schema
 ```
 
 ### How to use
