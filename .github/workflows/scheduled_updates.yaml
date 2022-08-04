@@ -17,6 +17,8 @@ jobs:
           ref: ${{ github.head_ref }}
       - name: Update Schema
         run: |
+          go get -u ./...
+          go mod tidy
           make gen-all-openapi
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
