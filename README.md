@@ -11,12 +11,12 @@ make gen-openapi-schema
 ### How to use
 In your kustomization.yaml file add a config block like
 
-using main branch
+#### Using main branch:
 ```
 openapi:
   path: https://raw.githubusercontent.com/argoproj/argo-schema-generator/main/schema/argo_all_k8s_kustomize_schema.json
 ```
-using a specific tag
+#### Using a specific tag:
 ```
 openapi:
   path: https://github.com/argoproj/argo-schema-generator/raw/2022-08-04-1659642986/schema/argo_all_k8s_kustomize_schema.json
