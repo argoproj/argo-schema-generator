@@ -20,6 +20,10 @@ jobs:
           go get -u ./...
           go mod tidy
           make gen-all-openapi
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d-%s')"
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Updated schema files
+          tagging_message: ${{ steps.date.outputs.date }}
