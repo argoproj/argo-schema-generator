@@ -15,3 +15,7 @@ In your kustomization.yaml file add a config block like
 openapi:
   path: https://raw.githubusercontent.com/zachaller/argo-schema-generator/main/schema/argo_all_k8s_kustomize_schema.json
 ```
+
+### Github Action
+There is a Github action set to run on the first of each month that will update the schema's. This action can 
+also be manually run to update definitions.
