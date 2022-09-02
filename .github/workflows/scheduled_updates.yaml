@@ -19,7 +19,7 @@ jobs:
         run: |
           go get -u ./...
           go mod tidy
-          make gen-all-openapi
+          make gen-openapi-schema
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d-%s')"
