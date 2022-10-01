@@ -66,6 +66,39 @@
                 }
             ]
         },
+        "io.argoproj.workflow.v1alpha1.ArtGCStatus": {
+            "description": "ArtGCStatus maintains state related to ArtifactGC",
+            "type": "object",
+            "properties": {
+                "notSpecified": {
+                    "description": "if this is true, we already checked to see if we need to do it and we don't",
+                    "type": "boolean"
+                },
+                "podsRecouped": {
+                    "description": "have completed Pods been processed? (mapped by Pod name) used to prevent re-processing the Status of a Pod more than once",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "boolean",
+                        "default": false
+                    }
+                },
+                "strategiesProcessed": {
+                    "description": "have Pods been started to perform this strategy? (enables us not to re-process what we've already done)",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "boolean",
+                        "default": false
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ArtGCStatus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.workflow.v1alpha1.Artifact": {
             "description": "Artifact indicates an artifact to place at a specified path",
             "type": "object",
@@ -81,9 +114,21 @@
                     "description": "ArchiveLogs indicates if the container logs should be archived",
                     "type": "boolean"
                 },
+                "artifactGC": {
+                    "description": "ArtifactGC describes the strategy to use when to deleting an artifact from completed or deleted workflows",
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtifactGC"
+                },
                 "artifactory": {
                     "description": "Artifactory contains artifactory artifact location details",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtifactoryArtifact"
+                },
+                "azure": {
+                    "description": "Azure contains Azure Storage artifact location details",
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.AzureArtifact"
+                },
+                "deleted": {
+                    "description": "Has this been deleted?",
+                    "type": "boolean"
                 },
                 "from": {
                     "description": "From allows an artifact to reference an artifact from a previous step",
@@ -160,6 +205,73 @@
                 }
             ]
         },
+        "io.argoproj.workflow.v1alpha1.ArtifactGC": {
+            "description": "ArtifactGC describes how to delete artifacts from completed Workflows",
+            "type": "object",
+            "properties": {
+                "podMetadata": {
+                    "description": "PodMetadata is an optional field for specifying the Labels and Annotations that should be assigned to the Pod doing the deletion",
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Metadata"
+                },
+                "serviceAccountName": {
+                    "description": "ServiceAccountName is an optional field for specifying the Service Account that should be assigned to the Pod doing the deletion",
+                    "type": "string"
+                },
+                "strategy": {
+                    "description": "Strategy is the strategy to use.",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ArtifactGC",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.workflow.v1alpha1.ArtifactGCSpec": {
+            "description": "ArtifactGCSpec specifies the Artifacts that need to be deleted",
+            "type": "object",
+            "properties": {
+                "artifactsByNode": {
+                    "description": "ArtifactsByNode maps Node name to information pertaining to Artifacts on that Node",
+                    "type": "object",
+                    "additionalProperties": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtifactNodeSpec"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ArtifactGCSpec",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.workflow.v1alpha1.ArtifactGCStatus": {
+            "description": "ArtifactGCStatus describes the result of the deletion",
+            "type": "object",
+            "properties": {
+                "artifactResultsByNode": {
+                    "description": "ArtifactResultsByNode maps Node name to result",
+                    "type": "object",
+                    "additionalProperties": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtifactResultNodeStatus"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ArtifactGCStatus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.workflow.v1alpha1.ArtifactLocation": {
             "description": "ArtifactLocation describes a location for a single or multiple artifacts. It is used as single artifact in the context of inputs/outputs (e.g. outputs.artifacts.artname). It is also used to describe the location of multiple artifacts such as the archive location of a single workflow step, which the executor will use as a default location to store its files.",
             "type": "object",
@@ -171,6 +283,10 @@
                 "artifactory": {
                     "description": "Artifactory contains artifactory artifact location details",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtifactoryArtifact"
+                },
+                "azure": {
+                    "description": "Azure contains Azure Storage artifact location details",
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.AzureArtifact"
                 },
                 "gcs": {
                     "description": "GCS contains GCS artifact location details",
@@ -209,6 +325,31 @@
                 }
             ]
         },
+        "io.argoproj.workflow.v1alpha1.ArtifactNodeSpec": {
+            "description": "ArtifactNodeSpec specifies the Artifacts that need to be deleted for a given Node",
+            "type": "object",
+            "properties": {
+                "archiveLocation": {
+                    "description": "ArchiveLocation is the template-level Artifact location specification",
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtifactLocation"
+                },
+                "artifacts": {
+                    "description": "Artifacts maps artifact name to Artifact description",
+                    "type": "object",
+                    "additionalProperties": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Artifact"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ArtifactNodeSpec",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.workflow.v1alpha1.ArtifactPaths": {
             "description": "ArtifactPaths expands a step from a collection of artifacts",
             "type": "object",
@@ -224,9 +365,21 @@
                     "description": "ArchiveLogs indicates if the container logs should be archived",
                     "type": "boolean"
                 },
+                "artifactGC": {
+                    "description": "ArtifactGC describes the strategy to use when to deleting an artifact from completed or deleted workflows",
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtifactGC"
+                },
                 "artifactory": {
                     "description": "Artifactory contains artifactory artifact location details",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtifactoryArtifact"
+                },
+                "azure": {
+                    "description": "Azure contains Azure Storage artifact location details",
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.AzureArtifact"
+                },
+                "deleted": {
+                    "description": "Has this been deleted?",
+                    "type": "boolean"
                 },
                 "from": {
                     "description": "From allows an artifact to reference an artifact from a previous step",
@@ -315,6 +468,10 @@
                     "description": "Artifactory stores artifacts to JFrog Artifactory",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtifactoryArtifactRepository"
                 },
+                "azure": {
+                    "description": "Azure stores artifact in an Azure Storage account",
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.AzureArtifactRepository"
+                },
                 "gcs": {
                     "description": "GCS stores artifact in a GCS object store",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.GCSArtifactRepository"
@@ -388,6 +545,118 @@
                 {
                     "group": "argoproj.io",
                     "kind": "ArtifactRepositoryRefStatus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.workflow.v1alpha1.ArtifactResult": {
+            "description": "ArtifactResult describes the result of attempting to delete a given Artifact",
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "error": {
+                    "description": "Error is an optional error message which should be set if Success==false",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name is the name of the Artifact",
+                    "type": "string",
+                    "default": ""
+                },
+                "success": {
+                    "description": "Success describes whether the deletion succeeded",
+                    "type": "boolean"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ArtifactResult",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.workflow.v1alpha1.ArtifactResultNodeStatus": {
+            "description": "ArtifactResultNodeStatus describes the result of the deletion on a given node",
+            "type": "object",
+            "properties": {
+                "artifactResults": {
+                    "description": "ArtifactResults maps Artifact name to result of the deletion",
+                    "type": "object",
+                    "additionalProperties": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtifactResult"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ArtifactResultNodeStatus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.workflow.v1alpha1.ArtifactSearchQuery": {
+            "type": "object",
+            "properties": {
+                "artifactGCStrategies": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "boolean",
+                        "default": false
+                    }
+                },
+                "artifactName": {
+                    "type": "string"
+                },
+                "deleted": {
+                    "type": "boolean"
+                },
+                "nodeId": {
+                    "type": "string"
+                },
+                "nodeTypes": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "boolean",
+                        "default": false
+                    }
+                },
+                "templateName": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ArtifactSearchQuery",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.workflow.v1alpha1.ArtifactSearchResult": {
+            "type": "object",
+            "required": [
+                "Artifact",
+                "NodeID"
+            ],
+            "properties": {
+                "Artifact": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Artifact"
+                },
+                "NodeID": {
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ArtifactSearchResult",
                     "version": "v1alpha1"
                 }
             ]
@@ -467,6 +736,121 @@
                 }
             ]
         },
+        "io.argoproj.workflow.v1alpha1.AzureArtifact": {
+            "description": "AzureArtifact is the location of a an Azure Storage artifact",
+            "type": "object",
+            "required": [
+                "endpoint",
+                "container",
+                "blob"
+            ],
+            "properties": {
+                "accountKeySecret": {
+                    "description": "AccountKeySecret is the secret selector to the Azure Blob Storage account access key",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                },
+                "blob": {
+                    "description": "Blob is the blob name (i.e., path) in the container where the artifact resides",
+                    "type": "string",
+                    "default": ""
+                },
+                "container": {
+                    "description": "Container is the container where resources will be stored",
+                    "type": "string",
+                    "default": ""
+                },
+                "endpoint": {
+                    "description": "Endpoint is the service url associated with an account. It is most likely \"https://\u003cACCOUNT_NAME\u003e.blob.core.windows.net\"",
+                    "type": "string",
+                    "default": ""
+                },
+                "useSDKCreds": {
+                    "description": "UseSDKCreds tells the driver to figure out credentials based on sdk defaults.",
+                    "type": "boolean"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AzureArtifact",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.workflow.v1alpha1.AzureArtifactRepository": {
+            "description": "AzureArtifactRepository defines the controller configuration for an Azure Blob Storage artifact repository",
+            "type": "object",
+            "required": [
+                "endpoint",
+                "container"
+            ],
+            "properties": {
+                "accountKeySecret": {
+                    "description": "AccountKeySecret is the secret selector to the Azure Blob Storage account access key",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                },
+                "blobNameFormat": {
+                    "description": "BlobNameFormat is defines the format of how to store blob names. Can reference workflow variables",
+                    "type": "string"
+                },
+                "container": {
+                    "description": "Container is the container where resources will be stored",
+                    "type": "string",
+                    "default": ""
+                },
+                "endpoint": {
+                    "description": "Endpoint is the service url associated with an account. It is most likely \"https://\u003cACCOUNT_NAME\u003e.blob.core.windows.net\"",
+                    "type": "string",
+                    "default": ""
+                },
+                "useSDKCreds": {
+                    "description": "UseSDKCreds tells the driver to figure out credentials based on sdk defaults.",
+                    "type": "boolean"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AzureArtifactRepository",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.workflow.v1alpha1.AzureBlobContainer": {
+            "description": "AzureBlobContainer contains the access information for interfacing with an Azure Blob Storage container",
+            "type": "object",
+            "required": [
+                "endpoint",
+                "container"
+            ],
+            "properties": {
+                "accountKeySecret": {
+                    "description": "AccountKeySecret is the secret selector to the Azure Blob Storage account access key",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                },
+                "container": {
+                    "description": "Container is the container where resources will be stored",
+                    "type": "string",
+                    "default": ""
+                },
+                "endpoint": {
+                    "description": "Endpoint is the service url associated with an account. It is most likely \"https://\u003cACCOUNT_NAME\u003e.blob.core.windows.net\"",
+                    "type": "string",
+                    "default": ""
+                },
+                "useSDKCreds": {
+                    "description": "UseSDKCreds tells the driver to figure out credentials based on sdk defaults.",
+                    "type": "boolean"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AzureBlobContainer",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.workflow.v1alpha1.Backoff": {
             "description": "Backoff is a backoff strategy to use within retryStrategy",
             "type": "object",
@@ -492,6 +876,27 @@
                 }
             ]
         },
+        "io.argoproj.workflow.v1alpha1.BasicAuth": {
+            "description": "BasicAuth describes the secret selectors required for basic authentication",
+            "type": "object",
+            "properties": {
+                "passwordSecret": {
+                    "description": "PasswordSecret is the secret selector to the repository password",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                },
+                "usernameSecret": {
+                    "description": "UsernameSecret is the secret selector to the repository username",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "BasicAuth",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.workflow.v1alpha1.Cache": {
             "description": "Cache is the configuration for the type of cache to be used",
             "type": "object",
@@ -508,6 +913,25 @@
                 {
                     "group": "argoproj.io",
                     "kind": "Cache",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.workflow.v1alpha1.ClientCertAuth": {
+            "description": "ClientCertAuth holds necessary information for client authentication via certificates",
+            "type": "object",
+            "properties": {
+                "clientCertSecret": {
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                },
+                "clientKeySecret": {
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ClientCertAuth",
                     "version": "v1alpha1"
                 }
             ]
@@ -1352,6 +1776,10 @@
                 "repo"
             ],
             "properties": {
+                "branch": {
+                    "description": "Branch is the branch to fetch when `SingleBranch` is enabled",
+                    "type": "string"
+                },
                 "depth": {
                     "description": "Depth specifies clones/fetches should be shallow and include the given number of commits from the branch tip",
                     "type": "integer",
@@ -1385,6 +1813,10 @@
                 "revision": {
                     "description": "Revision is the git commit, tag, branch to checkout",
                     "type": "string"
+                },
+                "singleBranch": {
+                    "description": "SingleBranch enables single branch clone, using the `branch` parameter",
+                    "type": "boolean"
                 },
                 "sshPrivateKeySecret": {
                     "description": "SSHPrivateKeySecret is the secret selector to the repository ssh private key",
@@ -1617,6 +2049,10 @@
                     "description": "Body is content of the HTTP Request",
                     "type": "string"
                 },
+                "bodyFrom": {
+                    "description": "BodyFrom is  content of the HTTP Request as Bytes",
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.HTTPBodySource"
+                },
                 "headers": {
                     "description": "Headers are an optional list of headers to send with HTTP requests",
                     "type": "array",
@@ -1626,7 +2062,7 @@
                     }
                 },
                 "insecureSkipVerify": {
-                    "description": "insecureSkipVerify is a bool when if set to true will skip TLS verification for the HTTP client",
+                    "description": "InsecureSkipVerify is a bool when if set to true will skip TLS verification for the HTTP client",
                     "type": "boolean"
                 },
                 "method": {
@@ -1657,12 +2093,16 @@
             ]
         },
         "io.argoproj.workflow.v1alpha1.HTTPArtifact": {
-            "description": "HTTPArtifact allows an file served on HTTP to be placed as an input artifact in a container",
+            "description": "HTTPArtifact allows a file served on HTTP to be placed as an input artifact in a container",
             "type": "object",
             "required": [
                 "url"
             ],
             "properties": {
+                "auth": {
+                    "description": "Auth contains information for client authentication",
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.HTTPAuth"
+                },
                 "headers": {
                     "description": "Headers are an optional list of headers to send with HTTP requests for artifacts",
                     "type": "array",
@@ -1681,6 +2121,47 @@
                 {
                     "group": "argoproj.io",
                     "kind": "HTTPArtifact",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.workflow.v1alpha1.HTTPAuth": {
+            "type": "object",
+            "properties": {
+                "basicAuth": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.BasicAuth"
+                },
+                "clientCert": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ClientCertAuth"
+                },
+                "oauth2": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.OAuth2Auth"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "HTTPAuth",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.workflow.v1alpha1.HTTPBodySource": {
+            "description": "HTTPBodySource contains the source of the HTTP body.",
+            "type": "object",
+            "properties": {
+                "bytes": {
+                    "type": "string",
+                    "format": "byte"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "HTTPBodySource",
                     "version": "v1alpha1"
                 }
             ]
@@ -1944,6 +2425,25 @@
                 {
                     "group": "argoproj.io",
                     "kind": "Link",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.workflow.v1alpha1.ManifestFrom": {
+            "type": "object",
+            "required": [
+                "artifact"
+            ],
+            "properties": {
+                "artifact": {
+                    "description": "Artifact contains the artifact to use",
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Artifact"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ManifestFrom",
                     "version": "v1alpha1"
                 }
             ]
@@ -2338,6 +2838,67 @@
                 {
                     "group": "argoproj.io",
                     "kind": "NoneStrategy",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.workflow.v1alpha1.OAuth2Auth": {
+            "description": "OAuth2Auth holds all information for client authentication via OAuth2 tokens",
+            "type": "object",
+            "properties": {
+                "clientIDSecret": {
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                },
+                "clientSecretSecret": {
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                },
+                "endpointParams": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.OAuth2EndpointParam"
+                    }
+                },
+                "scopes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "tokenURLSecret": {
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "OAuth2Auth",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.workflow.v1alpha1.OAuth2EndpointParam": {
+            "description": "EndpointParam is for requesting optional fields that should be sent in the oauth request",
+            "type": "object",
+            "required": [
+                "key"
+            ],
+            "properties": {
+                "key": {
+                    "description": "Name is the header name",
+                    "type": "string",
+                    "default": ""
+                },
+                "value": {
+                    "description": "Value is the literal value to use for the header",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "OAuth2EndpointParam",
                     "version": "v1alpha1"
                 }
             ]
@@ -2741,6 +3302,10 @@
                     "description": "Manifest contains the kubernetes manifest",
                     "type": "string"
                 },
+                "manifestFrom": {
+                    "description": "ManifestFrom is the source for a single kubernetes manifest",
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ManifestFrom"
+                },
                 "mergeStrategy": {
                     "description": "MergeStrategy is the strategy used to merge a patch. It defaults to \"strategic\" Must be one of: strategic, merge, json",
                     "type": "string"
@@ -2806,7 +3371,7 @@
                     "type": "string"
                 },
                 "limit": {
-                    "description": "Limit is the maximum number of attempts when retrying a container",
+                    "description": "Limit is the maximum number of retry attempts when retrying a container. It does not include the original container; the maximum number of total attempts will be `limit + 1`.",
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
                 },
                 "retryPolicy": {
@@ -4047,6 +4612,79 @@
                 }
             ]
         },
+        "io.argoproj.workflow.v1alpha1.WorkflowArtifactGCTask": {
+            "description": "WorkflowArtifactGCTask specifies the Artifacts that need to be deleted as well as the status of deletion",
+            "type": "object",
+            "required": [
+                "metadata",
+                "spec"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+                },
+                "spec": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtifactGCSpec"
+                },
+                "status": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtifactGCStatus"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "WorkflowArtifactGCTask",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.workflow.v1alpha1.WorkflowArtifactGCTaskList": {
+            "description": "WorkflowArtifactGCTaskList is list of WorkflowArtifactGCTask resources",
+            "type": "object",
+            "required": [
+                "metadata",
+                "items"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.WorkflowArtifactGCTask"
+                    }
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "WorkflowArtifactGCTaskList",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.workflow.v1alpha1.WorkflowEventBinding": {
             "description": "WorkflowEventBinding is the definition of an event resource",
             "type": "object",
@@ -4231,6 +4869,10 @@
                     "default": {},
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Arguments"
                 },
+                "artifactGC": {
+                    "description": "ArtifactGC describes the strategy to use when deleting artifacts from completed or deleted workflows (applies to all output Artifacts unless Artifact.ArtifactGC is specified, which overrides this)",
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtifactGC"
+                },
                 "artifactRepositoryRef": {
                     "description": "ArtifactRepositoryRef specifies the configMap name and key containing the artifact repository config.",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtifactRepositoryRef"
@@ -4312,7 +4954,7 @@
                     "$ref": "#/definitions/io.k8s.api.policy.v1beta1.PodDisruptionBudgetSpec"
                 },
                 "podGC": {
-                    "description": "PodGC describes the strategy to use when to deleting completed pods",
+                    "description": "PodGC describes the strategy to use when deleting completed pods",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.PodGC"
                 },
                 "podMetadata": {
@@ -4320,7 +4962,7 @@
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Metadata"
                 },
                 "podPriority": {
-                    "description": "Priority to apply to workflow pods.",
+                    "description": "Priority to apply to workflow pods. DEPRECATED: Use PodPriorityClassName instead.",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -4394,7 +5036,7 @@
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.TTLStrategy"
                 },
                 "volumeClaimGC": {
-                    "description": "VolumeClaimGC describes the strategy to use when to deleting volumes from completed workflows",
+                    "description": "VolumeClaimGC describes the strategy to use when deleting volumes from completed workflows",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.VolumeClaimGC"
                 },
                 "volumeClaimTemplates": {
@@ -4418,7 +5060,7 @@
                     "x-kubernetes-patch-strategy": "merge"
                 },
                 "workflowMetadata": {
-                    "description": "WorkflowMetadata contains some metadata of the workflow to be refer",
+                    "description": "WorkflowMetadata contains some metadata of the workflow to refer to",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.WorkflowMetadata"
                 },
                 "workflowTemplateRef": {
@@ -4438,6 +5080,10 @@
             "description": "WorkflowStatus contains overall status information about a workflow",
             "type": "object",
             "properties": {
+                "artifactGCStatus": {
+                    "description": "ArtifactGCStatus maintains the status of Artifact Garbage Collection",
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtGCStatus"
+                },
                 "artifactRepositoryRef": {
                     "description": "ArtifactRepositoryRef is used to cache the repository to use so we do not need to determine it everytime we reconcile.",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtifactRepositoryRefStatus"
