@@ -17271,7 +17271,8 @@
                     "items": {
                         "type": "string",
                         "default": ""
-                    }
+                    },
+                    "x-kubernetes-list-type": "atomic"
                 },
                 "apiVersions": {
                     "description": "APIVersions is the API versions the resources belong to. '*' is all versions. If '*' is present, the length of the slice must be one. Required.",
@@ -17279,7 +17280,8 @@
                     "items": {
                         "type": "string",
                         "default": ""
-                    }
+                    },
+                    "x-kubernetes-list-type": "atomic"
                 },
                 "resources": {
                     "description": "Resources is a list of resources this rule applies to.\n\nFor example: 'pods' means pods. 'pods/log' means the log subresource of pods. '*' means all resources, but not subresources. 'pods/*' means all subresources of pods. '*/scale' means all scale subresources. '*/*' means all resources and their subresources.\n\nIf wildcard is present, the validation rule will ensure resources do not overlap with each other.\n\nDepending on the enclosing object, subresources might not be allowed. Required.",
@@ -17287,16 +17289,12 @@
                     "items": {
                         "type": "string",
                         "default": ""
-                    }
+                    },
+                    "x-kubernetes-list-type": "atomic"
                 },
                 "scope": {
-                    "description": "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
-                    "type": "string",
-                    "enum": [
-                        "*",
-                        "Cluster",
-                        "Namespaced"
-                    ]
+                    "description": "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+                    "type": "string"
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -17311,7 +17309,8 @@
                     "items": {
                         "type": "string",
                         "default": ""
-                    }
+                    },
+                    "x-kubernetes-list-type": "atomic"
                 },
                 "apiVersions": {
                     "description": "APIVersions is the API versions the resources belong to. '*' is all versions. If '*' is present, the length of the slice must be one. Required.",
@@ -17319,7 +17318,8 @@
                     "items": {
                         "type": "string",
                         "default": ""
-                    }
+                    },
+                    "x-kubernetes-list-type": "atomic"
                 },
                 "operations": {
                     "description": "Operations is the operations the admission hook cares about - CREATE, UPDATE, DELETE, CONNECT or * for all of those operations and any future admission operations that are added. If '*' is present, the length of the slice must be one. Required.",
@@ -17327,7 +17327,8 @@
                     "items": {
                         "type": "string",
                         "default": ""
-                    }
+                    },
+                    "x-kubernetes-list-type": "atomic"
                 },
                 "resources": {
                     "description": "Resources is a list of resources this rule applies to.\n\nFor example: 'pods' means pods. 'pods/log' means the log subresource of pods. '*' means all resources, but not subresources. 'pods/*' means all subresources of pods. '*/scale' means all scale subresources. '*/*' means all resources and their subresources.\n\nIf wildcard is present, the validation rule will ensure resources do not overlap with each other.\n\nDepending on the enclosing object, subresources might not be allowed. Required.",
@@ -17335,16 +17336,12 @@
                     "items": {
                         "type": "string",
                         "default": ""
-                    }
+                    },
+                    "x-kubernetes-list-type": "atomic"
                 },
                 "scope": {
-                    "description": "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
-                    "type": "string",
-                    "enum": [
-                        "*",
-                        "Cluster",
-                        "Namespaced"
-                    ]
+                    "description": "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+                    "type": "string"
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -17601,7 +17598,7 @@
                     "type": "array",
                     "items": {
                         "default": {},
-                        "$ref": "#/definitions/io.k8s.api.admissionregistration.v1beta1.RuleWithOperations"
+                        "$ref": "#/definitions/io.k8s.api.admissionregistration.v1.RuleWithOperations"
                     }
                 },
                 "sideEffects": {
@@ -17689,84 +17686,6 @@
                 }
             ]
         },
-        "io.k8s.api.admissionregistration.v1beta1.Rule": {
-            "description": "Rule is a tuple of APIGroups, APIVersion, and Resources.It is recommended to make sure that all the tuple expansions are valid.",
-            "type": "object",
-            "properties": {
-                "apiGroups": {
-                    "description": "APIGroups is the API groups the resources belong to. '*' is all groups. If '*' is present, the length of the slice must be one. Required.",
-                    "type": "array",
-                    "items": {
-                        "type": "string",
-                        "default": ""
-                    }
-                },
-                "apiVersions": {
-                    "description": "APIVersions is the API versions the resources belong to. '*' is all versions. If '*' is present, the length of the slice must be one. Required.",
-                    "type": "array",
-                    "items": {
-                        "type": "string",
-                        "default": ""
-                    }
-                },
-                "resources": {
-                    "description": "Resources is a list of resources this rule applies to.\n\nFor example: 'pods' means pods. 'pods/log' means the log subresource of pods. '*' means all resources, but not subresources. 'pods/*' means all subresources of pods. '*/scale' means all scale subresources. '*/*' means all resources and their subresources.\n\nIf wildcard is present, the validation rule will ensure resources do not overlap with each other.\n\nDepending on the enclosing object, subresources might not be allowed. Required.",
-                    "type": "array",
-                    "items": {
-                        "type": "string",
-                        "default": ""
-                    }
-                },
-                "scope": {
-                    "description": "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
-                    "type": "string"
-                }
-            },
-            "x-kubernetes-group-version-kind": []
-        },
-        "io.k8s.api.admissionregistration.v1beta1.RuleWithOperations": {
-            "description": "RuleWithOperations is a tuple of Operations and Resources. It is recommended to make sure that all the tuple expansions are valid.",
-            "type": "object",
-            "properties": {
-                "apiGroups": {
-                    "description": "APIGroups is the API groups the resources belong to. '*' is all groups. If '*' is present, the length of the slice must be one. Required.",
-                    "type": "array",
-                    "items": {
-                        "type": "string",
-                        "default": ""
-                    }
-                },
-                "apiVersions": {
-                    "description": "APIVersions is the API versions the resources belong to. '*' is all versions. If '*' is present, the length of the slice must be one. Required.",
-                    "type": "array",
-                    "items": {
-                        "type": "string",
-                        "default": ""
-                    }
-                },
-                "operations": {
-                    "description": "Operations is the operations the admission hook cares about - CREATE, UPDATE, DELETE, CONNECT or * for all of those operations and any future admission operations that are added. If '*' is present, the length of the slice must be one. Required.",
-                    "type": "array",
-                    "items": {
-                        "type": "string",
-                        "default": ""
-                    }
-                },
-                "resources": {
-                    "description": "Resources is a list of resources this rule applies to.\n\nFor example: 'pods' means pods. 'pods/log' means the log subresource of pods. '*' means all resources, but not subresources. 'pods/*' means all subresources of pods. '*/scale' means all scale subresources. '*/*' means all resources and their subresources.\n\nIf wildcard is present, the validation rule will ensure resources do not overlap with each other.\n\nDepending on the enclosing object, subresources might not be allowed. Required.",
-                    "type": "array",
-                    "items": {
-                        "type": "string",
-                        "default": ""
-                    }
-                },
-                "scope": {
-                    "description": "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
-                    "type": "string"
-                }
-            },
-            "x-kubernetes-group-version-kind": []
-        },
         "io.k8s.api.admissionregistration.v1beta1.ServiceReference": {
             "description": "ServiceReference holds a reference to Service.legacy.k8s.io",
             "type": "object",
@@ -17844,7 +17763,7 @@
                     "type": "array",
                     "items": {
                         "default": {},
-                        "$ref": "#/definitions/io.k8s.api.admissionregistration.v1beta1.RuleWithOperations"
+                        "$ref": "#/definitions/io.k8s.api.admissionregistration.v1.RuleWithOperations"
                     }
                 },
                 "sideEffects": {
@@ -18669,7 +18588,7 @@
                     "format": "int32"
                 },
                 "replicas": {
-                    "description": "Replicas is the most recently oberved number of replicas. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller",
+                    "description": "Replicas is the most recently observed number of replicas. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller",
                     "type": "integer",
                     "format": "int32",
                     "default": 0
@@ -18830,6 +18749,19 @@
                 }
             ]
         },
+        "io.k8s.api.apps.v1.StatefulSetOrdinals": {
+            "description": "StatefulSetOrdinals describes the policy used for replica ordinal assignment in this StatefulSet.",
+            "type": "object",
+            "properties": {
+                "start": {
+                    "description": "start is the number representing the first replica's index. It may be used to number replicas from an alternate index (eg: 1-indexed) over the default 0-indexed names, or to orchestrate progressive movement of replicas from one StatefulSet to another. If set, replica indices will be in the range:\n  [.spec.ordinals.start, .spec.ordinals.start + .spec.replicas).\nIf unset, defaults to 0. Replica indices will be in the range:\n  [0, .spec.replicas).",
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 0
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
         "io.k8s.api.apps.v1.StatefulSetPersistentVolumeClaimRetentionPolicy": {
             "description": "StatefulSetPersistentVolumeClaimRetentionPolicy describes the policy used for PVCs created from the StatefulSet VolumeClaimTemplates.",
             "type": "object",
@@ -18858,6 +18790,10 @@
                     "description": "Minimum number of seconds for which a newly created pod should be ready without any of its container crashing for it to be considered available. Defaults to 0 (pod will be considered available as soon as it is ready)",
                     "type": "integer",
                     "format": "int32"
+                },
+                "ordinals": {
+                    "description": "ordinals controls the numbering of replica indices in a StatefulSet. The default ordinals behavior assigns a \"0\" index to the first replica and increments the index by one for each additional replica requested. Using the ordinals field requires the StatefulSetStartOrdinal feature gate to be enabled, which is alpha.",
+                    "$ref": "#/definitions/io.k8s.api.apps.v1.StatefulSetOrdinals"
                 },
                 "persistentVolumeClaimRetentionPolicy": {
                     "description": "persistentVolumeClaimRetentionPolicy describes the lifecycle of persistent volume claims created from volumeClaimTemplates. By default, all persistent volume claims are created as needed and retained until manually deleted. This policy allows the lifecycle to be altered, for example by deleting persistent volume claims when their stateful set is deleted, or when their pod is scaled down. This requires the StatefulSetAutoDeletePVC feature gate to be enabled, which is alpha.  +optional",
@@ -18891,7 +18827,7 @@
                     "default": ""
                 },
                 "template": {
-                    "description": "template is the object that describes the pod that will be created if insufficient replicas are detected. Each pod stamped out by the StatefulSet will fulfill this Template, but have a unique identity from the rest of the StatefulSet.",
+                    "description": "template is the object that describes the pod that will be created if insufficient replicas are detected. Each pod stamped out by the StatefulSet will fulfill this Template, but have a unique identity from the rest of the StatefulSet. Each pod will be named with the format \u003cstatefulsetname\u003e-\u003cpodindex\u003e. For example, a pod in a StatefulSet named \"web\" with index number \"3\" would be named \"web-3\".",
                     "default": {},
                     "$ref": "#/definitions/io.k8s.api.core.v1.PodTemplateSpec"
                 },
@@ -19522,6 +19458,19 @@
             },
             "x-kubernetes-group-version-kind": []
         },
+        "io.k8s.api.apps.v1beta1.StatefulSetOrdinals": {
+            "description": "StatefulSetOrdinals describes the policy used for replica ordinal assignment in this StatefulSet.",
+            "type": "object",
+            "properties": {
+                "start": {
+                    "description": "start is the number representing the first replica's index. It may be used to number replicas from an alternate index (eg: 1-indexed) over the default 0-indexed names, or to orchestrate progressive movement of replicas from one StatefulSet to another. If set, replica indices will be in the range:\n  [.spec.ordinals.start, .spec.ordinals.start + .spec.replicas).\nIf unset, defaults to 0. Replica indices will be in the range:\n  [0, .spec.replicas).",
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 0
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
         "io.k8s.api.apps.v1beta1.StatefulSetPersistentVolumeClaimRetentionPolicy": {
             "description": "StatefulSetPersistentVolumeClaimRetentionPolicy describes the policy used for PVCs created from the StatefulSet VolumeClaimTemplates.",
             "type": "object",
@@ -19549,6 +19498,10 @@
                     "description": "Minimum number of seconds for which a newly created pod should be ready without any of its container crashing for it to be considered available. Defaults to 0 (pod will be considered available as soon as it is ready)",
                     "type": "integer",
                     "format": "int32"
+                },
+                "ordinals": {
+                    "description": "ordinals controls the numbering of replica indices in a StatefulSet. The default ordinals behavior assigns a \"0\" index to the first replica and increments the index by one for each additional replica requested. Using the ordinals field requires the StatefulSetStartOrdinal feature gate to be enabled, which is alpha.",
+                    "$ref": "#/definitions/io.k8s.api.apps.v1beta1.StatefulSetOrdinals"
                 },
                 "persistentVolumeClaimRetentionPolicy": {
                     "description": "PersistentVolumeClaimRetentionPolicy describes the policy used for PVCs created from the StatefulSet VolumeClaimTemplates. This requires the StatefulSetAutoDeletePVC feature gate to be enabled, which is alpha.",
@@ -19578,7 +19531,7 @@
                     "default": ""
                 },
                 "template": {
-                    "description": "template is the object that describes the pod that will be created if insufficient replicas are detected. Each pod stamped out by the StatefulSet will fulfill this Template, but have a unique identity from the rest of the StatefulSet.",
+                    "description": "template is the object that describes the pod that will be created if insufficient replicas are detected. Each pod stamped out by the StatefulSet will fulfill this Template, but have a unique identity from the rest of the StatefulSet. Each pod will be named with the format \u003cstatefulsetname\u003e-\u003cpodindex\u003e. For example, a pod in a StatefulSet named \"web\" with index number \"3\" would be named \"web-3\".",
                     "default": {},
                     "$ref": "#/definitions/io.k8s.api.core.v1.PodTemplateSpec"
                 },
@@ -20339,7 +20292,7 @@
                     "format": "int32"
                 },
                 "replicas": {
-                    "description": "Replicas is the most recently oberved number of replicas. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller",
+                    "description": "Replicas is the most recently observed number of replicas. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller",
                     "type": "integer",
                     "format": "int32",
                     "default": 0
@@ -20556,6 +20509,19 @@
             },
             "x-kubernetes-group-version-kind": []
         },
+        "io.k8s.api.apps.v1beta2.StatefulSetOrdinals": {
+            "description": "StatefulSetOrdinals describes the policy used for replica ordinal assignment in this StatefulSet.",
+            "type": "object",
+            "properties": {
+                "start": {
+                    "description": "start is the number representing the first replica's index. It may be used to number replicas from an alternate index (eg: 1-indexed) over the default 0-indexed names, or to orchestrate progressive movement of replicas from one StatefulSet to another. If set, replica indices will be in the range:\n  [.spec.ordinals.start, .spec.ordinals.start + .spec.replicas).\nIf unset, defaults to 0. Replica indices will be in the range:\n  [0, .spec.replicas).",
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 0
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
         "io.k8s.api.apps.v1beta2.StatefulSetPersistentVolumeClaimRetentionPolicy": {
             "description": "StatefulSetPersistentVolumeClaimRetentionPolicy describes the policy used for PVCs created from the StatefulSet VolumeClaimTemplates.",
             "type": "object",
@@ -20585,6 +20551,10 @@
                     "type": "integer",
                     "format": "int32"
                 },
+                "ordinals": {
+                    "description": "ordinals controls the numbering of replica indices in a StatefulSet. The default ordinals behavior assigns a \"0\" index to the first replica and increments the index by one for each additional replica requested. Using the ordinals field requires the StatefulSetStartOrdinal feature gate to be enabled, which is alpha.",
+                    "$ref": "#/definitions/io.k8s.api.apps.v1beta2.StatefulSetOrdinals"
+                },
                 "persistentVolumeClaimRetentionPolicy": {
                     "description": "PersistentVolumeClaimRetentionPolicy describes the policy used for PVCs created from the StatefulSet VolumeClaimTemplates. This requires the StatefulSetAutoDeletePVC feature gate to be enabled, which is alpha.",
                     "$ref": "#/definitions/io.k8s.api.apps.v1beta2.StatefulSetPersistentVolumeClaimRetentionPolicy"
@@ -20613,7 +20583,7 @@
                     "default": ""
                 },
                 "template": {
-                    "description": "template is the object that describes the pod that will be created if insufficient replicas are detected. Each pod stamped out by the StatefulSet will fulfill this Template, but have a unique identity from the rest of the StatefulSet.",
+                    "description": "template is the object that describes the pod that will be created if insufficient replicas are detected. Each pod stamped out by the StatefulSet will fulfill this Template, but have a unique identity from the rest of the StatefulSet. Each pod will be named with the format \u003cstatefulsetname\u003e-\u003cpodindex\u003e. For example, a pod in a StatefulSet named \"web\" with index number \"3\" would be named \"web-3\".",
                     "default": {},
                     "$ref": "#/definitions/io.k8s.api.core.v1.PodTemplateSpec"
                 },
@@ -21018,7 +20988,7 @@
                     "type": "string"
                 },
                 "kind": {
-                    "description": "Kind of the referent; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds\"",
+                    "description": "Kind of the referent; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
                     "type": "string",
                     "default": ""
                 },
@@ -21652,7 +21622,7 @@
                     "type": "string"
                 },
                 "kind": {
-                    "description": "Kind of the referent; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds\"",
+                    "description": "Kind of the referent; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
                     "type": "string",
                     "default": ""
                 },
@@ -22624,7 +22594,7 @@
                     "format": "int32"
                 },
                 "uncountedTerminatedPods": {
-                    "description": "UncountedTerminatedPods holds the UIDs of Pods that have terminated but the job controller hasn't yet accounted for in the status counters.\n\nThe job controller creates pods with a finalizer. When a pod terminates (succeeded or failed), the controller does three steps to account for it in the job status: (1) Add the pod UID to the arrays in this field. (2) Remove the pod finalizer. (3) Remove the pod UID from the arrays while increasing the corresponding\n    counter.\n\nThis field is beta-level. The job controller only makes use of this field when the feature gate JobTrackingWithFinalizers is enabled (enabled by default). Old jobs might not be tracked using this field, in which case the field remains null.",
+                    "description": "UncountedTerminatedPods holds the UIDs of Pods that have terminated but the job controller hasn't yet accounted for in the status counters.\n\nThe job controller creates pods with a finalizer. When a pod terminates (succeeded or failed), the controller does three steps to account for it in the job status: (1) Add the pod UID to the arrays in this field. (2) Remove the pod finalizer. (3) Remove the pod UID from the arrays while increasing the corresponding\n    counter.\n\nOld jobs might not be tracked using this field, in which case the field remains null.",
                     "$ref": "#/definitions/io.k8s.api.batch.v1.UncountedTerminatedPods"
                 }
             },
@@ -23823,6 +23793,21 @@
                     "description": "volumeID used to identify the volume in cinder. More info: https://examples.k8s.io/mysql-cinder-pd/README.md",
                     "type": "string",
                     "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
+        "io.k8s.api.core.v1.ClaimSource": {
+            "description": "ClaimSource describes a reference to a ResourceClaim.\n\nExactly one of these fields should be set.  Consumers of this type must treat an empty object as if it has an unknown value.",
+            "type": "object",
+            "properties": {
+                "resourceClaimName": {
+                    "description": "ResourceClaimName is the name of a ResourceClaim object in the same namespace as this pod.",
+                    "type": "string"
+                },
+                "resourceClaimTemplateName": {
+                    "description": "ResourceClaimTemplateName is the name of a ResourceClaimTemplate object in the same namespace as this pod.\n\nThe template will be used to create a new ResourceClaim, which will be bound to this pod. When this pod is deleted, the ResourceClaim will also be deleted. The name of the ResourceClaim will be \u003cpod name\u003e-\u003cresource name\u003e, where \u003cresource name\u003e is the PodResourceClaim.Name. Pod validation will reject the pod if the concatenated name is not valid for a ResourceClaim (e.g. too long).\n\nAn existing ResourceClaim with that name that is not owned by the pod will not be used for the pod to avoid using an unrelated resource by mistake. Scheduling and pod startup are then blocked until the unrelated ResourceClaim is removed.\n\nThis field is immutable and no changes will be made to the corresponding ResourceClaim by the control plane after creating the ResourceClaim.",
+                    "type": "string"
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -26594,7 +26579,7 @@
             "type": "object",
             "properties": {
                 "configSource": {
-                    "description": "Deprecated: Previously used to specify the source of the node's configuration for the DynamicKubeletConfig feature. This feature is removed from Kubelets as of 1.24 and will be fully removed in 1.26.",
+                    "description": "Deprecated: Previously used to specify the source of the node's configuration for the DynamicKubeletConfig feature. This feature is removed.",
                     "$ref": "#/definitions/io.k8s.api.core.v1.NodeConfigSource"
                 },
                 "externalID": {
@@ -26638,7 +26623,7 @@
             "type": "object",
             "properties": {
                 "addresses": {
-                    "description": "List of addresses reachable to the node. Queried from cloud provider, if available. More info: https://kubernetes.io/docs/concepts/nodes/node/#addresses Note: This field is declared as mergeable, but the merge key is not sufficiently unique, which can cause data corruption when it is merged. Callers should instead use a full-replacement patch. See http://pr.k8s.io/79391 for an example.",
+                    "description": "List of addresses reachable to the node. Queried from cloud provider, if available. More info: https://kubernetes.io/docs/concepts/nodes/node/#addresses Note: This field is declared as mergeable, but the merge key is not sufficiently unique, which can cause data corruption when it is merged. Callers should instead use a full-replacement patch. See https://pr.k8s.io/79391 for an example.",
                     "type": "array",
                     "items": {
                         "default": {},
@@ -27007,12 +26992,12 @@
                     }
                 },
                 "dataSource": {
-                    "description": "dataSource field can be used to specify either: * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot) * An existing PVC (PersistentVolumeClaim) If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source. If the AnyVolumeDataSource feature gate is enabled, this field will always have the same contents as the DataSourceRef field.",
+                    "description": "dataSource field can be used to specify either: * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot) * An existing PVC (PersistentVolumeClaim) If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source. When the AnyVolumeDataSource feature gate is enabled, dataSource contents will be copied to dataSourceRef, and dataSourceRef contents will be copied to dataSource when dataSourceRef.namespace is not specified. If the namespace is specified, then dataSourceRef will not be copied to dataSource.",
                     "$ref": "#/definitions/io.k8s.api.core.v1.TypedLocalObjectReference"
                 },
                 "dataSourceRef": {
-                    "description": "dataSourceRef specifies the object from which to populate the volume with data, if a non-empty volume is desired. This may be any local object from a non-empty API group (non core object) or a PersistentVolumeClaim object. When this field is specified, volume binding will only succeed if the type of the specified object matches some installed volume populator or dynamic provisioner. This field will replace the functionality of the DataSource field and as such if both fields are non-empty, they must have the same value. For backwards compatibility, both fields (DataSource and DataSourceRef) will be set to the same value automatically if one of them is empty and the other is non-empty. There are two important differences between DataSource and DataSourceRef: * While DataSource only allows two specific types of objects, DataSourceRef\n  allows any non-core object, as well as PersistentVolumeClaim objects.\n* While DataSource ignores disallowed values (dropping them), DataSourceRef\n  preserves all values, and generates an error if a disallowed value is\n  specified.\n(Beta) Using this field requires the AnyVolumeDataSource feature gate to be enabled.",
-                    "$ref": "#/definitions/io.k8s.api.core.v1.TypedLocalObjectReference"
+                    "description": "dataSourceRef specifies the object from which to populate the volume with data, if a non-empty volume is desired. This may be any object from a non-empty API group (non core object) or a PersistentVolumeClaim object. When this field is specified, volume binding will only succeed if the type of the specified object matches some installed volume populator or dynamic provisioner. This field will replace the functionality of the dataSource field and as such if both fields are non-empty, they must have the same value. For backwards compatibility, when namespace isn't specified in dataSourceRef, both fields (dataSource and dataSourceRef) will be set to the same value automatically if one of them is empty and the other is non-empty. When namespace is specified in dataSourceRef, dataSource isn't set to the same value and must be empty. There are three important differences between dataSource and dataSourceRef: * While dataSource only allows two specific types of objects, dataSourceRef\n  allows any non-core object, as well as PersistentVolumeClaim objects.\n* While dataSource ignores disallowed values (dropping them), dataSourceRef\n  preserves all values, and generates an error if a disallowed value is\n  specified.\n* While dataSource only allows local objects, dataSourceRef allows objects\n  in any namespaces.\n(Beta) Using this field requires the AnyVolumeDataSource feature gate to be enabled. (Alpha) Using the namespace field of dataSourceRef requires the CrossNamespaceVolumeDataSource feature gate to be enabled.",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.TypedObjectReference"
                 },
                 "resources": {
                     "description": "resources represents the minimum resources the volume should have. If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements that are lower than previous value but must still be higher than capacity recorded in the status field of the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources",
@@ -27922,6 +27907,41 @@
             },
             "x-kubernetes-group-version-kind": []
         },
+        "io.k8s.api.core.v1.PodResourceClaim": {
+            "description": "PodResourceClaim references exactly one ResourceClaim through a ClaimSource. It adds a name to it that uniquely identifies the ResourceClaim inside the Pod. Containers that need access to the ResourceClaim reference it with this name.",
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "description": "Name uniquely identifies this resource claim inside the pod. This must be a DNS_LABEL.",
+                    "type": "string",
+                    "default": ""
+                },
+                "source": {
+                    "description": "Source describes where to find the ResourceClaim.",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.api.core.v1.ClaimSource"
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
+        "io.k8s.api.core.v1.PodSchedulingGate": {
+            "description": "PodSchedulingGate is associated to a Pod to guard its scheduling.",
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "description": "Name of the scheduling gate. Each scheduling gate must have a unique name field.",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
         "io.k8s.api.core.v1.PodSecurityContext": {
             "description": "PodSecurityContext holds pod-level security attributes and common container settings. Some fields are also present in container.securityContext.  Field values of container.securityContext take precedence over field values of PodSecurityContext.",
             "type": "object",
@@ -27962,7 +27982,7 @@
                     "$ref": "#/definitions/io.k8s.api.core.v1.SeccompProfile"
                 },
                 "supplementalGroups": {
-                    "description": "A list of groups applied to the first process run in each container, in addition to the container's primary GID.  If unspecified, no groups will be added to any container. Note that this field cannot be set when spec.os.name is windows.",
+                    "description": "A list of groups applied to the first process run in each container, in addition to the container's primary GID, the fsGroup (if specified), and group memberships defined in the container image for the uid of the container process. If unspecified, no additional groups are added to any container. Note that group memberships defined in the container image for the uid of the container process are still effective, even if they are not included in this list. Note that this field cannot be set when spec.os.name is windows.",
                     "type": "array",
                     "items": {
                         "type": "integer",
@@ -28154,6 +28174,20 @@
                         "$ref": "#/definitions/io.k8s.api.core.v1.PodReadinessGate"
                     }
                 },
+                "resourceClaims": {
+                    "description": "ResourceClaims defines which ResourceClaims must be allocated and reserved before the Pod is allowed to start. The resources will be made available to those containers which consume them by name.\n\nThis is an alpha field and requires enabling the DynamicResourceAllocation feature gate.\n\nThis field is immutable.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.api.core.v1.PodResourceClaim"
+                    },
+                    "x-kubernetes-list-map-keys": [
+                        "name"
+                    ],
+                    "x-kubernetes-list-type": "map",
+                    "x-kubernetes-patch-merge-key": "name",
+                    "x-kubernetes-patch-strategy": "merge,retainKeys"
+                },
                 "restartPolicy": {
                     "description": "Restart policy for all containers within the pod. One of Always, OnFailure, Never. Default to Always. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy\n\nPossible enum values:\n - `\"Always\"`\n - `\"Never\"`\n - `\"OnFailure\"`",
                     "type": "string",
@@ -28170,6 +28204,20 @@
                 "schedulerName": {
                     "description": "If specified, the pod will be dispatched by specified scheduler. If not specified, the pod will be dispatched by default scheduler.",
                     "type": "string"
+                },
+                "schedulingGates": {
+                    "description": "SchedulingGates is an opaque list of values that if specified will block scheduling the pod. More info:  https://git.k8s.io/enhancements/keps/sig-scheduling/3521-pod-scheduling-readiness.\n\nThis is an alpha-level feature enabled by PodSchedulingReadiness feature gate.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.api.core.v1.PodSchedulingGate"
+                    },
+                    "x-kubernetes-list-map-keys": [
+                        "name"
+                    ],
+                    "x-kubernetes-list-type": "map",
+                    "x-kubernetes-patch-merge-key": "name",
+                    "x-kubernetes-patch-strategy": "merge"
                 },
                 "securityContext": {
                     "description": "SecurityContext holds pod-level security attributes and common container settings. Optional: Defaults to empty.  See type description for default values of each field.",
@@ -28982,10 +29030,25 @@
                     "format": "int32"
                 },
                 "replicas": {
-                    "description": "Replicas is the most recently oberved number of replicas. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#what-is-a-replicationcontroller",
+                    "description": "Replicas is the most recently observed number of replicas. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#what-is-a-replicationcontroller",
                     "type": "integer",
                     "format": "int32",
                     "default": 0
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
+        "io.k8s.api.core.v1.ResourceClaim": {
+            "description": "ResourceClaim references one entry in PodSpec.ResourceClaims.",
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "description": "Name must match the name of one entry in pod.spec.resourceClaims of the Pod where this field is used. It makes that resource available inside a container.",
+                    "type": "string",
+                    "default": ""
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -29142,6 +29205,15 @@
             "description": "ResourceRequirements describes the compute resource requirements.",
             "type": "object",
             "properties": {
+                "claims": {
+                    "description": "Claims lists the names of resources, defined in spec.resourceClaims, that are used by this container.\n\nThis is an alpha field and requires enabling the DynamicResourceAllocation feature gate.\n\nThis field is immutable.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.api.core.v1.ResourceClaim"
+                    },
+                    "x-kubernetes-list-type": "set"
+                },
                 "limits": {
                     "description": "Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/",
                     "type": "object",
@@ -30315,7 +30387,7 @@
                     "format": "int32"
                 },
                 "nodeAffinityPolicy": {
-                    "description": "NodeAffinityPolicy indicates how we will treat Pod's nodeAffinity/nodeSelector when calculating pod topology spread skew. Options are: - Honor: only nodes matching nodeAffinity/nodeSelector are included in the calculations. - Ignore: nodeAffinity/nodeSelector are ignored. All nodes are included in the calculations.\n\nIf this value is nil, the behavior is equivalent to the Honor policy. This is a alpha-level feature enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.\n\nPossible enum values:\n - `\"Honor\"` means use this scheduling directive when calculating pod topology spread skew.\n - `\"Ignore\"` means ignore this scheduling directive when calculating pod topology spread skew.",
+                    "description": "NodeAffinityPolicy indicates how we will treat Pod's nodeAffinity/nodeSelector when calculating pod topology spread skew. Options are: - Honor: only nodes matching nodeAffinity/nodeSelector are included in the calculations. - Ignore: nodeAffinity/nodeSelector are ignored. All nodes are included in the calculations.\n\nIf this value is nil, the behavior is equivalent to the Honor policy. This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.\n\nPossible enum values:\n - `\"Honor\"` means use this scheduling directive when calculating pod topology spread skew.\n - `\"Ignore\"` means ignore this scheduling directive when calculating pod topology spread skew.",
                     "type": "string",
                     "enum": [
                         "Honor",
@@ -30323,7 +30395,7 @@
                     ]
                 },
                 "nodeTaintsPolicy": {
-                    "description": "NodeTaintsPolicy indicates how we will treat node taints when calculating pod topology spread skew. Options are: - Honor: nodes without taints, along with tainted nodes for which the incoming pod has a toleration, are included. - Ignore: node taints are ignored. All nodes are included.\n\nIf this value is nil, the behavior is equivalent to the Ignore policy. This is a alpha-level feature enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.\n\nPossible enum values:\n - `\"Honor\"` means use this scheduling directive when calculating pod topology spread skew.\n - `\"Ignore\"` means ignore this scheduling directive when calculating pod topology spread skew.",
+                    "description": "NodeTaintsPolicy indicates how we will treat node taints when calculating pod topology spread skew. Options are: - Honor: nodes without taints, along with tainted nodes for which the incoming pod has a toleration, are included. - Ignore: node taints are ignored. All nodes are included.\n\nIf this value is nil, the behavior is equivalent to the Ignore policy. This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.\n\nPossible enum values:\n - `\"Honor\"` means use this scheduling directive when calculating pod topology spread skew.\n - `\"Ignore\"` means ignore this scheduling directive when calculating pod topology spread skew.",
                     "type": "string",
                     "enum": [
                         "Honor",
@@ -30371,6 +30443,34 @@
                 }
             },
             "x-kubernetes-map-type": "atomic",
+            "x-kubernetes-group-version-kind": []
+        },
+        "io.k8s.api.core.v1.TypedObjectReference": {
+            "type": "object",
+            "required": [
+                "kind",
+                "name"
+            ],
+            "properties": {
+                "apiGroup": {
+                    "description": "APIGroup is the group for the resource being referenced. If APIGroup is not specified, the specified Kind must be in the core API group. For any other third-party types, APIGroup is required.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "Kind is the type of resource being referenced",
+                    "type": "string",
+                    "default": ""
+                },
+                "name": {
+                    "description": "Name is the name of resource being referenced",
+                    "type": "string",
+                    "default": ""
+                },
+                "namespace": {
+                    "description": "Namespace is the namespace of resource being referenced Note that when a namespace is specified, a gateway.networking.k8s.io/ReferenceGrant object is required in the referent namespace to allow that namespace's owner to accept the reference. See the ReferenceGrant documentation for details. (Alpha) This field requires the CrossNamespaceVolumeDataSource feature gate to be enabled.",
+                    "type": "string"
+                }
+            },
             "x-kubernetes-group-version-kind": []
         },
         "io.k8s.api.core.v1.Volume": {
@@ -31426,19 +31526,19 @@
             "x-kubernetes-group-version-kind": []
         },
         "io.k8s.api.extensions.v1beta1.IPBlock": {
-            "description": "DEPRECATED 1.9 - This group version of IPBlock is deprecated by networking/v1/IPBlock. IPBlock describes a particular CIDR (Ex. \"192.168.1.1/24\",\"2001:db9::/64\") that is allowed to the pods matched by a NetworkPolicySpec's podSelector. The except entry describes CIDRs that should not be included within this rule.",
+            "description": "DEPRECATED 1.9 - This group version of IPBlock is deprecated by networking/v1/IPBlock. IPBlock describes a particular CIDR (Ex. \"192.168.1.0/24\",\"2001:db8::/64\") that is allowed to the pods matched by a NetworkPolicySpec's podSelector. The except entry describes CIDRs that should not be included within this rule.",
             "type": "object",
             "required": [
                 "cidr"
             ],
             "properties": {
                 "cidr": {
-                    "description": "CIDR is a string representing the IP Block Valid examples are \"192.168.1.1/24\" or \"2001:db9::/64\"",
+                    "description": "CIDR is a string representing the IP Block Valid examples are \"192.168.1.0/24\" or \"2001:db8::/64\"",
                     "type": "string",
                     "default": ""
                 },
                 "except": {
-                    "description": "Except is a slice of CIDRs that should not be included within an IP Block Valid examples are \"192.168.1.1/24\" or \"2001:db9::/64\" Except values will be rejected if they are outside the CIDR range",
+                    "description": "Except is a slice of CIDRs that should not be included within an IP Block Valid examples are \"192.168.1.0/24\" or \"2001:db8::/64\" Except values will be rejected if they are outside the CIDR range",
                     "type": "array",
                     "items": {
                         "type": "string",
@@ -31541,6 +31641,76 @@
                 }
             ]
         },
+        "io.k8s.api.extensions.v1beta1.IngressLoadBalancerIngress": {
+            "description": "IngressLoadBalancerIngress represents the status of a load-balancer ingress point.",
+            "type": "object",
+            "properties": {
+                "hostname": {
+                    "description": "Hostname is set for load-balancer ingress points that are DNS based.",
+                    "type": "string"
+                },
+                "ip": {
+                    "description": "IP is set for load-balancer ingress points that are IP based.",
+                    "type": "string"
+                },
+                "ports": {
+                    "description": "Ports provides information about the ports exposed by this LoadBalancer.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.api.extensions.v1beta1.IngressPortStatus"
+                    },
+                    "x-kubernetes-list-type": "atomic"
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
+        "io.k8s.api.extensions.v1beta1.IngressLoadBalancerStatus": {
+            "description": "LoadBalancerStatus represents the status of a load-balancer.",
+            "type": "object",
+            "properties": {
+                "ingress": {
+                    "description": "Ingress is a list containing ingress points for the load-balancer.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.api.extensions.v1beta1.IngressLoadBalancerIngress"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
+        "io.k8s.api.extensions.v1beta1.IngressPortStatus": {
+            "description": "IngressPortStatus represents the error condition of a service port",
+            "type": "object",
+            "required": [
+                "port",
+                "protocol"
+            ],
+            "properties": {
+                "error": {
+                    "description": "Error is to record the problem with the service port The format of the error shall comply with the following rules: - built-in error values shall be specified in this file and those shall use\n  CamelCase names\n- cloud provider specific error values must have names that comply with the\n  format foo.example.com/CamelCase.",
+                    "type": "string"
+                },
+                "port": {
+                    "description": "Port is the port number of the ingress port.",
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 0
+                },
+                "protocol": {
+                    "description": "Protocol is the protocol of the ingress port. The supported values are: \"TCP\", \"UDP\", \"SCTP\"\n\nPossible enum values:\n - `\"SCTP\"` is the SCTP protocol.\n - `\"TCP\"` is the TCP protocol.\n - `\"UDP\"` is the UDP protocol.",
+                    "type": "string",
+                    "default": "",
+                    "enum": [
+                        "SCTP",
+                        "TCP",
+                        "UDP"
+                    ]
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
         "io.k8s.api.extensions.v1beta1.IngressRule": {
             "description": "IngressRule represents the rules mapping the paths under a specified host to the related backend services. Incoming requests are first evaluated for a host match, then routed to the backend associated with the matching IngressRuleValue.",
             "type": "object",
@@ -31605,7 +31775,7 @@
                 "loadBalancer": {
                     "description": "LoadBalancer contains the current status of the load-balancer.",
                     "default": {},
-                    "$ref": "#/definitions/io.k8s.api.core.v1.LoadBalancerStatus"
+                    "$ref": "#/definitions/io.k8s.api.extensions.v1beta1.IngressLoadBalancerStatus"
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -32212,7 +32382,7 @@
                     "format": "int32"
                 },
                 "replicas": {
-                    "description": "Replicas is the most recently oberved number of replicas. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller",
+                    "description": "Replicas is the most recently observed number of replicas. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller",
                     "type": "integer",
                     "format": "int32",
                     "default": 0
@@ -32488,19 +32658,19 @@
             "x-kubernetes-group-version-kind": []
         },
         "io.k8s.api.networking.v1.IPBlock": {
-            "description": "IPBlock describes a particular CIDR (Ex. \"192.168.1.1/24\",\"2001:db9::/64\") that is allowed to the pods matched by a NetworkPolicySpec's podSelector. The except entry describes CIDRs that should not be included within this rule.",
+            "description": "IPBlock describes a particular CIDR (Ex. \"192.168.1.0/24\",\"2001:db8::/64\") that is allowed to the pods matched by a NetworkPolicySpec's podSelector. The except entry describes CIDRs that should not be included within this rule.",
             "type": "object",
             "required": [
                 "cidr"
             ],
             "properties": {
                 "cidr": {
-                    "description": "CIDR is a string representing the IP Block Valid examples are \"192.168.1.1/24\" or \"2001:db9::/64\"",
+                    "description": "CIDR is a string representing the IP Block Valid examples are \"192.168.1.0/24\" or \"2001:db8::/64\"",
                     "type": "string",
                     "default": ""
                 },
                 "except": {
-                    "description": "Except is a slice of CIDRs that should not be included within an IP Block Valid examples are \"192.168.1.1/24\" or \"2001:db9::/64\" Except values will be rejected if they are outside the CIDR range",
+                    "description": "Except is a slice of CIDRs that should not be included within an IP Block Valid examples are \"192.168.1.0/24\" or \"2001:db8::/64\" Except values will be rejected if they are outside the CIDR range",
                     "type": "array",
                     "items": {
                         "type": "string",
@@ -32714,6 +32884,76 @@
                 }
             ]
         },
+        "io.k8s.api.networking.v1.IngressLoadBalancerIngress": {
+            "description": "IngressLoadBalancerIngress represents the status of a load-balancer ingress point.",
+            "type": "object",
+            "properties": {
+                "hostname": {
+                    "description": "Hostname is set for load-balancer ingress points that are DNS based.",
+                    "type": "string"
+                },
+                "ip": {
+                    "description": "IP is set for load-balancer ingress points that are IP based.",
+                    "type": "string"
+                },
+                "ports": {
+                    "description": "Ports provides information about the ports exposed by this LoadBalancer.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.api.networking.v1.IngressPortStatus"
+                    },
+                    "x-kubernetes-list-type": "atomic"
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
+        "io.k8s.api.networking.v1.IngressLoadBalancerStatus": {
+            "description": "IngressLoadBalancerStatus represents the status of a load-balancer.",
+            "type": "object",
+            "properties": {
+                "ingress": {
+                    "description": "Ingress is a list containing ingress points for the load-balancer.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.api.networking.v1.IngressLoadBalancerIngress"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
+        "io.k8s.api.networking.v1.IngressPortStatus": {
+            "description": "IngressPortStatus represents the error condition of a service port",
+            "type": "object",
+            "required": [
+                "port",
+                "protocol"
+            ],
+            "properties": {
+                "error": {
+                    "description": "Error is to record the problem with the service port The format of the error shall comply with the following rules: - built-in error values shall be specified in this file and those shall use\n  CamelCase names\n- cloud provider specific error values must have names that comply with the\n  format foo.example.com/CamelCase.",
+                    "type": "string"
+                },
+                "port": {
+                    "description": "Port is the port number of the ingress port.",
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 0
+                },
+                "protocol": {
+                    "description": "Protocol is the protocol of the ingress port. The supported values are: \"TCP\", \"UDP\", \"SCTP\"\n\nPossible enum values:\n - `\"SCTP\"` is the SCTP protocol.\n - `\"TCP\"` is the TCP protocol.\n - `\"UDP\"` is the UDP protocol.",
+                    "type": "string",
+                    "default": "",
+                    "enum": [
+                        "SCTP",
+                        "TCP",
+                        "UDP"
+                    ]
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
         "io.k8s.api.networking.v1.IngressRule": {
             "description": "IngressRule represents the rules mapping the paths under a specified host to the related backend services. Incoming requests are first evaluated for a host match, then routed to the backend associated with the matching IngressRuleValue.",
             "type": "object",
@@ -32798,7 +33038,7 @@
                 "loadBalancer": {
                     "description": "LoadBalancer contains the current status of the load-balancer.",
                     "default": {},
-                    "$ref": "#/definitions/io.k8s.api.core.v1.LoadBalancerStatus"
+                    "$ref": "#/definitions/io.k8s.api.networking.v1.IngressLoadBalancerStatus"
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -33313,6 +33553,76 @@
                 }
             ]
         },
+        "io.k8s.api.networking.v1beta1.IngressLoadBalancerIngress": {
+            "description": "IngressLoadBalancerIngress represents the status of a load-balancer ingress point.",
+            "type": "object",
+            "properties": {
+                "hostname": {
+                    "description": "Hostname is set for load-balancer ingress points that are DNS based.",
+                    "type": "string"
+                },
+                "ip": {
+                    "description": "IP is set for load-balancer ingress points that are IP based.",
+                    "type": "string"
+                },
+                "ports": {
+                    "description": "Ports provides information about the ports exposed by this LoadBalancer.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.api.networking.v1beta1.IngressPortStatus"
+                    },
+                    "x-kubernetes-list-type": "atomic"
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
+        "io.k8s.api.networking.v1beta1.IngressLoadBalancerStatus": {
+            "description": "LoadBalancerStatus represents the status of a load-balancer.",
+            "type": "object",
+            "properties": {
+                "ingress": {
+                    "description": "Ingress is a list containing ingress points for the load-balancer.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.api.networking.v1beta1.IngressLoadBalancerIngress"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
+        "io.k8s.api.networking.v1beta1.IngressPortStatus": {
+            "description": "IngressPortStatus represents the error condition of a service port",
+            "type": "object",
+            "required": [
+                "port",
+                "protocol"
+            ],
+            "properties": {
+                "error": {
+                    "description": "Error is to record the problem with the service port The format of the error shall comply with the following rules: - built-in error values shall be specified in this file and those shall use\n  CamelCase names\n- cloud provider specific error values must have names that comply with the\n  format foo.example.com/CamelCase.",
+                    "type": "string"
+                },
+                "port": {
+                    "description": "Port is the port number of the ingress port.",
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 0
+                },
+                "protocol": {
+                    "description": "Protocol is the protocol of the ingress port. The supported values are: \"TCP\", \"UDP\", \"SCTP\"\n\nPossible enum values:\n - `\"SCTP\"` is the SCTP protocol.\n - `\"TCP\"` is the TCP protocol.\n - `\"UDP\"` is the UDP protocol.",
+                    "type": "string",
+                    "default": "",
+                    "enum": [
+                        "SCTP",
+                        "TCP",
+                        "UDP"
+                    ]
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
         "io.k8s.api.networking.v1beta1.IngressRule": {
             "description": "IngressRule represents the rules mapping the paths under a specified host to the related backend services. Incoming requests are first evaluated for a host match, then routed to the backend associated with the matching IngressRuleValue.",
             "type": "object",
@@ -33375,7 +33685,7 @@
                 "loadBalancer": {
                     "description": "LoadBalancer contains the current status of the load-balancer.",
                     "default": {},
-                    "$ref": "#/definitions/io.k8s.api.core.v1.LoadBalancerStatus"
+                    "$ref": "#/definitions/io.k8s.api.networking.v1beta1.IngressLoadBalancerStatus"
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -33518,6 +33828,14 @@
                     "description": "Label query over pods whose evictions are managed by the disruption budget. A null selector will match no pods, while an empty ({}) selector will select all pods within the namespace.",
                     "x-kubernetes-patch-strategy": "replace",
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
+                },
+                "unhealthyPodEvictionPolicy": {
+                    "description": "UnhealthyPodEvictionPolicy defines the criteria for when unhealthy pods should be considered for eviction. Current implementation considers healthy pods, as pods that have status.conditions item with type=\"Ready\",status=\"True\".\n\nValid policies are IfHealthyBudget and AlwaysAllow. If no policy is specified, the default behavior will be used, which corresponds to the IfHealthyBudget policy.\n\nIfHealthyBudget policy means that running pods (status.phase=\"Running\"), but not yet healthy can be evicted only if the guarded application is not disrupted (status.currentHealthy is at least equal to status.desiredHealthy). Healthy pods will be subject to the PDB for eviction.\n\nAlwaysAllow policy means that all running pods (status.phase=\"Running\"), but not yet healthy are considered disrupted and can be evicted regardless of whether the criteria in a PDB is met. This means perspective running pods of a disrupted application might not get a chance to become healthy. Healthy pods will be subject to the PDB for eviction.\n\nAdditional policies may be added in the future. Clients making eviction decisions should disallow eviction of unhealthy pods if they encounter an unrecognized policy in this field.\n\nThis field is alpha-level. The eviction API uses this field when the feature gate PDBUnhealthyPodEvictionPolicy is enabled (disabled by default).\n\nPossible enum values:\n - `\"AlwaysAllow\"` policy means that all running pods (status.phase=\"Running\"), but not yet healthy are considered disrupted and can be evicted regardless of whether the criteria in a PDB is met. This means perspective running pods of a disrupted application might not get a chance to become healthy. Healthy pods will be subject to the PDB for eviction.\n - `\"IfHealthyBudget\"` policy means that running pods (status.phase=\"Running\"), but not yet healthy can be evicted only if the guarded application is not disrupted (status.currentHealthy is at least equal to status.desiredHealthy). Healthy pods will be subject to the PDB for eviction.",
+                    "type": "string",
+                    "enum": [
+                        "AlwaysAllow",
+                        "IfHealthyBudget"
+                    ]
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -33814,6 +34132,14 @@
                 "selector": {
                     "description": "Label query over pods whose evictions are managed by the disruption budget. A null selector selects no pods. An empty selector ({}) also selects no pods, which differs from standard behavior of selecting all pods. In policy/v1, an empty selector will select all pods in the namespace.",
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
+                },
+                "unhealthyPodEvictionPolicy": {
+                    "description": "UnhealthyPodEvictionPolicy defines the criteria for when unhealthy pods should be considered for eviction. Current implementation considers healthy pods, as pods that have status.conditions item with type=\"Ready\",status=\"True\".\n\nValid policies are IfHealthyBudget and AlwaysAllow. If no policy is specified, the default behavior will be used, which corresponds to the IfHealthyBudget policy.\n\nIfHealthyBudget policy means that running pods (status.phase=\"Running\"), but not yet healthy can be evicted only if the guarded application is not disrupted (status.currentHealthy is at least equal to status.desiredHealthy). Healthy pods will be subject to the PDB for eviction.\n\nAlwaysAllow policy means that all running pods (status.phase=\"Running\"), but not yet healthy are considered disrupted and can be evicted regardless of whether the criteria in a PDB is met. This means perspective running pods of a disrupted application might not get a chance to become healthy. Healthy pods will be subject to the PDB for eviction.\n\nAdditional policies may be added in the future. Clients making eviction decisions should disallow eviction of unhealthy pods if they encounter an unrecognized policy in this field.\n\nThis field is alpha-level. The eviction API uses this field when the feature gate PDBUnhealthyPodEvictionPolicy is enabled (disabled by default).\n\nPossible enum values:\n - `\"AlwaysAllow\"` policy means that all running pods (status.phase=\"Running\"), but not yet healthy are considered disrupted and can be evicted regardless of whether the criteria in a PDB is met. This means perspective running pods of a disrupted application might not get a chance to become healthy. Healthy pods will be subject to the PDB for eviction.\n - `\"IfHealthyBudget\"` policy means that running pods (status.phase=\"Running\"), but not yet healthy can be evicted only if the guarded application is not disrupted (status.currentHealthy is at least equal to status.desiredHealthy). Healthy pods will be subject to the PDB for eviction.",
+                    "type": "string",
+                    "enum": [
+                        "AlwaysAllow",
+                        "IfHealthyBudget"
+                    ]
                 }
             },
             "x-kubernetes-group-version-kind": []
