@@ -146,6 +146,10 @@
                     "description": "OrphanedResources specifies if controller should monitor orphaned resources of apps in this project",
                     "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.OrphanedResourcesMonitorSettings"
                 },
+                "permitOnlyProjectScopedClusters": {
+                    "description": "PermitOnlyProjectScopedClusters determines whether destinations can only reference clusters which are project-scoped",
+                    "type": "boolean"
+                },
                 "roles": {
                     "description": "Roles are user defined RBAC roles associated with this project",
                     "type": "array",
@@ -160,6 +164,14 @@
                     "items": {
                         "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SignatureKey"
+                    }
+                },
+                "sourceNamespaces": {
+                    "description": "SourceNamespaces defines the namespaces application resources are allowed to be created in",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
                     }
                 },
                 "sourceRepos": {
@@ -339,6 +351,511 @@
                 }
             ]
         },
+        "io.argoproj.argocd.v1alpha1.ApplicationMatchExpression": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "operator": {
+                    "type": "string"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationMatchExpression",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSet": {
+            "description": "ApplicationSet is a set of Application resources",
+            "type": "object",
+            "required": [
+                "metadata",
+                "spec"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+                },
+                "spec": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetSpec"
+                },
+                "status": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetStatus"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSet",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSetApplicationStatus": {
+            "description": "ApplicationSetApplicationStatus contains details about each Application managed by the ApplicationSet",
+            "type": "object",
+            "required": [
+                "application",
+                "message",
+                "status",
+                "step"
+            ],
+            "properties": {
+                "application": {
+                    "description": "Application contains the name of the Application resource",
+                    "type": "string",
+                    "default": ""
+                },
+                "lastTransitionTime": {
+                    "description": "LastTransitionTime is the time the status was last updated",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "message": {
+                    "description": "Message contains human-readable message indicating details about the status",
+                    "type": "string",
+                    "default": ""
+                },
+                "status": {
+                    "description": "Status contains the AppSet's perceived status of the managed Application resource: (Waiting, Pending, Progressing, Healthy)",
+                    "type": "string",
+                    "default": ""
+                },
+                "step": {
+                    "description": "Step tracks which step this Application should be updated in",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSetApplicationStatus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSetCondition": {
+            "description": "ApplicationSetCondition contains details about an applicationset condition, which is usally an error or warning",
+            "type": "object",
+            "required": [
+                "type",
+                "message",
+                "status",
+                "reason"
+            ],
+            "properties": {
+                "lastTransitionTime": {
+                    "description": "LastTransitionTime is the time the condition was last observed",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "message": {
+                    "description": "Message contains human-readable message indicating details about condition",
+                    "type": "string",
+                    "default": ""
+                },
+                "reason": {
+                    "description": "Single word camelcase representing the reason for the status eg ErrorOccurred",
+                    "type": "string",
+                    "default": ""
+                },
+                "status": {
+                    "description": "True/False/Unknown",
+                    "type": "string",
+                    "default": ""
+                },
+                "type": {
+                    "description": "Type is an applicationset condition type",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSetCondition",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSetGenerator": {
+            "description": "ApplicationSetGenerator represents a generator at the top level of an ApplicationSet.",
+            "type": "object",
+            "properties": {
+                "clusterDecisionResource": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.DuckTypeGenerator"
+                },
+                "clusters": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ClusterGenerator"
+                },
+                "git": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.GitGenerator"
+                },
+                "list": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ListGenerator"
+                },
+                "matrix": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.MatrixGenerator"
+                },
+                "merge": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.MergeGenerator"
+                },
+                "pullRequest": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.PullRequestGenerator"
+                },
+                "scmProvider": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SCMProviderGenerator"
+                },
+                "selector": {
+                    "description": "Selector allows to post-filter all generator.",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSetGenerator",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSetList": {
+            "description": "ApplicationSetList contains a list of ApplicationSet",
+            "type": "object",
+            "required": [
+                "items"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSet"
+                    }
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSetList",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSetNestedGenerator": {
+            "description": "ApplicationSetNestedGenerator represents a generator nested within a combination-type generator (MatrixGenerator or MergeGenerator).",
+            "type": "object",
+            "properties": {
+                "clusterDecisionResource": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.DuckTypeGenerator"
+                },
+                "clusters": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ClusterGenerator"
+                },
+                "git": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.GitGenerator"
+                },
+                "list": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ListGenerator"
+                },
+                "matrix": {
+                    "description": "Matrix should have the form of NestedMatrixGenerator",
+                    "$ref": "#/definitions/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSON"
+                },
+                "merge": {
+                    "description": "Merge should have the form of NestedMergeGenerator",
+                    "$ref": "#/definitions/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSON"
+                },
+                "pullRequest": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.PullRequestGenerator"
+                },
+                "scmProvider": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SCMProviderGenerator"
+                },
+                "selector": {
+                    "description": "Selector allows to post-filter all generator.",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSetNestedGenerator",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSetRolloutStep": {
+            "type": "object",
+            "properties": {
+                "matchExpressions": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationMatchExpression"
+                    }
+                },
+                "maxUpdate": {
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSetRolloutStep",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSetRolloutStrategy": {
+            "type": "object",
+            "properties": {
+                "steps": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetRolloutStep"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSetRolloutStrategy",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSetSpec": {
+            "description": "ApplicationSetSpec represents a class of application set state.",
+            "type": "object",
+            "required": [
+                "generators",
+                "template"
+            ],
+            "properties": {
+                "generators": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetGenerator"
+                    }
+                },
+                "goTemplate": {
+                    "type": "boolean"
+                },
+                "strategy": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetStrategy"
+                },
+                "syncPolicy": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetSyncPolicy"
+                },
+                "template": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetTemplate"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSetSpec",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSetStatus": {
+            "description": "ApplicationSetStatus defines the observed state of ApplicationSet",
+            "type": "object",
+            "properties": {
+                "applicationStatus": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetApplicationStatus"
+                    }
+                },
+                "conditions": {
+                    "description": "INSERT ADDITIONAL STATUS FIELD - define observed state of cluster Important: Run \"make\" to regenerate code after modifying this file",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetCondition"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSetStatus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSetStrategy": {
+            "description": "ApplicationSetStrategy configures how generated Applications are updated in sequence.",
+            "type": "object",
+            "properties": {
+                "rollingSync": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetRolloutStrategy"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSetStrategy",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSetSyncPolicy": {
+            "description": "ApplicationSetSyncPolicy configures how generated Applications will relate to their ApplicationSet.",
+            "type": "object",
+            "properties": {
+                "preserveResourcesOnDeletion": {
+                    "description": "PreserveResourcesOnDeletion will preserve resources on deletion. If PreserveResourcesOnDeletion is set to true, these Applications will not be deleted.",
+                    "type": "boolean"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSetSyncPolicy",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSetTemplate": {
+            "description": "ApplicationSetTemplate represents argocd ApplicationSpec",
+            "type": "object",
+            "required": [
+                "metadata",
+                "spec"
+            ],
+            "properties": {
+                "metadata": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetTemplateMeta"
+                },
+                "spec": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSpec"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSetTemplate",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSetTemplateMeta": {
+            "description": "ApplicationSetTemplateMeta represents the Argo CD application fields that may be used for Applications generated from the ApplicationSet (based on metav1.ObjectMeta)",
+            "type": "object",
+            "properties": {
+                "annotations": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "finalizers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "labels": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "namespace": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSetTemplateMeta",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ApplicationSetTerminalGenerator": {
+            "description": "ApplicationSetTerminalGenerator represents a generator nested within a nested generator (for example, a list within a merge within a matrix). A generator at this level may not be a combination-type generator (MatrixGenerator or MergeGenerator). ApplicationSet enforces this nesting depth limit because CRDs do not support recursive types. https://github.com/kubernetes-sigs/controller-tools/issues/477",
+            "type": "object",
+            "properties": {
+                "clusterDecisionResource": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.DuckTypeGenerator"
+                },
+                "clusters": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ClusterGenerator"
+                },
+                "git": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.GitGenerator"
+                },
+                "list": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ListGenerator"
+                },
+                "pullRequest": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.PullRequestGenerator"
+                },
+                "scmProvider": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SCMProviderGenerator"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSetTerminalGenerator",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.argocd.v1alpha1.ApplicationSource": {
             "description": "ApplicationSource contains all required information about the source of an application",
             "type": "object",
@@ -367,8 +884,12 @@
                     "type": "string"
                 },
                 "plugin": {
-                    "description": "ConfigManagementPlugin holds config management plugin specific options",
+                    "description": "Plugin holds config management plugin specific options",
                     "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSourcePlugin"
+                },
+                "ref": {
+                    "description": "Ref is reference to another source within sources field. This field will not be used if used with a `source` tag.",
+                    "type": "string"
                 },
                 "repoURL": {
                     "description": "RepoURL is the URL to the repository (Git or Helm) that contains the application manifests",
@@ -585,6 +1106,13 @@
                 },
                 "name": {
                     "type": "string"
+                },
+                "parameters": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSourcePluginParameter"
+                    }
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -595,11 +1123,46 @@
                 }
             ]
         },
+        "io.argoproj.argocd.v1alpha1.ApplicationSourcePluginParameter": {
+            "type": "object",
+            "properties": {
+                "array": {
+                    "description": "Array is the value of an array type parameter.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "map": {
+                    "description": "Map is the value of a map type parameter.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "name": {
+                    "description": "Name is the name identifying a parameter.",
+                    "type": "string"
+                },
+                "string": {
+                    "description": "String_ is the value of a string type parameter.",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationSourcePluginParameter",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.argocd.v1alpha1.ApplicationSpec": {
             "description": "ApplicationSpec represents desired application state. Contains link to repository with application definition and additional parameters link definition revision.",
             "type": "object",
             "required": [
-                "source",
                 "destination",
                 "project"
             ],
@@ -637,8 +1200,15 @@
                 },
                 "source": {
                     "description": "Source is a reference to the location of the application's manifests or chart",
-                    "default": {},
                     "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSource"
+                },
+                "sources": {
+                    "description": "Sources is a reference to the location of the application's manifests or chart",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSource"
+                    }
                 },
                 "syncPolicy": {
                     "description": "SyncPolicy controls when and how a sync will be performed",
@@ -690,6 +1260,10 @@
                     "description": "ReconciledAt indicates when the application state was reconciled using the latest git version",
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
+                "resourceHealthSource": {
+                    "description": "ResourceHealthSource indicates where the resource health status is stored: inline if not set or appTree",
+                    "type": "string"
+                },
                 "resources": {
                     "description": "Resources is a list of Kubernetes resources managed by this application",
                     "type": "array",
@@ -701,6 +1275,14 @@
                 "sourceType": {
                     "description": "SourceType specifies the type of this application",
                     "type": "string"
+                },
+                "sourceTypes": {
+                    "description": "SourceTypes specifies the type of the sources included in the application",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
                 },
                 "summary": {
                     "description": "Summary contains a list of URLs and container images used by this application",
@@ -835,6 +1417,32 @@
                 {
                     "group": "argoproj.io",
                     "kind": "Backoff",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.BasicAuthBitbucketServer": {
+            "description": "BasicAuthBitbucketServer defines the username/(password or personal access token) for Basic auth.",
+            "type": "object",
+            "required": [
+                "username",
+                "passwordRef"
+            ],
+            "properties": {
+                "passwordRef": {
+                    "description": "Password (or personal access token) reference.",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SecretRef"
+                },
+                "username": {
+                    "description": "Username for Basic auth",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "BasicAuthBitbucketServer",
                     "version": "v1alpha1"
                 }
             ]
@@ -994,6 +1602,36 @@
                 }
             ]
         },
+        "io.argoproj.argocd.v1alpha1.ClusterGenerator": {
+            "description": "ClusterGenerator defines a generator to match against clusters registered with ArgoCD.",
+            "type": "object",
+            "properties": {
+                "selector": {
+                    "description": "Selector defines a label selector to match against all clusters registered with ArgoCD. Clusters today are stored as Kubernetes Secrets, thus the Secret labels will be used for matching the selector.",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
+                },
+                "template": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetTemplate"
+                },
+                "values": {
+                    "description": "Values contains key/value pairs which are passed directly as parameters to the template",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ClusterGenerator",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.argocd.v1alpha1.ClusterInfo": {
             "description": "ClusterInfo contains information about the cluster",
             "type": "object",
@@ -1096,7 +1734,6 @@
             "description": "ComparedTo contains application source and target which was used for resources comparison",
             "type": "object",
             "required": [
-                "source",
                 "destination"
             ],
             "properties": {
@@ -1109,6 +1746,14 @@
                     "description": "Source is a reference to the application's source used for comparison",
                     "default": {},
                     "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSource"
+                },
+                "sources": {
+                    "description": "Sources is a reference to the application's multiple sources used for comparison",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSource"
+                    }
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -1210,6 +1855,50 @@
                 }
             ]
         },
+        "io.argoproj.argocd.v1alpha1.DuckTypeGenerator": {
+            "description": "DuckType defines a generator to match against clusters registered with ArgoCD.",
+            "type": "object",
+            "required": [
+                "configMapRef"
+            ],
+            "properties": {
+                "configMapRef": {
+                    "description": "ConfigMapRef is a ConfigMap with the duck type definitions needed to retrieve the data\n             this includes apiVersion(group/version), kind, matchKey and validation settings\nName is the resource name of the kind, group and version, defined in the ConfigMapRef RequeueAfterSeconds is how long before the duckType will be rechecked for a change",
+                    "type": "string",
+                    "default": ""
+                },
+                "labelSelector": {
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "requeueAfterSeconds": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "template": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetTemplate"
+                },
+                "values": {
+                    "description": "Values contains key/value pairs which are passed directly as parameters to the template",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "DuckTypeGenerator",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.argocd.v1alpha1.EnvEntry": {
             "description": "EnvEntry represents an entry in the application's environment",
             "type": "object",
@@ -1274,6 +1963,96 @@
                 {
                     "group": "argoproj.io",
                     "kind": "ExecProviderConfig",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.GitDirectoryGeneratorItem": {
+            "type": "object",
+            "required": [
+                "path"
+            ],
+            "properties": {
+                "exclude": {
+                    "type": "boolean"
+                },
+                "path": {
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "GitDirectoryGeneratorItem",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.GitFileGeneratorItem": {
+            "type": "object",
+            "required": [
+                "path"
+            ],
+            "properties": {
+                "path": {
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "GitFileGeneratorItem",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.GitGenerator": {
+            "type": "object",
+            "required": [
+                "repoURL",
+                "revision"
+            ],
+            "properties": {
+                "directories": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.GitDirectoryGeneratorItem"
+                    }
+                },
+                "files": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.GitFileGeneratorItem"
+                    }
+                },
+                "pathParamPrefix": {
+                    "type": "string"
+                },
+                "repoURL": {
+                    "type": "string",
+                    "default": ""
+                },
+                "requeueAfterSeconds": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "revision": {
+                    "type": "string",
+                    "default": ""
+                },
+                "template": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetTemplate"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "GitGenerator",
                     "version": "v1alpha1"
                 }
             ]
@@ -1657,6 +2436,175 @@
                 }
             ]
         },
+        "io.argoproj.argocd.v1alpha1.ListGenerator": {
+            "description": "ListGenerator include items info",
+            "type": "object",
+            "required": [
+                "elements"
+            ],
+            "properties": {
+                "elements": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSON"
+                    }
+                },
+                "template": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetTemplate"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ListGenerator",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ManagedNamespaceMetadata": {
+            "type": "object",
+            "properties": {
+                "annotations": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "labels": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ManagedNamespaceMetadata",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.MatrixGenerator": {
+            "description": "MatrixGenerator generates the cartesian product of two sets of parameters. The parameters are defined by two nested generators.",
+            "type": "object",
+            "required": [
+                "generators"
+            ],
+            "properties": {
+                "generators": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetNestedGenerator"
+                    }
+                },
+                "template": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetTemplate"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "MatrixGenerator",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.MergeGenerator": {
+            "description": "MergeGenerator merges the output of two or more generators. Where the values for all specified merge keys are equal between two sets of generated parameters, the parameter sets will be merged with the parameters from the latter generator taking precedence. Parameter sets with merge keys not present in the base generator's params will be ignored. For example, if the first generator produced [{a: '1', b: '2'}, {c: '1', d: '1'}] and the second generator produced [{'a': 'override'}], the united parameters for merge keys = ['a'] would be [{a: 'override', b: '1'}, {c: '1', d: '1'}].\n\nMergeGenerator supports template overriding. If a MergeGenerator is one of multiple top-level generators, its template will be merged with the top-level generator before the parameters are applied.",
+            "type": "object",
+            "required": [
+                "generators",
+                "mergeKeys"
+            ],
+            "properties": {
+                "generators": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetNestedGenerator"
+                    }
+                },
+                "mergeKeys": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "template": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetTemplate"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "MergeGenerator",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.NestedMatrixGenerator": {
+            "description": "NestedMatrixGenerator is a MatrixGenerator nested under another combination-type generator (MatrixGenerator or MergeGenerator). NestedMatrixGenerator does not have an override template, because template overriding has no meaning within the constituent generators of combination-type generators.\n\nNOTE: Nested matrix generator is not included directly in the CRD struct, instead it is included as a generic 'apiextensionsv1.JSON' object, and then marshalled into a NestedMatrixGenerator when processed.",
+            "type": "object",
+            "required": [
+                "generators"
+            ],
+            "properties": {
+                "generators": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetTerminalGenerator"
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "NestedMatrixGenerator",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.NestedMergeGenerator": {
+            "description": "NestedMergeGenerator is a MergeGenerator nested under another combination-type generator (MatrixGenerator or MergeGenerator). NestedMergeGenerator does not have an override template, because template overriding has no meaning within the constituent generators of combination-type generators.\n\nNOTE: Nested merge generator is not included directly in the CRD struct, instead it is included as a generic 'apiextensionsv1.JSON' object, and then marshalled into a NestedMergeGenerator when processed.",
+            "type": "object",
+            "required": [
+                "generators",
+                "mergeKeys"
+            ],
+            "properties": {
+                "generators": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetTerminalGenerator"
+                    }
+                },
+                "mergeKeys": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "NestedMergeGenerator",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.argocd.v1alpha1.Operation": {
             "description": "Operation contains information about a requested or running operation",
             "type": "object",
@@ -1900,6 +2848,260 @@
                 }
             ]
         },
+        "io.argoproj.argocd.v1alpha1.PullRequestGenerator": {
+            "description": "PullRequestGenerator defines a generator that scrapes a PullRequest API to find candidate pull requests.",
+            "type": "object",
+            "properties": {
+                "bitbucketServer": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.PullRequestGeneratorBitbucketServer"
+                },
+                "filters": {
+                    "description": "Filters for which pull requests should be considered.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.PullRequestGeneratorFilter"
+                    }
+                },
+                "gitea": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.PullRequestGeneratorGitea"
+                },
+                "github": {
+                    "description": "Which provider to use and config for it.",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.PullRequestGeneratorGithub"
+                },
+                "gitlab": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.PullRequestGeneratorGitLab"
+                },
+                "requeueAfterSeconds": {
+                    "description": "Standard parameters.",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "template": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetTemplate"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "PullRequestGenerator",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.PullRequestGeneratorBitbucketServer": {
+            "description": "PullRequestGenerator defines connection info specific to BitbucketServer.",
+            "type": "object",
+            "required": [
+                "project",
+                "repo",
+                "api"
+            ],
+            "properties": {
+                "api": {
+                    "description": "The Bitbucket REST API URL to talk to e.g. https://bitbucket.org/rest Required.",
+                    "type": "string",
+                    "default": ""
+                },
+                "basicAuth": {
+                    "description": "Credentials for Basic auth",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.BasicAuthBitbucketServer"
+                },
+                "project": {
+                    "description": "Project to scan. Required.",
+                    "type": "string",
+                    "default": ""
+                },
+                "repo": {
+                    "description": "Repo name to scan. Required.",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "PullRequestGeneratorBitbucketServer",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.PullRequestGeneratorFilter": {
+            "description": "PullRequestGeneratorFilter is a single pull request filter. If multiple filter types are set on a single struct, they will be AND'd together. All filters must pass for a pull request to be included.",
+            "type": "object",
+            "properties": {
+                "branchMatch": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "PullRequestGeneratorFilter",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.PullRequestGeneratorGitLab": {
+            "description": "PullRequestGeneratorGitLab defines connection info specific to GitLab.",
+            "type": "object",
+            "required": [
+                "project"
+            ],
+            "properties": {
+                "api": {
+                    "description": "The GitLab API URL to talk to. If blank, uses https://gitlab.com/.",
+                    "type": "string"
+                },
+                "labels": {
+                    "description": "Labels is used to filter the MRs that you want to target",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "project": {
+                    "description": "GitLab project to scan. Required.",
+                    "type": "string",
+                    "default": ""
+                },
+                "pullRequestState": {
+                    "description": "PullRequestState is an additional MRs filter to get only those with a certain state. Default: \"\" (all states)",
+                    "type": "string"
+                },
+                "tokenRef": {
+                    "description": "Authentication token reference.",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SecretRef"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "PullRequestGeneratorGitLab",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.PullRequestGeneratorGitea": {
+            "description": "PullRequestGenerator defines connection info specific to Gitea.",
+            "type": "object",
+            "required": [
+                "owner",
+                "repo",
+                "api"
+            ],
+            "properties": {
+                "api": {
+                    "description": "The Gitea API URL to talk to. Required",
+                    "type": "string",
+                    "default": ""
+                },
+                "insecure": {
+                    "description": "Allow insecure tls, for self-signed certificates; default: false.",
+                    "type": "boolean"
+                },
+                "owner": {
+                    "description": "Gitea org or user to scan. Required.",
+                    "type": "string",
+                    "default": ""
+                },
+                "repo": {
+                    "description": "Gitea repo name to scan. Required.",
+                    "type": "string",
+                    "default": ""
+                },
+                "tokenRef": {
+                    "description": "Authentication token reference.",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SecretRef"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "PullRequestGeneratorGitea",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.PullRequestGeneratorGithub": {
+            "description": "PullRequestGenerator defines connection info specific to GitHub.",
+            "type": "object",
+            "required": [
+                "owner",
+                "repo"
+            ],
+            "properties": {
+                "api": {
+                    "description": "The GitHub API URL to talk to. If blank, use https://api.github.com/.",
+                    "type": "string"
+                },
+                "appSecretName": {
+                    "description": "AppSecretName is a reference to a GitHub App repo-creds secret with permission to access pull requests.",
+                    "type": "string"
+                },
+                "labels": {
+                    "description": "Labels is used to filter the PRs that you want to target",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "owner": {
+                    "description": "GitHub org or user to scan. Required.",
+                    "type": "string",
+                    "default": ""
+                },
+                "repo": {
+                    "description": "GitHub repo name to scan. Required.",
+                    "type": "string",
+                    "default": ""
+                },
+                "tokenRef": {
+                    "description": "Authentication token reference.",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SecretRef"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "PullRequestGeneratorGithub",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.RefTarget": {
+            "type": "object",
+            "required": [
+                "Repo",
+                "TargetRevision",
+                "Chart"
+            ],
+            "properties": {
+                "Chart": {
+                    "type": "string",
+                    "default": ""
+                },
+                "Repo": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.Repository"
+                },
+                "TargetRevision": {
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RefTarget",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.argocd.v1alpha1.RepoCreds": {
             "description": "RepoCreds holds the definition for repository credentials",
             "type": "object",
@@ -1910,6 +3112,14 @@
                 "enableOCI": {
                     "description": "EnableOCI specifies whether helm-oci support should be enabled for this repo",
                     "type": "boolean"
+                },
+                "forceHttpBasicAuth": {
+                    "description": "ForceHttpBasicAuth specifies whether Argo CD should attempt to force basic auth for HTTP connections",
+                    "type": "boolean"
+                },
+                "gcpServiceAccountKey": {
+                    "description": "GCPServiceAccountKey specifies the service account key in JSON format to be used for getting credentials to Google Cloud Source repos",
+                    "type": "string"
                 },
                 "githubAppEnterpriseBaseUrl": {
                     "description": "GithubAppEnterpriseBaseURL specifies the GitHub API URL for GitHub app authentication. If empty will default to https://api.github.com",
@@ -1931,6 +3141,10 @@
                 },
                 "password": {
                     "description": "Password for authenticating at the repo server",
+                    "type": "string"
+                },
+                "proxy": {
+                    "description": "Proxy specifies the HTTP/HTTPS proxy used to access repos at the repo server",
                     "type": "string"
                 },
                 "sshPrivateKey": {
@@ -2013,6 +3227,14 @@
                 "enableOCI": {
                     "description": "EnableOCI specifies whether helm-oci support should be enabled for this repo",
                     "type": "boolean"
+                },
+                "forceHttpBasicAuth": {
+                    "description": "ForceHttpBasicAuth specifies whether Argo CD should attempt to force basic auth for HTTP connections",
+                    "type": "boolean"
+                },
+                "gcpServiceAccountKey": {
+                    "description": "GCPServiceAccountKey specifies the service account key in JSON format to be used for getting credentials to Google Cloud Source repos",
+                    "type": "string"
                 },
                 "githubAppEnterpriseBaseUrl": {
                     "description": "GithubAppEnterpriseBaseURL specifies the base URL of GitHub Enterprise installation. If empty will default to https://api.github.com",
@@ -2673,6 +3895,10 @@
                 "status": {
                     "type": "string"
                 },
+                "syncWave": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "version": {
                     "type": "string"
                 }
@@ -2711,7 +3937,6 @@
             "description": "RevisionHistory contains history information about a previous sync",
             "type": "object",
             "required": [
-                "revision",
                 "deployedAt",
                 "id"
             ],
@@ -2733,13 +3958,28 @@
                 },
                 "revision": {
                     "description": "Revision holds the revision the sync was performed against",
-                    "type": "string",
-                    "default": ""
+                    "type": "string"
+                },
+                "revisions": {
+                    "description": "Revisions holds the revision of each source in sources field the sync was performed against",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
                 },
                 "source": {
                     "description": "Source is a reference to the application source used for the sync operation",
                     "default": {},
                     "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSource"
+                },
+                "sources": {
+                    "description": "Sources is a reference to the application sources used for the sync operation",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSource"
+                    }
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -2767,7 +4007,7 @@
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
-                    "description": "Message contains the message associated with the revision, most likely the commit message. The message is truncated to the first newline or 64 characters (which ever comes first)",
+                    "description": "Message contains the message associated with the revision, most likely the commit message.",
                     "type": "string"
                 },
                 "signatureInfo": {
@@ -2787,6 +4027,349 @@
                 {
                     "group": "argoproj.io",
                     "kind": "RevisionMetadata",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.SCMProviderGenerator": {
+            "description": "SCMProviderGenerator defines a generator that scrapes a SCMaaS API to find candidate repos.",
+            "type": "object",
+            "properties": {
+                "azureDevOps": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SCMProviderGeneratorAzureDevOps"
+                },
+                "bitbucket": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SCMProviderGeneratorBitbucket"
+                },
+                "bitbucketServer": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SCMProviderGeneratorBitbucketServer"
+                },
+                "cloneProtocol": {
+                    "description": "Which protocol to use for the SCM URL. Default is provider-specific but ssh if possible. Not all providers necessarily support all protocols.",
+                    "type": "string"
+                },
+                "filters": {
+                    "description": "Filters for which repos should be considered.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SCMProviderGeneratorFilter"
+                    }
+                },
+                "gitea": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SCMProviderGeneratorGitea"
+                },
+                "github": {
+                    "description": "Which provider to use and config for it.",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SCMProviderGeneratorGithub"
+                },
+                "gitlab": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SCMProviderGeneratorGitlab"
+                },
+                "requeueAfterSeconds": {
+                    "description": "Standard parameters.",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "template": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetTemplate"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SCMProviderGenerator",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.SCMProviderGeneratorAzureDevOps": {
+            "description": "SCMProviderGeneratorAzureDevOps defines connection info specific to Azure DevOps.",
+            "type": "object",
+            "required": [
+                "organization",
+                "teamProject",
+                "accessTokenRef"
+            ],
+            "properties": {
+                "accessTokenRef": {
+                    "description": "The Personal Access Token (PAT) to use when connecting. Required.",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SecretRef"
+                },
+                "allBranches": {
+                    "description": "Scan all branches instead of just the default branch.",
+                    "type": "boolean"
+                },
+                "api": {
+                    "description": "The URL to Azure DevOps. If blank, use https://dev.azure.com.",
+                    "type": "string"
+                },
+                "organization": {
+                    "description": "Azure Devops organization. Required. E.g. \"my-organization\".",
+                    "type": "string",
+                    "default": ""
+                },
+                "teamProject": {
+                    "description": "Azure Devops team project. Required. E.g. \"my-team\".",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SCMProviderGeneratorAzureDevOps",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.SCMProviderGeneratorBitbucket": {
+            "description": "SCMProviderGeneratorBitbucket defines connection info specific to Bitbucket Cloud (API version 2).",
+            "type": "object",
+            "required": [
+                "owner",
+                "user",
+                "appPasswordRef"
+            ],
+            "properties": {
+                "allBranches": {
+                    "description": "Scan all branches instead of just the main branch.",
+                    "type": "boolean"
+                },
+                "appPasswordRef": {
+                    "description": "The app password to use for the user.  Required. See: https://support.atlassian.com/bitbucket-cloud/docs/app-passwords/",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SecretRef"
+                },
+                "owner": {
+                    "description": "Bitbucket workspace to scan. Required.",
+                    "type": "string",
+                    "default": ""
+                },
+                "user": {
+                    "description": "Bitbucket user to use when authenticating.  Should have a \"member\" role to be able to read all repositories and branches.  Required",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SCMProviderGeneratorBitbucket",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.SCMProviderGeneratorBitbucketServer": {
+            "description": "SCMProviderGeneratorBitbucketServer defines connection info specific to Bitbucket Server.",
+            "type": "object",
+            "required": [
+                "project",
+                "api"
+            ],
+            "properties": {
+                "allBranches": {
+                    "description": "Scan all branches instead of just the default branch.",
+                    "type": "boolean"
+                },
+                "api": {
+                    "description": "The Bitbucket Server REST API URL to talk to. Required.",
+                    "type": "string",
+                    "default": ""
+                },
+                "basicAuth": {
+                    "description": "Credentials for Basic auth",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.BasicAuthBitbucketServer"
+                },
+                "project": {
+                    "description": "Project to scan. Required.",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SCMProviderGeneratorBitbucketServer",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.SCMProviderGeneratorFilter": {
+            "description": "SCMProviderGeneratorFilter is a single repository filter. If multiple filter types are set on a single struct, they will be AND'd together. All filters must pass for a repo to be included.",
+            "type": "object",
+            "properties": {
+                "branchMatch": {
+                    "description": "A regex which must match the branch name.",
+                    "type": "string"
+                },
+                "labelMatch": {
+                    "description": "A regex which must match at least one label.",
+                    "type": "string"
+                },
+                "pathsDoNotExist": {
+                    "description": "An array of paths, all of which must not exist.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "pathsExist": {
+                    "description": "An array of paths, all of which must exist.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "repositoryMatch": {
+                    "description": "A regex for repo names.",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SCMProviderGeneratorFilter",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.SCMProviderGeneratorGitea": {
+            "description": "SCMProviderGeneratorGitea defines a connection info specific to Gitea.",
+            "type": "object",
+            "required": [
+                "owner",
+                "api"
+            ],
+            "properties": {
+                "allBranches": {
+                    "description": "Scan all branches instead of just the default branch.",
+                    "type": "boolean"
+                },
+                "api": {
+                    "description": "The Gitea URL to talk to. For example https://gitea.mydomain.com/.",
+                    "type": "string",
+                    "default": ""
+                },
+                "insecure": {
+                    "description": "Allow self-signed TLS / Certificates; default: false",
+                    "type": "boolean"
+                },
+                "owner": {
+                    "description": "Gitea organization or user to scan. Required.",
+                    "type": "string",
+                    "default": ""
+                },
+                "tokenRef": {
+                    "description": "Authentication token reference.",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SecretRef"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SCMProviderGeneratorGitea",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.SCMProviderGeneratorGithub": {
+            "description": "SCMProviderGeneratorGithub defines connection info specific to GitHub.",
+            "type": "object",
+            "required": [
+                "organization"
+            ],
+            "properties": {
+                "allBranches": {
+                    "description": "Scan all branches instead of just the default branch.",
+                    "type": "boolean"
+                },
+                "api": {
+                    "description": "The GitHub API URL to talk to. If blank, use https://api.github.com/.",
+                    "type": "string"
+                },
+                "appSecretName": {
+                    "description": "AppSecretName is a reference to a GitHub App repo-creds secret.",
+                    "type": "string"
+                },
+                "organization": {
+                    "description": "GitHub org to scan. Required.",
+                    "type": "string",
+                    "default": ""
+                },
+                "tokenRef": {
+                    "description": "Authentication token reference.",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SecretRef"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SCMProviderGeneratorGithub",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.SCMProviderGeneratorGitlab": {
+            "description": "SCMProviderGeneratorGitlab defines connection info specific to Gitlab.",
+            "type": "object",
+            "required": [
+                "group"
+            ],
+            "properties": {
+                "allBranches": {
+                    "description": "Scan all branches instead of just the default branch.",
+                    "type": "boolean"
+                },
+                "api": {
+                    "description": "The Gitlab API URL to talk to.",
+                    "type": "string"
+                },
+                "group": {
+                    "description": "Gitlab group to scan. Required.  You can use either the project id (recommended) or the full namespaced path.",
+                    "type": "string",
+                    "default": ""
+                },
+                "includeSubgroups": {
+                    "description": "Recurse through subgroups (true) or scan only the base group (false).  Defaults to \"false\"",
+                    "type": "boolean"
+                },
+                "tokenRef": {
+                    "description": "Authentication token reference.",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SecretRef"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SCMProviderGeneratorGitlab",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.SecretRef": {
+            "description": "Utility struct for a reference to a secret key.",
+            "type": "object",
+            "required": [
+                "secretName",
+                "key"
+            ],
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "default": ""
+                },
+                "secretName": {
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SecretRef",
                     "version": "v1alpha1"
                 }
             ]
@@ -2844,9 +4427,25 @@
                     "description": "Revision is the revision (Git) or chart version (Helm) which to sync the application to If omitted, will use the revision specified in app spec.",
                     "type": "string"
                 },
+                "revisions": {
+                    "description": "Revisions is the list of revision (Git) or chart version (Helm) which to sync each source in sources field for the application to If omitted, will use the revision specified in app spec.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
                 "source": {
                     "description": "Source overrides the source definition set in the application. This is typically set in a Rollback operation and is nil during a Sync operation",
                     "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSource"
+                },
+                "sources": {
+                    "description": "Sources overrides the source definition set in the application. This is typically set in a Rollback operation and is nil during a Sync operation",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSource"
+                    }
                 },
                 "syncOptions": {
                     "description": "SyncOptions provide per-sync sync-options, e.g. Validate=false",
@@ -2919,10 +4518,26 @@
                     "type": "string",
                     "default": ""
                 },
+                "revisions": {
+                    "description": "Revisions holds the revision this sync operation was performed for respective indexed source in sources field",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
                 "source": {
                     "description": "Source records the application source information of the sync, used for comparing auto-sync",
                     "default": {},
                     "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSource"
+                },
+                "sources": {
+                    "description": "Source records the application source information of the sync, used for comparing auto-sync",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSource"
+                    }
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -2940,6 +4555,10 @@
                 "automated": {
                     "description": "Automated will keep an application synced to the target revision",
                     "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SyncPolicyAutomated"
+                },
+                "managedNamespaceMetadata": {
+                    "description": "ManagedNamespaceMetadata controls metadata in the given namespace (if CreateNamespace=true)",
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ManagedNamespaceMetadata"
                 },
                 "retry": {
                     "description": "Retry controls failed sync retry behavior",
@@ -3002,6 +4621,14 @@
                 "revision": {
                     "description": "Revision contains information about the revision the comparison has been performed to",
                     "type": "string"
+                },
+                "revisions": {
+                    "description": "Revisions contains information about the revisions of multiple sources the comparison has been performed to",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
                 },
                 "status": {
                     "description": "Status is the sync state of the comparison",
