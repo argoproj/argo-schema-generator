@@ -1005,6 +1005,41 @@
                 }
             ]
         },
+        "io.argoproj.workflow.v1alpha1.Column": {
+            "description": "Column is a custom column that will be exposed in the Workflow List View.",
+            "type": "object",
+            "required": [
+                "name",
+                "type",
+                "key"
+            ],
+            "properties": {
+                "key": {
+                    "description": "The key of the label or annotation, e.g., \"workflows.argoproj.io/completed\".",
+                    "type": "string",
+                    "default": ""
+                },
+                "name": {
+                    "description": "The name of this column, e.g., \"Workflow Completed\".",
+                    "type": "string",
+                    "default": ""
+                },
+                "type": {
+                    "description": "The type of this column, \"label\" or \"annotation\".",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-patch-merge-key": "name",
+            "x-kubernetes-patch-strategy": "merge",
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "Column",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.workflow.v1alpha1.Condition": {
             "type": "object",
             "properties": {
@@ -1115,6 +1150,15 @@
                 "readinessProbe": {
                     "description": "Periodic probe of container service readiness. Container will be removed from service endpoints if the probe fails. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes",
                     "$ref": "#/definitions/io.k8s.api.core.v1.Probe"
+                },
+                "resizePolicy": {
+                    "description": "Resources resize policy for the container.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.api.core.v1.ContainerResizePolicy"
+                    },
+                    "x-kubernetes-list-type": "atomic"
                 },
                 "resources": {
                     "description": "Compute Resources required by this container. Cannot be updated. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/",
@@ -2409,7 +2453,7 @@
                     "default": ""
                 },
                 "scope": {
-                    "description": "\"workflow\", \"pod\", \"pod-logs\", \"event-source-logs\", \"sensor-logs\" or \"chat\"",
+                    "description": "\"workflow\", \"pod\", \"pod-logs\", \"event-source-logs\", \"sensor-logs\", \"workflow-list\" or \"chat\"",
                     "type": "string",
                     "default": ""
                 },
@@ -2759,7 +2803,7 @@
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Outputs"
                 },
                 "phase": {
-                    "description": "Phase a simple, high-level summary of where the node is in its lifecycle. Can be used as a state machine.",
+                    "description": "Phase a simple, high-level summary of where the node is in its lifecycle. Can be used as a state machine. Will be one of these values \"Pending\", \"Running\" before the node is completed, or \"Succeeded\", \"Skipped\", \"Failed\", \"Error\", or \"Omitted\" as a final state.",
                     "type": "string"
                 },
                 "podIP": {
@@ -3666,6 +3710,15 @@
                     "description": "Periodic probe of container service readiness. Container will be removed from service endpoints if the probe fails. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes",
                     "$ref": "#/definitions/io.k8s.api.core.v1.Probe"
                 },
+                "resizePolicy": {
+                    "description": "Resources resize policy for the container.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.api.core.v1.ContainerResizePolicy"
+                    },
+                    "x-kubernetes-list-type": "atomic"
+                },
                 "resources": {
                     "description": "Compute Resources required by this container. Cannot be updated. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/",
                     "default": {},
@@ -4388,6 +4441,15 @@
                 "readinessProbe": {
                     "description": "Periodic probe of container service readiness. Container will be removed from service endpoints if the probe fails. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes",
                     "$ref": "#/definitions/io.k8s.api.core.v1.Probe"
+                },
+                "resizePolicy": {
+                    "description": "Resources resize policy for the container.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.api.core.v1.ContainerResizePolicy"
+                    },
+                    "x-kubernetes-list-type": "atomic"
                 },
                 "resources": {
                     "description": "Compute Resources required by this container. Cannot be updated. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/",
@@ -5139,7 +5201,7 @@
                     }
                 },
                 "phase": {
-                    "description": "Phase a simple, high-level summary of where the workflow is in its lifecycle.",
+                    "description": "Phase a simple, high-level summary of where the workflow is in its lifecycle. Will be \"\" (Unknown), \"Pending\", or \"Running\" before the workflow is completed, and \"Succeeded\", \"Failed\" or \"Error\" once the workflow has completed.",
                     "type": "string"
                 },
                 "progress": {
