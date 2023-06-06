@@ -961,7 +961,9 @@
                     "items": {
                         "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.HelmParameter"
-                    }
+                    },
+                    "x-kubernetes-patch-merge-key": "name",
+                    "x-kubernetes-patch-strategy": "merge"
                 },
                 "passCredentials": {
                     "description": "PassCredentials pass credentials to all domains (Helm's --pass-credentials)",
