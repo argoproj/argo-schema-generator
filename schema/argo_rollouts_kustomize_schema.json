@@ -461,6 +461,52 @@
                 }
             ]
         },
+        "io.argoproj.rollouts.v1alpha1.ApisixRoute": {
+            "description": "ApisixRoute holds information on the APISIX Route the rollout needs to modify",
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "description": "Name refer to the name of the APISIX Route used to route traffic to the service",
+                    "type": "string",
+                    "default": ""
+                },
+                "rules": {
+                    "description": "RuleRef a list of the APISIX Route HTTP Rules used to route traffic to the service",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApisixRoute",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.ApisixTrafficRouting": {
+            "description": "ApisixTrafficRouting defines the configuration required to use APISIX as traffic router",
+            "type": "object",
+            "properties": {
+                "route": {
+                    "description": "Route references an Apisix Route to modify to shape traffic",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ApisixRoute"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApisixTrafficRouting",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.rollouts.v1alpha1.AppMeshTrafficRouting": {
             "description": "AppMeshTrafficRouting configuration for AWS AppMesh service mesh to enable fine grain configuration",
             "type": "object",
@@ -615,6 +661,11 @@
             ],
             "properties": {
                 "arn": {
+                    "type": "string",
+                    "default": ""
+                },
+                "fullName": {
+                    "description": "FullName is the full name of the resource",
                     "type": "string",
                     "default": ""
                 },
@@ -795,6 +846,14 @@
                     "description": "SetCanaryScale defines how to scale the newRS without changing traffic weight",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.SetCanaryScale"
                 },
+                "setHeaderRoute": {
+                    "description": "SetHeaderRoute defines the route with specified header name to send 100% of traffic to the canary service",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.SetHeaderRoute"
+                },
+                "setMirrorRoute": {
+                    "description": "SetMirrorRoutes Mirrors traffic that matches rules to a particular destination",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.SetMirrorRoute"
+                },
                 "setWeight": {
                     "description": "SetWeight sets what percentage of the newRS should receive",
                     "type": "integer",
@@ -845,6 +904,11 @@
                 "maxUnavailable": {
                     "description": "MaxUnavailable The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of total pods at the start of update (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. By default, a fixed value of 25% is used. Example: when this is set to 30%, the old RC can be scaled down by 30% immediately when the rolling update starts. Once new pods are ready, old RC can be scaled down further, followed by scaling up the new RC, ensuring that at least 70% of original number of pods are available at all times during the update.",
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+                },
+                "minPodsPerReplicaSet": {
+                    "description": "Assuming the desired number of pods in a stable or canary ReplicaSet is not zero, then make sure it is at least MinPodsPerReplicaSet for High Availability. Only applicable for TrafficRoutedCanary",
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "pingPong": {
                     "description": "PingPongSpec holds the ping and pong services",
@@ -1089,6 +1153,10 @@
                 "query"
             ],
             "properties": {
+                "apiVersion": {
+                    "description": "ApiVersion refers to the Datadog API version being used (default: v1). v1 will eventually be deprecated.",
+                    "type": "string"
+                },
                 "interval": {
                     "type": "string"
                 },
@@ -1493,6 +1561,52 @@
                 }
             ]
         },
+        "io.argoproj.rollouts.v1alpha1.HeaderRoutingMatch": {
+            "type": "object",
+            "required": [
+                "headerName",
+                "headerValue"
+            ],
+            "properties": {
+                "headerName": {
+                    "description": "HeaderName the name of the request header",
+                    "type": "string",
+                    "default": ""
+                },
+                "headerValue": {
+                    "description": "HeaderValue the value of the header",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.StringMatch"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "HeaderRoutingMatch",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.InfluxdbMetric": {
+            "description": "InfluxdbMetric defines the InfluxDB Flux query to perform canary analysis",
+            "type": "object",
+            "properties": {
+                "profile": {
+                    "description": "Profile is the name of the secret holding InfluxDB account configuration",
+                    "type": "string"
+                },
+                "query": {
+                    "description": "Query is a raw InfluxDB flux query to perform",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "InfluxdbMetric",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.rollouts.v1alpha1.IstioDestinationRule": {
             "description": "IstioDestinationRule is a reference to an Istio DestinationRule to modify and shape traffic",
             "type": "object",
@@ -1573,6 +1687,14 @@
                     "items": {
                         "type": "string",
                         "default": ""
+                    }
+                },
+                "tcpRoutes": {
+                    "description": "A list of TCP routes within VirtualService to edit. If omitted, VirtualService must have a single route of this type.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.TCPRoute"
                     }
                 },
                 "tlsRoutes": {
@@ -1724,6 +1846,25 @@
                 {
                     "group": "argoproj.io",
                     "kind": "KayentaThreshold",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.MangedRoutes": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "MangedRoutes",
                     "version": "v1alpha1"
                 }
             ]
@@ -1880,6 +2021,10 @@
                     "description": "Graphite specifies the Graphite metric to query",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.GraphiteMetric"
                 },
+                "influxdb": {
+                    "description": "Influxdb specifies the influxdb metric to query",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.InfluxdbMetric"
+                },
                 "job": {
                     "description": "Job specifies the job metric run",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.JobMetric"
@@ -1892,9 +2037,21 @@
                     "description": "NewRelic specifies the newrelic metric to query",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.NewRelicMetric"
                 },
+                "plugin": {
+                    "description": "Plugin specifies the hashicorp go-plugin metric to query",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "format": "byte"
+                    }
+                },
                 "prometheus": {
                     "description": "Prometheus specifies the prometheus metric to query",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.PrometheusMetric"
+                },
+                "skywalking": {
+                    "description": "SkyWalking specifies the skywalking metric to query",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.SkyWalkingMetric"
                 },
                 "wavefront": {
                     "description": "Wavefront specifies the wavefront metric to query",
@@ -2022,9 +2179,6 @@
         "io.argoproj.rollouts.v1alpha1.NginxTrafficRouting": {
             "description": "NginxTrafficRouting configuration for Nginx ingress controller to control traffic routing",
             "type": "object",
-            "required": [
-                "stableIngress"
-            ],
             "properties": {
                 "additionalIngressAnnotations": {
                     "type": "object",
@@ -2039,8 +2193,15 @@
                 },
                 "stableIngress": {
                     "description": "StableIngress refers to the name of an `Ingress` resource in the same namespace as the `Rollout`",
-                    "type": "string",
-                    "default": ""
+                    "type": "string"
+                },
+                "stableIngresses": {
+                    "description": "StableIngresses refers to the names of `Ingress` resources in the same namespace as the `Rollout` in a multi ingress scenario",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -2207,6 +2368,22 @@
                 {
                     "group": "argoproj.io",
                     "kind": "RequiredDuringSchedulingIgnoredDuringExecution",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.RollbackWindowSpec": {
+            "type": "object",
+            "properties": {
+                "revisions": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RollbackWindowSpec",
                     "version": "v1alpha1"
                 }
             ]
@@ -2564,6 +2741,10 @@
                     "description": "Selector overrides the selector to be used for the template's ReplicaSet. If omitted, will use the same selector as the Rollout",
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
                 },
+                "service": {
+                    "description": "Service controls the optionally generated service",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.TemplateService"
+                },
                 "specRef": {
                     "description": "SpecRef indicates where the rollout should get the RS template from",
                     "type": "string",
@@ -2654,7 +2835,7 @@
                     "type": "boolean"
                 },
                 "progressDeadlineAbort": {
-                    "description": "ProgressDeadlineAbort is whether to abort the update when ProgressDeadlineSeconds is exceeded if analysis is not used. Default is false.",
+                    "description": "ProgressDeadlineAbort is whether to abort the update when ProgressDeadlineSeconds is exceeded.",
                     "type": "boolean"
                 },
                 "progressDeadlineSeconds": {
@@ -2675,6 +2856,10 @@
                     "description": "The number of old ReplicaSets to retain. If unspecified, will retain 10 old ReplicaSets",
                     "type": "integer",
                     "format": "int32"
+                },
+                "rollbackWindow": {
+                    "description": "The window in which a rollback will be fast tracked (fully promoted)",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RollbackWindowSpec"
                 },
                 "selector": {
                     "description": "Label selector for pods. Existing ReplicaSets whose pods are selected by this will be the ones affected by this rollout. It must match the pod template's labels.",
@@ -2864,6 +3049,10 @@
                     "description": "Ambassador holds specific configuration to use Ambassador to route traffic",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AmbassadorTrafficRouting"
                 },
+                "apisix": {
+                    "description": "Apisix holds specific configuration to use Apisix to route traffic",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ApisixTrafficRouting"
+                },
                 "appMesh": {
                     "description": "AppMesh holds specific configuration to use AppMesh to route traffic",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AppMeshTrafficRouting"
@@ -2872,19 +3061,67 @@
                     "description": "Istio holds Istio specific configuration to route traffic",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.IstioTrafficRouting"
                 },
+                "managedRoutes": {
+                    "description": "ManagedRoutes A list of HTTP routes that Argo Rollouts manages, the order of this array also becomes the precedence in the upstream traffic router.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.MangedRoutes"
+                    }
+                },
                 "nginx": {
                     "description": "Nginx holds Nginx Ingress specific configuration to route traffic",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.NginxTrafficRouting"
                 },
+                "plugins": {
+                    "description": "Plugins holds specific configuration that traffic router plugins can use for routing traffic",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "format": "byte"
+                    }
+                },
                 "smi": {
                     "description": "SMI holds TrafficSplit specific configuration to route traffic",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.SMITrafficRouting"
+                },
+                "traefik": {
+                    "description": "Traefik holds specific configuration to use Traefik to route traffic",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.TraefikTrafficRouting"
                 }
             },
             "x-kubernetes-group-version-kind": [
                 {
                     "group": "argoproj.io",
                     "kind": "RolloutTrafficRouting",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.RouteMatch": {
+            "type": "object",
+            "properties": {
+                "headers": {
+                    "description": "Headers What request with matching headers should be mirrored",
+                    "type": "object",
+                    "additionalProperties": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.StringMatch"
+                    }
+                },
+                "method": {
+                    "description": "Method What http methods should be mirrored",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.StringMatch"
+                },
+                "path": {
+                    "description": "Path What url paths should be mirrored",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.StringMatch"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RouteMatch",
                     "version": "v1alpha1"
                 }
             ]
@@ -3041,6 +3278,84 @@
                 }
             ]
         },
+        "io.argoproj.rollouts.v1alpha1.SetHeaderRoute": {
+            "description": "SetHeaderRoute defines the route with specified header name to send 100% of traffic to the canary service",
+            "type": "object",
+            "properties": {
+                "match": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.HeaderRoutingMatch"
+                    }
+                },
+                "name": {
+                    "description": "Name this is the name of the route to use for the mirroring of traffic this also needs to be included in the `spec.strategy.canary.trafficRouting.managedRoutes` field",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SetHeaderRoute",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.SetMirrorRoute": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "match": {
+                    "description": "Match Contains a list of rules that if mated will mirror the traffic to the services",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RouteMatch"
+                    }
+                },
+                "name": {
+                    "description": "Name this is the name of the route to use for the mirroring of traffic this also needs to be included in the `spec.strategy.canary.trafficRouting.managedRoutes` field",
+                    "type": "string",
+                    "default": ""
+                },
+                "percentage": {
+                    "description": "Services The list of services to mirror the traffic to if the method, path, headers match Service string `json:\"service\" protobuf:\"bytes,3,opt,name=service\"` Percentage What percent of the traffic that matched the rules should be mirrored",
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SetMirrorRoute",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.SkyWalkingMetric": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "interval": {
+                    "type": "string"
+                },
+                "query": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SkyWalkingMetric",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.rollouts.v1alpha1.StickinessConfig": {
             "type": "object",
             "required": [
@@ -3062,6 +3377,49 @@
                 {
                     "group": "argoproj.io",
                     "kind": "StickinessConfig",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.StringMatch": {
+            "description": "StringMatch Used to define what type of matching we will use exact, prefix, or regular expression",
+            "type": "object",
+            "properties": {
+                "exact": {
+                    "description": "Exact The string must match exactly",
+                    "type": "string"
+                },
+                "prefix": {
+                    "description": "Prefix The string will be prefixed matched",
+                    "type": "string"
+                },
+                "regex": {
+                    "description": "Regex The string will be regular expression matched",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "StringMatch",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.TCPRoute": {
+            "description": "TCPRoute holds the information on the virtual service's TCP routes that are desired to be matched for changing weights.",
+            "type": "object",
+            "properties": {
+                "port": {
+                    "description": "Port number of the TCP Route desired to be matched in the given Istio VirtualService.",
+                    "type": "integer",
+                    "format": "int64"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "TCPRoute",
                     "version": "v1alpha1"
                 }
             ]
@@ -3094,6 +3452,12 @@
         },
         "io.argoproj.rollouts.v1alpha1.TemplateService": {
             "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Name of the service generated by the experiment",
+                    "type": "string"
+                }
+            },
             "x-kubernetes-group-version-kind": [
                 {
                     "group": "argoproj.io",
@@ -3221,6 +3585,27 @@
                 }
             ]
         },
+        "io.argoproj.rollouts.v1alpha1.TraefikTrafficRouting": {
+            "description": "TraefikTrafficRouting defines the configuration required to use Traefik as traffic router",
+            "type": "object",
+            "required": [
+                "weightedTraefikServiceName"
+            ],
+            "properties": {
+                "weightedTraefikServiceName": {
+                    "description": "TraefikServiceName refer to the name of the Traefik service used to route traffic to the service",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "TraefikTrafficRouting",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.rollouts.v1alpha1.TrafficWeights": {
             "description": "TrafficWeights describes the current status of how traffic has been split",
             "type": "object",
@@ -3308,7 +3693,7 @@
             ],
             "properties": {
                 "body": {
-                    "description": "Body is the body of the we metric (must be POST/PUT)",
+                    "description": "Body is the body of the web metric (must be POST/PUT)",
                     "type": "string"
                 },
                 "headers": {
@@ -3324,6 +3709,11 @@
                 "insecure": {
                     "description": "Insecure skips host TLS verification",
                     "type": "boolean"
+                },
+                "jsonBody": {
+                    "description": "JSONBody is the body of the web metric in a json format (method must be POST/PUT)",
+                    "type": "string",
+                    "format": "byte"
                 },
                 "jsonPath": {
                     "description": "JSONPath is a JSON Path to use as the result variable (default: \"{$}\")",

@@ -376,6 +376,25 @@
                 }
             ]
         },
+        "io.argoproj.argocd.v1alpha1.ApplicationPreservedFields": {
+            "type": "object",
+            "properties": {
+                "annotations": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationPreservedFields",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.argocd.v1alpha1.ApplicationSet": {
             "description": "ApplicationSet is a set of Application resources",
             "type": "object",
@@ -676,6 +695,9 @@
                 },
                 "goTemplate": {
                     "type": "boolean"
+                },
+                "preservedFields": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationPreservedFields"
                 },
                 "strategy": {
                     "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetStrategy"
@@ -1049,6 +1071,10 @@
                         "default": ""
                     }
                 },
+                "commonAnnotationsEnvsubst": {
+                    "description": "CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values",
+                    "type": "boolean"
+                },
                 "commonLabels": {
                     "description": "CommonLabels is a list of additional labels to add to rendered manifests",
                     "type": "object",
@@ -1080,6 +1106,18 @@
                 "nameSuffix": {
                     "description": "NameSuffix is a suffix appended to resources for Kustomize apps",
                     "type": "string"
+                },
+                "namespace": {
+                    "description": "Namespace sets the namespace that Kustomize adds to all resources",
+                    "type": "string"
+                },
+                "replicas": {
+                    "description": "Replicas is a list of Kustomize Replicas override specifications",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.KustomizeReplica"
+                    }
                 },
                 "version": {
                     "description": "Version controls which version of Kustomize to use for rendering manifests",
@@ -1126,22 +1164,6 @@
         "io.argoproj.argocd.v1alpha1.ApplicationSourcePluginParameter": {
             "type": "object",
             "properties": {
-                "array": {
-                    "description": "Array is the value of an array type parameter.",
-                    "type": "array",
-                    "items": {
-                        "type": "string",
-                        "default": ""
-                    }
-                },
-                "map": {
-                    "description": "Map is the value of a map type parameter.",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string",
-                        "default": ""
-                    }
-                },
                 "name": {
                     "description": "Name is the name identifying a parameter.",
                     "type": "string"
@@ -2436,6 +2458,32 @@
                 }
             ]
         },
+        "io.argoproj.argocd.v1alpha1.KustomizeReplica": {
+            "type": "object",
+            "required": [
+                "name",
+                "count"
+            ],
+            "properties": {
+                "count": {
+                    "description": "Number of replicas",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+                },
+                "name": {
+                    "description": "Name of Deployment or StatefulSet",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "KustomizeReplica",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.argocd.v1alpha1.ListGenerator": {
             "description": "ListGenerator include items info",
             "type": "object",
@@ -2449,6 +2497,9 @@
                         "default": {},
                         "$ref": "#/definitions/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSON"
                     }
+                },
+                "elementsYaml": {
+                    "type": "string"
                 },
                 "template": {
                     "default": {},
@@ -2706,6 +2757,46 @@
                 {
                     "group": "argoproj.io",
                     "kind": "OperationState",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.OptionalArray": {
+            "type": "object",
+            "properties": {
+                "array": {
+                    "description": "Array is the value of an array type parameter.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "OptionalArray",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.OptionalMap": {
+            "type": "object",
+            "properties": {
+                "map": {
+                    "description": "Map is the value of a map type parameter.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "OptionalMap",
                     "version": "v1alpha1"
                 }
             ]

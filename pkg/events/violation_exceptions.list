@@ -12,6 +12,7 @@ API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/e
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1,GithubEventSource,Organizations
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1,GithubEventSource,Repositories
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1,GitlabEventSource,Events
+API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1,GitlabEventSource,Groups
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1,GitlabEventSource,Projects
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1,HDFSEventSource,Addresses
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1,OwnedRepositories,Names
@@ -32,6 +33,8 @@ API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/s
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,ArgoWorkflowTrigger,Parameters
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,AzureEventHubsTrigger,Parameters
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,AzureEventHubsTrigger,Payload
+API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,AzureServiceBusTrigger,Parameters
+API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,AzureServiceBusTrigger,Payload
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,CustomTrigger,Parameters
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,CustomTrigger,Payload
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,DataFilter,Value

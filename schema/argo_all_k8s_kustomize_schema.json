@@ -376,6 +376,25 @@
                 }
             ]
         },
+        "io.argoproj.argocd.v1alpha1.ApplicationPreservedFields": {
+            "type": "object",
+            "properties": {
+                "annotations": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApplicationPreservedFields",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.argocd.v1alpha1.ApplicationSet": {
             "description": "ApplicationSet is a set of Application resources",
             "type": "object",
@@ -676,6 +695,9 @@
                 },
                 "goTemplate": {
                     "type": "boolean"
+                },
+                "preservedFields": {
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationPreservedFields"
                 },
                 "strategy": {
                     "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetStrategy"
@@ -1049,6 +1071,10 @@
                         "default": ""
                     }
                 },
+                "commonAnnotationsEnvsubst": {
+                    "description": "CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values",
+                    "type": "boolean"
+                },
                 "commonLabels": {
                     "description": "CommonLabels is a list of additional labels to add to rendered manifests",
                     "type": "object",
@@ -1080,6 +1106,18 @@
                 "nameSuffix": {
                     "description": "NameSuffix is a suffix appended to resources for Kustomize apps",
                     "type": "string"
+                },
+                "namespace": {
+                    "description": "Namespace sets the namespace that Kustomize adds to all resources",
+                    "type": "string"
+                },
+                "replicas": {
+                    "description": "Replicas is a list of Kustomize Replicas override specifications",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.KustomizeReplica"
+                    }
                 },
                 "version": {
                     "description": "Version controls which version of Kustomize to use for rendering manifests",
@@ -1126,22 +1164,6 @@
         "io.argoproj.argocd.v1alpha1.ApplicationSourcePluginParameter": {
             "type": "object",
             "properties": {
-                "array": {
-                    "description": "Array is the value of an array type parameter.",
-                    "type": "array",
-                    "items": {
-                        "type": "string",
-                        "default": ""
-                    }
-                },
-                "map": {
-                    "description": "Map is the value of a map type parameter.",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string",
-                        "default": ""
-                    }
-                },
                 "name": {
                     "description": "Name is the name identifying a parameter.",
                     "type": "string"
@@ -2436,6 +2458,32 @@
                 }
             ]
         },
+        "io.argoproj.argocd.v1alpha1.KustomizeReplica": {
+            "type": "object",
+            "required": [
+                "name",
+                "count"
+            ],
+            "properties": {
+                "count": {
+                    "description": "Number of replicas",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+                },
+                "name": {
+                    "description": "Name of Deployment or StatefulSet",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "KustomizeReplica",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.argocd.v1alpha1.ListGenerator": {
             "description": "ListGenerator include items info",
             "type": "object",
@@ -2449,6 +2497,9 @@
                         "default": {},
                         "$ref": "#/definitions/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSON"
                     }
+                },
+                "elementsYaml": {
+                    "type": "string"
                 },
                 "template": {
                     "default": {},
@@ -2706,6 +2757,46 @@
                 {
                     "group": "argoproj.io",
                     "kind": "OperationState",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.OptionalArray": {
+            "type": "object",
+            "properties": {
+                "array": {
+                    "description": "Array is the value of an array type parameter.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "OptionalArray",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.OptionalMap": {
+            "type": "object",
+            "properties": {
+                "map": {
+                    "description": "Map is the value of a map type parameter.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "OptionalMap",
                     "version": "v1alpha1"
                 }
             ]
@@ -4853,6 +4944,9 @@
                 "jetstream": {
                     "$ref": "#/definitions/io.argoproj.eventbus.v1alpha1.JetStreamConfig"
                 },
+                "kafka": {
+                    "$ref": "#/definitions/io.argoproj.eventbus.v1alpha1.KafkaBus"
+                },
                 "nats": {
                     "$ref": "#/definitions/io.argoproj.eventbus.v1alpha1.NATSConfig"
                 }
@@ -4973,6 +5067,10 @@
             "properties": {
                 "jetstream": {
                     "$ref": "#/definitions/io.argoproj.eventbus.v1alpha1.JetStreamBus"
+                },
+                "kafka": {
+                    "description": "Kafka eventbus",
+                    "$ref": "#/definitions/io.argoproj.eventbus.v1alpha1.KafkaBus"
                 },
                 "nats": {
                     "description": "NATS eventbus",
@@ -5142,6 +5240,67 @@
                 {
                     "group": "argoproj.io",
                     "kind": "JetStreamConfig",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.eventbus.v1alpha1.KafkaBus": {
+            "description": "KafkaBus holds the KafkaBus EventBus information",
+            "type": "object",
+            "properties": {
+                "consumerGroup": {
+                    "description": "Consumer group for kafka client",
+                    "$ref": "#/definitions/io.argoproj.eventbus.v1alpha1.KafkaConsumerGroup"
+                },
+                "sasl": {
+                    "description": "SASL configuration for the kafka client",
+                    "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.common.SASLConfig"
+                },
+                "tls": {
+                    "description": "TLS configuration for the kafka client.",
+                    "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.common.TLSConfig"
+                },
+                "topic": {
+                    "description": "Topic name, defaults to {namespace_name}-{eventbus_name}",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "URL to kafka cluster, multiple URLs separated by comma",
+                    "type": "string"
+                },
+                "version": {
+                    "description": "Kafka version, sarama defaults to the oldest supported stable version",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "KafkaBus",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.eventbus.v1alpha1.KafkaConsumerGroup": {
+            "type": "object",
+            "properties": {
+                "groupName": {
+                    "description": "Consumer group name, defaults to {namespace_name}-{sensor_name}",
+                    "type": "string"
+                },
+                "rebalanceStrategy": {
+                    "description": "Rebalance strategy can be one of: sticky, roundrobin, range. Range is the default.",
+                    "type": "string"
+                },
+                "startOldest": {
+                    "description": "When starting up a new group do we want to start from the oldest event (true) or the newest event (false), defaults to false",
+                    "type": "boolean"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "KafkaConsumerGroup",
                     "version": "v1alpha1"
                 }
             ]
@@ -5592,6 +5751,116 @@
                 {
                     "group": "argoproj.io",
                     "kind": "AzureEventsHubEventSource",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.eventsource.v1alpha1.AzureQueueStorageEventSource": {
+            "description": "AzureQueueStorageEventSource describes the event source for azure queue storage more info at https://learn.microsoft.com/en-us/azure/storage/queues/",
+            "type": "object",
+            "required": [
+                "queueName"
+            ],
+            "properties": {
+                "connectionString": {
+                    "description": "ConnectionString is the connection string to access Azure Queue Storage. If this fields is not provided it will try to access via Azure AD with StorageAccountName.",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                },
+                "dlq": {
+                    "description": "DLQ specifies if a dead-letter queue is configured for messages that can't be processed successfully. If set to true, messages with invalid payload won't be acknowledged to allow to forward them farther to the dead-letter queue. The default value is false.",
+                    "type": "boolean"
+                },
+                "filter": {
+                    "description": "Filter",
+                    "$ref": "#/definitions/io.argoproj.eventsource.v1alpha1.EventSourceFilter"
+                },
+                "jsonBody": {
+                    "description": "JSONBody specifies that all event body payload coming from this source will be JSON",
+                    "type": "boolean"
+                },
+                "metadata": {
+                    "description": "Metadata holds the user defined metadata which will passed along the event payload.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "queueName": {
+                    "description": "QueueName is the name of the queue",
+                    "type": "string",
+                    "default": ""
+                },
+                "storageAccountName": {
+                    "description": "StorageAccountName is the name of the storage account where the queue is. This field is necessary to access via Azure AD (managed identity) and it is ignored if ConnectionString is set.",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AzureQueueStorageEventSource",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.eventsource.v1alpha1.AzureServiceBusEventSource": {
+            "description": "AzureServiceBusEventSource describes the event source for azure service bus More info at https://docs.microsoft.com/en-us/azure/service-bus-messaging/",
+            "type": "object",
+            "required": [
+                "queueName",
+                "topicName",
+                "subscriptionName"
+            ],
+            "properties": {
+                "connectionString": {
+                    "description": "ConnectionString is the connection string for the Azure Service Bus. If this fields is not provided it will try to access via Azure AD with DefaultAzureCredential and FullyQualifiedNamespace.",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                },
+                "filter": {
+                    "description": "Filter",
+                    "$ref": "#/definitions/io.argoproj.eventsource.v1alpha1.EventSourceFilter"
+                },
+                "fullyQualifiedNamespace": {
+                    "description": "FullyQualifiedNamespace is the Service Bus namespace name (ex: myservicebus.servicebus.windows.net). This field is necessary to access via Azure AD (managed identity) and it is ignored if ConnectionString is set.",
+                    "type": "string"
+                },
+                "jsonBody": {
+                    "description": "JSONBody specifies that all event body payload coming from this source will be JSON",
+                    "type": "boolean"
+                },
+                "metadata": {
+                    "description": "Metadata holds the user defined metadata which will passed along the event payload.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "queueName": {
+                    "description": "QueueName is the name of the Azure Service Bus Queue",
+                    "type": "string",
+                    "default": ""
+                },
+                "subscriptionName": {
+                    "description": "SubscriptionName is the name of the Azure Service Bus Topic Subscription",
+                    "type": "string",
+                    "default": ""
+                },
+                "tls": {
+                    "description": "TLS configuration for the service bus client",
+                    "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.common.TLSConfig"
+                },
+                "topicName": {
+                    "description": "TopicName is the name of the Azure Service Bus Topic",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AzureServiceBusEventSource",
                     "version": "v1alpha1"
                 }
             ]
@@ -6122,6 +6391,22 @@
                         "$ref": "#/definitions/io.argoproj.eventsource.v1alpha1.AzureEventsHubEventSource"
                     }
                 },
+                "azureQueueStorage": {
+                    "description": "AzureQueueStorage event source",
+                    "type": "object",
+                    "additionalProperties": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.eventsource.v1alpha1.AzureQueueStorageEventSource"
+                    }
+                },
+                "azureServiceBus": {
+                    "description": "Azure Service Bus event source",
+                    "type": "object",
+                    "additionalProperties": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.eventsource.v1alpha1.AzureServiceBusEventSource"
+                    }
+                },
                 "bitbucket": {
                     "description": "Bitbucket event sources",
                     "type": "object",
@@ -6643,6 +6928,14 @@
                     "type": "string",
                     "default": ""
                 },
+                "groups": {
+                    "description": "List of group IDs or group name like \"test\". Group level hook available in Premium and Ultimate Gitlab.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
                 "metadata": {
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
@@ -6656,7 +6949,7 @@
                     "type": "string"
                 },
                 "projects": {
-                    "description": "List of project IDs or project namespace paths like \"whynowy/test\"",
+                    "description": "List of project IDs or project namespace paths like \"whynowy/test\". Projects and groups cannot be empty at the same time.",
                     "type": "array",
                     "items": {
                         "type": "string",
@@ -6801,7 +7094,6 @@
             "type": "object",
             "required": [
                 "url",
-                "partition",
                 "topic"
             ],
             "properties": {
@@ -6884,6 +7176,10 @@
                 "clientId"
             ],
             "properties": {
+                "auth": {
+                    "description": "Auth hosts secret selectors for username and password",
+                    "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.common.BasicAuth"
+                },
                 "clientId": {
                     "description": "ClientID is the id of the client",
                     "type": "string",
@@ -7162,8 +7458,20 @@
                 "url"
             ],
             "properties": {
+                "authAthenzParams": {
+                    "description": "Authentication athenz parameters for the pulsar client. Refer https://github.com/apache/pulsar-client-go/blob/master/pulsar/auth/athenz.go Either token or athenz can be set to use auth.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "authAthenzSecret": {
+                    "description": "Authentication athenz privateKey secret for the pulsar client. AuthAthenzSecret must be set if AuthAthenzParams is used.",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                },
                 "authTokenSecret": {
-                    "description": "Authentication token for the pulsar client.",
+                    "description": "Authentication token for the pulsar client. Either token or athenz can be set to use auth.",
                     "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
                 },
                 "connectionBackoff": {
@@ -8534,6 +8842,52 @@
                 }
             ]
         },
+        "io.argoproj.rollouts.v1alpha1.ApisixRoute": {
+            "description": "ApisixRoute holds information on the APISIX Route the rollout needs to modify",
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "description": "Name refer to the name of the APISIX Route used to route traffic to the service",
+                    "type": "string",
+                    "default": ""
+                },
+                "rules": {
+                    "description": "RuleRef a list of the APISIX Route HTTP Rules used to route traffic to the service",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApisixRoute",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.ApisixTrafficRouting": {
+            "description": "ApisixTrafficRouting defines the configuration required to use APISIX as traffic router",
+            "type": "object",
+            "properties": {
+                "route": {
+                    "description": "Route references an Apisix Route to modify to shape traffic",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ApisixRoute"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ApisixTrafficRouting",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.rollouts.v1alpha1.AppMeshTrafficRouting": {
             "description": "AppMeshTrafficRouting configuration for AWS AppMesh service mesh to enable fine grain configuration",
             "type": "object",
@@ -8688,6 +9042,11 @@
             ],
             "properties": {
                 "arn": {
+                    "type": "string",
+                    "default": ""
+                },
+                "fullName": {
+                    "description": "FullName is the full name of the resource",
                     "type": "string",
                     "default": ""
                 },
@@ -8868,6 +9227,14 @@
                     "description": "SetCanaryScale defines how to scale the newRS without changing traffic weight",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.SetCanaryScale"
                 },
+                "setHeaderRoute": {
+                    "description": "SetHeaderRoute defines the route with specified header name to send 100% of traffic to the canary service",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.SetHeaderRoute"
+                },
+                "setMirrorRoute": {
+                    "description": "SetMirrorRoutes Mirrors traffic that matches rules to a particular destination",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.SetMirrorRoute"
+                },
                 "setWeight": {
                     "description": "SetWeight sets what percentage of the newRS should receive",
                     "type": "integer",
@@ -8918,6 +9285,11 @@
                 "maxUnavailable": {
                     "description": "MaxUnavailable The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of total pods at the start of update (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. By default, a fixed value of 25% is used. Example: when this is set to 30%, the old RC can be scaled down by 30% immediately when the rolling update starts. Once new pods are ready, old RC can be scaled down further, followed by scaling up the new RC, ensuring that at least 70% of original number of pods are available at all times during the update.",
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+                },
+                "minPodsPerReplicaSet": {
+                    "description": "Assuming the desired number of pods in a stable or canary ReplicaSet is not zero, then make sure it is at least MinPodsPerReplicaSet for High Availability. Only applicable for TrafficRoutedCanary",
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "pingPong": {
                     "description": "PingPongSpec holds the ping and pong services",
@@ -9162,6 +9534,10 @@
                 "query"
             ],
             "properties": {
+                "apiVersion": {
+                    "description": "ApiVersion refers to the Datadog API version being used (default: v1). v1 will eventually be deprecated.",
+                    "type": "string"
+                },
                 "interval": {
                     "type": "string"
                 },
@@ -9566,6 +9942,52 @@
                 }
             ]
         },
+        "io.argoproj.rollouts.v1alpha1.HeaderRoutingMatch": {
+            "type": "object",
+            "required": [
+                "headerName",
+                "headerValue"
+            ],
+            "properties": {
+                "headerName": {
+                    "description": "HeaderName the name of the request header",
+                    "type": "string",
+                    "default": ""
+                },
+                "headerValue": {
+                    "description": "HeaderValue the value of the header",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.StringMatch"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "HeaderRoutingMatch",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.InfluxdbMetric": {
+            "description": "InfluxdbMetric defines the InfluxDB Flux query to perform canary analysis",
+            "type": "object",
+            "properties": {
+                "profile": {
+                    "description": "Profile is the name of the secret holding InfluxDB account configuration",
+                    "type": "string"
+                },
+                "query": {
+                    "description": "Query is a raw InfluxDB flux query to perform",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "InfluxdbMetric",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.rollouts.v1alpha1.IstioDestinationRule": {
             "description": "IstioDestinationRule is a reference to an Istio DestinationRule to modify and shape traffic",
             "type": "object",
@@ -9646,6 +10068,14 @@
                     "items": {
                         "type": "string",
                         "default": ""
+                    }
+                },
+                "tcpRoutes": {
+                    "description": "A list of TCP routes within VirtualService to edit. If omitted, VirtualService must have a single route of this type.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.TCPRoute"
                     }
                 },
                 "tlsRoutes": {
@@ -9797,6 +10227,25 @@
                 {
                     "group": "argoproj.io",
                     "kind": "KayentaThreshold",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.MangedRoutes": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "MangedRoutes",
                     "version": "v1alpha1"
                 }
             ]
@@ -9953,6 +10402,10 @@
                     "description": "Graphite specifies the Graphite metric to query",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.GraphiteMetric"
                 },
+                "influxdb": {
+                    "description": "Influxdb specifies the influxdb metric to query",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.InfluxdbMetric"
+                },
                 "job": {
                     "description": "Job specifies the job metric run",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.JobMetric"
@@ -9965,9 +10418,21 @@
                     "description": "NewRelic specifies the newrelic metric to query",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.NewRelicMetric"
                 },
+                "plugin": {
+                    "description": "Plugin specifies the hashicorp go-plugin metric to query",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "format": "byte"
+                    }
+                },
                 "prometheus": {
                     "description": "Prometheus specifies the prometheus metric to query",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.PrometheusMetric"
+                },
+                "skywalking": {
+                    "description": "SkyWalking specifies the skywalking metric to query",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.SkyWalkingMetric"
                 },
                 "wavefront": {
                     "description": "Wavefront specifies the wavefront metric to query",
@@ -10095,9 +10560,6 @@
         "io.argoproj.rollouts.v1alpha1.NginxTrafficRouting": {
             "description": "NginxTrafficRouting configuration for Nginx ingress controller to control traffic routing",
             "type": "object",
-            "required": [
-                "stableIngress"
-            ],
             "properties": {
                 "additionalIngressAnnotations": {
                     "type": "object",
@@ -10112,8 +10574,15 @@
                 },
                 "stableIngress": {
                     "description": "StableIngress refers to the name of an `Ingress` resource in the same namespace as the `Rollout`",
-                    "type": "string",
-                    "default": ""
+                    "type": "string"
+                },
+                "stableIngresses": {
+                    "description": "StableIngresses refers to the names of `Ingress` resources in the same namespace as the `Rollout` in a multi ingress scenario",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -10280,6 +10749,22 @@
                 {
                     "group": "argoproj.io",
                     "kind": "RequiredDuringSchedulingIgnoredDuringExecution",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.RollbackWindowSpec": {
+            "type": "object",
+            "properties": {
+                "revisions": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RollbackWindowSpec",
                     "version": "v1alpha1"
                 }
             ]
@@ -10637,6 +11122,10 @@
                     "description": "Selector overrides the selector to be used for the template's ReplicaSet. If omitted, will use the same selector as the Rollout",
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
                 },
+                "service": {
+                    "description": "Service controls the optionally generated service",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.TemplateService"
+                },
                 "specRef": {
                     "description": "SpecRef indicates where the rollout should get the RS template from",
                     "type": "string",
@@ -10727,7 +11216,7 @@
                     "type": "boolean"
                 },
                 "progressDeadlineAbort": {
-                    "description": "ProgressDeadlineAbort is whether to abort the update when ProgressDeadlineSeconds is exceeded if analysis is not used. Default is false.",
+                    "description": "ProgressDeadlineAbort is whether to abort the update when ProgressDeadlineSeconds is exceeded.",
                     "type": "boolean"
                 },
                 "progressDeadlineSeconds": {
@@ -10748,6 +11237,10 @@
                     "description": "The number of old ReplicaSets to retain. If unspecified, will retain 10 old ReplicaSets",
                     "type": "integer",
                     "format": "int32"
+                },
+                "rollbackWindow": {
+                    "description": "The window in which a rollback will be fast tracked (fully promoted)",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RollbackWindowSpec"
                 },
                 "selector": {
                     "description": "Label selector for pods. Existing ReplicaSets whose pods are selected by this will be the ones affected by this rollout. It must match the pod template's labels.",
@@ -10937,6 +11430,10 @@
                     "description": "Ambassador holds specific configuration to use Ambassador to route traffic",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AmbassadorTrafficRouting"
                 },
+                "apisix": {
+                    "description": "Apisix holds specific configuration to use Apisix to route traffic",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ApisixTrafficRouting"
+                },
                 "appMesh": {
                     "description": "AppMesh holds specific configuration to use AppMesh to route traffic",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AppMeshTrafficRouting"
@@ -10945,19 +11442,67 @@
                     "description": "Istio holds Istio specific configuration to route traffic",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.IstioTrafficRouting"
                 },
+                "managedRoutes": {
+                    "description": "ManagedRoutes A list of HTTP routes that Argo Rollouts manages, the order of this array also becomes the precedence in the upstream traffic router.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.MangedRoutes"
+                    }
+                },
                 "nginx": {
                     "description": "Nginx holds Nginx Ingress specific configuration to route traffic",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.NginxTrafficRouting"
                 },
+                "plugins": {
+                    "description": "Plugins holds specific configuration that traffic router plugins can use for routing traffic",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "format": "byte"
+                    }
+                },
                 "smi": {
                     "description": "SMI holds TrafficSplit specific configuration to route traffic",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.SMITrafficRouting"
+                },
+                "traefik": {
+                    "description": "Traefik holds specific configuration to use Traefik to route traffic",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.TraefikTrafficRouting"
                 }
             },
             "x-kubernetes-group-version-kind": [
                 {
                     "group": "argoproj.io",
                     "kind": "RolloutTrafficRouting",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.RouteMatch": {
+            "type": "object",
+            "properties": {
+                "headers": {
+                    "description": "Headers What request with matching headers should be mirrored",
+                    "type": "object",
+                    "additionalProperties": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.StringMatch"
+                    }
+                },
+                "method": {
+                    "description": "Method What http methods should be mirrored",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.StringMatch"
+                },
+                "path": {
+                    "description": "Path What url paths should be mirrored",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.StringMatch"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "RouteMatch",
                     "version": "v1alpha1"
                 }
             ]
@@ -11114,6 +11659,84 @@
                 }
             ]
         },
+        "io.argoproj.rollouts.v1alpha1.SetHeaderRoute": {
+            "description": "SetHeaderRoute defines the route with specified header name to send 100% of traffic to the canary service",
+            "type": "object",
+            "properties": {
+                "match": {
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.HeaderRoutingMatch"
+                    }
+                },
+                "name": {
+                    "description": "Name this is the name of the route to use for the mirroring of traffic this also needs to be included in the `spec.strategy.canary.trafficRouting.managedRoutes` field",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SetHeaderRoute",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.SetMirrorRoute": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "match": {
+                    "description": "Match Contains a list of rules that if mated will mirror the traffic to the services",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RouteMatch"
+                    }
+                },
+                "name": {
+                    "description": "Name this is the name of the route to use for the mirroring of traffic this also needs to be included in the `spec.strategy.canary.trafficRouting.managedRoutes` field",
+                    "type": "string",
+                    "default": ""
+                },
+                "percentage": {
+                    "description": "Services The list of services to mirror the traffic to if the method, path, headers match Service string `json:\"service\" protobuf:\"bytes,3,opt,name=service\"` Percentage What percent of the traffic that matched the rules should be mirrored",
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SetMirrorRoute",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.SkyWalkingMetric": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "interval": {
+                    "type": "string"
+                },
+                "query": {
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SkyWalkingMetric",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.rollouts.v1alpha1.StickinessConfig": {
             "type": "object",
             "required": [
@@ -11135,6 +11758,49 @@
                 {
                     "group": "argoproj.io",
                     "kind": "StickinessConfig",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.StringMatch": {
+            "description": "StringMatch Used to define what type of matching we will use exact, prefix, or regular expression",
+            "type": "object",
+            "properties": {
+                "exact": {
+                    "description": "Exact The string must match exactly",
+                    "type": "string"
+                },
+                "prefix": {
+                    "description": "Prefix The string will be prefixed matched",
+                    "type": "string"
+                },
+                "regex": {
+                    "description": "Regex The string will be regular expression matched",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "StringMatch",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.TCPRoute": {
+            "description": "TCPRoute holds the information on the virtual service's TCP routes that are desired to be matched for changing weights.",
+            "type": "object",
+            "properties": {
+                "port": {
+                    "description": "Port number of the TCP Route desired to be matched in the given Istio VirtualService.",
+                    "type": "integer",
+                    "format": "int64"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "TCPRoute",
                     "version": "v1alpha1"
                 }
             ]
@@ -11167,6 +11833,12 @@
         },
         "io.argoproj.rollouts.v1alpha1.TemplateService": {
             "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Name of the service generated by the experiment",
+                    "type": "string"
+                }
+            },
             "x-kubernetes-group-version-kind": [
                 {
                     "group": "argoproj.io",
@@ -11294,6 +11966,27 @@
                 }
             ]
         },
+        "io.argoproj.rollouts.v1alpha1.TraefikTrafficRouting": {
+            "description": "TraefikTrafficRouting defines the configuration required to use Traefik as traffic router",
+            "type": "object",
+            "required": [
+                "weightedTraefikServiceName"
+            ],
+            "properties": {
+                "weightedTraefikServiceName": {
+                    "description": "TraefikServiceName refer to the name of the Traefik service used to route traffic to the service",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "TraefikTrafficRouting",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.rollouts.v1alpha1.TrafficWeights": {
             "description": "TrafficWeights describes the current status of how traffic has been split",
             "type": "object",
@@ -11381,7 +12074,7 @@
             ],
             "properties": {
                 "body": {
-                    "description": "Body is the body of the we metric (must be POST/PUT)",
+                    "description": "Body is the body of the web metric (must be POST/PUT)",
                     "type": "string"
                 },
                 "headers": {
@@ -11397,6 +12090,11 @@
                 "insecure": {
                     "description": "Insecure skips host TLS verification",
                     "type": "boolean"
+                },
+                "jsonBody": {
+                    "description": "JSONBody is the body of the web metric in a json format (method must be POST/PUT)",
+                    "type": "string",
+                    "format": "byte"
                 },
                 "jsonPath": {
                     "description": "JSONPath is a JSON Path to use as the result variable (default: \"{$}\")",
@@ -11665,6 +12363,63 @@
                 {
                     "group": "argoproj.io",
                     "kind": "AzureEventHubsTrigger",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.sensor.v1alpha1.AzureServiceBusTrigger": {
+            "type": "object",
+            "required": [
+                "queueName",
+                "topicName",
+                "subscriptionName",
+                "payload"
+            ],
+            "properties": {
+                "connectionString": {
+                    "description": "ConnectionString is the connection string for the Azure Service Bus",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                },
+                "parameters": {
+                    "description": "Parameters is the list of key-value extracted from event's payload that are applied to the trigger resource.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.sensor.v1alpha1.TriggerParameter"
+                    }
+                },
+                "payload": {
+                    "description": "Payload is the list of key-value extracted from an event payload to construct the request payload.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.sensor.v1alpha1.TriggerParameter"
+                    }
+                },
+                "queueName": {
+                    "description": "QueueName is the name of the Azure Service Bus Queue",
+                    "type": "string",
+                    "default": ""
+                },
+                "subscriptionName": {
+                    "description": "SubscriptionName is the name of the Azure Service Bus Topic Subscription",
+                    "type": "string",
+                    "default": ""
+                },
+                "tls": {
+                    "description": "TLS configuration for the service bus client",
+                    "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.common.TLSConfig"
+                },
+                "topicName": {
+                    "description": "TopicName is the name of the Azure Service Bus Topic",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AzureServiceBusTrigger",
                     "version": "v1alpha1"
                 }
             ]
@@ -12268,7 +13023,6 @@
             "required": [
                 "url",
                 "topic",
-                "partition",
                 "payload"
             ],
             "properties": {
@@ -12290,13 +13044,13 @@
                     }
                 },
                 "partition": {
-                    "description": "Partition to write data to.",
+                    "description": "DEPRECATED",
                     "type": "integer",
                     "format": "int32",
                     "default": 0
                 },
                 "partitioningKey": {
-                    "description": "The partitioning key for the messages put on the Kafka topic. Defaults to broker url.",
+                    "description": "The partitioning key for the messages put on the Kafka topic.",
                     "type": "string"
                 },
                 "payload": {
@@ -12315,6 +13069,10 @@
                 "sasl": {
                     "description": "SASL configuration for the kafka client",
                     "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.common.SASLConfig"
+                },
+                "schemaRegistry": {
+                    "description": "Schema Registry configuration to producer message with avro format",
+                    "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.common.SchemaRegistryConfig"
                 },
                 "tls": {
                     "description": "TLS configuration for the Kafka producer.",
@@ -12498,8 +13256,20 @@
                 "payload"
             ],
             "properties": {
+                "authAthenzParams": {
+                    "description": "Authentication athenz parameters for the pulsar client. Refer https://github.com/apache/pulsar-client-go/blob/master/pulsar/auth/athenz.go Either token or athenz can be set to use auth.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "authAthenzSecret": {
+                    "description": "Authentication athenz privateKey secret for the pulsar client. AuthAthenzSecret must be set if AuthAthenzParams is used.",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                },
                 "authTokenSecret": {
-                    "description": "Authentication token for the pulsar client.",
+                    "description": "Authentication token for the pulsar client. Either token or athenz can be set to use auth.",
                     "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
                 },
                 "connectionBackoff": {
@@ -12674,8 +13444,21 @@
                     "description": "EventBusName references to a EventBus name. By default the value is \"default\"",
                     "type": "string"
                 },
+                "loggingFields": {
+                    "description": "LoggingFields add additional key-value pairs when logging happens",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
                 "replicas": {
                     "description": "Replicas is the sensor deployment replicas",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "revisionHistoryLimit": {
+                    "description": "RevisionHistoryLimit specifies how many old deployment revisions to retain",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -12723,12 +13506,60 @@
                 }
             ]
         },
+        "io.argoproj.sensor.v1alpha1.SlackSender": {
+            "type": "object",
+            "properties": {
+                "icon": {
+                    "description": "Icon is the Slack application's icon, e.g. :robot_face: or https://example.com/image.png",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "Username is the Slack application's username",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SlackSender",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.sensor.v1alpha1.SlackThread": {
+            "type": "object",
+            "properties": {
+                "broadcastMessageToChannel": {
+                    "description": "BroadcastMessageToChannel allows to also broadcast the message from the thread to the channel",
+                    "type": "boolean"
+                },
+                "messageAggregationKey": {
+                    "description": "MessageAggregationKey allows to aggregate the messages to a thread by some key.",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SlackThread",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.sensor.v1alpha1.SlackTrigger": {
             "description": "SlackTrigger refers to the specification of the slack notification trigger.",
             "type": "object",
             "properties": {
+                "attachments": {
+                    "description": "Attachments is a JSON format string that represents an array of Slack attachments according to the attachments API: https://api.slack.com/reference/messaging/attachments .",
+                    "type": "string"
+                },
+                "blocks": {
+                    "description": "Blocks is a JSON format string that represents an array of Slack blocks according to the blocks API: https://api.slack.com/reference/block-kit/blocks .",
+                    "type": "string"
+                },
                 "channel": {
-                    "description": "Channel refers to which Slack channel to send slack message.",
+                    "description": "Channel refers to which Slack channel to send Slack message.",
                     "type": "string"
                 },
                 "message": {
@@ -12743,9 +13574,19 @@
                         "$ref": "#/definitions/io.argoproj.sensor.v1alpha1.TriggerParameter"
                     }
                 },
+                "sender": {
+                    "description": "Sender refers to additional configuration of the Slack application that sends the message.",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.sensor.v1alpha1.SlackSender"
+                },
                 "slackToken": {
                     "description": "SlackToken refers to the Kubernetes secret that holds the slack token required to send messages.",
                     "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                },
+                "thread": {
+                    "description": "Thread refers to additional options for sending messages to a Slack thread.",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.sensor.v1alpha1.SlackThread"
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -12926,6 +13767,10 @@
             "description": "Trigger is an action taken, output produced, an event created, a message sent",
             "type": "object",
             "properties": {
+                "atLeastOnce": {
+                    "description": "AtLeastOnce determines the trigger execution semantics. Defaults to false. Trigger execution will use at-most-once semantics. If set to true, Trigger execution will switch to at-least-once semantics.",
+                    "type": "boolean"
+                },
                 "parameters": {
                     "description": "Parameters is the list of parameters applied to the trigger template definition",
                     "type": "array",
@@ -13016,6 +13861,10 @@
                     "type": "string",
                     "default": ""
                 },
+                "useRawData": {
+                    "description": "UseRawData indicates if the value in an event at data key should be used without converting to string. When true, a number, boolean, json or string parameter may be extracted. When the field is unspecified, or explicitly false, the behavior is to turn the extracted field into a string. (e.g. when set to true, the parameter 123 will resolve to the numerical type, but when false, or not provided, the string \"123\" will be resolved)",
+                    "type": "boolean"
+                },
                 "value": {
                     "description": "Value is the default literal value to use for this parameter source This is only used if the DataKey is invalid. If the DataKey is invalid and this is not defined, this param source will produce an error.",
                     "type": "string"
@@ -13068,6 +13917,10 @@
                 "azureEventHubs": {
                     "description": "AzureEventHubs refers to the trigger send an event to an Azure Event Hub.",
                     "$ref": "#/definitions/io.argoproj.sensor.v1alpha1.AzureEventHubsTrigger"
+                },
+                "azureServiceBus": {
+                    "description": "AzureServiceBus refers to the trigger designed to place messages on Azure Service Bus",
+                    "$ref": "#/definitions/io.argoproj.sensor.v1alpha1.AzureServiceBusTrigger"
                 },
                 "conditions": {
                     "description": "Conditions is the conditions to execute the trigger. For example: \"(dep01 || dep02) \u0026\u0026 dep04\"",

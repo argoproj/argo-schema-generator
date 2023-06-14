@@ -8,6 +8,7 @@ API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,AnalysisTemplateSpec,DryRun
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,AnalysisTemplateSpec,MeasurementRetention
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,AnalysisTemplateSpec,Metrics
+API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,ApisixRoute,Rules
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,AppMeshVirtualService,Routes
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,CanaryStrategy,Steps
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,CloudWatchMetric,MetricDataQueries
@@ -22,9 +23,11 @@ API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,ExperimentStatus,TemplateStatuses
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,IstioTrafficRouting,VirtualServices
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,IstioVirtualService,Routes
+API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,IstioVirtualService,TCPRoutes
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,IstioVirtualService,TLSRoutes
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,KayentaMetric,Scopes
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,MetricResult,Measurements
+API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,NginxTrafficRouting,StableIngresses
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,RolloutAnalysis,Args
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,RolloutAnalysis,DryRun
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,RolloutAnalysis,MeasurementRetention
@@ -34,7 +37,11 @@ API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,RolloutExperimentStepAnalysisTemplateRef,Args
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,RolloutStatus,Conditions
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,RolloutStatus,PauseConditions
+API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,RolloutTrafficRouting,ManagedRoutes
+API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,SetHeaderRoute,Match
+API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,SetMirrorRoute,Match
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,TLSRoute,SNIHosts
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,TrafficWeights,Additional
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,WebMetric,Headers
+API rule violation: names_match,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,MetricProvider,SkyWalking
 API rule violation: names_match,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,RolloutStatus,HPAReplicas
