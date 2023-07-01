@@ -8,13 +8,13 @@ require (
 	github.com/argoproj/argo-rollouts v1.5.1
 	github.com/argoproj/argo-workflows/v3 v3.4.8
 	github.com/blang/semver/v4 v4.0.0
-	k8s.io/api v0.27.2
-	k8s.io/kube-openapi v0.0.0-20230606174411-725288a7abf1
+	k8s.io/api v0.27.3
+	k8s.io/kube-openapi v0.0.0-20230614213217-ba0abe644833
 
 )
 
 require (
-	cloud.google.com/go/compute v1.19.0 // indirect
+	cloud.google.com/go/compute v1.19.1 // indirect
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
 	github.com/Azure/go-ansiterm v0.0.0-20210617225240-d185dfc1b5a1 // indirect
 	github.com/MakeNowJust/heredoc v1.0.0 // indirect
@@ -111,20 +111,20 @@ require (
 	golang.org/x/time v0.3.0 // indirect
 	golang.org/x/tools v0.7.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
-	google.golang.org/genproto v0.0.0-20230530153820-e85fd2cbaebc // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20230530153820-e85fd2cbaebc // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20230530153820-e85fd2cbaebc // indirect
-	google.golang.org/grpc v1.55.0 // indirect
-	google.golang.org/protobuf v1.30.0 // indirect
+	google.golang.org/genproto v0.0.0-20230629202037-9506855d4529 // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20230629202037-9506855d4529 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20230629202037-9506855d4529 // indirect
+	google.golang.org/grpc v1.56.1 // indirect
+	google.golang.org/protobuf v1.31.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	k8s.io/apiextensions-apiserver v0.25.8 // indirect
-	k8s.io/apimachinery v0.27.2 // indirect
+	k8s.io/apimachinery v0.27.3 // indirect
 	k8s.io/apiserver v0.25.8 // indirect
 	k8s.io/cli-runtime v0.25.8 // indirect
-	k8s.io/client-go v0.27.2 // indirect
+	k8s.io/client-go v0.27.3 // indirect
 	k8s.io/component-base v0.25.8 // indirect
 	k8s.io/component-helpers v0.25.8 // indirect
 	k8s.io/gengo v0.0.0-20220902162205-c0856e24416d // indirect
