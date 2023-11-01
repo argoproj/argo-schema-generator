@@ -2788,7 +2788,6 @@
                 },
                 "createdBy": {
                     "description": "If resource is created before the specified time then the event is treated as valid.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "fields": {
@@ -3883,7 +3882,6 @@
                 },
                 "time": {
                     "description": "Time - A Timestamp when the event happened.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "type": {

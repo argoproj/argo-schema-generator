@@ -2467,7 +2467,6 @@
             "properties": {
                 "count": {
                     "description": "Number of replicas",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
                 },
                 "name": {
@@ -2494,7 +2493,6 @@
                 "elements": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSON"
                     }
                 },
@@ -2745,7 +2743,6 @@
                 },
                 "startedAt": {
                     "description": "StartedAt contains time of operation start",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "syncResult": {
@@ -4038,7 +4035,6 @@
                 },
                 "deployedAt": {
                     "description": "DeployedAt holds the time the sync operation completed",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "id": {
@@ -4094,7 +4090,6 @@
                 },
                 "date": {
                     "description": "Date specifies when the revision was authored",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -7737,7 +7732,6 @@
                 },
                 "createdBy": {
                     "description": "If resource is created before the specified time then the event is treated as valid.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "fields": {
@@ -9399,7 +9393,6 @@
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.CloudWatchMetricStatMetric"
                 },
                 "period": {
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
                 },
                 "stat": {
@@ -9705,12 +9698,10 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "Last time the condition transitioned from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "lastUpdateTime": {
                     "description": "The last time this condition was updated.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -10631,7 +10622,6 @@
                     "default": ""
                 },
                 "startTime": {
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 }
             },
@@ -10974,12 +10964,10 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "Last time the condition transitioned from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "lastUpdateTime": {
                     "description": "The last time this condition was updated.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -12627,7 +12615,6 @@
                 },
                 "time": {
                     "description": "Time - A Timestamp when the event happened.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "type": {
@@ -14215,7 +14202,7 @@
             ]
         },
         "io.argoproj.workflow.v1alpha1.ArtifactGC": {
-            "description": "ArtifactGC describes how to delete artifacts from completed Workflows",
+            "description": "ArtifactGC describes how to delete artifacts from completed Workflows - this is embedded into the WorkflowLevelArtifactGC, and also used for individual Artifacts to override that as needed",
             "type": "object",
             "properties": {
                 "podMetadata": {
@@ -14703,6 +14690,10 @@
             "description": "ArtifactoryArtifactRepository defines the controller configuration for an artifactory artifact repository",
             "type": "object",
             "properties": {
+                "keyFormat": {
+                    "description": "KeyFormat defines the format of how to store keys and can reference workflow variables.",
+                    "type": "string"
+                },
                 "passwordSecret": {
                     "description": "PasswordSecret is the secret selector to the repository password",
                     "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
@@ -14873,7 +14864,7 @@
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
                 },
                 "maxDuration": {
-                    "description": "MaxDuration is the maximum amount of time allowed for the backoff strategy",
+                    "description": "MaxDuration is the maximum amount of time allowed for a workflow in the backoff strategy",
                     "type": "string"
                 }
             },
@@ -15595,7 +15586,6 @@
                     "description": "WithItems expands a task into multiple parallel tasks from the items in the list",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Item"
                     }
                 },
@@ -15772,7 +15762,7 @@
                     "type": "string"
                 },
                 "keyFormat": {
-                    "description": "KeyFormat is defines the format of how to store keys. Can reference workflow variables",
+                    "description": "KeyFormat defines the format of how to store keys and can reference workflow variables.",
                     "type": "string"
                 },
                 "serviceAccountKeySecret": {
@@ -15817,12 +15807,16 @@
                 "realtime"
             ],
             "properties": {
+                "operation": {
+                    "description": "Operation defines the operation to apply with value and the metrics' current value",
+                    "type": "string"
+                },
                 "realtime": {
                     "description": "Realtime emits this metric in real time if applicable",
                     "type": "boolean"
                 },
                 "value": {
-                    "description": "Value is the value of the metric",
+                    "description": "Value is the value to be used in the operation with the metric's current value. If no operation is set, value is the value of the metric",
                     "type": "string",
                     "default": ""
                 }
@@ -16311,7 +16305,6 @@
                     "description": "Buckets is a list of bucket divisors for the histogram",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Amount"
                     }
                 },
@@ -16661,6 +16654,10 @@
                 "name": {
                     "description": "name of the mutex",
                     "type": "string"
+                },
+                "namespace": {
+                    "description": "Namespace is the namespace of the mutex, default: [namespace of workflow]",
+                    "type": "string"
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -16783,7 +16780,6 @@
                 },
                 "finishedAt": {
                     "description": "Time at which this node completed",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "hostNodeName": {
@@ -16847,7 +16843,6 @@
                 },
                 "startedAt": {
                     "description": "Time at which this node started",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "synchronizationStatus": {
@@ -17008,6 +17003,10 @@
                 "securityToken": {
                     "description": "SecurityToken is the user's temporary security token. For more details, check out: https://www.alibabacloud.com/help/doc-detail/100624.htm",
                     "type": "string"
+                },
+                "useSDKCreds": {
+                    "description": "UseSDKCreds tells the driver to figure out credentials based on sdk defaults.",
+                    "type": "boolean"
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -17039,7 +17038,7 @@
                     "type": "string"
                 },
                 "keyFormat": {
-                    "description": "KeyFormat is defines the format of how to store keys. Can reference workflow variables",
+                    "description": "KeyFormat defines the format of how to store keys and can reference workflow variables.",
                     "type": "string"
                 },
                 "lifecycleRule": {
@@ -17053,6 +17052,10 @@
                 "securityToken": {
                     "description": "SecurityToken is the user's temporary security token. For more details, check out: https://www.alibabacloud.com/help/doc-detail/100624.htm",
                     "type": "string"
+                },
+                "useSDKCreds": {
+                    "description": "UseSDKCreds tells the driver to figure out credentials based on sdk defaults.",
+                    "type": "boolean"
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -17094,6 +17097,10 @@
                 "securityToken": {
                     "description": "SecurityToken is the user's temporary security token. For more details, check out: https://www.alibabacloud.com/help/doc-detail/100624.htm",
                     "type": "string"
+                },
+                "useSDKCreds": {
+                    "description": "UseSDKCreds tells the driver to figure out credentials based on sdk defaults.",
+                    "type": "boolean"
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -17252,12 +17259,16 @@
             "description": "PodGC describes how to delete completed pods as they complete",
             "type": "object",
             "properties": {
+                "deleteDelayDuration": {
+                    "description": "DeleteDelayDuration specifies the duration before pods in the GC queue get deleted.",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Duration"
+                },
                 "labelSelector": {
                     "description": "LabelSelector is the label selector to check if the pods match the labels before being added to the pod GC queue.",
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
                 },
                 "strategy": {
-                    "description": "Strategy is the strategy to use. One of \"OnPodCompletion\", \"OnPodSuccess\", \"OnWorkflowCompletion\", \"OnWorkflowSuccess\"",
+                    "description": "Strategy is the strategy to use. One of \"OnPodCompletion\", \"OnPodSuccess\", \"OnWorkflowCompletion\", \"OnWorkflowSuccess\". If unset, does not delete Pods",
                     "type": "string"
                 }
             },
@@ -17465,6 +17476,10 @@
                     "description": "Bucket is the name of the bucket",
                     "type": "string"
                 },
+                "caSecret": {
+                    "description": "CASecret specifies the secret that contains the CA, used to verify the TLS connection",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                },
                 "createBucketIfNotPresent": {
                     "description": "CreateBucketIfNotPresent tells the driver to attempt to create the S3 bucket for output artifacts, if it doesn't exist. Setting Enabled Encryption will apply either SSE-S3 to the bucket if KmsKeyId is not set or SSE-KMS if it is.",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.CreateS3BucketOptions"
@@ -17521,6 +17536,10 @@
                     "description": "Bucket is the name of the bucket",
                     "type": "string"
                 },
+                "caSecret": {
+                    "description": "CASecret specifies the secret that contains the CA, used to verify the TLS connection",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                },
                 "createBucketIfNotPresent": {
                     "description": "CreateBucketIfNotPresent tells the driver to attempt to create the S3 bucket for output artifacts, if it doesn't exist. Setting Enabled Encryption will apply either SSE-S3 to the bucket if KmsKeyId is not set or SSE-KMS if it is.",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.CreateS3BucketOptions"
@@ -17537,7 +17556,7 @@
                     "type": "boolean"
                 },
                 "keyFormat": {
-                    "description": "KeyFormat is defines the format of how to store keys. Can reference workflow variables",
+                    "description": "KeyFormat defines the format of how to store keys and can reference workflow variables.",
                     "type": "string"
                 },
                 "keyPrefix": {
@@ -17580,6 +17599,10 @@
                 "bucket": {
                     "description": "Bucket is the name of the bucket",
                     "type": "string"
+                },
+                "caSecret": {
+                    "description": "CASecret specifies the secret that contains the CA, used to verify the TLS connection",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
                 },
                 "createBucketIfNotPresent": {
                     "description": "CreateBucketIfNotPresent tells the driver to attempt to create the S3 bucket for output artifacts, if it doesn't exist. Setting Enabled Encryption will apply either SSE-S3 to the bucket if KmsKeyId is not set or SSE-KMS if it is.",
@@ -17857,6 +17880,10 @@
                 "configMapKeyRef": {
                     "description": "ConfigMapKeyRef is configmap selector for Semaphore configuration",
                     "$ref": "#/definitions/io.k8s.api.core.v1.ConfigMapKeySelector"
+                },
+                "namespace": {
+                    "description": "Namespace is the namespace of the configmap, default: [namespace of workflow]",
+                    "type": "string"
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -18035,7 +18062,7 @@
             "type": "object",
             "properties": {
                 "duration": {
-                    "description": "Duration is the seconds to wait before automatically resuming a template. Must be a string. Default unit is seconds. Could also be a Duration, e.g.: \"2m\", \"6h\", \"1d\"",
+                    "description": "Duration is the seconds to wait before automatically resuming a template. Must be a string. Default unit is seconds. Could also be a Duration, e.g.: \"2m\", \"6h\"",
                     "type": "string"
                 }
             },
@@ -18302,7 +18329,6 @@
                     "description": "Steps define a series of sequential/parallel workflow steps",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ParallelSteps"
                     }
                 },
@@ -18673,7 +18699,7 @@
             "type": "object",
             "properties": {
                 "strategy": {
-                    "description": "Strategy is the strategy to use. One of \"OnWorkflowCompletion\", \"OnWorkflowSuccess\"",
+                    "description": "Strategy is the strategy to use. One of \"OnWorkflowCompletion\", \"OnWorkflowSuccess\". Defaults to \"OnWorkflowSuccess\"",
                     "type": "string"
                 }
             },
@@ -18888,6 +18914,39 @@
                 }
             ]
         },
+        "io.argoproj.workflow.v1alpha1.WorkflowLevelArtifactGC": {
+            "description": "WorkflowLevelArtifactGC describes how to delete artifacts from completed Workflows - this spec is used on the Workflow level",
+            "type": "object",
+            "properties": {
+                "forceFinalizerRemoval": {
+                    "description": "ForceFinalizerRemoval: if set to true, the finalizer will be removed in the case that Artifact GC fails",
+                    "type": "boolean"
+                },
+                "podMetadata": {
+                    "description": "PodMetadata is an optional field for specifying the Labels and Annotations that should be assigned to the Pod doing the deletion",
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Metadata"
+                },
+                "podSpecPatch": {
+                    "description": "PodSpecPatch holds strategic merge patch to apply against the artgc pod spec.",
+                    "type": "string"
+                },
+                "serviceAccountName": {
+                    "description": "ServiceAccountName is an optional field for specifying the Service Account that should be assigned to the Pod doing the deletion",
+                    "type": "string"
+                },
+                "strategy": {
+                    "description": "Strategy is the strategy to use.",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "WorkflowLevelArtifactGC",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.workflow.v1alpha1.WorkflowList": {
             "description": "WorkflowList is list of Workflow resources",
             "type": "object",
@@ -18981,7 +19040,7 @@
                 },
                 "artifactGC": {
                     "description": "ArtifactGC describes the strategy to use when deleting artifacts from completed or deleted workflows (applies to all output Artifacts unless Artifact.ArtifactGC is specified, which overrides this)",
-                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtifactGC"
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.WorkflowLevelArtifactGC"
                 },
                 "artifactRepositoryRef": {
                     "description": "ArtifactRepositoryRef specifies the configMap name and key containing the artifact repository config.",
@@ -19223,7 +19282,6 @@
                 },
                 "finishedAt": {
                     "description": "Time at which this workflow completed",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -19273,7 +19331,6 @@
                 },
                 "startedAt": {
                     "description": "Time at which this workflow started",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "storedTemplates": {
@@ -19350,7 +19407,6 @@
                     "description": "WithItems expands a step into multiple parallel steps from the items in the list",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Item"
                     }
                 },
@@ -21034,7 +21090,6 @@
                 },
                 "data": {
                     "description": "Data is the serialized representation of the state.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.runtime.RawExtension"
                 },
                 "kind": {
@@ -21144,7 +21199,6 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "Last time the condition transitioned from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -21377,12 +21431,10 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "Last time the condition transitioned from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "lastUpdateTime": {
                     "description": "The last time this condition was updated.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -21610,7 +21662,6 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "The last time the condition transitioned from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -21838,7 +21889,6 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "Last time the condition transitioned from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -22094,7 +22144,6 @@
                 },
                 "data": {
                     "description": "data is the serialized representation of the state.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.runtime.RawExtension"
                 },
                 "kind": {
@@ -22186,12 +22235,10 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "Last time the condition transitioned from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "lastUpdateTime": {
                     "description": "The last time this condition was updated.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -22555,7 +22602,6 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "Last time the condition transitioned from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -22794,7 +22840,6 @@
                 },
                 "data": {
                     "description": "Data is the serialized representation of the state.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.runtime.RawExtension"
                 },
                 "kind": {
@@ -22886,7 +22931,6 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "Last time the condition transitioned from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -23103,12 +23147,10 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "Last time the condition transitioned from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "lastUpdateTime": {
                     "description": "The last time this condition was updated.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -23320,7 +23362,6 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "The last time the condition transitioned from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -23606,7 +23647,6 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "Last time the condition transitioned from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -23975,7 +24015,6 @@
             "properties": {
                 "expirationTimestamp": {
                     "description": "ExpirationTimestamp is the time of expiration of the returned token.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "token": {
@@ -24157,7 +24196,6 @@
                 },
                 "currentAverageValue": {
                     "description": "currentAverageValue is the current value of the average of the resource metric across all relevant pods, as a raw value (instead of as a percentage of the request), similar to the \"pods\" metric source type. It will always be set, regardless of the corresponding metric specification.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                 },
                 "name": {
@@ -24235,7 +24273,6 @@
                 },
                 "currentValue": {
                     "description": "currentValue is the current value of the metric (as a quantity)",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                 },
                 "metricName": {
@@ -24296,7 +24333,6 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "lastTransitionTime is the last time the condition transitioned from one status to another",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -24539,7 +24575,6 @@
                 },
                 "targetValue": {
                     "description": "targetValue is the target value of the metric (as a quantity).",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                 }
             },
@@ -24560,7 +24595,6 @@
                 },
                 "currentValue": {
                     "description": "currentValue is the current value of the metric (as a quantity).",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                 },
                 "metricName": {
@@ -24599,7 +24633,6 @@
                 },
                 "targetAverageValue": {
                     "description": "targetAverageValue is the target value of the average of the metric across all relevant pods (as a quantity)",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                 }
             },
@@ -24615,7 +24648,6 @@
             "properties": {
                 "currentAverageValue": {
                     "description": "currentAverageValue is the current value of the average of the metric across all relevant pods (as a quantity)",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                 },
                 "metricName": {
@@ -24669,7 +24701,6 @@
                 },
                 "currentAverageValue": {
                     "description": "currentAverageValue is the current value of the average of the resource metric across all relevant pods, as a raw value (instead of as a percentage of the request), similar to the \"pods\" metric source type. It will always be set, regardless of the corresponding metric specification.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                 },
                 "name": {
@@ -24984,7 +25015,6 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "lastTransitionTime is the last time the condition transitioned from one status to another",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -25609,12 +25639,10 @@
             "properties": {
                 "lastProbeTime": {
                     "description": "Last time the condition was checked.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "lastTransitionTime": {
                     "description": "Last time the condition transit from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -26180,12 +26208,10 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "lastTransitionTime is the time the condition last transitioned from one status to another. If unset, when a new condition type is added or an existing condition's status is changed, the server defaults this to the current time.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "lastUpdateTime": {
                     "description": "lastUpdateTime is the time of the last update to this condition",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -26380,12 +26406,10 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "lastTransitionTime is the time the condition last transitioned from one status to another. If unset, when a new condition type is added or an existing condition's status is changed, the server defaults this to the current time.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "lastUpdateTime": {
                     "description": "timestamp for the last update to this condition",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -27597,7 +27621,6 @@
             "properties": {
                 "startedAt": {
                     "description": "Time at which the container was last (re-)started",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 }
             },
@@ -27622,7 +27645,6 @@
                 },
                 "finishedAt": {
                     "description": "Time at which the container last terminated",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -27640,7 +27662,6 @@
                 },
                 "startedAt": {
                     "description": "Time at which previous execution of the container started",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 }
             },
@@ -27676,7 +27697,6 @@
                     "description": "AllocatedResources represents the compute resources allocated for this container by the node. Kubelet sets this value to Container.Resources.Requests upon successful pod admission and after successfully admitting desired pod resize.",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                     }
                 },
@@ -28418,12 +28438,10 @@
                 },
                 "eventTime": {
                     "description": "Time when this Event was first observed.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.MicroTime"
                 },
                 "firstTimestamp": {
                     "description": "The time at which the event was first recorded. (Time of server receipt is in TypeMeta.)",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "involvedObject": {
@@ -28437,7 +28455,6 @@
                 },
                 "lastTimestamp": {
                     "description": "The time at which the most recent occurrence of this event was recorded.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -28537,7 +28554,6 @@
                 },
                 "lastObservedTime": {
                     "description": "Time of the last occurrence observed",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.MicroTime"
                 }
             },
@@ -28844,7 +28860,6 @@
                 },
                 "port": {
                     "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
                 },
                 "scheme": {
@@ -29168,7 +29183,6 @@
                     "description": "Default resource requirement limit value by resource name if resource limit is omitted.",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                     }
                 },
@@ -29176,7 +29190,6 @@
                     "description": "DefaultRequest is the default resource requirement request value by resource name if resource request is omitted.",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                     }
                 },
@@ -29184,7 +29197,6 @@
                     "description": "Max usage constraints on this kind by resource name.",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                     }
                 },
@@ -29192,7 +29204,6 @@
                     "description": "MaxLimitRequestRatio if specified, the named resource must have a request and limit that are both non-zero where limit divided by request is less than or equal to the enumerated value; this represents the max burst for the named resource.",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                     }
                 },
@@ -29200,7 +29211,6 @@
                     "description": "Min usage constraints on this kind by resource name.",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                     }
                 },
@@ -29282,7 +29292,6 @@
                     "description": "List of objects",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.runtime.RawExtension"
                     }
                 },
@@ -29438,7 +29447,6 @@
             ],
             "properties": {
                 "lastTransitionTime": {
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -29623,12 +29631,10 @@
             "properties": {
                 "lastHeartbeatTime": {
                     "description": "Last time we got an update on a given condition.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "lastTransitionTime": {
                     "description": "Last time the condition transit from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -29765,7 +29771,6 @@
                     "description": "Capacity represents the available resources of a node",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                     }
                 }
@@ -29914,7 +29919,6 @@
                     "description": "Allocatable represents the resources of a node that are available for scheduling. Defaults to Capacity.",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                     }
                 },
@@ -29922,7 +29926,6 @@
                     "description": "Capacity represents the total resources of a node. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                     }
                 },
@@ -30193,12 +30196,10 @@
             "properties": {
                 "lastProbeTime": {
                     "description": "lastProbeTime is the time we probed the condition.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "lastTransitionTime": {
                     "description": "lastTransitionTime is the time the condition transitioned from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -30330,7 +30331,6 @@
                     "description": "allocatedResources tracks the resources allocated to a PVC including its capacity. Key names follow standard Kubernetes label syntax. Valid values are either:\n\t* Un-prefixed keys:\n\t\t- storage - the capacity of the volume.\n\t* Custom resources must use implementation-defined prefixed names such as \"example.com/my-custom-resource\"\nApart from above values - keys that are unprefixed or have kubernetes.io prefix are considered reserved and hence may not be used.\n\nCapacity reported here may be larger than the actual capacity when a volume expansion operation is requested. For storage quota, the larger value from allocatedResources and PVC.spec.resources is used. If allocatedResources is not set, PVC.spec.resources alone is used for quota calculation. If a volume expansion capacity request is lowered, allocatedResources is only lowered if there are no expansion operations in progress and if the actual volume capacity is equal or lower than the requested capacity.\n\nA controller that receives PVC update with previously unknown resourceName should ignore the update for the purpose it was designed. For example - a controller that only is responsible for resizing capacity of the volume, should ignore PVC updates that change other valid resources associated with PVC.\n\nThis is an alpha field and requires enabling RecoverVolumeExpansionFailure feature.",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                     }
                 },
@@ -30338,7 +30338,6 @@
                     "description": "capacity represents the actual resources of the underlying volume.",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                     }
                 },
@@ -30563,7 +30562,6 @@
                     "description": "capacity is the description of the persistent volume's resources and capacity. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                     }
                 },
@@ -30891,12 +30889,10 @@
             "properties": {
                 "lastProbeTime": {
                     "description": "Last time we probed the condition.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "lastTransitionTime": {
                     "description": "Last time the condition transitioned from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -31443,7 +31439,6 @@
                     "description": "Overhead represents the resource overhead associated with running a pod for a given RuntimeClass. This field will be autopopulated at admission time by the RuntimeClass admission controller. If the RuntimeClass admission controller is enabled, overhead must not be set in Pod create requests. The RuntimeClass admission controller will reject Pod create requests which have the overhead already set. If RuntimeClass is configured and selected in the PodSpec, Overhead will be set to the value defined in the corresponding RuntimeClass, otherwise it will remain unset and treated as zero. More info: https://git.k8s.io/enhancements/keps/sig-node/688-pod-overhead/README.md",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                     }
                 },
@@ -31878,7 +31873,6 @@
             "properties": {
                 "evictionTime": {
                     "description": "Time at which this entry was added to the list.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -32228,7 +32222,6 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "The last time the condition transitioned from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -32393,7 +32386,6 @@
                 },
                 "divisor": {
                     "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                 },
                 "resource": {
@@ -32486,7 +32478,6 @@
                     "description": "hard is the set of desired hard limits for each named resource. More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                     }
                 },
@@ -32513,7 +32504,6 @@
                     "description": "Hard is the set of enforced hard limits for each named resource. More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                     }
                 },
@@ -32521,7 +32511,6 @@
                     "description": "Used is the current observed total usage of the resource in the namespace.",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                     }
                 }
@@ -32548,7 +32537,6 @@
                     "description": "Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                     }
                 },
@@ -32556,7 +32544,6 @@
                     "description": "Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. Requests cannot exceed Limits. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                     }
                 }
@@ -33275,7 +33262,6 @@
                 },
                 "targetPort": {
                     "description": "Number or name of the port to access on the pods targeted by the service. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME. If this is a string, it will be looked up as a named port in the target Pod's container ports. If this is not specified, the value of the 'port' field is used (an identity map). This field is ignored for services with clusterIP=None, and should be omitted or set equal to the 'port' field. More info: https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
                 }
             },
@@ -33568,7 +33554,6 @@
                 },
                 "port": {
                     "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
                 }
             },
@@ -34268,7 +34253,6 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "Last time the condition transitioned from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -34489,12 +34473,10 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "Last time the condition transitioned from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "lastUpdateTime": {
                     "description": "The last time this condition was updated.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -34820,7 +34802,6 @@
                 },
                 "servicePort": {
                     "description": "Specifies the port of the referenced service.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
                 }
             },
@@ -35246,7 +35227,6 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "The last time the condition transitioned from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -36244,7 +36224,6 @@
                 },
                 "servicePort": {
                     "description": "servicePort Specifies the port of the referenced service.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
                 }
             },
@@ -36731,7 +36710,6 @@
                     "description": "DisruptedPods contains information about pods whose eviction was processed by the API server eviction subresource handler but has not yet been observed by the PodDisruptionBudget controller. A pod will be in this map from the time when the API server processed the eviction request to the time when the pod is seen by PDB controller as having been marked for deletion (or after a timeout). The key in the map is the name of the pod and the value is the time when the API server processed the eviction request. If the deletion didn't occur and a pod is still there it will be removed from the list automatically by PodDisruptionBudget controller after some time. If everything goes smooth this map should be empty for the most of the time. Large number of entries in the map may indicate problems with pod deletions.",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                     }
                 },
@@ -37035,7 +37013,6 @@
                     "description": "DisruptedPods contains information about pods whose eviction was processed by the API server eviction subresource handler but has not yet been observed by the PodDisruptionBudget controller. A pod will be in this map from the time when the API server processed the eviction request to the time when the pod is seen by PDB controller as having been marked for deletion (or after a timeout). The key in the map is the name of the pod and the value is the time when the API server processed the eviction request. If the deletion didn't occur and a pod is still there it will be removed from the list automatically by PodDisruptionBudget controller after some time. If everything goes smooth this map should be empty for the most of the time. Large number of entries in the map may indicate problems with pod deletions.",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                     }
                 },
@@ -38869,7 +38846,6 @@
                 },
                 "time": {
                     "description": "time represents the time the error was encountered.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 }
             },
@@ -39133,7 +39109,6 @@
                 },
                 "time": {
                     "description": "time represents the time the error was encountered.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 }
             },
@@ -39761,7 +39736,6 @@
                 },
                 "time": {
                     "description": "time represents the time the error was encountered.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 }
             },

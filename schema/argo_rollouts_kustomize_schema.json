@@ -1018,7 +1018,6 @@
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.CloudWatchMetricStatMetric"
                 },
                 "period": {
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
                 },
                 "stat": {
@@ -1324,12 +1323,10 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "Last time the condition transitioned from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "lastUpdateTime": {
                     "description": "The last time this condition was updated.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -2250,7 +2247,6 @@
                     "default": ""
                 },
                 "startTime": {
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 }
             },
@@ -2593,12 +2589,10 @@
             "properties": {
                 "lastTransitionTime": {
                     "description": "Last time the condition transitioned from one status to another.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "lastUpdateTime": {
                     "description": "The last time this condition was updated.",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {

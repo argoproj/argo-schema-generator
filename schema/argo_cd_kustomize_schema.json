@@ -2467,7 +2467,6 @@
             "properties": {
                 "count": {
                     "description": "Number of replicas",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
                 },
                 "name": {
@@ -2494,7 +2493,6 @@
                 "elements": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSON"
                     }
                 },
@@ -2745,7 +2743,6 @@
                 },
                 "startedAt": {
                     "description": "StartedAt contains time of operation start",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "syncResult": {
@@ -4038,7 +4035,6 @@
                 },
                 "deployedAt": {
                     "description": "DeployedAt holds the time the sync operation completed",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "id": {
@@ -4094,7 +4090,6 @@
                 },
                 "date": {
                     "description": "Date specifies when the revision was authored",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {

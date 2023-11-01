@@ -206,7 +206,7 @@
             ]
         },
         "io.argoproj.workflow.v1alpha1.ArtifactGC": {
-            "description": "ArtifactGC describes how to delete artifacts from completed Workflows",
+            "description": "ArtifactGC describes how to delete artifacts from completed Workflows - this is embedded into the WorkflowLevelArtifactGC, and also used for individual Artifacts to override that as needed",
             "type": "object",
             "properties": {
                 "podMetadata": {
@@ -694,6 +694,10 @@
             "description": "ArtifactoryArtifactRepository defines the controller configuration for an artifactory artifact repository",
             "type": "object",
             "properties": {
+                "keyFormat": {
+                    "description": "KeyFormat defines the format of how to store keys and can reference workflow variables.",
+                    "type": "string"
+                },
                 "passwordSecret": {
                     "description": "PasswordSecret is the secret selector to the repository password",
                     "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
@@ -864,7 +868,7 @@
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
                 },
                 "maxDuration": {
-                    "description": "MaxDuration is the maximum amount of time allowed for the backoff strategy",
+                    "description": "MaxDuration is the maximum amount of time allowed for a workflow in the backoff strategy",
                     "type": "string"
                 }
             },
@@ -1577,7 +1581,6 @@
                     "description": "WithItems expands a task into multiple parallel tasks from the items in the list",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Item"
                     }
                 },
@@ -1754,7 +1757,7 @@
                     "type": "string"
                 },
                 "keyFormat": {
-                    "description": "KeyFormat is defines the format of how to store keys. Can reference workflow variables",
+                    "description": "KeyFormat defines the format of how to store keys and can reference workflow variables.",
                     "type": "string"
                 },
                 "serviceAccountKeySecret": {
@@ -1799,12 +1802,16 @@
                 "realtime"
             ],
             "properties": {
+                "operation": {
+                    "description": "Operation defines the operation to apply with value and the metrics' current value",
+                    "type": "string"
+                },
                 "realtime": {
                     "description": "Realtime emits this metric in real time if applicable",
                     "type": "boolean"
                 },
                 "value": {
-                    "description": "Value is the value of the metric",
+                    "description": "Value is the value to be used in the operation with the metric's current value. If no operation is set, value is the value of the metric",
                     "type": "string",
                     "default": ""
                 }
@@ -2293,7 +2300,6 @@
                     "description": "Buckets is a list of bucket divisors for the histogram",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Amount"
                     }
                 },
@@ -2643,6 +2649,10 @@
                 "name": {
                     "description": "name of the mutex",
                     "type": "string"
+                },
+                "namespace": {
+                    "description": "Namespace is the namespace of the mutex, default: [namespace of workflow]",
+                    "type": "string"
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -2765,7 +2775,6 @@
                 },
                 "finishedAt": {
                     "description": "Time at which this node completed",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "hostNodeName": {
@@ -2829,7 +2838,6 @@
                 },
                 "startedAt": {
                     "description": "Time at which this node started",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "synchronizationStatus": {
@@ -2990,6 +2998,10 @@
                 "securityToken": {
                     "description": "SecurityToken is the user's temporary security token. For more details, check out: https://www.alibabacloud.com/help/doc-detail/100624.htm",
                     "type": "string"
+                },
+                "useSDKCreds": {
+                    "description": "UseSDKCreds tells the driver to figure out credentials based on sdk defaults.",
+                    "type": "boolean"
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -3021,7 +3033,7 @@
                     "type": "string"
                 },
                 "keyFormat": {
-                    "description": "KeyFormat is defines the format of how to store keys. Can reference workflow variables",
+                    "description": "KeyFormat defines the format of how to store keys and can reference workflow variables.",
                     "type": "string"
                 },
                 "lifecycleRule": {
@@ -3035,6 +3047,10 @@
                 "securityToken": {
                     "description": "SecurityToken is the user's temporary security token. For more details, check out: https://www.alibabacloud.com/help/doc-detail/100624.htm",
                     "type": "string"
+                },
+                "useSDKCreds": {
+                    "description": "UseSDKCreds tells the driver to figure out credentials based on sdk defaults.",
+                    "type": "boolean"
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -3076,6 +3092,10 @@
                 "securityToken": {
                     "description": "SecurityToken is the user's temporary security token. For more details, check out: https://www.alibabacloud.com/help/doc-detail/100624.htm",
                     "type": "string"
+                },
+                "useSDKCreds": {
+                    "description": "UseSDKCreds tells the driver to figure out credentials based on sdk defaults.",
+                    "type": "boolean"
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -3234,12 +3254,16 @@
             "description": "PodGC describes how to delete completed pods as they complete",
             "type": "object",
             "properties": {
+                "deleteDelayDuration": {
+                    "description": "DeleteDelayDuration specifies the duration before pods in the GC queue get deleted.",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Duration"
+                },
                 "labelSelector": {
                     "description": "LabelSelector is the label selector to check if the pods match the labels before being added to the pod GC queue.",
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
                 },
                 "strategy": {
-                    "description": "Strategy is the strategy to use. One of \"OnPodCompletion\", \"OnPodSuccess\", \"OnWorkflowCompletion\", \"OnWorkflowSuccess\"",
+                    "description": "Strategy is the strategy to use. One of \"OnPodCompletion\", \"OnPodSuccess\", \"OnWorkflowCompletion\", \"OnWorkflowSuccess\". If unset, does not delete Pods",
                     "type": "string"
                 }
             },
@@ -3447,6 +3471,10 @@
                     "description": "Bucket is the name of the bucket",
                     "type": "string"
                 },
+                "caSecret": {
+                    "description": "CASecret specifies the secret that contains the CA, used to verify the TLS connection",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                },
                 "createBucketIfNotPresent": {
                     "description": "CreateBucketIfNotPresent tells the driver to attempt to create the S3 bucket for output artifacts, if it doesn't exist. Setting Enabled Encryption will apply either SSE-S3 to the bucket if KmsKeyId is not set or SSE-KMS if it is.",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.CreateS3BucketOptions"
@@ -3503,6 +3531,10 @@
                     "description": "Bucket is the name of the bucket",
                     "type": "string"
                 },
+                "caSecret": {
+                    "description": "CASecret specifies the secret that contains the CA, used to verify the TLS connection",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                },
                 "createBucketIfNotPresent": {
                     "description": "CreateBucketIfNotPresent tells the driver to attempt to create the S3 bucket for output artifacts, if it doesn't exist. Setting Enabled Encryption will apply either SSE-S3 to the bucket if KmsKeyId is not set or SSE-KMS if it is.",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.CreateS3BucketOptions"
@@ -3519,7 +3551,7 @@
                     "type": "boolean"
                 },
                 "keyFormat": {
-                    "description": "KeyFormat is defines the format of how to store keys. Can reference workflow variables",
+                    "description": "KeyFormat defines the format of how to store keys and can reference workflow variables.",
                     "type": "string"
                 },
                 "keyPrefix": {
@@ -3562,6 +3594,10 @@
                 "bucket": {
                     "description": "Bucket is the name of the bucket",
                     "type": "string"
+                },
+                "caSecret": {
+                    "description": "CASecret specifies the secret that contains the CA, used to verify the TLS connection",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
                 },
                 "createBucketIfNotPresent": {
                     "description": "CreateBucketIfNotPresent tells the driver to attempt to create the S3 bucket for output artifacts, if it doesn't exist. Setting Enabled Encryption will apply either SSE-S3 to the bucket if KmsKeyId is not set or SSE-KMS if it is.",
@@ -3830,6 +3866,10 @@
                 "configMapKeyRef": {
                     "description": "ConfigMapKeyRef is configmap selector for Semaphore configuration",
                     "$ref": "#/definitions/io.k8s.api.core.v1.ConfigMapKeySelector"
+                },
+                "namespace": {
+                    "description": "Namespace is the namespace of the configmap, default: [namespace of workflow]",
+                    "type": "string"
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -4008,7 +4048,7 @@
             "type": "object",
             "properties": {
                 "duration": {
-                    "description": "Duration is the seconds to wait before automatically resuming a template. Must be a string. Default unit is seconds. Could also be a Duration, e.g.: \"2m\", \"6h\", \"1d\"",
+                    "description": "Duration is the seconds to wait before automatically resuming a template. Must be a string. Default unit is seconds. Could also be a Duration, e.g.: \"2m\", \"6h\"",
                     "type": "string"
                 }
             },
@@ -4275,7 +4315,6 @@
                     "description": "Steps define a series of sequential/parallel workflow steps",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ParallelSteps"
                     }
                 },
@@ -4637,7 +4676,7 @@
             "type": "object",
             "properties": {
                 "strategy": {
-                    "description": "Strategy is the strategy to use. One of \"OnWorkflowCompletion\", \"OnWorkflowSuccess\"",
+                    "description": "Strategy is the strategy to use. One of \"OnWorkflowCompletion\", \"OnWorkflowSuccess\". Defaults to \"OnWorkflowSuccess\"",
                     "type": "string"
                 }
             },
@@ -4852,6 +4891,39 @@
                 }
             ]
         },
+        "io.argoproj.workflow.v1alpha1.WorkflowLevelArtifactGC": {
+            "description": "WorkflowLevelArtifactGC describes how to delete artifacts from completed Workflows - this spec is used on the Workflow level",
+            "type": "object",
+            "properties": {
+                "forceFinalizerRemoval": {
+                    "description": "ForceFinalizerRemoval: if set to true, the finalizer will be removed in the case that Artifact GC fails",
+                    "type": "boolean"
+                },
+                "podMetadata": {
+                    "description": "PodMetadata is an optional field for specifying the Labels and Annotations that should be assigned to the Pod doing the deletion",
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Metadata"
+                },
+                "podSpecPatch": {
+                    "description": "PodSpecPatch holds strategic merge patch to apply against the artgc pod spec.",
+                    "type": "string"
+                },
+                "serviceAccountName": {
+                    "description": "ServiceAccountName is an optional field for specifying the Service Account that should be assigned to the Pod doing the deletion",
+                    "type": "string"
+                },
+                "strategy": {
+                    "description": "Strategy is the strategy to use.",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "WorkflowLevelArtifactGC",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.workflow.v1alpha1.WorkflowList": {
             "description": "WorkflowList is list of Workflow resources",
             "type": "object",
@@ -4945,7 +5017,7 @@
                 },
                 "artifactGC": {
                     "description": "ArtifactGC describes the strategy to use when deleting artifacts from completed or deleted workflows (applies to all output Artifacts unless Artifact.ArtifactGC is specified, which overrides this)",
-                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtifactGC"
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.WorkflowLevelArtifactGC"
                 },
                 "artifactRepositoryRef": {
                     "description": "ArtifactRepositoryRef specifies the configMap name and key containing the artifact repository config.",
@@ -5181,7 +5253,6 @@
                 },
                 "finishedAt": {
                     "description": "Time at which this workflow completed",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -5231,7 +5302,6 @@
                 },
                 "startedAt": {
                     "description": "Time at which this workflow started",
-                    "default": {},
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "storedTemplates": {
@@ -5308,7 +5378,6 @@
                     "description": "WithItems expands a step into multiple parallel steps from the items in the list",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Item"
                     }
                 },
