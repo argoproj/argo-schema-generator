@@ -38,7 +38,6 @@ API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/s
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,CustomTrigger,Parameters
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,CustomTrigger,Payload
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,DataFilter,Value
-API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,Event,Data
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,EventDependencyFilter,Data
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,EventDependencyFilter,Exprs
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,ExprFilter,Fields

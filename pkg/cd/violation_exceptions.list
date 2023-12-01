@@ -58,7 +58,6 @@ API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/ap
 API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,PullRequestGenerator,Filters
 API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,PullRequestGeneratorGitLab,Labels
 API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,PullRequestGeneratorGithub,Labels
-API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,RepositoryCertificate,CertData
 API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,ResourceAction,Params
 API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,ResourceActions,Definitions
 API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,ResourceIgnoreDifferences,JQPathExpressions
@@ -84,9 +83,6 @@ API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/ap
 API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,SyncWindow,Applications
 API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,SyncWindow,Clusters
 API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,SyncWindow,Namespaces
-API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,TLSClientConfig,CAData
-API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,TLSClientConfig,CertData
-API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,TLSClientConfig,KeyData
 API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,rawResourceOverride,KnownTypeFields
 API rule violation: names_match,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,ApplicationSourceJsonnet,TLAs
 API rule violation: names_match,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,ApplicationSourcePluginParameter,String_
