@@ -8,6 +8,8 @@ API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/e
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1,BitbucketServerEventSource,Events
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1,BitbucketServerEventSource,Repositories
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1,CalendarEventSource,ExclusionDates
+API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1,GerritEventSource,Events
+API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1,GerritEventSource,Projects
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1,GithubEventSource,Events
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1,GithubEventSource,Organizations
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1,GithubEventSource,Repositories
@@ -38,6 +40,8 @@ API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/s
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,CustomTrigger,Parameters
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,CustomTrigger,Payload
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,DataFilter,Value
+API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,EmailTrigger,Parameters
+API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,EmailTrigger,To
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,EventDependencyFilter,Data
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,EventDependencyFilter,Exprs
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,ExprFilter,Fields
@@ -65,6 +69,7 @@ API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/s
 API rule violation: list_type_missing,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,TriggerTemplate,ConditionsReset
 API rule violation: names_match,github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1,BusConfig,JetStream
 API rule violation: names_match,github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1,EventBusSpec,JetStream
+API rule violation: names_match,github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1,EventBusSpec,JetStreamExotic
 API rule violation: names_match,github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1,BitbucketAuth,OAuthToken
 API rule violation: names_match,github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1,BitbucketEventSource,DeprecatedOwner
 API rule violation: names_match,github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1,BitbucketEventSource,DeprecatedProjectKey

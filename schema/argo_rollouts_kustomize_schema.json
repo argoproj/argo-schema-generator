@@ -7,6 +7,9 @@
                     "default": {},
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AwsResourceRef"
                 },
+                "ingress": {
+                    "type": "string"
+                },
                 "loadBalancer": {
                     "default": {},
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AwsResourceRef"
@@ -28,7 +31,6 @@
             "description": "ALBTrafficRouting configuration for ALB ingress controller to control traffic routing",
             "type": "object",
             "required": [
-                "ingress",
                 "servicePort"
             ],
             "properties": {
@@ -38,8 +40,15 @@
                 },
                 "ingress": {
                     "description": "Ingress refers to the name of an `Ingress` resource in the same namespace as the `Rollout`",
-                    "type": "string",
-                    "default": ""
+                    "type": "string"
+                },
+                "ingresses": {
+                    "description": "Ingresses refers to the name of an `Ingress` resource in the same namespace as the `Rollout` in a multi ingress scenario",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
                 },
                 "rootService": {
                     "description": "RootService references the service in the ingress to the controller should add the action to",
@@ -52,7 +61,7 @@
                     "default": 0
                 },
                 "stickinessConfig": {
-                    "description": "AdditionalForwardConfig allows to specify further settings on the ForwaredConfig",
+                    "description": "StickinessConfig refers to the duration-based stickiness of the target groups associated with an `Ingress`",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.StickinessConfig"
                 }
             },
@@ -185,6 +194,35 @@
                 {
                     "group": "argoproj.io",
                     "kind": "AnalysisRunList",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.AnalysisRunMetadata": {
+            "description": "AnalysisRunMetadata extra labels to add to the AnalysisRun",
+            "type": "object",
+            "properties": {
+                "annotations": {
+                    "description": "Annotations additional annotations to add to the AnalysisRun",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "labels": {
+                    "description": "Labels Additional labels to add to the AnalysisRun",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AnalysisRunMetadata",
                     "version": "v1alpha1"
                 }
             ]
@@ -2336,6 +2374,23 @@
                 }
             ]
         },
+        "io.argoproj.rollouts.v1alpha1.PrometheusAuth": {
+            "description": "PrometheusMetric defines the prometheus query to perform canary analysis",
+            "type": "object",
+            "properties": {
+                "sigv4": {
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Sigv4Config"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "PrometheusAuth",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.rollouts.v1alpha1.PrometheusMetric": {
             "description": "PrometheusMetric defines the prometheus query to perform canary analysis",
             "type": "object",
@@ -2344,9 +2399,33 @@
                     "description": "Address is the HTTP address and port of the prometheus server",
                     "type": "string"
                 },
+                "authentication": {
+                    "description": "Sigv4 Config is the aws SigV4 configuration to use for SigV4 signing if using Amazon Managed Prometheus",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.PrometheusAuth"
+                },
+                "headers": {
+                    "description": "Headers are optional HTTP headers to use in the request",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.WebMetricHeader"
+                    },
+                    "x-kubernetes-patch-merge-key": "key",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "insecure": {
+                    "description": "Insecure skips host TLS verification",
+                    "type": "boolean"
+                },
                 "query": {
                     "description": "Query is a raw prometheus query to perform",
                     "type": "string"
+                },
+                "timeout": {
+                    "description": "Timeout represents the duration within which a prometheus query should complete. It is expressed in seconds.",
+                    "type": "integer",
+                    "format": "int64"
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -2424,6 +2503,11 @@
             "description": "RolloutAnalysis defines a template that is used to create a analysisRun",
             "type": "object",
             "properties": {
+                "analysisRunMetadata": {
+                    "description": "AnalysisRunMetadata labels and annotations that will be added to the AnalysisRuns",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisRunMetadata"
+                },
                 "args": {
                     "description": "Args the arguments that will be added to the AnalysisRuns",
                     "type": "array",
@@ -2460,7 +2544,9 @@
                     "items": {
                         "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutAnalysisTemplate"
-                    }
+                    },
+                    "x-kubernetes-patch-merge-key": "templateName",
+                    "x-kubernetes-patch-strategy": "merge"
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -2475,6 +2561,11 @@
             "description": "RolloutAnalysisBackground defines a template that is used to create a background analysisRun",
             "type": "object",
             "properties": {
+                "analysisRunMetadata": {
+                    "description": "AnalysisRunMetadata labels and annotations that will be added to the AnalysisRuns",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisRunMetadata"
+                },
                 "args": {
                     "description": "Args the arguments that will be added to the AnalysisRuns",
                     "type": "array",
@@ -2516,7 +2607,9 @@
                     "items": {
                         "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutAnalysisTemplate"
-                    }
+                    },
+                    "x-kubernetes-patch-merge-key": "templateName",
+                    "x-kubernetes-patch-strategy": "merge"
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -2902,6 +2995,14 @@
                 "alb": {
                     "description": "/ ALB keeps information regarding the ALB and TargetGroups",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ALBStatus"
+                },
+                "albs": {
+                    "description": "/ ALBs keeps information regarding multiple ALBs and TargetGroups in a multi ingress scenario",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ALBStatus"
+                    }
                 },
                 "availableReplicas": {
                     "description": "Total number of available pods (ready for at least minReadySeconds) targeted by this rollout.",
@@ -3325,6 +3426,30 @@
                 {
                     "group": "argoproj.io",
                     "kind": "SetMirrorRoute",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.Sigv4Config": {
+            "type": "object",
+            "properties": {
+                "profile": {
+                    "description": "Profile is the Credential Profile used to sign the SigV4 Request",
+                    "type": "string"
+                },
+                "region": {
+                    "description": "Region is the AWS Region to sign the SigV4 Request",
+                    "type": "string"
+                },
+                "roleArn": {
+                    "description": "RoleARN is the IAM role used to sign the SIgV4 Request",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "Sigv4Config",
                     "version": "v1alpha1"
                 }
             ]
