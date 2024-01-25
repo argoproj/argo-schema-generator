@@ -133,14 +133,14 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	k8s.io/apiextensions-apiserver v0.25.8 // indirect
 	k8s.io/apimachinery v0.28.4 // indirect
-	k8s.io/apiserver v0.26.13 // indirect
+	k8s.io/apiserver v0.28.4 // indirect
 	k8s.io/cli-runtime v0.25.8 // indirect
 	k8s.io/client-go v0.28.4 // indirect
-	k8s.io/component-base v0.26.13 // indirect
+	k8s.io/component-base v0.28.4 // indirect
 	k8s.io/component-helpers v0.25.8 // indirect
 	k8s.io/gengo v0.0.0-20230829151522-9cce18d56c01 // indirect
 	k8s.io/klog/v2 v2.110.1 // indirect
-	k8s.io/kube-aggregator v0.26.13 // indirect
+	k8s.io/kube-aggregator v0.28.4 // indirect
 	k8s.io/kubectl v0.25.8 // indirect
 	k8s.io/kubernetes v1.25.8 // indirect
 	k8s.io/utils v0.0.0-20231127182322-b307cd553661 // indirect
@@ -154,29 +154,29 @@ require (
 
 replace (
 	github.com/go-check/check => github.com/go-check/check v0.0.0-20180628173108-788fd7840127
-	k8s.io/api v0.0.0 => k8s.io/api v0.26.13
-	k8s.io/apiextensions-apiserver v0.0.0 => k8s.io/apiextensions-apiserver v0.26.13
-	k8s.io/apimachinery v0.0.0 => k8s.io/apimachinery v0.26.13
-	k8s.io/apiserver v0.0.0 => k8s.io/apiserver v0.26.13
-	k8s.io/cli-runtime v0.0.0 => k8s.io/cli-runtime v0.26.13
-	k8s.io/client-go v0.0.0 => k8s.io/client-go v0.26.13
-	k8s.io/cloud-provider v0.0.0 => k8s.io/cloud-provider v0.26.13
-	k8s.io/cluster-bootstrap v0.0.0 => k8s.io/cluster-bootstrap v0.26.13
-	k8s.io/code-generator v0.0.0 => k8s.io/code-generator v0.26.13
-	k8s.io/component-base v0.0.0 => k8s.io/component-base v0.26.13
-	k8s.io/component-helpers v0.0.0 => k8s.io/component-helpers v0.26.13
-	k8s.io/controller-manager v0.0.0 => k8s.io/controller-manager v0.26.13
-	k8s.io/cri-api v0.0.0 => k8s.io/cri-api v0.26.13
-	k8s.io/csi-translation-lib v0.0.0 => k8s.io/csi-translation-lib v0.26.13
-	k8s.io/kube-aggregator v0.0.0 => k8s.io/kube-aggregator v0.26.13
-	k8s.io/kube-controller-manager v0.0.0 => k8s.io/kube-controller-manager v0.26.13
-	k8s.io/kube-proxy v0.0.0 => k8s.io/kube-proxy v0.26.13
-	k8s.io/kube-scheduler v0.0.0 => k8s.io/kube-scheduler v0.26.13
-	k8s.io/kubectl v0.0.0 => k8s.io/kubectl v0.26.13
-	k8s.io/kubelet v0.0.0 => k8s.io/kubelet v0.26.13
-	k8s.io/legacy-cloud-providers v0.0.0 => k8s.io/legacy-cloud-providers v0.26.13
-	k8s.io/metrics v0.0.0 => k8s.io/metrics v0.26.13
-	k8s.io/mount-utils v0.0.0 => k8s.io/mount-utils v0.26.13
-	k8s.io/pod-security-admission v0.0.0 => k8s.io/pod-security-admission v0.26.13
-	k8s.io/sample-apiserver v0.0.0 => k8s.io/sample-apiserver v0.26.13
+	k8s.io/api v0.0.0 => k8s.io/api v0.28.4
+	k8s.io/apiextensions-apiserver v0.0.0 => k8s.io/apiextensions-apiserver v0.28.4
+	k8s.io/apimachinery v0.0.0 => k8s.io/apimachinery v0.28.4
+	k8s.io/apiserver v0.0.0 => k8s.io/apiserver v0.28.4
+	k8s.io/cli-runtime v0.0.0 => k8s.io/cli-runtime v0.28.4
+	k8s.io/client-go v0.0.0 => k8s.io/client-go v0.28.4
+	k8s.io/cloud-provider v0.0.0 => k8s.io/cloud-provider v0.28.4
+	k8s.io/cluster-bootstrap v0.0.0 => k8s.io/cluster-bootstrap v0.28.4
+	k8s.io/code-generator v0.0.0 => k8s.io/code-generator v0.28.4
+	k8s.io/component-base v0.0.0 => k8s.io/component-base v0.28.4
+	k8s.io/component-helpers v0.0.0 => k8s.io/component-helpers v0.28.4
+	k8s.io/controller-manager v0.0.0 => k8s.io/controller-manager v0.28.4
+	k8s.io/cri-api v0.0.0 => k8s.io/cri-api v0.28.4
+	k8s.io/csi-translation-lib v0.0.0 => k8s.io/csi-translation-lib v0.28.4
+	k8s.io/kube-aggregator v0.0.0 => k8s.io/kube-aggregator v0.28.4
+	k8s.io/kube-controller-manager v0.0.0 => k8s.io/kube-controller-manager v0.28.4
+	k8s.io/kube-proxy v0.0.0 => k8s.io/kube-proxy v0.28.4
+	k8s.io/kube-scheduler v0.0.0 => k8s.io/kube-scheduler v0.28.4
+	k8s.io/kubectl v0.0.0 => k8s.io/kubectl v0.28.4
+	k8s.io/kubelet v0.0.0 => k8s.io/kubelet v0.28.4
+	k8s.io/legacy-cloud-providers v0.0.0 => k8s.io/legacy-cloud-providers v0.28.4
+	k8s.io/metrics v0.0.0 => k8s.io/metrics v0.28.4
+	k8s.io/mount-utils v0.0.0 => k8s.io/mount-utils v0.28.4
+	k8s.io/pod-security-admission v0.0.0 => k8s.io/pod-security-admission v0.28.4
+	k8s.io/sample-apiserver v0.0.0 => k8s.io/sample-apiserver v0.28.4
 )
