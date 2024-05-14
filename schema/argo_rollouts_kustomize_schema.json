@@ -277,6 +277,10 @@
                 "terminate": {
                     "description": "Terminate is used to prematurely stop the run (e.g. rollout completed and analysis is no longer desired)",
                     "type": "boolean"
+                },
+                "ttlStrategy": {
+                    "description": "TTLStrategy object contains the strategy for the time to live depending on if the analysis succeeded or failed",
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.TTLStrategy"
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -294,6 +298,10 @@
                 "phase"
             ],
             "properties": {
+                "completedAt": {
+                    "description": "CompletedAt indicates when the analysisRun completed",
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
                 "dryRunSummary": {
                     "description": "DryRunSummary contains the final results from the metric executions in the dry-run mode",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RunSummary"
@@ -424,12 +432,30 @@
                 }
             ]
         },
+        "io.argoproj.rollouts.v1alpha1.AnalysisTemplateRef": {
+            "type": "object",
+            "properties": {
+                "clusterScope": {
+                    "description": "Whether to look for the templateName at cluster scope or namespace scope",
+                    "type": "boolean"
+                },
+                "templateName": {
+                    "description": "TemplateName name of template to use in AnalysisRun",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "AnalysisTemplateRef",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.rollouts.v1alpha1.AnalysisTemplateSpec": {
             "description": "AnalysisTemplateSpec is the specification for a AnalysisTemplate resource",
             "type": "object",
-            "required": [
-                "metrics"
-            ],
             "properties": {
                 "args": {
                     "description": "Args are the list of arguments to the template",
@@ -469,6 +495,16 @@
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Metric"
                     },
                     "x-kubernetes-patch-merge-key": "name",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "templates": {
+                    "description": "Templates reference to a list of analysis templates to combine with the rest of the metrics for an AnalysisRun",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisTemplateRef"
+                    },
+                    "x-kubernetes-patch-merge-key": "templateName",
                     "x-kubernetes-patch-strategy": "merge"
                 }
             },
@@ -687,6 +723,29 @@
                 {
                     "group": "argoproj.io",
                     "kind": "ArgumentValueFrom",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.rollouts.v1alpha1.Authentication": {
+            "description": "Authentication method",
+            "type": "object",
+            "properties": {
+                "oauth2": {
+                    "description": "OAuth2 config",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.OAuth2Config"
+                },
+                "sigv4": {
+                    "description": "Sigv4 Config is the aws SigV4 configuration to use for SigV4 signing if using Amazon Managed Prometheus",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Sigv4Config"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "Authentication",
                     "version": "v1alpha1"
                 }
             ]
@@ -1186,20 +1245,33 @@
         },
         "io.argoproj.rollouts.v1alpha1.DatadogMetric": {
             "type": "object",
-            "required": [
-                "query"
-            ],
             "properties": {
+                "aggregator": {
+                    "description": "Aggregator is a type of aggregator to use for metrics-based queries (default: last). Used for v2",
+                    "type": "string"
+                },
                 "apiVersion": {
                     "description": "ApiVersion refers to the Datadog API version being used (default: v1). v1 will eventually be deprecated.",
                     "type": "string"
                 },
-                "interval": {
+                "formula": {
+                    "description": "Formula refers to the Formula made up of the queries. Only useful with Queries. Used for v2",
                     "type": "string"
                 },
+                "interval": {
+                    "description": "Interval refers to the Interval time window in Datadog (default: 5m). Not to be confused with the polling rate for the metric.",
+                    "type": "string"
+                },
+                "queries": {
+                    "description": "Queries is a map of query_name_as_key: query. You can then use query_name_as_key inside Formula.Used for v2",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
                 "query": {
-                    "type": "string",
-                    "default": ""
+                    "type": "string"
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -1448,6 +1520,11 @@
                     },
                     "x-kubernetes-patch-merge-key": "name",
                     "x-kubernetes-patch-strategy": "merge"
+                },
+                "analysisRunMetadata": {
+                    "description": "AnalysisRunMetadata labels and annotations that will be added to the AnalysisRuns",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisRunMetadata"
                 },
                 "dryRun": {
                     "description": "DryRun object contains the settings for running the analysis in Dry-Run mode",
@@ -2247,6 +2324,38 @@
                 }
             ]
         },
+        "io.argoproj.rollouts.v1alpha1.OAuth2Config": {
+            "type": "object",
+            "properties": {
+                "clientId": {
+                    "description": "OAuth2 client ID",
+                    "type": "string"
+                },
+                "clientSecret": {
+                    "description": "OAuth2 client secret",
+                    "type": "string"
+                },
+                "scopes": {
+                    "description": "OAuth2 scopes",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
+                "tokenUrl": {
+                    "description": "OAuth2 provider token URL",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "OAuth2Config",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.rollouts.v1alpha1.ObjectRef": {
             "description": "ObjectRef holds a references to the Kubernetes object",
             "type": "object",
@@ -2261,6 +2370,10 @@
                 },
                 "name": {
                     "description": "Name of the referent",
+                    "type": "string"
+                },
+                "scaleDown": {
+                    "description": "Automatically scale down deployment",
                     "type": "string"
                 }
             },
@@ -2374,23 +2487,6 @@
                 }
             ]
         },
-        "io.argoproj.rollouts.v1alpha1.PrometheusAuth": {
-            "description": "PrometheusMetric defines the prometheus query to perform canary analysis",
-            "type": "object",
-            "properties": {
-                "sigv4": {
-                    "default": {},
-                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Sigv4Config"
-                }
-            },
-            "x-kubernetes-group-version-kind": [
-                {
-                    "group": "argoproj.io",
-                    "kind": "PrometheusAuth",
-                    "version": "v1alpha1"
-                }
-            ]
-        },
         "io.argoproj.rollouts.v1alpha1.PrometheusMetric": {
             "description": "PrometheusMetric defines the prometheus query to perform canary analysis",
             "type": "object",
@@ -2400,9 +2496,9 @@
                     "type": "string"
                 },
                 "authentication": {
-                    "description": "Sigv4 Config is the aws SigV4 configuration to use for SigV4 signing if using Amazon Managed Prometheus",
+                    "description": "Authentication details",
                     "default": {},
-                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.PrometheusAuth"
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Authentication"
                 },
                 "headers": {
                     "description": "Headers are optional HTTP headers to use in the request",
@@ -2543,7 +2639,7 @@
                     "type": "array",
                     "items": {
                         "default": {},
-                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutAnalysisTemplate"
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisTemplateRef"
                     },
                     "x-kubernetes-patch-merge-key": "templateName",
                     "x-kubernetes-patch-strategy": "merge"
@@ -2606,7 +2702,7 @@
                     "type": "array",
                     "items": {
                         "default": {},
-                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutAnalysisTemplate"
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisTemplateRef"
                     },
                     "x-kubernetes-patch-merge-key": "templateName",
                     "x-kubernetes-patch-strategy": "merge"
@@ -2643,27 +2739,6 @@
                 {
                     "group": "argoproj.io",
                     "kind": "RolloutAnalysisRunStatus",
-                    "version": "v1alpha1"
-                }
-            ]
-        },
-        "io.argoproj.rollouts.v1alpha1.RolloutAnalysisTemplate": {
-            "type": "object",
-            "properties": {
-                "clusterScope": {
-                    "description": "Whether to look for the templateName at cluster scope or namespace scope",
-                    "type": "boolean"
-                },
-                "templateName": {
-                    "description": "TemplateName name of template to use in AnalysisRun",
-                    "type": "string",
-                    "default": ""
-                }
-            },
-            "x-kubernetes-group-version-kind": [
-                {
-                    "group": "argoproj.io",
-                    "kind": "RolloutAnalysisTemplate",
                     "version": "v1alpha1"
                 }
             ]
@@ -2732,6 +2807,21 @@
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutExperimentStepAnalysisTemplateRef"
                     },
                     "x-kubernetes-patch-merge-key": "name",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
+                "analysisRunMetadata": {
+                    "description": "AnalysisRunMetadata labels and annotations that will be added to the AnalysisRuns",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisRunMetadata"
+                },
+                "dryRun": {
+                    "description": "DryRun object contains the settings for running the analysis in Dry-Run mode",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.DryRun"
+                    },
+                    "x-kubernetes-patch-merge-key": "metricName",
                     "x-kubernetes-patch-strategy": "merge"
                 },
                 "duration": {
@@ -3164,6 +3254,11 @@
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.MangedRoutes"
                     }
                 },
+                "maxTrafficWeight": {
+                    "description": "MaxTrafficWeight The total weight of traffic. If unspecified, it defaults to 100",
+                    "type": "integer",
+                    "format": "int32"
+                },
                 "nginx": {
                     "description": "Nginx holds Nginx Ingress specific configuration to route traffic",
                     "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.NginxTrafficRouting"
@@ -3569,6 +3664,34 @@
                 }
             ]
         },
+        "io.argoproj.rollouts.v1alpha1.TTLStrategy": {
+            "description": "TTLStrategy defines the strategy for the time to live depending on if the analysis succeeded or failed",
+            "type": "object",
+            "properties": {
+                "secondsAfterCompletion": {
+                    "description": "SecondsAfterCompletion is the number of seconds to live after completion.",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "secondsAfterFailure": {
+                    "description": "SecondsAfterFailure is the number of seconds to live after failure.",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "secondsAfterSuccess": {
+                    "description": "SecondsAfterSuccess is the number of seconds to live after success.",
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "TTLStrategy",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.rollouts.v1alpha1.TemplateService": {
             "type": "object",
             "properties": {
@@ -3811,6 +3934,11 @@
                 "url"
             ],
             "properties": {
+                "authentication": {
+                    "description": "Authentication details",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Authentication"
+                },
                 "body": {
                     "description": "Body is the body of the web metric (must be POST/PUT)",
                     "type": "string"

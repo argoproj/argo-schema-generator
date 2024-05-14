@@ -2585,7 +2585,7 @@ func schema_pkg_apis_workflow_v1alpha1_Event(ref common.ReferenceCallback) commo
 				Properties: map[string]spec.Schema{
 					"selector": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Selector (https://github.com/antonmedv/expr) that we must must match the event. E.g. `payload.message == \"test\"`",
+							Description: "Selector (https://github.com/expr-lang/expr) that we must must match the event. E.g. `payload.message == \"test\"`",
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
@@ -6828,7 +6828,7 @@ func schema_pkg_apis_workflow_v1alpha1_ValueFrom(ref common.ReferenceCallback) c
 					},
 					"event": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Selector (https://github.com/antonmedv/expr) that is evaluated against the event to get the value of the parameter. E.g. `payload.message`",
+							Description: "Selector (https://github.com/expr-lang/expr) that is evaluated against the event to get the value of the parameter. E.g. `payload.message`",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -7569,7 +7569,7 @@ func schema_pkg_apis_workflow_v1alpha1_WorkflowSpec(ref common.ReferenceCallback
 					},
 					"dnsPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Set DNS policy for the pod. Defaults to \"ClusterFirst\". Valid values are 'ClusterFirstWithHostNet', 'ClusterFirst', 'Default' or 'None'. DNS parameters given in DNSConfig will be merged with the policy selected with DNSPolicy. To have DNS options set along with hostNetwork, you have to specify DNS policy explicitly to 'ClusterFirstWithHostNet'.",
+							Description: "Set DNS policy for workflow pods. Defaults to \"ClusterFirst\". Valid values are 'ClusterFirstWithHostNet', 'ClusterFirst', 'Default' or 'None'. DNS parameters given in DNSConfig will be merged with the policy selected with DNSPolicy. To have DNS options set along with hostNetwork, you have to specify DNS policy explicitly to 'ClusterFirstWithHostNet'.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -7930,7 +7930,7 @@ func schema_pkg_apis_workflow_v1alpha1_WorkflowStatus(ref common.ReferenceCallba
 					},
 					"taskResultsCompletionStatus": {
 						SchemaProps: spec.SchemaProps{
-							Description: "TaskResultsCompletionStatus tracks task result completion status (mapped by pod name). Used to prevent premature archiving and garbage collection.",
+							Description: "TaskResultsCompletionStatus tracks task result completion status (mapped by node ID). Used to prevent premature archiving and garbage collection.",
 							Type:        []string{"object"},
 							AdditionalProperties: &spec.SchemaOrBool{
 								Allows: true,

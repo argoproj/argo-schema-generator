@@ -25,6 +25,7 @@ API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/ap
 API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,ApplicationSourceJsonnet,ExtVars
 API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,ApplicationSourceJsonnet,Libs
 API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,ApplicationSourceJsonnet,TLAs
+API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,ApplicationSourceKustomize,Components
 API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,ApplicationSpec,Info
 API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,ApplicationStatus,Conditions
 API rule violation: list_type_missing,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,ApplicationStatus,Resources
@@ -170,6 +171,7 @@ API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,AnalysisTemplateSpec,DryRun
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,AnalysisTemplateSpec,MeasurementRetention
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,AnalysisTemplateSpec,Metrics
+API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,AnalysisTemplateSpec,Templates
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,ApisixRoute,Rules
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,AppMeshVirtualService,Routes
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,CanaryStrategy,Steps
@@ -190,12 +192,14 @@ API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,KayentaMetric,Scopes
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,MetricResult,Measurements
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,NginxTrafficRouting,StableIngresses
+API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,OAuth2Config,Scopes
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,PrometheusMetric,Headers
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,RolloutAnalysis,Args
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,RolloutAnalysis,DryRun
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,RolloutAnalysis,MeasurementRetention
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,RolloutAnalysis,Templates
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,RolloutExperimentStep,Analyses
+API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,RolloutExperimentStep,DryRun
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,RolloutExperimentStep,Templates
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,RolloutExperimentStepAnalysisTemplateRef,Args
 API rule violation: list_type_missing,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,RolloutStatus,ALBs
@@ -437,6 +441,9 @@ API rule violation: names_match,github.com/argoproj/argo-cd/v2/pkg/apis/applicat
 API rule violation: names_match,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,ApplicationSourcePluginParameter,String_
 API rule violation: names_match,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,ClusterCacheInfo,APIsCount
 API rule violation: names_match,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,ConnectionState,ModifiedAt
+API rule violation: names_match,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,ErrApplicationNotAllowedToUseProject,application
+API rule violation: names_match,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,ErrApplicationNotAllowedToUseProject,namespace
+API rule violation: names_match,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,ErrApplicationNotAllowedToUseProject,project
 API rule violation: names_match,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,HelmOptions,ValuesFileSchemes
 API rule violation: names_match,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,JWTToken,ExpiresAt
 API rule violation: names_match,github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1,JWTToken,IssuedAt
@@ -485,7 +492,10 @@ API rule violation: names_match,github.com/argoproj/argo-events/pkg/apis/eventso
 API rule violation: names_match,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,EventContext,DataContentType
 API rule violation: names_match,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,EventContext,SpecVersion
 API rule violation: names_match,github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1,TriggerTemplate,CustomTrigger
+API rule violation: names_match,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,Authentication,OAuth2
 API rule violation: names_match,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,MetricProvider,SkyWalking
+API rule violation: names_match,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,OAuth2Config,ClientID
+API rule violation: names_match,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,OAuth2Config,TokenURL
 API rule violation: names_match,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,RolloutStatus,ALBs
 API rule violation: names_match,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,RolloutStatus,HPAReplicas
 API rule violation: names_match,github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1,Sigv4Config,RoleARN

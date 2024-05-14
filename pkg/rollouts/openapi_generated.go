@@ -42,6 +42,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisRunStrategy":                             schema_pkg_apis_rollouts_v1alpha1_AnalysisRunStrategy(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisTemplate":                                schema_pkg_apis_rollouts_v1alpha1_AnalysisTemplate(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisTemplateList":                            schema_pkg_apis_rollouts_v1alpha1_AnalysisTemplateList(ref),
+		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisTemplateRef":                             schema_pkg_apis_rollouts_v1alpha1_AnalysisTemplateRef(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisTemplateSpec":                            schema_pkg_apis_rollouts_v1alpha1_AnalysisTemplateSpec(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AntiAffinity":                                    schema_pkg_apis_rollouts_v1alpha1_AntiAffinity(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.ApisixRoute":                                     schema_pkg_apis_rollouts_v1alpha1_ApisixRoute(ref),
@@ -52,6 +53,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AppMeshVirtualService":                           schema_pkg_apis_rollouts_v1alpha1_AppMeshVirtualService(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.Argument":                                        schema_pkg_apis_rollouts_v1alpha1_Argument(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.ArgumentValueFrom":                               schema_pkg_apis_rollouts_v1alpha1_ArgumentValueFrom(ref),
+		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.Authentication":                                  schema_pkg_apis_rollouts_v1alpha1_Authentication(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AwsResourceRef":                                  schema_pkg_apis_rollouts_v1alpha1_AwsResourceRef(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.BlueGreenStatus":                                 schema_pkg_apis_rollouts_v1alpha1_BlueGreenStatus(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.BlueGreenStrategy":                               schema_pkg_apis_rollouts_v1alpha1_BlueGreenStrategy(ref),
@@ -93,12 +95,12 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.MetricResult":                                    schema_pkg_apis_rollouts_v1alpha1_MetricResult(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.NewRelicMetric":                                  schema_pkg_apis_rollouts_v1alpha1_NewRelicMetric(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.NginxTrafficRouting":                             schema_pkg_apis_rollouts_v1alpha1_NginxTrafficRouting(ref),
+		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.OAuth2Config":                                    schema_pkg_apis_rollouts_v1alpha1_OAuth2Config(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.ObjectRef":                                       schema_pkg_apis_rollouts_v1alpha1_ObjectRef(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.PauseCondition":                                  schema_pkg_apis_rollouts_v1alpha1_PauseCondition(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.PingPongSpec":                                    schema_pkg_apis_rollouts_v1alpha1_PingPongSpec(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.PodTemplateMetadata":                             schema_pkg_apis_rollouts_v1alpha1_PodTemplateMetadata(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.PreferredDuringSchedulingIgnoredDuringExecution": schema_pkg_apis_rollouts_v1alpha1_PreferredDuringSchedulingIgnoredDuringExecution(ref),
-		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.PrometheusAuth":                                  schema_pkg_apis_rollouts_v1alpha1_PrometheusAuth(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.PrometheusMetric":                                schema_pkg_apis_rollouts_v1alpha1_PrometheusMetric(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.RequiredDuringSchedulingIgnoredDuringExecution":  schema_pkg_apis_rollouts_v1alpha1_RequiredDuringSchedulingIgnoredDuringExecution(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.RollbackWindowSpec":                              schema_pkg_apis_rollouts_v1alpha1_RollbackWindowSpec(ref),
@@ -106,7 +108,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.RolloutAnalysis":                                 schema_pkg_apis_rollouts_v1alpha1_RolloutAnalysis(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.RolloutAnalysisBackground":                       schema_pkg_apis_rollouts_v1alpha1_RolloutAnalysisBackground(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.RolloutAnalysisRunStatus":                        schema_pkg_apis_rollouts_v1alpha1_RolloutAnalysisRunStatus(ref),
-		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.RolloutAnalysisTemplate":                         schema_pkg_apis_rollouts_v1alpha1_RolloutAnalysisTemplate(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.RolloutCondition":                                schema_pkg_apis_rollouts_v1alpha1_RolloutCondition(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.RolloutExperimentStep":                           schema_pkg_apis_rollouts_v1alpha1_RolloutExperimentStep(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.RolloutExperimentStepAnalysisTemplateRef":        schema_pkg_apis_rollouts_v1alpha1_RolloutExperimentStepAnalysisTemplateRef(ref),
@@ -131,6 +132,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.StringMatch":                                     schema_pkg_apis_rollouts_v1alpha1_StringMatch(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.TCPRoute":                                        schema_pkg_apis_rollouts_v1alpha1_TCPRoute(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.TLSRoute":                                        schema_pkg_apis_rollouts_v1alpha1_TLSRoute(ref),
+		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.TTLStrategy":                                     schema_pkg_apis_rollouts_v1alpha1_TTLStrategy(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.TemplateService":                                 schema_pkg_apis_rollouts_v1alpha1_TemplateService(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.TemplateSpec":                                    schema_pkg_apis_rollouts_v1alpha1_TemplateSpec(ref),
 		"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.TemplateStatus":                                  schema_pkg_apis_rollouts_v1alpha1_TemplateStatus(ref),
@@ -550,12 +552,18 @@ func schema_pkg_apis_rollouts_v1alpha1_AnalysisRunSpec(ref common.ReferenceCallb
 							},
 						},
 					},
+					"ttlStrategy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TTLStrategy object contains the strategy for the time to live depending on if the analysis succeeded or failed",
+							Ref:         ref("github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.TTLStrategy"),
+						},
+					},
 				},
 				Required: []string{"metrics"},
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.Argument", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.DryRun", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.MeasurementRetention", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.Metric"},
+			"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.Argument", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.DryRun", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.MeasurementRetention", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.Metric", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.TTLStrategy"},
 	}
 }
 
@@ -612,6 +620,12 @@ func schema_pkg_apis_rollouts_v1alpha1_AnalysisRunStatus(ref common.ReferenceCal
 						SchemaProps: spec.SchemaProps{
 							Description: "DryRunSummary contains the final results from the metric executions in the dry-run mode",
 							Ref:         ref("github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.RunSummary"),
+						},
+					},
+					"completedAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CompletedAt indicates when the analysisRun completed",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
 						},
 					},
 				},
@@ -741,6 +755,33 @@ func schema_pkg_apis_rollouts_v1alpha1_AnalysisTemplateList(ref common.Reference
 	}
 }
 
+func schema_pkg_apis_rollouts_v1alpha1_AnalysisTemplateRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"templateName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TemplateName name of template to use in AnalysisRun",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterScope": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Whether to look for the templateName at cluster scope or namespace scope",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_rollouts_v1alpha1_AnalysisTemplateSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -828,12 +869,31 @@ func schema_pkg_apis_rollouts_v1alpha1_AnalysisTemplateSpec(ref common.Reference
 							},
 						},
 					},
+					"templates": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-patch-merge-key": "templateName",
+								"x-kubernetes-patch-strategy":  "merge",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Templates reference to a list of analysis templates to combine with the rest of the metrics for an AnalysisRun",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisTemplateRef"),
+									},
+								},
+							},
+						},
+					},
 				},
-				Required: []string{"metrics"},
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.Argument", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.DryRun", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.MeasurementRetention", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.Metric"},
+			"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisTemplateRef", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.Argument", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.DryRun", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.MeasurementRetention", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.Metric"},
 	}
 }
 
@@ -1096,6 +1156,35 @@ func schema_pkg_apis_rollouts_v1alpha1_ArgumentValueFrom(ref common.ReferenceCal
 		},
 		Dependencies: []string{
 			"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.FieldRef"},
+	}
+}
+
+func schema_pkg_apis_rollouts_v1alpha1_Authentication(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Authentication method",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"sigv4": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Sigv4 Config is the aws SigV4 configuration to use for SigV4 signing if using Amazon Managed Prometheus",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.Sigv4Config"),
+						},
+					},
+					"oauth2": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OAuth2 config",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.OAuth2Config"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.OAuth2Config", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.Sigv4Config"},
 	}
 }
 
@@ -1805,15 +1894,38 @@ func schema_pkg_apis_rollouts_v1alpha1_DatadogMetric(ref common.ReferenceCallbac
 				Properties: map[string]spec.Schema{
 					"interval": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Description: "Interval refers to the Interval time window in Datadog (default: 5m). Not to be confused with the polling rate for the metric.",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 					"query": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"queries": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Queries is a map of query_name_as_key: query. You can then use query_name_as_key inside Formula.Used for v2",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"formula": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Formula refers to the Formula made up of the queries. Only useful with Queries. Used for v2",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 					"apiVersion": {
@@ -1823,8 +1935,14 @@ func schema_pkg_apis_rollouts_v1alpha1_DatadogMetric(ref common.ReferenceCallbac
 							Format:      "",
 						},
 					},
+					"aggregator": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Aggregator is a type of aggregator to use for metrics-based queries (default: last). Used for v2",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 				},
-				Required: []string{"query"},
 			},
 		},
 	}
@@ -2233,12 +2351,19 @@ func schema_pkg_apis_rollouts_v1alpha1_ExperimentSpec(ref common.ReferenceCallba
 							},
 						},
 					},
+					"analysisRunMetadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AnalysisRunMetadata labels and annotations that will be added to the AnalysisRuns",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisRunMetadata"),
+						},
+					},
 				},
 				Required: []string{"templates"},
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.DryRun", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.ExperimentAnalysisTemplateRef", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.MeasurementRetention", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.TemplateSpec"},
+			"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisRunMetadata", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.DryRun", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.ExperimentAnalysisTemplateRef", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.MeasurementRetention", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.TemplateSpec"},
 	}
 }
 
@@ -3239,6 +3364,54 @@ func schema_pkg_apis_rollouts_v1alpha1_NginxTrafficRouting(ref common.ReferenceC
 	}
 }
 
+func schema_pkg_apis_rollouts_v1alpha1_OAuth2Config(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"tokenUrl": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OAuth2 provider token URL",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clientId": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OAuth2 client ID",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clientSecret": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OAuth2 client secret",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"scopes": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OAuth2 scopes",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_rollouts_v1alpha1_ObjectRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -3263,6 +3436,13 @@ func schema_pkg_apis_rollouts_v1alpha1_ObjectRef(ref common.ReferenceCallback) c
 					"name": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Name of the referent",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"scaleDown": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Automatically scale down deployment",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -3398,27 +3578,6 @@ func schema_pkg_apis_rollouts_v1alpha1_PreferredDuringSchedulingIgnoredDuringExe
 	}
 }
 
-func schema_pkg_apis_rollouts_v1alpha1_PrometheusAuth(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "PrometheusMetric defines the prometheus query to perform canary analysis",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"sigv4": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.Sigv4Config"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.Sigv4Config"},
-	}
-}
-
 func schema_pkg_apis_rollouts_v1alpha1_PrometheusMetric(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -3442,9 +3601,9 @@ func schema_pkg_apis_rollouts_v1alpha1_PrometheusMetric(ref common.ReferenceCall
 					},
 					"authentication": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Sigv4 Config is the aws SigV4 configuration to use for SigV4 signing if using Amazon Managed Prometheus",
+							Description: "Authentication details",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.PrometheusAuth"),
+							Ref:         ref("github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.Authentication"),
 						},
 					},
 					"timeout": {
@@ -3485,7 +3644,7 @@ func schema_pkg_apis_rollouts_v1alpha1_PrometheusMetric(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.PrometheusAuth", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.WebMetricHeader"},
+			"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.Authentication", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.WebMetricHeader"},
 	}
 }
 
@@ -3587,7 +3746,7 @@ func schema_pkg_apis_rollouts_v1alpha1_RolloutAnalysis(ref common.ReferenceCallb
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.RolloutAnalysisTemplate"),
+										Ref:     ref("github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisTemplateRef"),
 									},
 								},
 							},
@@ -3664,7 +3823,7 @@ func schema_pkg_apis_rollouts_v1alpha1_RolloutAnalysis(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisRunArgument", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisRunMetadata", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.DryRun", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.MeasurementRetention", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.RolloutAnalysisTemplate"},
+			"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisRunArgument", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisRunMetadata", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisTemplateRef", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.DryRun", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.MeasurementRetention"},
 	}
 }
 
@@ -3689,7 +3848,7 @@ func schema_pkg_apis_rollouts_v1alpha1_RolloutAnalysisBackground(ref common.Refe
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.RolloutAnalysisTemplate"),
+										Ref:     ref("github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisTemplateRef"),
 									},
 								},
 							},
@@ -3773,7 +3932,7 @@ func schema_pkg_apis_rollouts_v1alpha1_RolloutAnalysisBackground(ref common.Refe
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisRunArgument", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisRunMetadata", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.DryRun", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.MeasurementRetention", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.RolloutAnalysisTemplate"},
+			"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisRunArgument", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisRunMetadata", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisTemplateRef", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.DryRun", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.MeasurementRetention"},
 	}
 }
 
@@ -3805,33 +3964,6 @@ func schema_pkg_apis_rollouts_v1alpha1_RolloutAnalysisRunStatus(ref common.Refer
 					},
 				},
 				Required: []string{"name", "status"},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_rollouts_v1alpha1_RolloutAnalysisTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"templateName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "TemplateName name of template to use in AnalysisRun",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"clusterScope": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Whether to look for the templateName at cluster scope or namespace scope",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-				},
 			},
 		},
 	}
@@ -3951,12 +4083,39 @@ func schema_pkg_apis_rollouts_v1alpha1_RolloutExperimentStep(ref common.Referenc
 							},
 						},
 					},
+					"dryRun": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-patch-merge-key": "metricName",
+								"x-kubernetes-patch-strategy":  "merge",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "DryRun object contains the settings for running the analysis in Dry-Run mode",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.DryRun"),
+									},
+								},
+							},
+						},
+					},
+					"analysisRunMetadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AnalysisRunMetadata labels and annotations that will be added to the AnalysisRuns",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisRunMetadata"),
+						},
+					},
 				},
 				Required: []string{"templates"},
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.RolloutExperimentStepAnalysisTemplateRef", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.RolloutExperimentTemplate"},
+			"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.AnalysisRunMetadata", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.DryRun", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.RolloutExperimentStepAnalysisTemplateRef", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.RolloutExperimentTemplate"},
 	}
 }
 
@@ -4585,6 +4744,13 @@ func schema_pkg_apis_rollouts_v1alpha1_RolloutTrafficRouting(ref common.Referenc
 							},
 						},
 					},
+					"maxTrafficWeight": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MaxTrafficWeight The total weight of traffic. If unspecified, it defaults to 100",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
 				},
 			},
 		},
@@ -5078,6 +5244,40 @@ func schema_pkg_apis_rollouts_v1alpha1_TLSRoute(ref common.ReferenceCallback) co
 	}
 }
 
+func schema_pkg_apis_rollouts_v1alpha1_TTLStrategy(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "TTLStrategy defines the strategy for the time to live depending on if the analysis succeeded or failed",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"secondsAfterCompletion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SecondsAfterCompletion is the number of seconds to live after completion.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"secondsAfterFailure": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SecondsAfterFailure is the number of seconds to live after failure.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"secondsAfterSuccess": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SecondsAfterSuccess is the number of seconds to live after success.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_rollouts_v1alpha1_TemplateService(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -5452,12 +5652,19 @@ func schema_pkg_apis_rollouts_v1alpha1_WebMetric(ref common.ReferenceCallback) c
 							Format:      "byte",
 						},
 					},
+					"authentication": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Authentication details",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.Authentication"),
+						},
+					},
 				},
 				Required: []string{"url"},
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.WebMetricHeader"},
+			"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.Authentication", "github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.WebMetricHeader"},
 	}
 }
 

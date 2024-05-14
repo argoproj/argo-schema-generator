@@ -8,6 +8,10 @@
                     "description": "ClusterName contains AWS cluster name",
                     "type": "string"
                 },
+                "profile": {
+                    "description": "Profile contains optional role ARN. If set then AWS IAM Authenticator uses the profile to perform cluster operations instead of the default AWS credential provider chain.",
+                    "type": "string"
+                },
                 "roleARN": {
                     "description": "RoleARN contains optional role ARN. If set then AWS IAM Authenticator assume a role to perform cluster operations instead of the default AWS credential provider chain.",
                     "type": "string"
@@ -772,6 +776,9 @@
                 "template": {
                     "default": {},
                     "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetTemplate"
+                },
+                "templatePatch": {
+                    "type": "string"
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -1163,6 +1170,14 @@
                         "default": ""
                     }
                 },
+                "components": {
+                    "description": "Components specifies a list of kustomize components to add to the kustomization before building",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
+                },
                 "forceCommonAnnotations": {
                     "description": "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps",
                     "type": "boolean"
@@ -1178,6 +1193,10 @@
                         "type": "string",
                         "default": ""
                     }
+                },
+                "labelWithoutSelector": {
+                    "description": "LabelWithoutSelector specifies whether to apply common labels to resource selectors or not",
+                    "type": "boolean"
                 },
                 "namePrefix": {
                     "description": "NamePrefix is a prefix appended to resources for Kustomize apps",
@@ -2092,6 +2111,35 @@
                 {
                     "group": "argoproj.io",
                     "kind": "EnvEntry",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.argocd.v1alpha1.ErrApplicationNotAllowedToUseProject": {
+            "type": "object",
+            "required": [
+                "application",
+                "namespace",
+                "project"
+            ],
+            "properties": {
+                "application": {
+                    "type": "string",
+                    "default": ""
+                },
+                "namespace": {
+                    "type": "string",
+                    "default": ""
+                },
+                "project": {
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "ErrApplicationNotAllowedToUseProject",
                     "version": "v1alpha1"
                 }
             ]
@@ -4501,6 +4549,11 @@
                     "format": "int64",
                     "default": 0
                 },
+                "initiatedBy": {
+                    "description": "InitiatedBy contains information about who initiated the operations",
+                    "default": {},
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.OperationInitiator"
+                },
                 "revision": {
                     "description": "Revision holds the revision the sync was performed against",
                     "type": "string"
@@ -5219,7 +5272,8 @@
                 "comparedTo": {
                     "description": "ComparedTo contains information about what has been compared",
                     "default": {},
-                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ComparedTo"
+                    "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ComparedTo",
+                    "x-kubernetes-patch-strategy": "replace"
                 },
                 "revision": {
                     "description": "Revision contains information about the revision the comparison has been performed to",

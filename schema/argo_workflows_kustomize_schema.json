@@ -1689,7 +1689,7 @@
             ],
             "properties": {
                 "selector": {
-                    "description": "Selector (https://github.com/antonmedv/expr) that we must must match the event. E.g. `payload.message == \"test\"`",
+                    "description": "Selector (https://github.com/expr-lang/expr) that we must must match the event. E.g. `payload.message == \"test\"`",
                     "type": "string",
                     "default": ""
                 }
@@ -4605,7 +4605,7 @@
                     "type": "string"
                 },
                 "event": {
-                    "description": "Selector (https://github.com/antonmedv/expr) that is evaluated against the event to get the value of the parameter. E.g. `payload.message`",
+                    "description": "Selector (https://github.com/expr-lang/expr) that is evaluated against the event to get the value of the parameter. E.g. `payload.message`",
                     "type": "string"
                 },
                 "expression": {
@@ -5056,7 +5056,7 @@
                     "$ref": "#/definitions/io.k8s.api.core.v1.PodDNSConfig"
                 },
                 "dnsPolicy": {
-                    "description": "Set DNS policy for the pod. Defaults to \"ClusterFirst\". Valid values are 'ClusterFirstWithHostNet', 'ClusterFirst', 'Default' or 'None'. DNS parameters given in DNSConfig will be merged with the policy selected with DNSPolicy. To have DNS options set along with hostNetwork, you have to specify DNS policy explicitly to 'ClusterFirstWithHostNet'.",
+                    "description": "Set DNS policy for workflow pods. Defaults to \"ClusterFirst\". Valid values are 'ClusterFirstWithHostNet', 'ClusterFirst', 'Default' or 'None'. DNS parameters given in DNSConfig will be merged with the policy selected with DNSPolicy. To have DNS options set along with hostNetwork, you have to specify DNS policy explicitly to 'ClusterFirstWithHostNet'.",
                     "type": "string"
                 },
                 "entrypoint": {
@@ -5343,7 +5343,7 @@
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.SynchronizationStatus"
                 },
                 "taskResultsCompletionStatus": {
-                    "description": "TaskResultsCompletionStatus tracks task result completion status (mapped by pod name). Used to prevent premature archiving and garbage collection.",
+                    "description": "TaskResultsCompletionStatus tracks task result completion status (mapped by node ID). Used to prevent premature archiving and garbage collection.",
                     "type": "object",
                     "additionalProperties": {
                         "type": "boolean",

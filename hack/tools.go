@@ -13,5 +13,4 @@ import (
 	_ "github.com/argoproj/argo-workflows/v3/pkg/apis/workflow/v1alpha1"
 	_ "k8s.io/api"
 	_ "k8s.io/kube-openapi/cmd/openapi-gen"
-	_ "k8s.io/api/flowcontrol"
 )
