@@ -149,7 +149,7 @@ func generateOpenApiSchema(outputPath string, GetOpenAPIDefinitions func(ref com
 		}
 	}
 
-	k8sDefs, err := loadK8SDefinitions([]int{18, 21, 24})
+	k8sDefs, err := loadK8SDefinitions([]int{18, 21, 24, 26, 28, 30})
 	checkErr(err)
 	for k, v := range def {
 		//We pull out argo crd information based on the dot pattern of the key in the dictionary we are also setting it for all
