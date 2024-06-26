@@ -29,7 +29,7 @@ gen-workflows-openapi: install-tools $(DIST_DIR)/openapi-gen
 		--output-file pkg/workflows/openapi_generated.go \
 		--report-filename pkg/workflows/violation_exceptions.list \
 		--output-dir ${CURRENT_DIR} \
-		github.com/argoproj/argo-workflows/v3
+		github.com/argoproj/argo-workflows/v3/pkg/apis/workflow/v1alpha1
 
 .PHONY: gen-events-openapi
 gen-events-openapi: install-tools $(DIST_DIR)/openapi-gen
