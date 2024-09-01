@@ -21455,6 +21455,9 @@
         "io.k8s.api.admissionregistration.v1.ValidatingAdmissionPolicyBindingList": {
             "description": "ValidatingAdmissionPolicyBindingList is a list of ValidatingAdmissionPolicyBinding.",
             "type": "object",
+            "required": [
+                "items"
+            ],
             "properties": {
                 "apiVersion": {
                     "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -21522,6 +21525,9 @@
         "io.k8s.api.admissionregistration.v1.ValidatingAdmissionPolicyList": {
             "description": "ValidatingAdmissionPolicyList is a list of ValidatingAdmissionPolicy.",
             "type": "object",
+            "required": [
+                "items"
+            ],
             "properties": {
                 "apiVersion": {
                     "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -22370,6 +22376,9 @@
         "io.k8s.api.admissionregistration.v1beta1.ValidatingAdmissionPolicyBindingList": {
             "description": "ValidatingAdmissionPolicyBindingList is a list of ValidatingAdmissionPolicyBinding.",
             "type": "object",
+            "required": [
+                "items"
+            ],
             "properties": {
                 "apiVersion": {
                     "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -22437,6 +22446,9 @@
         "io.k8s.api.admissionregistration.v1beta1.ValidatingAdmissionPolicyList": {
             "description": "ValidatingAdmissionPolicyList is a list of ValidatingAdmissionPolicy.",
             "type": "object",
+            "required": [
+                "items"
+            ],
             "properties": {
                 "apiVersion": {
                     "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -23713,11 +23725,11 @@
                     "format": "int32"
                 },
                 "ordinals": {
-                    "description": "ordinals controls the numbering of replica indices in a StatefulSet. The default ordinals behavior assigns a \"0\" index to the first replica and increments the index by one for each additional replica requested. Using the ordinals field requires the StatefulSetStartOrdinal feature gate to be enabled, which is beta.",
+                    "description": "ordinals controls the numbering of replica indices in a StatefulSet. The default ordinals behavior assigns a \"0\" index to the first replica and increments the index by one for each additional replica requested.",
                     "$ref": "#/definitions/io.k8s.api.apps.v1.StatefulSetOrdinals"
                 },
                 "persistentVolumeClaimRetentionPolicy": {
-                    "description": "persistentVolumeClaimRetentionPolicy describes the lifecycle of persistent volume claims created from volumeClaimTemplates. By default, all persistent volume claims are created as needed and retained until manually deleted. This policy allows the lifecycle to be altered, for example by deleting persistent volume claims when their stateful set is deleted, or when their pod is scaled down. This requires the StatefulSetAutoDeletePVC feature gate to be enabled, which is alpha.  +optional",
+                    "description": "persistentVolumeClaimRetentionPolicy describes the lifecycle of persistent volume claims created from volumeClaimTemplates. By default, all persistent volume claims are created as needed and retained until manually deleted. This policy allows the lifecycle to be altered, for example by deleting persistent volume claims when their stateful set is deleted, or when their pod is scaled down. This requires the StatefulSetAutoDeletePVC feature gate to be enabled, which is beta.",
                     "$ref": "#/definitions/io.k8s.api.apps.v1.StatefulSetPersistentVolumeClaimRetentionPolicy"
                 },
                 "podManagementPolicy": {
@@ -24426,7 +24438,7 @@
                     "format": "int32"
                 },
                 "ordinals": {
-                    "description": "ordinals controls the numbering of replica indices in a StatefulSet. The default ordinals behavior assigns a \"0\" index to the first replica and increments the index by one for each additional replica requested. Using the ordinals field requires the StatefulSetStartOrdinal feature gate to be enabled, which is beta.",
+                    "description": "ordinals controls the numbering of replica indices in a StatefulSet. The default ordinals behavior assigns a \"0\" index to the first replica and increments the index by one for each additional replica requested.",
                     "$ref": "#/definitions/io.k8s.api.apps.v1beta1.StatefulSetOrdinals"
                 },
                 "persistentVolumeClaimRetentionPolicy": {
@@ -25489,7 +25501,7 @@
                     "format": "int32"
                 },
                 "ordinals": {
-                    "description": "ordinals controls the numbering of replica indices in a StatefulSet. The default ordinals behavior assigns a \"0\" index to the first replica and increments the index by one for each additional replica requested. Using the ordinals field requires the StatefulSetStartOrdinal feature gate to be enabled, which is beta.",
+                    "description": "ordinals controls the numbering of replica indices in a StatefulSet. The default ordinals behavior assigns a \"0\" index to the first replica and increments the index by one for each additional replica requested.",
                     "$ref": "#/definitions/io.k8s.api.apps.v1beta2.StatefulSetOrdinals"
                 },
                 "persistentVolumeClaimRetentionPolicy": {
@@ -27495,7 +27507,7 @@
                     "format": "int32"
                 },
                 "managedBy": {
-                    "description": "ManagedBy field indicates the controller that manages a Job. The k8s Job controller reconciles jobs which don't have this field at all or the field value is the reserved string `kubernetes.io/job-controller`, but skips reconciling Jobs with a custom value for this field. The value must be a valid domain-prefixed path (e.g. acme.io/foo) - all characters before the first \"/\" must be a valid subdomain as defined by RFC 1123. All characters trailing the first \"/\" must be valid HTTP Path characters as defined by RFC 3986. The value cannot exceed 64 characters.\n\nThis field is alpha-level. The job controller accepts setting the field when the feature gate JobManagedBy is enabled (disabled by default).",
+                    "description": "ManagedBy field indicates the controller that manages a Job. The k8s Job controller reconciles jobs which don't have this field at all or the field value is the reserved string `kubernetes.io/job-controller`, but skips reconciling Jobs with a custom value for this field. The value must be a valid domain-prefixed path (e.g. acme.io/foo) - all characters before the first \"/\" must be a valid subdomain as defined by RFC 1123. All characters trailing the first \"/\" must be valid HTTP Path characters as defined by RFC 3986. The value cannot exceed 63 characters. This field is immutable.\n\nThis field is alpha-level. The job controller accepts setting the field when the feature gate JobManagedBy is enabled (disabled by default).",
                     "type": "string"
                 },
                 "manualSelector": {
@@ -27513,7 +27525,7 @@
                     "format": "int32"
                 },
                 "podFailurePolicy": {
-                    "description": "Specifies the policy of handling failed pods. In particular, it allows to specify the set of actions and conditions which need to be satisfied to take the associated action. If empty, the default behaviour applies - the counter of failed pods, represented by the jobs's .status.failed field, is incremented and it is checked against the backoffLimit. This field cannot be used in combination with restartPolicy=OnFailure.\n\nThis field is beta-level. It can be used when the `JobPodFailurePolicy` feature gate is enabled (enabled by default).",
+                    "description": "Specifies the policy of handling failed pods. In particular, it allows to specify the set of actions and conditions which need to be satisfied to take the associated action. If empty, the default behaviour applies - the counter of failed pods, represented by the jobs's .status.failed field, is incremented and it is checked against the backoffLimit. This field cannot be used in combination with restartPolicy=OnFailure.",
                     "$ref": "#/definitions/io.k8s.api.batch.v1.PodFailurePolicy"
                 },
                 "podReplacementPolicy": {
@@ -27529,7 +27541,7 @@
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
                 },
                 "successPolicy": {
-                    "description": "successPolicy specifies the policy when the Job can be declared as succeeded. If empty, the default behavior applies - the Job is declared as succeeded only when the number of succeeded pods equals to the completions. When the field is specified, it must be immutable and works only for the Indexed Jobs. Once the Job meets the SuccessPolicy, the lingering pods are terminated.\n\nThis field  is alpha-level. To use this field, you must enable the `JobSuccessPolicy` feature gate (disabled by default).",
+                    "description": "successPolicy specifies the policy when the Job can be declared as succeeded. If empty, the default behavior applies - the Job is declared as succeeded only when the number of succeeded pods equals to the completions. When the field is specified, it must be immutable and works only for the Indexed Jobs. Once the Job meets the SuccessPolicy, the lingering pods are terminated.\n\nThis field is beta-level. To use this field, you must enable the `JobSuccessPolicy` feature gate (enabled by default).",
                     "$ref": "#/definitions/io.k8s.api.batch.v1.SuccessPolicy"
                 },
                 "suspend": {
@@ -27587,7 +27599,7 @@
                     "type": "string"
                 },
                 "ready": {
-                    "description": "The number of pods which have a Ready condition.",
+                    "description": "The number of active pods which have a Ready condition and are not terminating (without a deletionTimestamp).",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -28504,6 +28516,7 @@
                 "cachingMode": {
                     "description": "cachingMode is the Host Caching mode: None, Read Only, Read Write.\n\nPossible enum values:\n - `\"None\"`\n - `\"ReadOnly\"`\n - `\"ReadWrite\"`",
                     "type": "string",
+                    "default": "ReadWrite",
                     "enum": [
                         "None",
                         "ReadOnly",
@@ -28522,11 +28535,13 @@
                 },
                 "fsType": {
                     "description": "fsType is Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. \"ext4\", \"xfs\", \"ntfs\". Implicitly inferred to be \"ext4\" if unspecified.",
-                    "type": "string"
+                    "type": "string",
+                    "default": "ext4"
                 },
                 "kind": {
                     "description": "kind expected values are Shared: multiple blob disks per storage account  Dedicated: single blob disk per storage account  Managed: azure managed data disk (only in managed availability set). defaults to shared\n\nPossible enum values:\n - `\"Dedicated\"`\n - `\"Managed\"`\n - `\"Shared\"`",
                     "type": "string",
+                    "default": "Shared",
                     "enum": [
                         "Dedicated",
                         "Managed",
@@ -28535,7 +28550,8 @@
                 },
                 "readOnly": {
                     "description": "readOnly Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "default": false
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -28873,21 +28889,6 @@
                     "description": "volumeID used to identify the volume in cinder. More info: https://examples.k8s.io/mysql-cinder-pd/README.md",
                     "type": "string",
                     "default": ""
-                }
-            },
-            "x-kubernetes-group-version-kind": []
-        },
-        "io.k8s.api.core.v1.ClaimSource": {
-            "description": "ClaimSource describes a reference to a ResourceClaim.\n\nExactly one of these fields should be set.  Consumers of this type must treat an empty object as if it has an unknown value.",
-            "type": "object",
-            "properties": {
-                "resourceClaimName": {
-                    "description": "ResourceClaimName is the name of a ResourceClaim object in the same namespace as this pod.",
-                    "type": "string"
-                },
-                "resourceClaimTemplateName": {
-                    "description": "ResourceClaimTemplateName is the name of a ResourceClaimTemplate object in the same namespace as this pod.\n\nThe template will be used to create a new ResourceClaim, which will be bound to this pod. When this pod is deleted, the ResourceClaim will also be deleted. The pod name and resource name, along with a generated component, will be used to form a unique name for the ResourceClaim, which will be recorded in pod.status.resourceClaimStatuses.\n\nThis field is immutable and no changes will be made to the corresponding ResourceClaim by the control plane after creating the ResourceClaim.",
-                    "type": "string"
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -29618,6 +29619,20 @@
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
                     }
                 },
+                "allocatedResourcesStatus": {
+                    "description": "AllocatedResourcesStatus represents the status of various resources allocated for this Pod.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.api.core.v1.ResourceStatus"
+                    },
+                    "x-kubernetes-list-map-keys": [
+                        "name"
+                    ],
+                    "x-kubernetes-list-type": "map",
+                    "x-kubernetes-patch-merge-key": "name",
+                    "x-kubernetes-patch-strategy": "merge"
+                },
                 "containerID": {
                     "description": "ContainerID is the ID of the container in the format '\u003ctype\u003e://\u003ccontainer_id\u003e'. Where type is a container runtime identifier, returned from Version call of CRI API (for example \"containerd\").",
                     "type": "string"
@@ -29666,6 +29681,10 @@
                     "default": {},
                     "$ref": "#/definitions/io.k8s.api.core.v1.ContainerState"
                 },
+                "user": {
+                    "description": "User represents user identity information initially attached to the first process of the container",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.ContainerUser"
+                },
                 "volumeMounts": {
                     "description": "Status of volume mounts.",
                     "type": "array",
@@ -29679,6 +29698,17 @@
                     "x-kubernetes-list-type": "map",
                     "x-kubernetes-patch-merge-key": "mountPath",
                     "x-kubernetes-patch-strategy": "merge"
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
+        "io.k8s.api.core.v1.ContainerUser": {
+            "description": "ContainerUser represents user identity information",
+            "type": "object",
+            "properties": {
+                "linux": {
+                    "description": "Linux holds user identity information initially attached to the first process of the containers in Linux. Note that the actual running identity can be changed if the process has enough privilege to do so.",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.LinuxContainerUser"
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -30893,10 +30923,14 @@
         "io.k8s.api.core.v1.HostIP": {
             "description": "HostIP represents a single IP address allocated to the host.",
             "type": "object",
+            "required": [
+                "ip"
+            ],
             "properties": {
                 "ip": {
                     "description": "IP is the IP address assigned to the host",
-                    "type": "string"
+                    "type": "string",
+                    "default": ""
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -30962,7 +30996,8 @@
                 },
                 "iscsiInterface": {
                     "description": "iscsiInterface is the interface Name that uses an iSCSI transport. Defaults to 'default' (tcp).",
-                    "type": "string"
+                    "type": "string",
+                    "default": "default"
                 },
                 "lun": {
                     "description": "lun is iSCSI Target Lun number.",
@@ -31027,7 +31062,8 @@
                 },
                 "iscsiInterface": {
                     "description": "iscsiInterface is the interface Name that uses an iSCSI transport. Defaults to 'default' (tcp).",
-                    "type": "string"
+                    "type": "string",
+                    "default": "default"
                 },
                 "lun": {
                     "description": "lun represents iSCSI Target Lun number.",
@@ -31056,6 +31092,26 @@
                     "description": "targetPortal is iSCSI Target Portal. The Portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260).",
                     "type": "string",
                     "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
+        "io.k8s.api.core.v1.ImageVolumeSource": {
+            "description": "ImageVolumeSource represents a image volume resource.",
+            "type": "object",
+            "properties": {
+                "pullPolicy": {
+                    "description": "Policy for pulling OCI objects. Possible values are: Always: the kubelet always attempts to pull the reference. Container creation will fail If the pull fails. Never: the kubelet never pulls the reference and only uses a local image or artifact. Container creation will fail if the reference isn't present. IfNotPresent: the kubelet pulls if the reference isn't already present on disk. Container creation will fail if the reference isn't present and the pull fails. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise.\n\nPossible enum values:\n - `\"Always\"` means that kubelet always attempts to pull the latest image. Container will fail If the pull fails.\n - `\"IfNotPresent\"` means that kubelet pulls if the image isn't present on disk. Container will fail if the image isn't present and the pull fails.\n - `\"Never\"` means that kubelet never pulls an image, but only uses a local image. Container will fail if the image isn't present",
+                    "type": "string",
+                    "enum": [
+                        "Always",
+                        "IfNotPresent",
+                        "Never"
+                    ]
+                },
+                "reference": {
+                    "description": "Required: Image or artifact reference to be used. Behaves in the same way as pod.spec.containers[*].image. Pull secrets will be assembled in the same way as for the container image by looking up node credentials, SA image pull secrets, and pod spec image pull secrets. More info: https://kubernetes.io/docs/concepts/containers/images This field is optional to allow higher level config management to default or override container images in workload controllers like Deployments and StatefulSets.",
+                    "type": "string"
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -31257,6 +31313,39 @@
                         "$ref": "#/definitions/io.k8s.api.core.v1.LimitRangeItem"
                     },
                     "x-kubernetes-list-type": "atomic"
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
+        "io.k8s.api.core.v1.LinuxContainerUser": {
+            "description": "LinuxContainerUser represents user identity information in Linux containers",
+            "type": "object",
+            "required": [
+                "uid",
+                "gid"
+            ],
+            "properties": {
+                "gid": {
+                    "description": "GID is the primary gid initially attached to the first process in the container",
+                    "type": "integer",
+                    "format": "int64",
+                    "default": 0
+                },
+                "supplementalGroups": {
+                    "description": "SupplementalGroups are the supplemental groups initially attached to the first process in the container",
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "format": "int64",
+                        "default": 0
+                    },
+                    "x-kubernetes-list-type": "atomic"
+                },
+                "uid": {
+                    "description": "UID is the primary uid initially attached to the first process in the container",
+                    "type": "integer",
+                    "format": "int64",
+                    "default": 0
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -31724,6 +31813,17 @@
             },
             "x-kubernetes-group-version-kind": []
         },
+        "io.k8s.api.core.v1.NodeFeatures": {
+            "description": "NodeFeatures describes the set of features implemented by the CRI implementation. The features contained in the NodeFeatures should depend only on the cri implementation independent of runtime handlers.",
+            "type": "object",
+            "properties": {
+                "supplementalGroupsPolicy": {
+                    "description": "SupplementalGroupsPolicy is set to true if the runtime supports SupplementalGroupsPolicy and ContainerUser.",
+                    "type": "boolean"
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
         "io.k8s.api.core.v1.NodeList": {
             "description": "NodeList is the whole list of all Nodes which have been registered with master.",
             "type": "object",
@@ -31797,11 +31897,15 @@
             "x-kubernetes-group-version-kind": []
         },
         "io.k8s.api.core.v1.NodeRuntimeHandlerFeatures": {
-            "description": "NodeRuntimeHandlerFeatures is a set of runtime features.",
+            "description": "NodeRuntimeHandlerFeatures is a set of features implemented by the runtime handler.",
             "type": "object",
             "properties": {
                 "recursiveReadOnlyMounts": {
                     "description": "RecursiveReadOnlyMounts is set to true if the runtime handler supports RecursiveReadOnlyMounts.",
+                    "type": "boolean"
+                },
+                "userNamespaces": {
+                    "description": "UserNamespaces is set to true if the runtime handler supports UserNamespaces, including for volumes.",
                     "type": "boolean"
                 }
             },
@@ -31963,7 +32067,7 @@
                     }
                 },
                 "capacity": {
-                    "description": "Capacity represents the total resources of a node. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity",
+                    "description": "Capacity represents the total resources of a node. More info: https://kubernetes.io/docs/reference/node/node-status/#capacity",
                     "type": "object",
                     "additionalProperties": {
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
@@ -31991,6 +32095,10 @@
                     "description": "Endpoints of daemons running on the Node.",
                     "default": {},
                     "$ref": "#/definitions/io.k8s.api.core.v1.NodeDaemonEndpoints"
+                },
+                "features": {
+                    "description": "Features describes the set of features implemented by the CRI implementation.",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.NodeFeatures"
                 },
                 "images": {
                     "description": "List of container images on this node",
@@ -32082,7 +32190,7 @@
                     "default": ""
                 },
                 "kubeProxyVersion": {
-                    "description": "KubeProxy Version reported by the node.",
+                    "description": "Deprecated: KubeProxy Version reported by the node.",
                     "type": "string",
                     "default": ""
                 },
@@ -32355,7 +32463,7 @@
                     "type": "string"
                 },
                 "volumeAttributesClassName": {
-                    "description": "volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim. If specified, the CSI driver will create or update the volume with the attributes defined in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName, it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass will be applied to the claim but it's not allowed to reset this field to empty string once it is set. If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass will be set by the persistentvolume controller if it exists. If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource exists. More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/ (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.",
+                    "description": "volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim. If specified, the CSI driver will create or update the volume with the attributes defined in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName, it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass will be applied to the claim but it's not allowed to reset this field to empty string once it is set. If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass will be set by the persistentvolume controller if it exists. If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource exists. More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/ (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).",
                     "type": "string"
                 },
                 "volumeMode": {
@@ -32399,10 +32507,10 @@
                         "type": "string",
                         "default": "",
                         "enum": [
-                            "ControllerResizeFailed",
                             "ControllerResizeInProgress",
-                            "NodeResizeFailed",
+                            "ControllerResizeInfeasible",
                             "NodeResizeInProgress",
+                            "NodeResizeInfeasible",
                             "NodeResizePending"
                         ]
                     },
@@ -32437,11 +32545,11 @@
                     "x-kubernetes-patch-strategy": "merge"
                 },
                 "currentVolumeAttributesClassName": {
-                    "description": "currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using. When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim This is an alpha field and requires enabling VolumeAttributesClass feature.",
+                    "description": "currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using. When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim This is a beta field and requires enabling VolumeAttributesClass feature (off by default).",
                     "type": "string"
                 },
                 "modifyVolumeStatus": {
-                    "description": "ModifyVolumeStatus represents the status object of ControllerModifyVolume operation. When this is unset, there is no ModifyVolume operation being attempted. This is an alpha field and requires enabling VolumeAttributesClass feature.",
+                    "description": "ModifyVolumeStatus represents the status object of ControllerModifyVolume operation. When this is unset, there is no ModifyVolume operation being attempted. This is a beta field and requires enabling VolumeAttributesClass feature (off by default).",
                     "$ref": "#/definitions/io.k8s.api.core.v1.ModifyVolumeStatus"
                 },
                 "phase": {
@@ -32769,7 +32877,7 @@
                     "$ref": "#/definitions/io.k8s.api.core.v1.StorageOSPersistentVolumeSource"
                 },
                 "volumeAttributesClassName": {
-                    "description": "Name of VolumeAttributesClass to which this persistent volume belongs. Empty value is not allowed. When this field is not set, it indicates that this volume does not belong to any VolumeAttributesClass. This field is mutable and can be changed by the CSI driver after a volume has been updated successfully to a new class. For an unbound PersistentVolume, the volumeAttributesClassName will be matched with unbound PersistentVolumeClaims during the binding process. This is an alpha field and requires enabling VolumeAttributesClass feature.",
+                    "description": "Name of VolumeAttributesClass to which this persistent volume belongs. Empty value is not allowed. When this field is not set, it indicates that this volume does not belong to any VolumeAttributesClass. This field is mutable and can be changed by the CSI driver after a volume has been updated successfully to a new class. For an unbound PersistentVolume, the volumeAttributesClassName will be matched with unbound PersistentVolumeClaims during the binding process. This is a beta field and requires enabling VolumeAttributesClass feature (off by default).",
                     "type": "string"
                 },
                 "volumeMode": {
@@ -32792,7 +32900,7 @@
             "type": "object",
             "properties": {
                 "lastPhaseTransitionTime": {
-                    "description": "lastPhaseTransitionTime is the time the phase transitioned from one to another and automatically resets to current time everytime a volume phase transitions. This is a beta field and requires the PersistentVolumeLastPhaseTransitionTime feature to be enabled (enabled by default).",
+                    "description": "lastPhaseTransitionTime is the time the phase transitioned from one to another and automatically resets to current time everytime a volume phase transitions.",
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
                 },
                 "message": {
@@ -32909,7 +33017,7 @@
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
                 },
                 "matchLabelKeys": {
-                    "description": "MatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both matchLabelKeys and labelSelector. Also, matchLabelKeys cannot be set when labelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.",
+                    "description": "MatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both matchLabelKeys and labelSelector. Also, matchLabelKeys cannot be set when labelSelector isn't set. This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).",
                     "type": "array",
                     "items": {
                         "type": "string",
@@ -32918,7 +33026,7 @@
                     "x-kubernetes-list-type": "atomic"
                 },
                 "mismatchLabelKeys": {
-                    "description": "MismatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both mismatchLabelKeys and labelSelector. Also, mismatchLabelKeys cannot be set when labelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.",
+                    "description": "MismatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both mismatchLabelKeys and labelSelector. Also, mismatchLabelKeys cannot be set when labelSelector isn't set. This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).",
                     "type": "array",
                     "items": {
                         "type": "string",
@@ -33142,10 +33250,14 @@
         "io.k8s.api.core.v1.PodIP": {
             "description": "PodIP represents a single IP address allocated to the pod.",
             "type": "object",
+            "required": [
+                "ip"
+            ],
             "properties": {
                 "ip": {
                     "description": "IP is the IP address assigned to the pod",
-                    "type": "string"
+                    "type": "string",
+                    "default": ""
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -33316,7 +33428,7 @@
             "x-kubernetes-group-version-kind": []
         },
         "io.k8s.api.core.v1.PodResourceClaim": {
-            "description": "PodResourceClaim references exactly one ResourceClaim through a ClaimSource. It adds a name to it that uniquely identifies the ResourceClaim inside the Pod. Containers that need access to the ResourceClaim reference it with this name.",
+            "description": "PodResourceClaim references exactly one ResourceClaim, either directly or by naming a ResourceClaimTemplate which is then turned into a ResourceClaim for the pod.\n\nIt adds a name to it that uniquely identifies the ResourceClaim inside the Pod. Containers that need access to the ResourceClaim reference it with this name.",
             "type": "object",
             "required": [
                 "name"
@@ -33327,10 +33439,13 @@
                     "type": "string",
                     "default": ""
                 },
-                "source": {
-                    "description": "Source describes where to find the ResourceClaim.",
-                    "default": {},
-                    "$ref": "#/definitions/io.k8s.api.core.v1.ClaimSource"
+                "resourceClaimName": {
+                    "description": "ResourceClaimName is the name of a ResourceClaim object in the same namespace as this pod.\n\nExactly one of ResourceClaimName and ResourceClaimTemplateName must be set.",
+                    "type": "string"
+                },
+                "resourceClaimTemplateName": {
+                    "description": "ResourceClaimTemplateName is the name of a ResourceClaimTemplate object in the same namespace as this pod.\n\nThe template will be used to create a new ResourceClaim, which will be bound to this pod. When this pod is deleted, the ResourceClaim will also be deleted. The pod name and resource name, along with a generated component, will be used to form a unique name for the ResourceClaim, which will be recorded in pod.status.resourceClaimStatuses.\n\nThis field is immutable and no changes will be made to the corresponding ResourceClaim by the control plane after creating the ResourceClaim.\n\nExactly one of ResourceClaimName and ResourceClaimTemplateName must be set.",
+                    "type": "string"
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -33348,7 +33463,7 @@
                     "default": ""
                 },
                 "resourceClaimName": {
-                    "description": "ResourceClaimName is the name of the ResourceClaim that was generated for the Pod in the namespace of the Pod. It this is unset, then generating a ResourceClaim was not necessary. The pod.spec.resourceClaims entry can be ignored in this case.",
+                    "description": "ResourceClaimName is the name of the ResourceClaim that was generated for the Pod in the namespace of the Pod. If this is unset, then generating a ResourceClaim was not necessary. The pod.spec.resourceClaims entry can be ignored in this case.",
                     "type": "string"
                 }
             },
@@ -33413,7 +33528,7 @@
                     "$ref": "#/definitions/io.k8s.api.core.v1.SeccompProfile"
                 },
                 "supplementalGroups": {
-                    "description": "A list of groups applied to the first process run in each container, in addition to the container's primary GID, the fsGroup (if specified), and group memberships defined in the container image for the uid of the container process. If unspecified, no additional groups are added to any container. Note that group memberships defined in the container image for the uid of the container process are still effective, even if they are not included in this list. Note that this field cannot be set when spec.os.name is windows.",
+                    "description": "A list of groups applied to the first process run in each container, in addition to the container's primary GID and fsGroup (if specified).  If the SupplementalGroupsPolicy feature is enabled, the supplementalGroupsPolicy field determines whether these are in addition to or instead of any group memberships defined in the container image. If unspecified, no additional groups are added, though group memberships defined in the container image may still be used, depending on the supplementalGroupsPolicy field. Note that this field cannot be set when spec.os.name is windows.",
                     "type": "array",
                     "items": {
                         "type": "integer",
@@ -33421,6 +33536,14 @@
                         "default": 0
                     },
                     "x-kubernetes-list-type": "atomic"
+                },
+                "supplementalGroupsPolicy": {
+                    "description": "Defines how supplemental groups of the first container processes are calculated. Valid values are \"Merge\" and \"Strict\". If not specified, \"Merge\" is used. (Alpha) Using the field requires the SupplementalGroupsPolicy feature gate to be enabled and the container runtime must implement support for this feature. Note that this field cannot be set when spec.os.name is windows.\n\nPossible enum values:\n - `\"Merge\"` means that the container's provided SupplementalGroups and FsGroup (specified in SecurityContext) will be merged with the primary user's groups as defined in the container image (in /etc/group).\n - `\"Strict\"` means that the container's provided SupplementalGroups and FsGroup (specified in SecurityContext) will be used instead of any groups defined in the container image.",
+                    "type": "string",
+                    "enum": [
+                        "Merge",
+                        "Strict"
+                    ]
                 },
                 "sysctls": {
                     "description": "Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported sysctls (by the container runtime) might fail to launch. Note that this field cannot be set when spec.os.name is windows.",
@@ -33578,7 +33701,7 @@
                     "x-kubernetes-patch-strategy": "merge"
                 },
                 "nodeName": {
-                    "description": "NodeName is a request to schedule this pod onto a specific node. If it is non-empty, the scheduler simply schedules this pod onto that node, assuming that it fits resource requirements.",
+                    "description": "NodeName indicates in which node this pod is scheduled. If empty, this pod is a candidate for scheduling by the scheduler defined in schedulerName. Once this field is set, the kubelet for this node becomes responsible for the lifecycle of this pod. This field should not be used to express a desire for the pod to be scheduled on a specific node. https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename",
                     "type": "string"
                 },
                 "nodeSelector": {
@@ -33591,7 +33714,7 @@
                     "x-kubernetes-map-type": "atomic"
                 },
                 "os": {
-                    "description": "Specifies the OS of the containers in the pod. Some pod and container fields are restricted if this is set.\n\nIf the OS field is set to linux, the following fields must be unset: -securityContext.windowsOptions\n\nIf the OS field is set to windows, following fields must be unset: - spec.hostPID - spec.hostIPC - spec.hostUsers - spec.securityContext.appArmorProfile - spec.securityContext.seLinuxOptions - spec.securityContext.seccompProfile - spec.securityContext.fsGroup - spec.securityContext.fsGroupChangePolicy - spec.securityContext.sysctls - spec.shareProcessNamespace - spec.securityContext.runAsUser - spec.securityContext.runAsGroup - spec.securityContext.supplementalGroups - spec.containers[*].securityContext.appArmorProfile - spec.containers[*].securityContext.seLinuxOptions - spec.containers[*].securityContext.seccompProfile - spec.containers[*].securityContext.capabilities - spec.containers[*].securityContext.readOnlyRootFilesystem - spec.containers[*].securityContext.privileged - spec.containers[*].securityContext.allowPrivilegeEscalation - spec.containers[*].securityContext.procMount - spec.containers[*].securityContext.runAsUser - spec.containers[*].securityContext.runAsGroup",
+                    "description": "Specifies the OS of the containers in the pod. Some pod and container fields are restricted if this is set.\n\nIf the OS field is set to linux, the following fields must be unset: -securityContext.windowsOptions\n\nIf the OS field is set to windows, following fields must be unset: - spec.hostPID - spec.hostIPC - spec.hostUsers - spec.securityContext.appArmorProfile - spec.securityContext.seLinuxOptions - spec.securityContext.seccompProfile - spec.securityContext.fsGroup - spec.securityContext.fsGroupChangePolicy - spec.securityContext.sysctls - spec.shareProcessNamespace - spec.securityContext.runAsUser - spec.securityContext.runAsGroup - spec.securityContext.supplementalGroups - spec.securityContext.supplementalGroupsPolicy - spec.containers[*].securityContext.appArmorProfile - spec.containers[*].securityContext.seLinuxOptions - spec.containers[*].securityContext.seccompProfile - spec.containers[*].securityContext.capabilities - spec.containers[*].securityContext.readOnlyRootFilesystem - spec.containers[*].securityContext.privileged - spec.containers[*].securityContext.allowPrivilegeEscalation - spec.containers[*].securityContext.procMount - spec.containers[*].securityContext.runAsUser - spec.containers[*].securityContext.runAsGroup",
                     "$ref": "#/definitions/io.k8s.api.core.v1.PodOS"
                 },
                 "overhead": {
@@ -34175,7 +34298,7 @@
                     "format": "int32"
                 },
                 "sources": {
-                    "description": "sources is the list of volume projections",
+                    "description": "sources is the list of volume projections. Each entry in this list handles one source.",
                     "type": "array",
                     "items": {
                         "default": {},
@@ -34242,7 +34365,8 @@
                 },
                 "keyring": {
                     "description": "keyring is the path to key ring for RBDUser. Default is /etc/ceph/keyring. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it",
-                    "type": "string"
+                    "type": "string",
+                    "default": "/etc/ceph/keyring"
                 },
                 "monitors": {
                     "description": "monitors is a collection of Ceph monitors. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it",
@@ -34255,7 +34379,8 @@
                 },
                 "pool": {
                     "description": "pool is the rados pool name. Default is rbd. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it",
-                    "type": "string"
+                    "type": "string",
+                    "default": "rbd"
                 },
                 "readOnly": {
                     "description": "readOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it",
@@ -34267,7 +34392,8 @@
                 },
                 "user": {
                     "description": "user is the rados user name. Default is admin. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it",
-                    "type": "string"
+                    "type": "string",
+                    "default": "admin"
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -34291,7 +34417,8 @@
                 },
                 "keyring": {
                     "description": "keyring is the path to key ring for RBDUser. Default is /etc/ceph/keyring. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it",
-                    "type": "string"
+                    "type": "string",
+                    "default": "/etc/ceph/keyring"
                 },
                 "monitors": {
                     "description": "monitors is a collection of Ceph monitors. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it",
@@ -34304,7 +34431,8 @@
                 },
                 "pool": {
                     "description": "pool is the rados pool name. Default is rbd. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it",
-                    "type": "string"
+                    "type": "string",
+                    "default": "rbd"
                 },
                 "readOnly": {
                     "description": "readOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it",
@@ -34316,7 +34444,8 @@
                 },
                 "user": {
                     "description": "user is the rados user name. Default is admin. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it",
-                    "type": "string"
+                    "type": "string",
+                    "default": "admin"
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -34552,6 +34681,10 @@
                     "description": "Name must match the name of one entry in pod.spec.resourceClaims of the Pod where this field is used. It makes that resource available inside a container.",
                     "type": "string",
                     "default": ""
+                },
+                "request": {
+                    "description": "Request is the name chosen for a request in the referenced claim. If empty, everything from the claim is made available, otherwise only the result of this request.",
+                    "type": "string"
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -34578,6 +34711,25 @@
                 }
             },
             "x-kubernetes-map-type": "atomic",
+            "x-kubernetes-group-version-kind": []
+        },
+        "io.k8s.api.core.v1.ResourceHealth": {
+            "description": "ResourceHealth represents the health of a resource. It has the latest device health information. This is a part of KEP https://kep.k8s.io/4680 and historical health changes are planned to be added in future iterations of a KEP.",
+            "type": "object",
+            "required": [
+                "resourceID"
+            ],
+            "properties": {
+                "health": {
+                    "description": "Health of the resource. can be one of:\n - Healthy: operates as normal\n - Unhealthy: reported unhealthy. We consider this a temporary health issue\n              since we do not have a mechanism today to distinguish\n              temporary and permanent issues.\n - Unknown: The status cannot be determined.\n            For example, Device Plugin got unregistered and hasn't been re-registered since.\n\nIn future we may want to introduce the PermanentlyUnhealthy Status.",
+                    "type": "string"
+                },
+                "resourceID": {
+                    "description": "ResourceID is the unique identifier of the resource. See the ResourceID type for more information.",
+                    "type": "string",
+                    "default": ""
+                }
+            },
             "x-kubernetes-group-version-kind": []
         },
         "io.k8s.api.core.v1.ResourceQuota": {
@@ -34742,6 +34894,32 @@
             },
             "x-kubernetes-group-version-kind": []
         },
+        "io.k8s.api.core.v1.ResourceStatus": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "description": "Name of the resource. Must be unique within the pod and match one of the resources from the pod spec.",
+                    "type": "string",
+                    "default": ""
+                },
+                "resources": {
+                    "description": "List of unique Resources health. Each element in the list contains an unique resource ID and resource health. At a minimum, ResourceID must uniquely identify the Resource allocated to the Pod on the Node for the lifetime of a Pod. See ResourceID type for it's definition.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.api.core.v1.ResourceHealth"
+                    },
+                    "x-kubernetes-list-map-keys": [
+                        "resourceID"
+                    ],
+                    "x-kubernetes-list-type": "map"
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
         "io.k8s.api.core.v1.SELinuxOptions": {
             "description": "SELinuxOptions are the labels to be applied to the container",
             "type": "object",
@@ -34776,7 +34954,8 @@
             "properties": {
                 "fsType": {
                     "description": "fsType is the filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. \"ext4\", \"xfs\", \"ntfs\". Default is \"xfs\"",
-                    "type": "string"
+                    "type": "string",
+                    "default": "xfs"
                 },
                 "gateway": {
                     "description": "gateway is the host address of the ScaleIO API Gateway.",
@@ -34801,7 +34980,8 @@
                 },
                 "storageMode": {
                     "description": "storageMode indicates whether the storage for a volume should be ThickProvisioned or ThinProvisioned. Default is ThinProvisioned.",
-                    "type": "string"
+                    "type": "string",
+                    "default": "ThinProvisioned"
                 },
                 "storagePool": {
                     "description": "storagePool is the ScaleIO Storage Pool associated with the protection domain.",
@@ -34830,7 +35010,8 @@
             "properties": {
                 "fsType": {
                     "description": "fsType is the filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. \"ext4\", \"xfs\", \"ntfs\". Default is \"xfs\".",
-                    "type": "string"
+                    "type": "string",
+                    "default": "xfs"
                 },
                 "gateway": {
                     "description": "gateway is the host address of the ScaleIO API Gateway.",
@@ -34855,7 +35036,8 @@
                 },
                 "storageMode": {
                     "description": "storageMode indicates whether the storage for a volume should be ThickProvisioned or ThinProvisioned. Default is ThinProvisioned.",
-                    "type": "string"
+                    "type": "string",
+                    "default": "ThinProvisioned"
                 },
                 "storagePool": {
                     "description": "storagePool is the ScaleIO Storage Pool associated with the protection domain.",
@@ -35185,7 +35367,7 @@
                     "type": "boolean"
                 },
                 "procMount": {
-                    "description": "procMount denotes the type of proc mount to use for the containers. The default is DefaultProcMount which uses the container runtime defaults for readonly paths and masked paths. This requires the ProcMountType feature flag to be enabled. Note that this field cannot be set when spec.os.name is windows.\n\nPossible enum values:\n - `\"Default\"` uses the container runtime defaults for readonly and masked paths for /proc. Most container runtimes mask certain paths in /proc to avoid accidental security exposure of special devices or information.\n - `\"Unmasked\"` bypasses the default masking behavior of the container runtime and ensures the newly created /proc the container stays in tact with no modifications.",
+                    "description": "procMount denotes the type of proc mount to use for the containers. The default value is Default which uses the container runtime defaults for readonly paths and masked paths. This requires the ProcMountType feature flag to be enabled. Note that this field cannot be set when spec.os.name is windows.\n\nPossible enum values:\n - `\"Default\"` uses the container runtime defaults for readonly and masked paths for /proc. Most container runtimes mask certain paths in /proc to avoid accidental security exposure of special devices or information.\n - `\"Unmasked\"` bypasses the default masking behavior of the container runtime and ensures the newly created /proc the container stays in tact with no modifications.",
                     "type": "string",
                     "enum": [
                         "Default",
@@ -36100,6 +36282,10 @@
                     "description": "hostPath represents a pre-existing file or directory on the host machine that is directly exposed to the container. This is generally used for system agents or other privileged things that are allowed to see the host machine. Most containers will NOT need this. More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath",
                     "$ref": "#/definitions/io.k8s.api.core.v1.HostPathVolumeSource"
                 },
+                "image": {
+                    "description": "image represents an OCI object (a container image or artifact) pulled and mounted on the kubelet's host machine. The volume is resolved at pod startup depending on which PullPolicy value is provided:\n\n- Always: the kubelet always attempts to pull the reference. Container creation will fail If the pull fails. - Never: the kubelet never pulls the reference and only uses a local image or artifact. Container creation will fail if the reference isn't present. - IfNotPresent: the kubelet pulls if the reference isn't already present on disk. Container creation will fail if the reference isn't present and the pull fails.\n\nThe volume gets re-resolved if the pod gets deleted and recreated, which means that new remote content will become available on pod recreation. A failure to resolve or pull the image during pod startup will block containers from starting and may add significant latency. Failures will be retried using normal volume backoff and will be reported on the pod reason and message. The types of objects that may be mounted by this volume are defined by the container runtime implementation on a host machine and at minimum must include all valid types supported by the container image field. The OCI object gets mounted in a single directory (spec.containers[*].volumeMounts.mountPath) by merging the manifest layers in the same way as for container images. The volume will be mounted read-only (ro) and non-executable files (noexec). Sub path mounts for containers are not supported (spec.containers[*].volumeMounts.subpath). The field spec.securityContext.fsGroupChangePolicy has no effect on this volume type.",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.ImageVolumeSource"
+                },
                 "iscsi": {
                     "description": "iscsi represents an ISCSI Disk resource that is attached to a kubelet's host machine and then exposed to the pod. More info: https://examples.k8s.io/volumes/iscsi/README.md",
                     "$ref": "#/definitions/io.k8s.api.core.v1.ISCSIVolumeSource"
@@ -36264,7 +36450,7 @@
             "x-kubernetes-group-version-kind": []
         },
         "io.k8s.api.core.v1.VolumeProjection": {
-            "description": "Projection that may be projected along with other supported volume types",
+            "description": "Projection that may be projected along with other supported volume types. Exactly one of these fields must be set.",
             "type": "object",
             "properties": {
                 "clusterTrustBundle": {
@@ -36382,6 +36568,10 @@
                 "hostPath": {
                     "description": "hostPath represents a pre-existing file or directory on the host machine that is directly exposed to the container. This is generally used for system agents or other privileged things that are allowed to see the host machine. Most containers will NOT need this. More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath",
                     "$ref": "#/definitions/io.k8s.api.core.v1.HostPathVolumeSource"
+                },
+                "image": {
+                    "description": "image represents an OCI object (a container image or artifact) pulled and mounted on the kubelet's host machine. The volume is resolved at pod startup depending on which PullPolicy value is provided:\n\n- Always: the kubelet always attempts to pull the reference. Container creation will fail If the pull fails. - Never: the kubelet never pulls the reference and only uses a local image or artifact. Container creation will fail if the reference isn't present. - IfNotPresent: the kubelet pulls if the reference isn't already present on disk. Container creation will fail if the reference isn't present and the pull fails.\n\nThe volume gets re-resolved if the pod gets deleted and recreated, which means that new remote content will become available on pod recreation. A failure to resolve or pull the image during pod startup will block containers from starting and may add significant latency. Failures will be retried using normal volume backoff and will be reported on the pod reason and message. The types of objects that may be mounted by this volume are defined by the container runtime implementation on a host machine and at minimum must include all valid types supported by the container image field. The OCI object gets mounted in a single directory (spec.containers[*].volumeMounts.mountPath) by merging the manifest layers in the same way as for container images. The volume will be mounted read-only (ro) and non-executable files (noexec). Sub path mounts for containers are not supported (spec.containers[*].volumeMounts.subpath). The field spec.securityContext.fsGroupChangePolicy has no effect on this volume type.",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.ImageVolumeSource"
                 },
                 "iscsi": {
                     "description": "iscsi represents an ISCSI Disk resource that is attached to a kubelet's host machine and then exposed to the pod. More info: https://examples.k8s.io/volumes/iscsi/README.md",
@@ -38462,6 +38652,7 @@
                     "format": "int32"
                 }
             },
+            "x-kubernetes-map-type": "atomic",
             "x-kubernetes-group-version-kind": []
         },
         "io.k8s.api.networking.v1beta1.HTTPIngressPath": {
@@ -38502,6 +38693,88 @@
                         "$ref": "#/definitions/io.k8s.api.networking.v1beta1.HTTPIngressPath"
                     },
                     "x-kubernetes-list-type": "atomic"
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
+        "io.k8s.api.networking.v1beta1.IPAddress": {
+            "description": "IPAddress represents a single IP of a single IP Family. The object is designed to be used by APIs that operate on IP addresses. The object is used by the Service core API for allocation of IP addresses. An IP address can be represented in different formats, to guarantee the uniqueness of the IP, the name of the object is the IP address in canonical format, four decimal digits separated by dots suppressing leading zeros for IPv4 and the representation defined by RFC 5952 for IPv6. Valid: 192.168.1.5 or 2001:db8::1 or 2001:db8:aaaa:bbbb:cccc:dddd:eeee:1 Invalid: 10.01.2.3 or 2001:db8:0:0:0::1",
+            "type": "object",
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+                },
+                "spec": {
+                    "description": "spec is the desired state of the IPAddress. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.api.networking.v1beta1.IPAddressSpec"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "networking.k8s.io",
+                    "kind": "IPAddress",
+                    "version": "v1beta1"
+                }
+            ]
+        },
+        "io.k8s.api.networking.v1beta1.IPAddressList": {
+            "description": "IPAddressList contains a list of IPAddress.",
+            "type": "object",
+            "required": [
+                "items"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "items": {
+                    "description": "items is the list of IPAddresses.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.api.networking.v1beta1.IPAddress"
+                    }
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "networking.k8s.io",
+                    "kind": "IPAddressList",
+                    "version": "v1beta1"
+                }
+            ]
+        },
+        "io.k8s.api.networking.v1beta1.IPAddressSpec": {
+            "description": "IPAddressSpec describe the attributes in an IP Address.",
+            "type": "object",
+            "required": [
+                "parentRef"
+            ],
+            "properties": {
+                "parentRef": {
+                    "description": "ParentRef references the resource that an IPAddress is attached to. An IPAddress must reference a parent object.",
+                    "$ref": "#/definitions/io.k8s.api.networking.v1beta1.ParentReference"
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -38871,6 +39144,143 @@
                 "secretName": {
                     "description": "secretName is the name of the secret used to terminate TLS traffic on port 443. Field is left optional to allow TLS routing based on SNI hostname alone. If the SNI host in a listener conflicts with the \"Host\" header field used by an IngressRule, the SNI host is used for termination and value of the Host header is used for routing.",
                     "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
+        "io.k8s.api.networking.v1beta1.ParentReference": {
+            "description": "ParentReference describes a reference to a parent object.",
+            "type": "object",
+            "required": [
+                "resource",
+                "name"
+            ],
+            "properties": {
+                "group": {
+                    "description": "Group is the group of the object being referenced.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name is the name of the object being referenced.",
+                    "type": "string"
+                },
+                "namespace": {
+                    "description": "Namespace is the namespace of the object being referenced.",
+                    "type": "string"
+                },
+                "resource": {
+                    "description": "Resource is the resource of the object being referenced.",
+                    "type": "string"
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
+        "io.k8s.api.networking.v1beta1.ServiceCIDR": {
+            "description": "ServiceCIDR defines a range of IP addresses using CIDR format (e.g. 192.168.0.0/24 or 2001:db2::/64). This range is used to allocate ClusterIPs to Service objects.",
+            "type": "object",
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+                },
+                "spec": {
+                    "description": "spec is the desired state of the ServiceCIDR. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.api.networking.v1beta1.ServiceCIDRSpec"
+                },
+                "status": {
+                    "description": "status represents the current state of the ServiceCIDR. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.api.networking.v1beta1.ServiceCIDRStatus"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "networking.k8s.io",
+                    "kind": "ServiceCIDR",
+                    "version": "v1beta1"
+                }
+            ]
+        },
+        "io.k8s.api.networking.v1beta1.ServiceCIDRList": {
+            "description": "ServiceCIDRList contains a list of ServiceCIDR objects.",
+            "type": "object",
+            "required": [
+                "items"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "items": {
+                    "description": "items is the list of ServiceCIDRs.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.api.networking.v1beta1.ServiceCIDR"
+                    }
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "networking.k8s.io",
+                    "kind": "ServiceCIDRList",
+                    "version": "v1beta1"
+                }
+            ]
+        },
+        "io.k8s.api.networking.v1beta1.ServiceCIDRSpec": {
+            "description": "ServiceCIDRSpec define the CIDRs the user wants to use for allocating ClusterIPs for Services.",
+            "type": "object",
+            "properties": {
+                "cidrs": {
+                    "description": "CIDRs defines the IP blocks in CIDR notation (e.g. \"192.168.0.0/24\" or \"2001:db8::/64\") from which to assign service cluster IPs. Max of two CIDRs is allowed, one of each IP family. This field is immutable.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    },
+                    "x-kubernetes-list-type": "atomic"
+                }
+            },
+            "x-kubernetes-group-version-kind": []
+        },
+        "io.k8s.api.networking.v1beta1.ServiceCIDRStatus": {
+            "description": "ServiceCIDRStatus describes the current state of the ServiceCIDR.",
+            "type": "object",
+            "properties": {
+                "conditions": {
+                    "description": "conditions holds an array of metav1.Condition that describe the state of the ServiceCIDR. Current service state",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Condition"
+                    },
+                    "x-kubernetes-list-map-keys": [
+                        "type"
+                    ],
+                    "x-kubernetes-list-type": "map",
+                    "x-kubernetes-patch-merge-key": "type",
+                    "x-kubernetes-patch-strategy": "merge"
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -42155,6 +42565,85 @@
                 }
             },
             "x-kubernetes-group-version-kind": []
+        },
+        "io.k8s.api.storage.v1beta1.VolumeAttributesClass": {
+            "description": "VolumeAttributesClass represents a specification of mutable volume attributes defined by the CSI driver. The class can be specified during dynamic provisioning of PersistentVolumeClaims, and changed in the PersistentVolumeClaim spec after provisioning.",
+            "type": "object",
+            "required": [
+                "driverName"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "driverName": {
+                    "description": "Name of the CSI driver This field is immutable.",
+                    "type": "string",
+                    "default": ""
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+                },
+                "parameters": {
+                    "description": "parameters hold volume attributes defined by the CSI driver. These values are opaque to the Kubernetes and are passed directly to the CSI driver. The underlying storage provider supports changing these attributes on an existing volume, however the parameters field itself is immutable. To invoke a volume update, a new VolumeAttributesClass should be created with new parameters, and the PersistentVolumeClaim should be updated to reference the new VolumeAttributesClass.\n\nThis field is required and must contain at least one key/value pair. The keys cannot be empty, and the maximum number of parameters is 512, with a cumulative max size of 256K. If the CSI driver rejects invalid parameters, the target PersistentVolumeClaim will be set to an \"Infeasible\" state in the modifyVolumeStatus field.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "storage.k8s.io",
+                    "kind": "VolumeAttributesClass",
+                    "version": "v1beta1"
+                }
+            ]
+        },
+        "io.k8s.api.storage.v1beta1.VolumeAttributesClassList": {
+            "description": "VolumeAttributesClassList is a collection of VolumeAttributesClass objects.",
+            "type": "object",
+            "required": [
+                "items"
+            ],
+            "properties": {
+                "apiVersion": {
+                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                    "type": "string"
+                },
+                "items": {
+                    "description": "items is the list of VolumeAttributesClass objects.",
+                    "type": "array",
+                    "items": {
+                        "default": {},
+                        "$ref": "#/definitions/io.k8s.api.storage.v1beta1.VolumeAttributesClass"
+                    }
+                },
+                "kind": {
+                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                    "type": "string"
+                },
+                "metadata": {
+                    "description": "Standard list metadata More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
+                    "default": {},
+                    "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "storage.k8s.io",
+                    "kind": "VolumeAttributesClassList",
+                    "version": "v1beta1"
+                }
+            ]
         },
         "io.k8s.api.storage.v1beta1.VolumeError": {
             "description": "VolumeError captures an error encountered during a volume operation.",
