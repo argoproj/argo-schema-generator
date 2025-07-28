@@ -1,0 +1,16 @@
+name: Security Scan
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - develop
+      - release/**
+
+jobs:
+  security-scan:
+    uses: NymCard-Payments/security-scan-gh-action/.github/workflows/gitleaks-scan.yml@master
+    secrets:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+      gitleaks-license: ${{ secrets.GITLEAKS_LICENSE }}
