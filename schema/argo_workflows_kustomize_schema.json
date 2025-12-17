@@ -859,6 +859,10 @@
             "description": "Backoff is a backoff strategy to use within retryStrategy",
             "type": "object",
             "properties": {
+                "cap": {
+                    "description": "Cap is a limit on revised values of the duration parameter. If a multiplication by the factor parameter would make the duration exceed the cap then the duration is set to the cap",
+                    "type": "string"
+                },
                 "duration": {
                     "description": "Duration is the amount to back off. Default unit is seconds, but could also be a duration (e.g. \"2m\", \"1h\")",
                     "type": "string"
@@ -1440,8 +1444,7 @@
             "description": "CronWorkflowSpec is the specification of a CronWorkflow",
             "type": "object",
             "required": [
-                "workflowSpec",
-                "schedule"
+                "workflowSpec"
             ],
             "properties": {
                 "concurrencyPolicy": {
@@ -1454,14 +1457,25 @@
                     "format": "int32"
                 },
                 "schedule": {
-                    "description": "Schedule is a schedule to run the Workflow in Cron format",
-                    "type": "string",
-                    "default": ""
+                    "description": "Schedule is a schedule to run the Workflow in Cron format. Deprecated, use Schedules",
+                    "type": "string"
+                },
+                "schedules": {
+                    "description": "v3.6 and after: Schedules is a list of schedules to run the Workflow in Cron format",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": ""
+                    }
                 },
                 "startingDeadlineSeconds": {
                     "description": "StartingDeadlineSeconds is the K8s-style deadline that will limit the time a CronWorkflow will be run after its original scheduled time if it is missed.",
                     "type": "integer",
                     "format": "int64"
+                },
+                "stopStrategy": {
+                    "description": "v3.6 and after: StopStrategy defines if the CronWorkflow should stop scheduling based on a condition",
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.StopStrategy"
                 },
                 "successfulJobsHistoryLimit": {
                     "description": "SuccessfulJobsHistoryLimit is the number of successful jobs to be kept at a time",
@@ -1474,6 +1488,10 @@
                 },
                 "timezone": {
                     "description": "Timezone is the timezone against which the cron schedule will be calculated, e.g. \"Asia/Tokyo\". Default is machine's local time.",
+                    "type": "string"
+                },
+                "when": {
+                    "description": "v3.6 and after: When is an expression that determines if a run should be scheduled.",
                     "type": "string"
                 },
                 "workflowMetadata": {
@@ -1497,11 +1515,6 @@
         "io.argoproj.workflow.v1alpha1.CronWorkflowStatus": {
             "description": "CronWorkflowStatus is the status of a CronWorkflow",
             "type": "object",
-            "required": [
-                "active",
-                "lastScheduledTime",
-                "conditions"
-            ],
             "properties": {
                 "active": {
                     "description": "Active is a list of active workflows stemming from this CronWorkflow",
@@ -1519,9 +1532,26 @@
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Condition"
                     }
                 },
+                "failed": {
+                    "description": "v3.6 and after: Failed counts how many times child workflows failed",
+                    "type": "integer",
+                    "format": "int64",
+                    "default": 0
+                },
                 "lastScheduledTime": {
                     "description": "LastScheduleTime is the last time the CronWorkflow was scheduled",
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+                },
+                "phase": {
+                    "description": "v3.6 and after: Phase is an enum of Active or Stopped. It changes to Stopped when stopStrategy.expression is true",
+                    "type": "string",
+                    "default": ""
+                },
+                "succeeded": {
+                    "description": "v3.6 and after: Succeeded counts how many times child workflows succeeded",
+                    "type": "integer",
+                    "format": "int64",
+                    "default": 0
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -1569,7 +1599,7 @@
                     }
                 },
                 "inline": {
-                    "description": "Inline is the template. Template must be empty if this is declared (and vice-versa).",
+                    "description": "Inline is the template. Template must be empty if this is declared (and vice-versa). Note: As mentioned in the corresponding definition in WorkflowStep, this struct is defined recursively, so we need \"x-kubernetes-preserve-unknown-fields: true\" in the validation schema.",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Template"
                 },
                 "name": {
@@ -1594,7 +1624,7 @@
                     "type": "string"
                 },
                 "withItems": {
-                    "description": "WithItems expands a task into multiple parallel tasks from the items in the list",
+                    "description": "WithItems expands a task into multiple parallel tasks from the items in the list Note: The structure of WithItems is free-form, so we need \"x-kubernetes-preserve-unknown-fields: true\" in the validation schema.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Item"
@@ -1872,6 +1902,10 @@
                     "description": "InsecureIgnoreHostKey disables SSH strict host key checking during git clone",
                     "type": "boolean"
                 },
+                "insecureSkipTLS": {
+                    "description": "InsecureSkipTLS disables server certificate verification resulting in insecure HTTPS connections",
+                    "type": "boolean"
+                },
                 "passwordSecret": {
                     "description": "PasswordSecret is the secret selector to the repository password",
                     "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
@@ -1920,6 +1954,10 @@
                         "type": "string",
                         "default": ""
                     }
+                },
+                "dataTransferProtection": {
+                    "description": "DataTransferProtection is the protection level for HDFS data transfer. It corresponds to the dfs.data.transfer.protection configuration in HDFS.",
+                    "type": "string"
                 },
                 "force": {
                     "description": "Force copies a file forcibly even if it exists",
@@ -1979,6 +2017,10 @@
                         "default": ""
                     }
                 },
+                "dataTransferProtection": {
+                    "description": "DataTransferProtection is the protection level for HDFS data transfer. It corresponds to the dfs.data.transfer.protection configuration in HDFS.",
+                    "type": "string"
+                },
                 "force": {
                     "description": "Force copies a file forcibly even if it exists",
                     "type": "boolean"
@@ -2035,6 +2077,10 @@
                         "type": "string",
                         "default": ""
                     }
+                },
+                "dataTransferProtection": {
+                    "description": "DataTransferProtection is the protection level for HDFS data transfer. It corresponds to the dfs.data.transfer.protection configuration in HDFS.",
+                    "type": "string"
                 },
                 "hdfsUser": {
                     "description": "HDFSUser is the user to access HDFS file system. It is ignored if either ccache or keytab is used.",
@@ -2662,6 +2708,10 @@
             "description": "Mutex holds Mutex configuration",
             "type": "object",
             "properties": {
+                "database": {
+                    "description": "Database specifies this is database controlled if this is set true",
+                    "type": "boolean"
+                },
                 "name": {
                     "description": "name of the mutex",
                     "type": "string"
@@ -2883,6 +2933,10 @@
                 "synchronizationStatus": {
                     "description": "SynchronizationStatus is the synchronization status of the node",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.NodeSynchronizationStatus"
+                },
+                "taskResultSynced": {
+                    "description": "TaskResultSynced is used to determine if the node's output has been received",
+                    "type": "boolean"
                 },
                 "templateName": {
                     "description": "TemplateName is the template name which this node corresponds to. Not applicable to virtual nodes (e.g. Retry, StepGroup)",
@@ -3208,7 +3262,7 @@
                     "x-kubernetes-patch-strategy": "merge"
                 },
                 "result": {
-                    "description": "Result holds the result (stdout) of a script template",
+                    "description": "Result holds the result (stdout) of a script or container template, or the response body of an HTTP template",
                     "type": "string"
                 }
             },
@@ -3221,6 +3275,7 @@
             ]
         },
         "io.argoproj.workflow.v1alpha1.ParallelSteps": {
+            "description": "swagger:ignore",
             "type": "array",
             "x-kubernetes-group-version-kind": [
                 {
@@ -3263,7 +3318,7 @@
                     "default": ""
                 },
                 "value": {
-                    "description": "Value is the literal value to use for the parameter. If specified in the context of an input parameter, the value takes precedence over any passed values",
+                    "description": "Value is the literal value to use for the parameter. If specified in the context of an input parameter, any passed values take precedence over the specified value",
                     "type": "string"
                 },
                 "valueFrom": {
@@ -3546,6 +3601,10 @@
                     "description": "SecretKeySecret is the secret selector to the bucket's secret key",
                     "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
                 },
+                "sessionTokenSecret": {
+                    "description": "SessionTokenSecret is used for ephemeral credentials like an IAM assume role or S3 access grant",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                },
                 "useSDKCreds": {
                     "description": "UseSDKCreds tells the driver to figure out credentials based on sdk defaults.",
                     "type": "boolean"
@@ -3610,6 +3669,10 @@
                     "description": "SecretKeySecret is the secret selector to the bucket's secret key",
                     "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
                 },
+                "sessionTokenSecret": {
+                    "description": "SessionTokenSecret is used for ephemeral credentials like an IAM assume role or S3 access grant",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                },
                 "useSDKCreds": {
                     "description": "UseSDKCreds tells the driver to figure out credentials based on sdk defaults.",
                     "type": "boolean"
@@ -3666,6 +3729,10 @@
                     "description": "SecretKeySecret is the secret selector to the bucket's secret key",
                     "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
                 },
+                "sessionTokenSecret": {
+                    "description": "SessionTokenSecret is used for ephemeral credentials like an IAM assume role or S3 access grant",
+                    "$ref": "#/definitions/io.k8s.api.core.v1.SecretKeySelector"
+                },
                 "useSDKCreds": {
                     "description": "UseSDKCreds tells the driver to figure out credentials based on sdk defaults.",
                     "type": "boolean"
@@ -3712,8 +3779,7 @@
             "description": "ScriptTemplate is a template subtype to enable scripting through code steps",
             "type": "object",
             "required": [
-                "name",
-                "source"
+                "name"
             ],
             "properties": {
                 "args": {
@@ -3919,8 +3985,12 @@
             "type": "object",
             "properties": {
                 "configMapKeyRef": {
-                    "description": "ConfigMapKeyRef is configmap selector for Semaphore configuration",
+                    "description": "ConfigMapKeyRef is a configmap selector for Semaphore configuration",
                     "$ref": "#/definitions/io.k8s.api.core.v1.ConfigMapKeySelector"
+                },
+                "database": {
+                    "description": "SyncDatabaseRef is a database reference for Semaphore configuration",
+                    "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.SyncDatabaseRef"
                 },
                 "namespace": {
                     "description": "Namespace is the namespace of the configmap, default: [namespace of workflow]",
@@ -3988,6 +4058,27 @@
                 {
                     "group": "argoproj.io",
                     "kind": "Sequence",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
+        "io.argoproj.workflow.v1alpha1.StopStrategy": {
+            "description": "StopStrategy defines if the CronWorkflow should stop scheduling based on an expression. v3.6 and after",
+            "type": "object",
+            "required": [
+                "expression"
+            ],
+            "properties": {
+                "expression": {
+                    "description": "v3.6 and after: Expression is an expression that stops scheduling workflows when true. Use the variables `cronworkflow`.`failed` or `cronworkflow`.`succeeded` to access the number of failed or successful child workflows.",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "StopStrategy",
                     "version": "v1alpha1"
                 }
             ]
@@ -4115,17 +4206,50 @@
                 }
             ]
         },
+        "io.argoproj.workflow.v1alpha1.SyncDatabaseRef": {
+            "type": "object",
+            "required": [
+                "key"
+            ],
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "x-kubernetes-group-version-kind": [
+                {
+                    "group": "argoproj.io",
+                    "kind": "SyncDatabaseRef",
+                    "version": "v1alpha1"
+                }
+            ]
+        },
         "io.argoproj.workflow.v1alpha1.Synchronization": {
             "description": "Synchronization holds synchronization lock configuration",
             "type": "object",
             "properties": {
                 "mutex": {
-                    "description": "Mutex holds the Mutex lock details",
+                    "description": "Mutex holds the Mutex lock details - deprecated, use mutexes instead",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Mutex"
                 },
+                "mutexes": {
+                    "description": "v3.6 and after: Mutexes holds the list of Mutex lock details",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Mutex"
+                    }
+                },
                 "semaphore": {
-                    "description": "Semaphore holds the Semaphore configuration",
+                    "description": "Semaphore holds the Semaphore configuration - deprecated, use semaphores instead",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.SemaphoreRef"
+                },
+                "semaphores": {
+                    "description": "v3.6 and after: Semaphores holds the list of Semaphores configuration",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.SemaphoreRef"
+                    }
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -4214,6 +4338,14 @@
                 "affinity": {
                     "description": "Affinity sets the pod's scheduling constraints Overrides the affinity set at the workflow level (if any)",
                     "$ref": "#/definitions/io.k8s.api.core.v1.Affinity"
+                },
+                "annotations": {
+                    "description": "Annotations is a list of annotations to add to the template at runtime",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "default": ""
+                    }
                 },
                 "archiveLocation": {
                     "description": "Location in which all files related to the step will be stored (logs, artifacts, etc...). Can be overridden by individual items in Outputs. If omitted, will use the default artifact repository location configured in the controller, appended with the \u003cworkflowname\u003e/\u003cnodename\u003e in the key.",
@@ -4316,17 +4448,12 @@
                     "format": "int64"
                 },
                 "plugin": {
-                    "description": "Plugin is a plugin template",
+                    "description": "Plugin is a plugin template Note: the structure of a plugin template is free-form, so we need to have \"x-kubernetes-preserve-unknown-fields: true\" in the validation schema.",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Plugin"
                 },
                 "podSpecPatch": {
                     "description": "PodSpecPatch holds strategic merge patch to apply against the pod spec. Allows parameterization of container fields which are not strings (e.g. resource limits).",
                     "type": "string"
-                },
-                "priority": {
-                    "description": "Priority to apply to workflow pods.",
-                    "type": "integer",
-                    "format": "int32"
                 },
                 "priorityClassName": {
                     "description": "PriorityClassName to apply to workflow pods.",
@@ -5177,11 +5304,6 @@
                     "description": "PodMetadata defines additional metadata that should be applied to workflow pods",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Metadata"
                 },
-                "podPriority": {
-                    "description": "Priority to apply to workflow pods. DEPRECATED: Use PodPriorityClassName instead.",
-                    "type": "integer",
-                    "format": "int32"
-                },
                 "podPriorityClassName": {
                     "description": "PriorityClassName to apply to workflow pods.",
                     "type": "string"
@@ -5427,7 +5549,7 @@
                     }
                 },
                 "inline": {
-                    "description": "Inline is the template. Template must be empty if this is declared (and vice-versa).",
+                    "description": "Inline is the template. Template must be empty if this is declared (and vice-versa). Note: This struct is defined recursively, since the inline template can potentially contain steps/DAGs that also has an \"inline\" field. Kubernetes doesn't allow recursive types, so we need \"x-kubernetes-preserve-unknown-fields: true\" in the validation schema.",
                     "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Template"
                 },
                 "name": {
@@ -5451,7 +5573,7 @@
                     "type": "string"
                 },
                 "withItems": {
-                    "description": "WithItems expands a step into multiple parallel steps from the items in the list",
+                    "description": "WithItems expands a step into multiple parallel steps from the items in the list Note: The structure of WithItems is free-form, so we need \"x-kubernetes-preserve-unknown-fields: true\" in the validation schema.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Item"

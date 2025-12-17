@@ -22,970 +22,150 @@ limitations under the License.
 package events
 
 import (
+	v1alpha1 "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1"
 	common "k8s.io/kube-openapi/pkg/common"
 	spec "k8s.io/kube-openapi/pkg/validation/spec"
 )
 
 func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenAPIDefinition {
 	return map[string]common.OpenAPIDefinition{
-		"github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.BusConfig":                       schema_pkg_apis_eventbus_v1alpha1_BusConfig(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.ContainerTemplate":               schema_pkg_apis_eventbus_v1alpha1_ContainerTemplate(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.EventBus":                        schema_pkg_apis_eventbus_v1alpha1_EventBus(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.EventBusList":                    schema_pkg_apis_eventbus_v1alpha1_EventBusList(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.EventBusSpec":                    schema_pkg_apis_eventbus_v1alpha1_EventBusSpec(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.EventBusStatus":                  schema_pkg_apis_eventbus_v1alpha1_EventBusStatus(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.JetStreamBus":                    schema_pkg_apis_eventbus_v1alpha1_JetStreamBus(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.JetStreamConfig":                 schema_pkg_apis_eventbus_v1alpha1_JetStreamConfig(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.KafkaBus":                        schema_pkg_apis_eventbus_v1alpha1_KafkaBus(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.KafkaConsumerGroup":              schema_pkg_apis_eventbus_v1alpha1_KafkaConsumerGroup(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.NATSBus":                         schema_pkg_apis_eventbus_v1alpha1_NATSBus(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.NATSConfig":                      schema_pkg_apis_eventbus_v1alpha1_NATSConfig(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.NativeStrategy":                  schema_pkg_apis_eventbus_v1alpha1_NativeStrategy(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.PersistenceStrategy":             schema_pkg_apis_eventbus_v1alpha1_PersistenceStrategy(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AMQPConsumeConfig":            schema_pkg_apis_eventsource_v1alpha1_AMQPConsumeConfig(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AMQPEventSource":              schema_pkg_apis_eventsource_v1alpha1_AMQPEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AMQPExchangeDeclareConfig":    schema_pkg_apis_eventsource_v1alpha1_AMQPExchangeDeclareConfig(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AMQPQueueBindConfig":          schema_pkg_apis_eventsource_v1alpha1_AMQPQueueBindConfig(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AMQPQueueDeclareConfig":       schema_pkg_apis_eventsource_v1alpha1_AMQPQueueDeclareConfig(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AzureEventsHubEventSource":    schema_pkg_apis_eventsource_v1alpha1_AzureEventsHubEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AzureQueueStorageEventSource": schema_pkg_apis_eventsource_v1alpha1_AzureQueueStorageEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AzureServiceBusEventSource":   schema_pkg_apis_eventsource_v1alpha1_AzureServiceBusEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.BitbucketAuth":                schema_pkg_apis_eventsource_v1alpha1_BitbucketAuth(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.BitbucketBasicAuth":           schema_pkg_apis_eventsource_v1alpha1_BitbucketBasicAuth(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.BitbucketEventSource":         schema_pkg_apis_eventsource_v1alpha1_BitbucketEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.BitbucketRepository":          schema_pkg_apis_eventsource_v1alpha1_BitbucketRepository(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.BitbucketServerEventSource":   schema_pkg_apis_eventsource_v1alpha1_BitbucketServerEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.BitbucketServerRepository":    schema_pkg_apis_eventsource_v1alpha1_BitbucketServerRepository(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.CalendarEventSource":          schema_pkg_apis_eventsource_v1alpha1_CalendarEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.CatchupConfiguration":         schema_pkg_apis_eventsource_v1alpha1_CatchupConfiguration(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.ConfigMapPersistence":         schema_pkg_apis_eventsource_v1alpha1_ConfigMapPersistence(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EmitterEventSource":           schema_pkg_apis_eventsource_v1alpha1_EmitterEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventPersistence":             schema_pkg_apis_eventsource_v1alpha1_EventPersistence(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSource":                  schema_pkg_apis_eventsource_v1alpha1_EventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter":            schema_pkg_apis_eventsource_v1alpha1_EventSourceFilter(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceList":              schema_pkg_apis_eventsource_v1alpha1_EventSourceList(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceSpec":              schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceStatus":            schema_pkg_apis_eventsource_v1alpha1_EventSourceStatus(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.FileEventSource":              schema_pkg_apis_eventsource_v1alpha1_FileEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.GenericEventSource":           schema_pkg_apis_eventsource_v1alpha1_GenericEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.GerritEventSource":            schema_pkg_apis_eventsource_v1alpha1_GerritEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.GithubAppCreds":               schema_pkg_apis_eventsource_v1alpha1_GithubAppCreds(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.GithubEventSource":            schema_pkg_apis_eventsource_v1alpha1_GithubEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.GitlabEventSource":            schema_pkg_apis_eventsource_v1alpha1_GitlabEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.HDFSEventSource":              schema_pkg_apis_eventsource_v1alpha1_HDFSEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.KafkaConsumerGroup":           schema_pkg_apis_eventsource_v1alpha1_KafkaConsumerGroup(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.KafkaEventSource":             schema_pkg_apis_eventsource_v1alpha1_KafkaEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.MQTTEventSource":              schema_pkg_apis_eventsource_v1alpha1_MQTTEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.NATSAuth":                     schema_pkg_apis_eventsource_v1alpha1_NATSAuth(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.NATSEventsSource":             schema_pkg_apis_eventsource_v1alpha1_NATSEventsSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.NSQEventSource":               schema_pkg_apis_eventsource_v1alpha1_NSQEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.OwnedRepositories":            schema_pkg_apis_eventsource_v1alpha1_OwnedRepositories(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.PubSubEventSource":            schema_pkg_apis_eventsource_v1alpha1_PubSubEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.PulsarEventSource":            schema_pkg_apis_eventsource_v1alpha1_PulsarEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.RedisEventSource":             schema_pkg_apis_eventsource_v1alpha1_RedisEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.RedisStreamEventSource":       schema_pkg_apis_eventsource_v1alpha1_RedisStreamEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.ResourceEventSource":          schema_pkg_apis_eventsource_v1alpha1_ResourceEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.ResourceFilter":               schema_pkg_apis_eventsource_v1alpha1_ResourceFilter(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.SFTPEventSource":              schema_pkg_apis_eventsource_v1alpha1_SFTPEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.SNSEventSource":               schema_pkg_apis_eventsource_v1alpha1_SNSEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.SQSEventSource":               schema_pkg_apis_eventsource_v1alpha1_SQSEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.Selector":                     schema_pkg_apis_eventsource_v1alpha1_Selector(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.Service":                      schema_pkg_apis_eventsource_v1alpha1_Service(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.SlackEventSource":             schema_pkg_apis_eventsource_v1alpha1_SlackEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.StorageGridEventSource":       schema_pkg_apis_eventsource_v1alpha1_StorageGridEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.StorageGridFilter":            schema_pkg_apis_eventsource_v1alpha1_StorageGridFilter(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.StripeEventSource":            schema_pkg_apis_eventsource_v1alpha1_StripeEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.Template":                     schema_pkg_apis_eventsource_v1alpha1_Template(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WatchPathConfig":              schema_pkg_apis_eventsource_v1alpha1_WatchPathConfig(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookContext":               schema_pkg_apis_eventsource_v1alpha1_WebhookContext(ref),
-		"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookEventSource":           schema_pkg_apis_eventsource_v1alpha1_WebhookEventSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.AWSLambdaTrigger":                  schema_pkg_apis_sensor_v1alpha1_AWSLambdaTrigger(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.ArgoWorkflowTrigger":               schema_pkg_apis_sensor_v1alpha1_ArgoWorkflowTrigger(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.ArtifactLocation":                  schema_pkg_apis_sensor_v1alpha1_ArtifactLocation(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.AzureEventHubsTrigger":             schema_pkg_apis_sensor_v1alpha1_AzureEventHubsTrigger(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.AzureServiceBusTrigger":            schema_pkg_apis_sensor_v1alpha1_AzureServiceBusTrigger(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.ConditionsResetByTime":             schema_pkg_apis_sensor_v1alpha1_ConditionsResetByTime(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.ConditionsResetCriteria":           schema_pkg_apis_sensor_v1alpha1_ConditionsResetCriteria(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.CustomTrigger":                     schema_pkg_apis_sensor_v1alpha1_CustomTrigger(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.DataFilter":                        schema_pkg_apis_sensor_v1alpha1_DataFilter(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.EmailTrigger":                      schema_pkg_apis_sensor_v1alpha1_EmailTrigger(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.Event":                             schema_pkg_apis_sensor_v1alpha1_Event(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.EventContext":                      schema_pkg_apis_sensor_v1alpha1_EventContext(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.EventDependency":                   schema_pkg_apis_sensor_v1alpha1_EventDependency(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.EventDependencyFilter":             schema_pkg_apis_sensor_v1alpha1_EventDependencyFilter(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.EventDependencyTransformer":        schema_pkg_apis_sensor_v1alpha1_EventDependencyTransformer(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.ExprFilter":                        schema_pkg_apis_sensor_v1alpha1_ExprFilter(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.FileArtifact":                      schema_pkg_apis_sensor_v1alpha1_FileArtifact(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.GitArtifact":                       schema_pkg_apis_sensor_v1alpha1_GitArtifact(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.GitCreds":                          schema_pkg_apis_sensor_v1alpha1_GitCreds(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.GitRemoteConfig":                   schema_pkg_apis_sensor_v1alpha1_GitRemoteConfig(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.HTTPTrigger":                       schema_pkg_apis_sensor_v1alpha1_HTTPTrigger(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.K8SResourcePolicy":                 schema_pkg_apis_sensor_v1alpha1_K8SResourcePolicy(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.KafkaTrigger":                      schema_pkg_apis_sensor_v1alpha1_KafkaTrigger(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.LogTrigger":                        schema_pkg_apis_sensor_v1alpha1_LogTrigger(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.NATSTrigger":                       schema_pkg_apis_sensor_v1alpha1_NATSTrigger(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.OpenWhiskTrigger":                  schema_pkg_apis_sensor_v1alpha1_OpenWhiskTrigger(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.PayloadField":                      schema_pkg_apis_sensor_v1alpha1_PayloadField(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.PulsarTrigger":                     schema_pkg_apis_sensor_v1alpha1_PulsarTrigger(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.RateLimit":                         schema_pkg_apis_sensor_v1alpha1_RateLimit(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.Sensor":                            schema_pkg_apis_sensor_v1alpha1_Sensor(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.SensorList":                        schema_pkg_apis_sensor_v1alpha1_SensorList(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.SensorSpec":                        schema_pkg_apis_sensor_v1alpha1_SensorSpec(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.SensorStatus":                      schema_pkg_apis_sensor_v1alpha1_SensorStatus(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.SlackSender":                       schema_pkg_apis_sensor_v1alpha1_SlackSender(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.SlackThread":                       schema_pkg_apis_sensor_v1alpha1_SlackThread(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.SlackTrigger":                      schema_pkg_apis_sensor_v1alpha1_SlackTrigger(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.StandardK8STrigger":                schema_pkg_apis_sensor_v1alpha1_StandardK8STrigger(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.StatusPolicy":                      schema_pkg_apis_sensor_v1alpha1_StatusPolicy(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.Template":                          schema_pkg_apis_sensor_v1alpha1_Template(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TimeFilter":                        schema_pkg_apis_sensor_v1alpha1_TimeFilter(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.Trigger":                           schema_pkg_apis_sensor_v1alpha1_Trigger(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter":                  schema_pkg_apis_sensor_v1alpha1_TriggerParameter(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameterSource":            schema_pkg_apis_sensor_v1alpha1_TriggerParameterSource(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerPolicy":                     schema_pkg_apis_sensor_v1alpha1_TriggerPolicy(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerTemplate":                   schema_pkg_apis_sensor_v1alpha1_TriggerTemplate(ref),
-		"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.URLArtifact":                       schema_pkg_apis_sensor_v1alpha1_URLArtifact(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AMQPConsumeConfig":            schema_pkg_apis_events_v1alpha1_AMQPConsumeConfig(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AMQPEventSource":              schema_pkg_apis_events_v1alpha1_AMQPEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AMQPExchangeDeclareConfig":    schema_pkg_apis_events_v1alpha1_AMQPExchangeDeclareConfig(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AMQPQueueBindConfig":          schema_pkg_apis_events_v1alpha1_AMQPQueueBindConfig(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AMQPQueueDeclareConfig":       schema_pkg_apis_events_v1alpha1_AMQPQueueDeclareConfig(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AWSLambdaTrigger":             schema_pkg_apis_events_v1alpha1_AWSLambdaTrigger(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Amount":                       schema_pkg_apis_events_v1alpha1_Amount(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ArgoWorkflowTrigger":          schema_pkg_apis_events_v1alpha1_ArgoWorkflowTrigger(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ArtifactLocation":             schema_pkg_apis_events_v1alpha1_ArtifactLocation(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureEventHubsTrigger":        schema_pkg_apis_events_v1alpha1_AzureEventHubsTrigger(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureEventsHubEventSource":    schema_pkg_apis_events_v1alpha1_AzureEventsHubEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureQueueStorageEventSource": schema_pkg_apis_events_v1alpha1_AzureQueueStorageEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureServiceBusEventSource":   schema_pkg_apis_events_v1alpha1_AzureServiceBusEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureServiceBusTrigger":       schema_pkg_apis_events_v1alpha1_AzureServiceBusTrigger(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff":                      schema_pkg_apis_events_v1alpha1_Backoff(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BasicAuth":                    schema_pkg_apis_events_v1alpha1_BasicAuth(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketAuth":                schema_pkg_apis_events_v1alpha1_BitbucketAuth(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketBasicAuth":           schema_pkg_apis_events_v1alpha1_BitbucketBasicAuth(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketEventSource":         schema_pkg_apis_events_v1alpha1_BitbucketEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketRepository":          schema_pkg_apis_events_v1alpha1_BitbucketRepository(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketServerEventSource":   schema_pkg_apis_events_v1alpha1_BitbucketServerEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketServerRepository":    schema_pkg_apis_events_v1alpha1_BitbucketServerRepository(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BusConfig":                    schema_pkg_apis_events_v1alpha1_BusConfig(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.CalendarEventSource":          schema_pkg_apis_events_v1alpha1_CalendarEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.CatchupConfiguration":         schema_pkg_apis_events_v1alpha1_CatchupConfiguration(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Condition":                    schema_pkg_apis_events_v1alpha1_Condition(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ConditionsResetByTime":        schema_pkg_apis_events_v1alpha1_ConditionsResetByTime(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ConditionsResetCriteria":      schema_pkg_apis_events_v1alpha1_ConditionsResetCriteria(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ConfigMapPersistence":         schema_pkg_apis_events_v1alpha1_ConfigMapPersistence(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Container":                    schema_pkg_apis_events_v1alpha1_Container(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ContainerTemplate":            schema_pkg_apis_events_v1alpha1_ContainerTemplate(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.CustomTrigger":                schema_pkg_apis_events_v1alpha1_CustomTrigger(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.DataFilter":                   schema_pkg_apis_events_v1alpha1_DataFilter(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EmailTrigger":                 schema_pkg_apis_events_v1alpha1_EmailTrigger(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EmitterEventSource":           schema_pkg_apis_events_v1alpha1_EmitterEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Event":                        schema_pkg_apis_events_v1alpha1_Event(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventBus":                     schema_pkg_apis_events_v1alpha1_EventBus(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventBusList":                 schema_pkg_apis_events_v1alpha1_EventBusList(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventBusSpec":                 schema_pkg_apis_events_v1alpha1_EventBusSpec(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventBusStatus":               schema_pkg_apis_events_v1alpha1_EventBusStatus(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventContext":                 schema_pkg_apis_events_v1alpha1_EventContext(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventDependency":              schema_pkg_apis_events_v1alpha1_EventDependency(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventDependencyFilter":        schema_pkg_apis_events_v1alpha1_EventDependencyFilter(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventDependencyTransformer":   schema_pkg_apis_events_v1alpha1_EventDependencyTransformer(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventPersistence":             schema_pkg_apis_events_v1alpha1_EventPersistence(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSource":                  schema_pkg_apis_events_v1alpha1_EventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter":            schema_pkg_apis_events_v1alpha1_EventSourceFilter(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceList":              schema_pkg_apis_events_v1alpha1_EventSourceList(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceSpec":              schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceStatus":            schema_pkg_apis_events_v1alpha1_EventSourceStatus(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ExprFilter":                   schema_pkg_apis_events_v1alpha1_ExprFilter(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.FileArtifact":                 schema_pkg_apis_events_v1alpha1_FileArtifact(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.FileEventSource":              schema_pkg_apis_events_v1alpha1_FileEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GenericEventSource":           schema_pkg_apis_events_v1alpha1_GenericEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GerritEventSource":            schema_pkg_apis_events_v1alpha1_GerritEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GitArtifact":                  schema_pkg_apis_events_v1alpha1_GitArtifact(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GitCreds":                     schema_pkg_apis_events_v1alpha1_GitCreds(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GitRemoteConfig":              schema_pkg_apis_events_v1alpha1_GitRemoteConfig(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GithubAppCreds":               schema_pkg_apis_events_v1alpha1_GithubAppCreds(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GithubEventSource":            schema_pkg_apis_events_v1alpha1_GithubEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GitlabEventSource":            schema_pkg_apis_events_v1alpha1_GitlabEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.HDFSEventSource":              schema_pkg_apis_events_v1alpha1_HDFSEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.HTTPTrigger":                  schema_pkg_apis_events_v1alpha1_HTTPTrigger(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Int64OrString":                schema_pkg_apis_events_v1alpha1_Int64OrString(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.JetStreamBus":                 schema_pkg_apis_events_v1alpha1_JetStreamBus(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.JetStreamConfig":              schema_pkg_apis_events_v1alpha1_JetStreamConfig(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.K8SResource":                  schema_pkg_apis_events_v1alpha1_K8SResource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.K8SResourcePolicy":            schema_pkg_apis_events_v1alpha1_K8SResourcePolicy(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.KafkaBus":                     schema_pkg_apis_events_v1alpha1_KafkaBus(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.KafkaConsumerGroup":           schema_pkg_apis_events_v1alpha1_KafkaConsumerGroup(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.KafkaEventSource":             schema_pkg_apis_events_v1alpha1_KafkaEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.KafkaTrigger":                 schema_pkg_apis_events_v1alpha1_KafkaTrigger(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.LogTrigger":                   schema_pkg_apis_events_v1alpha1_LogTrigger(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.MNSEventSource":               schema_pkg_apis_events_v1alpha1_MNSEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.MQTTEventSource":              schema_pkg_apis_events_v1alpha1_MQTTEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Metadata":                     schema_pkg_apis_events_v1alpha1_Metadata(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSAuth":                     schema_pkg_apis_events_v1alpha1_NATSAuth(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSBus":                      schema_pkg_apis_events_v1alpha1_NATSBus(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSConfig":                   schema_pkg_apis_events_v1alpha1_NATSConfig(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSEventsSource":             schema_pkg_apis_events_v1alpha1_NATSEventsSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSTrigger":                  schema_pkg_apis_events_v1alpha1_NATSTrigger(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NSQEventSource":               schema_pkg_apis_events_v1alpha1_NSQEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NativeStrategy":               schema_pkg_apis_events_v1alpha1_NativeStrategy(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.OpenWhiskTrigger":             schema_pkg_apis_events_v1alpha1_OpenWhiskTrigger(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.OwnedRepositories":            schema_pkg_apis_events_v1alpha1_OwnedRepositories(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PayloadField":                 schema_pkg_apis_events_v1alpha1_PayloadField(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PersistenceStrategy":          schema_pkg_apis_events_v1alpha1_PersistenceStrategy(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PubSubEventSource":            schema_pkg_apis_events_v1alpha1_PubSubEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PulsarEventSource":            schema_pkg_apis_events_v1alpha1_PulsarEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PulsarTrigger":                schema_pkg_apis_events_v1alpha1_PulsarTrigger(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.RateLimit":                    schema_pkg_apis_events_v1alpha1_RateLimit(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.RedisEventSource":             schema_pkg_apis_events_v1alpha1_RedisEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.RedisStreamEventSource":       schema_pkg_apis_events_v1alpha1_RedisStreamEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ResourceEventSource":          schema_pkg_apis_events_v1alpha1_ResourceEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ResourceFilter":               schema_pkg_apis_events_v1alpha1_ResourceFilter(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.S3Artifact":                   schema_pkg_apis_events_v1alpha1_S3Artifact(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.S3Bucket":                     schema_pkg_apis_events_v1alpha1_S3Bucket(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.S3Filter":                     schema_pkg_apis_events_v1alpha1_S3Filter(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SASLConfig":                   schema_pkg_apis_events_v1alpha1_SASLConfig(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SFTPEventSource":              schema_pkg_apis_events_v1alpha1_SFTPEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SNSEventSource":               schema_pkg_apis_events_v1alpha1_SNSEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SQSEventSource":               schema_pkg_apis_events_v1alpha1_SQSEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SchemaRegistryConfig":         schema_pkg_apis_events_v1alpha1_SchemaRegistryConfig(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SecureHeader":                 schema_pkg_apis_events_v1alpha1_SecureHeader(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Selector":                     schema_pkg_apis_events_v1alpha1_Selector(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Sensor":                       schema_pkg_apis_events_v1alpha1_Sensor(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SensorList":                   schema_pkg_apis_events_v1alpha1_SensorList(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SensorSpec":                   schema_pkg_apis_events_v1alpha1_SensorSpec(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SensorStatus":                 schema_pkg_apis_events_v1alpha1_SensorStatus(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Service":                      schema_pkg_apis_events_v1alpha1_Service(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SlackEventSource":             schema_pkg_apis_events_v1alpha1_SlackEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SlackSender":                  schema_pkg_apis_events_v1alpha1_SlackSender(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SlackThread":                  schema_pkg_apis_events_v1alpha1_SlackThread(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SlackTrigger":                 schema_pkg_apis_events_v1alpha1_SlackTrigger(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.StandardK8STrigger":           schema_pkg_apis_events_v1alpha1_StandardK8STrigger(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Status":                       schema_pkg_apis_events_v1alpha1_Status(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.StatusPolicy":                 schema_pkg_apis_events_v1alpha1_StatusPolicy(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.StorageGridEventSource":       schema_pkg_apis_events_v1alpha1_StorageGridEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.StorageGridFilter":            schema_pkg_apis_events_v1alpha1_StorageGridFilter(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.StripeEventSource":            schema_pkg_apis_events_v1alpha1_StripeEventSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig":                    schema_pkg_apis_events_v1alpha1_TLSConfig(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Template":                     schema_pkg_apis_events_v1alpha1_Template(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TimeFilter":                   schema_pkg_apis_events_v1alpha1_TimeFilter(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Trigger":                      schema_pkg_apis_events_v1alpha1_Trigger(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter":             schema_pkg_apis_events_v1alpha1_TriggerParameter(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameterSource":       schema_pkg_apis_events_v1alpha1_TriggerParameterSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerPolicy":                schema_pkg_apis_events_v1alpha1_TriggerPolicy(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerTemplate":              schema_pkg_apis_events_v1alpha1_TriggerTemplate(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.URLArtifact":                  schema_pkg_apis_events_v1alpha1_URLArtifact(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ValueFromSource":              schema_pkg_apis_events_v1alpha1_ValueFromSource(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WatchPathConfig":              schema_pkg_apis_events_v1alpha1_WatchPathConfig(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookContext":               schema_pkg_apis_events_v1alpha1_WebhookContext(ref),
+		"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookEventSource":           schema_pkg_apis_events_v1alpha1_WebhookEventSource(ref),
 	}
 }
 
-func schema_pkg_apis_eventbus_v1alpha1_BusConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "BusConfig has the finalized configuration for EventBus",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"nats": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.NATSConfig"),
-						},
-					},
-					"jetstream": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.JetStreamConfig"),
-						},
-					},
-					"kafka": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.KafkaBus"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.JetStreamConfig", "github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.KafkaBus", "github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.NATSConfig"},
-	}
-}
-
-func schema_pkg_apis_eventbus_v1alpha1_ContainerTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "ContainerTemplate defines customized spec for a container",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"resources": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/api/core/v1.ResourceRequirements"),
-						},
-					},
-					"imagePullPolicy": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"securityContext": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/api/core/v1.SecurityContext"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"k8s.io/api/core/v1.ResourceRequirements", "k8s.io/api/core/v1.SecurityContext"},
-	}
-}
-
-func schema_pkg_apis_eventbus_v1alpha1_EventBus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "EventBus is the definition of a eventbus resource",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.EventBusSpec"),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.EventBusStatus"),
-						},
-					},
-				},
-				Required: []string{"metadata", "spec"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.EventBusSpec", "github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.EventBusStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
-	}
-}
-
-func schema_pkg_apis_eventbus_v1alpha1_EventBusList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "EventBusList is the list of eventbus resources",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.EventBus"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"metadata", "items"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.EventBus", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
-	}
-}
-
-func schema_pkg_apis_eventbus_v1alpha1_EventBusSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "EventBusSpec refers to specification of eventbus resource",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"nats": {
-						SchemaProps: spec.SchemaProps{
-							Description: "NATS eventbus",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.NATSBus"),
-						},
-					},
-					"jetstream": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.JetStreamBus"),
-						},
-					},
-					"kafka": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kafka eventbus",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.KafkaBus"),
-						},
-					},
-					"jetstreamExotic": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Exotic JetStream",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.JetStreamConfig"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.JetStreamBus", "github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.JetStreamConfig", "github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.KafkaBus", "github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.NATSBus"},
-	}
-}
-
-func schema_pkg_apis_eventbus_v1alpha1_EventBusStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "EventBusStatus holds the status of the eventbus resource",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"conditions": {
-						VendorExtensible: spec.VendorExtensible{
-							Extensions: spec.Extensions{
-								"x-kubernetes-patch-merge-key": "type",
-								"x-kubernetes-patch-strategy":  "merge",
-							},
-						},
-						SchemaProps: spec.SchemaProps{
-							Description: "Conditions are the latest available observations of a resource's current state.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/common.Condition"),
-									},
-								},
-							},
-						},
-					},
-					"config": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Config holds the fininalized configuration of EventBus",
-							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.BusConfig"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.Condition", "github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.BusConfig"},
-	}
-}
-
-func schema_pkg_apis_eventbus_v1alpha1_JetStreamBus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "JetStreamBus holds the JetStream EventBus information",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"version": {
-						SchemaProps: spec.SchemaProps{
-							Description: "JetStream version, such as \"2.7.3\"",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"replicas": {
-						SchemaProps: spec.SchemaProps{
-							Description: "JetStream StatefulSet size",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"containerTemplate": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ContainerTemplate contains customized spec for Nats JetStream container",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.ContainerTemplate"),
-						},
-					},
-					"reloaderContainerTemplate": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ReloaderContainerTemplate contains customized spec for config reloader container",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.ContainerTemplate"),
-						},
-					},
-					"metricsContainerTemplate": {
-						SchemaProps: spec.SchemaProps{
-							Description: "MetricsContainerTemplate contains customized spec for metrics container",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.ContainerTemplate"),
-						},
-					},
-					"persistence": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.PersistenceStrategy"),
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Metadata sets the pods's metadata, i.e. annotations and labels",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.Metadata"),
-						},
-					},
-					"nodeSelector": {
-						SchemaProps: spec.SchemaProps{
-							Description: "NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"tolerations": {
-						SchemaProps: spec.SchemaProps{
-							Description: "If specified, the pod's tolerations.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/api/core/v1.Toleration"),
-									},
-								},
-							},
-						},
-					},
-					"securityContext": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SecurityContext holds pod-level security attributes and common container settings. Optional: Defaults to empty.  See type description for default values of each field.",
-							Ref:         ref("k8s.io/api/core/v1.PodSecurityContext"),
-						},
-					},
-					"imagePullSecrets": {
-						VendorExtensible: spec.VendorExtensible{
-							Extensions: spec.Extensions{
-								"x-kubernetes-patch-merge-key": "name",
-								"x-kubernetes-patch-strategy":  "merge",
-							},
-						},
-						SchemaProps: spec.SchemaProps{
-							Description: "ImagePullSecrets is an optional list of references to secrets in the same namespace to use for pulling any of the images used by this PodSpec. If specified, these secrets will be passed to individual puller implementations for them to use. For example, in the case of docker, only DockerConfig type secrets are honored. More info: https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/api/core/v1.LocalObjectReference"),
-									},
-								},
-							},
-						},
-					},
-					"priorityClassName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "If specified, indicates the Redis pod's priority. \"system-node-critical\" and \"system-cluster-critical\" are two special keywords which indicate the highest priorities with the former being the highest priority. Any other name must be defined by creating a PriorityClass object with that name. If not specified, the pod priority will be default or zero if there is no default. More info: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"priority": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The priority value. Various system components use this field to find the priority of the Redis pod. When Priority Admission Controller is enabled, it prevents users from setting this field. The admission controller populates this field from PriorityClassName. The higher the value, the higher the priority. More info: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"affinity": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The pod's scheduling constraints More info: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/",
-							Ref:         ref("k8s.io/api/core/v1.Affinity"),
-						},
-					},
-					"serviceAccountName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ServiceAccountName to apply to the StatefulSet",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"settings": {
-						SchemaProps: spec.SchemaProps{
-							Description: "JetStream configuration, if not specified, global settings in controller-config will be used. See https://docs.nats.io/running-a-nats-service/configuration#jetstream. Only configure \"max_memory_store\" or \"max_file_store\", do not set \"store_dir\" as it has been hardcoded.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"startArgs": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Optional arguments to start nats-server. For example, \"-D\" to enable debugging output, \"-DV\" to enable debugging and tracing. Check https://docs.nats.io/ for all the available arguments.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"streamConfig": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Optional configuration for the streams to be created in this JetStream service, if specified, it will be merged with the default configuration in controller-config. It accepts a YAML format configuration, available fields include, \"maxBytes\", \"maxMsgs\", \"maxAge\" (e.g. 72h), \"replicas\" (1, 3, 5), \"duplicates\" (e.g. 5m).",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"maxPayload": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Maximum number of bytes in a message payload, 0 means unlimited. Defaults to 1MB",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.Metadata", "github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.ContainerTemplate", "github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.PersistenceStrategy", "k8s.io/api/core/v1.Affinity", "k8s.io/api/core/v1.LocalObjectReference", "k8s.io/api/core/v1.PodSecurityContext", "k8s.io/api/core/v1.Toleration"},
-	}
-}
-
-func schema_pkg_apis_eventbus_v1alpha1_JetStreamConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"url": {
-						SchemaProps: spec.SchemaProps{
-							Description: "JetStream (Nats) URL",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"accessSecret": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Secret for auth",
-							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
-						},
-					},
-					"streamConfig": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"k8s.io/api/core/v1.SecretKeySelector"},
-	}
-}
-
-func schema_pkg_apis_eventbus_v1alpha1_KafkaBus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "KafkaBus holds the KafkaBus EventBus information",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"url": {
-						SchemaProps: spec.SchemaProps{
-							Description: "URL to kafka cluster, multiple URLs separated by comma",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"topic": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Topic name, defaults to {namespace_name}-{eventbus_name}",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"version": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kafka version, sarama defaults to the oldest supported stable version",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"tls": {
-						SchemaProps: spec.SchemaProps{
-							Description: "TLS configuration for the kafka client.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.TLSConfig"),
-						},
-					},
-					"sasl": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SASL configuration for the kafka client",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.SASLConfig"),
-						},
-					},
-					"consumerGroup": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Consumer group for kafka client",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.KafkaConsumerGroup"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.SASLConfig", "github.com/argoproj/argo-events/pkg/apis/common.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.KafkaConsumerGroup"},
-	}
-}
-
-func schema_pkg_apis_eventbus_v1alpha1_KafkaConsumerGroup(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"groupName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Consumer group name, defaults to {namespace_name}-{sensor_name}",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"rebalanceStrategy": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Rebalance strategy can be one of: sticky, roundrobin, range. Range is the default.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"startOldest": {
-						SchemaProps: spec.SchemaProps{
-							Description: "When starting up a new group do we want to start from the oldest event (true) or the newest event (false), defaults to false",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_eventbus_v1alpha1_NATSBus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "NATSBus holds the NATS eventbus information",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"native": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Native means to bring up a native NATS service",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.NativeStrategy"),
-						},
-					},
-					"exotic": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Exotic holds an exotic NATS config",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.NATSConfig"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.NATSConfig", "github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.NativeStrategy"},
-	}
-}
-
-func schema_pkg_apis_eventbus_v1alpha1_NATSConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "NATSConfig holds the config of NATS",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"url": {
-						SchemaProps: spec.SchemaProps{
-							Description: "NATS streaming url",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"clusterID": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Cluster ID for nats streaming",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"auth": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Auth strategy, default to AuthStrategyNone",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"accessSecret": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Secret for auth",
-							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"k8s.io/api/core/v1.SecretKeySelector"},
-	}
-}
-
-func schema_pkg_apis_eventbus_v1alpha1_NativeStrategy(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "NativeStrategy indicates to install a native NATS service",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"replicas": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Size is the NATS StatefulSet size",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"auth": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"persistence": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.PersistenceStrategy"),
-						},
-					},
-					"containerTemplate": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ContainerTemplate contains customized spec for NATS container",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.ContainerTemplate"),
-						},
-					},
-					"metricsContainerTemplate": {
-						SchemaProps: spec.SchemaProps{
-							Description: "MetricsContainerTemplate contains customized spec for metrics container",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.ContainerTemplate"),
-						},
-					},
-					"nodeSelector": {
-						SchemaProps: spec.SchemaProps{
-							Description: "NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"tolerations": {
-						SchemaProps: spec.SchemaProps{
-							Description: "If specified, the pod's tolerations.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/api/core/v1.Toleration"),
-									},
-								},
-							},
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Metadata sets the pods's metadata, i.e. annotations and labels",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.Metadata"),
-						},
-					},
-					"securityContext": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SecurityContext holds pod-level security attributes and common container settings. Optional: Defaults to empty.  See type description for default values of each field.",
-							Ref:         ref("k8s.io/api/core/v1.PodSecurityContext"),
-						},
-					},
-					"maxAge": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Max Age of existing messages, i.e. \"72h\", “4h35m”",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"imagePullSecrets": {
-						VendorExtensible: spec.VendorExtensible{
-							Extensions: spec.Extensions{
-								"x-kubernetes-patch-merge-key": "name",
-								"x-kubernetes-patch-strategy":  "merge",
-							},
-						},
-						SchemaProps: spec.SchemaProps{
-							Description: "ImagePullSecrets is an optional list of references to secrets in the same namespace to use for pulling any of the images used by this PodSpec. If specified, these secrets will be passed to individual puller implementations for them to use. For example, in the case of docker, only DockerConfig type secrets are honored. More info: https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/api/core/v1.LocalObjectReference"),
-									},
-								},
-							},
-						},
-					},
-					"serviceAccountName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ServiceAccountName to apply to NATS StatefulSet",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"priorityClassName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "If specified, indicates the EventSource pod's priority. \"system-node-critical\" and \"system-cluster-critical\" are two special keywords which indicate the highest priorities with the former being the highest priority. Any other name must be defined by creating a PriorityClass object with that name. If not specified, the pod priority will be default or zero if there is no default. More info: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"priority": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The priority value. Various system components use this field to find the priority of the EventSource pod. When Priority Admission Controller is enabled, it prevents users from setting this field. The admission controller populates this field from PriorityClassName. The higher the value, the higher the priority. More info: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"affinity": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The pod's scheduling constraints More info: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/",
-							Ref:         ref("k8s.io/api/core/v1.Affinity"),
-						},
-					},
-					"maxMsgs": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Maximum number of messages per channel, 0 means unlimited. Defaults to 1000000",
-							Type:        []string{"integer"},
-							Format:      "int64",
-						},
-					},
-					"maxBytes": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Total size of messages per channel, 0 means unlimited. Defaults to 1GB",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"maxSubs": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Maximum number of subscriptions per channel, 0 means unlimited. Defaults to 1000",
-							Type:        []string{"integer"},
-							Format:      "int64",
-						},
-					},
-					"maxPayload": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Maximum number of bytes in a message payload, 0 means unlimited. Defaults to 1MB",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"raftHeartbeatTimeout": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Specifies the time in follower state without a leader before attempting an election, i.e. \"72h\", “4h35m”. Defaults to 2s",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"raftElectionTimeout": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Specifies the time in candidate state without a leader before attempting an election, i.e. \"72h\", “4h35m”. Defaults to 2s",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"raftLeaseTimeout": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Specifies how long a leader waits without being able to contact a quorum of nodes before stepping down as leader, i.e. \"72h\", “4h35m”. Defaults to 1s",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"raftCommitTimeout": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Specifies the time without an Apply() operation before sending an heartbeat to ensure timely commit, i.e. \"72h\", “4h35m”. Defaults to 100ms",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.Metadata", "github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.ContainerTemplate", "github.com/argoproj/argo-events/pkg/apis/eventbus/v1alpha1.PersistenceStrategy", "k8s.io/api/core/v1.Affinity", "k8s.io/api/core/v1.LocalObjectReference", "k8s.io/api/core/v1.PodSecurityContext", "k8s.io/api/core/v1.Toleration"},
-	}
-}
-
-func schema_pkg_apis_eventbus_v1alpha1_PersistenceStrategy(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "PersistenceStrategy defines the strategy of persistence",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"storageClassName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"accessMode": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Available access modes such as ReadWriteOnce, ReadWriteMany https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"volumeSize": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Volume size, e.g. 10Gi",
-							Ref:         ref("k8s.io/apimachinery/pkg/api/resource.Quantity"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/api/resource.Quantity"},
-	}
-}
-
-func schema_pkg_apis_eventsource_v1alpha1_AMQPConsumeConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_AMQPConsumeConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1033,7 +213,7 @@ func schema_pkg_apis_eventsource_v1alpha1_AMQPConsumeConfig(ref common.Reference
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_AMQPEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_AMQPEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1074,7 +254,7 @@ func schema_pkg_apis_eventsource_v1alpha1_AMQPEventSource(ref common.ReferenceCa
 					"connectionBackoff": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Backoff holds parameters applied to connection.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.Backoff"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff"),
 						},
 					},
 					"jsonBody": {
@@ -1087,7 +267,7 @@ func schema_pkg_apis_eventsource_v1alpha1_AMQPEventSource(ref common.ReferenceCa
 					"tls": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TLS configuration for the amqp client.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.TLSConfig"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"),
 						},
 					},
 					"metadata": {
@@ -1109,31 +289,31 @@ func schema_pkg_apis_eventsource_v1alpha1_AMQPEventSource(ref common.ReferenceCa
 					"exchangeDeclare": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ExchangeDeclare holds the configuration for the exchange on the server For more information, visit https://pkg.go.dev/github.com/rabbitmq/amqp091-go#Channel.ExchangeDeclare",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AMQPExchangeDeclareConfig"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AMQPExchangeDeclareConfig"),
 						},
 					},
 					"queueDeclare": {
 						SchemaProps: spec.SchemaProps{
 							Description: "QueueDeclare holds the configuration of a queue to hold messages and deliver to consumers. Declaring creates a queue if it doesn't already exist, or ensures that an existing queue matches the same parameters For more information, visit https://pkg.go.dev/github.com/rabbitmq/amqp091-go#Channel.QueueDeclare",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AMQPQueueDeclareConfig"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AMQPQueueDeclareConfig"),
 						},
 					},
 					"queueBind": {
 						SchemaProps: spec.SchemaProps{
 							Description: "QueueBind holds the configuration that binds an exchange to a queue so that publishings to the exchange will be routed to the queue when the publishing routing key matches the binding routing key For more information, visit https://pkg.go.dev/github.com/rabbitmq/amqp091-go#Channel.QueueBind",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AMQPQueueBindConfig"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AMQPQueueBindConfig"),
 						},
 					},
 					"consume": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Consume holds the configuration to immediately starts delivering queued messages For more information, visit https://pkg.go.dev/github.com/rabbitmq/amqp091-go#Channel.Consume",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AMQPConsumeConfig"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AMQPConsumeConfig"),
 						},
 					},
 					"auth": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Auth hosts secret selectors for username and password",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.BasicAuth"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BasicAuth"),
 						},
 					},
 					"urlSecret": {
@@ -1145,7 +325,7 @@ func schema_pkg_apis_eventsource_v1alpha1_AMQPEventSource(ref common.ReferenceCa
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 				},
@@ -1153,11 +333,11 @@ func schema_pkg_apis_eventsource_v1alpha1_AMQPEventSource(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.Backoff", "github.com/argoproj/argo-events/pkg/apis/common.BasicAuth", "github.com/argoproj/argo-events/pkg/apis/common.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AMQPConsumeConfig", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AMQPExchangeDeclareConfig", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AMQPQueueBindConfig", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AMQPQueueDeclareConfig", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AMQPConsumeConfig", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AMQPExchangeDeclareConfig", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AMQPQueueBindConfig", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AMQPQueueDeclareConfig", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BasicAuth", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_AMQPExchangeDeclareConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_AMQPExchangeDeclareConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1198,7 +378,7 @@ func schema_pkg_apis_eventsource_v1alpha1_AMQPExchangeDeclareConfig(ref common.R
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_AMQPQueueBindConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_AMQPQueueBindConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1218,7 +398,7 @@ func schema_pkg_apis_eventsource_v1alpha1_AMQPQueueBindConfig(ref common.Referen
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_AMQPQueueDeclareConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_AMQPQueueDeclareConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1273,7 +453,292 @@ func schema_pkg_apis_eventsource_v1alpha1_AMQPQueueDeclareConfig(ref common.Refe
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_AzureEventsHubEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_AWSLambdaTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "AWSLambdaTrigger refers to specification of the trigger to invoke an AWS Lambda function",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"functionName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "FunctionName refers to the name of the function to invoke.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"accessKey": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AccessKey refers K8s secret containing aws access key",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"secretKey": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SecretKey refers K8s secret containing aws secret key",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"region": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Region is AWS region",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"payload": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Payload is the list of key-value extracted from an event payload to construct the request payload.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Parameters is the list of key-value extracted from event's payload that are applied to the trigger resource.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+					"invocationType": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Choose from the following options.\n\n   * RequestResponse (default) - Invoke the function synchronously. Keep\n   the connection open until the function returns a response or times out.\n   The API response includes the function response and additional data.\n\n   * Event - Invoke the function asynchronously. Send events that fail multiple\n   times to the function's dead-letter queue (if it's configured). The API\n   response only includes a status code.\n\n   * DryRun - Validate parameter values and verify that the user or role\n   has permission to invoke the function.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"roleARN": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RoleARN is the Amazon Resource Name (ARN) of the role to assume.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"functionName", "region", "payload"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter", "k8s.io/api/core/v1.SecretKeySelector"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_Amount(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Amount represent a numeric amount.",
+				Type:        v1alpha1.Amount{}.OpenAPISchemaType(),
+				Format:      v1alpha1.Amount{}.OpenAPISchemaFormat(),
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_ArgoWorkflowTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ArgoWorkflowTrigger is the trigger for the Argo Workflow",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Source of the K8s resource file(s)",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ArtifactLocation"),
+						},
+					},
+					"operation": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Operation refers to the type of operation performed on the argo workflow resource. Default value is Submit.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Parameters is the list of parameters to pass to resolved Argo Workflow object",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+					"args": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Args is the list of arguments to pass to the argo CLI",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ArtifactLocation", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_ArtifactLocation(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ArtifactLocation describes the source location for an external artifact",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"s3": {
+						SchemaProps: spec.SchemaProps{
+							Description: "S3 compliant artifact",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.S3Artifact"),
+						},
+					},
+					"inline": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Inline artifact is embedded in sensor spec as a string",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"file": {
+						SchemaProps: spec.SchemaProps{
+							Description: "File artifact is artifact stored in a file",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.FileArtifact"),
+						},
+					},
+					"url": {
+						SchemaProps: spec.SchemaProps{
+							Description: "URL to fetch the artifact from",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.URLArtifact"),
+						},
+					},
+					"configmap": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Configmap that stores the artifact",
+							Ref:         ref("k8s.io/api/core/v1.ConfigMapKeySelector"),
+						},
+					},
+					"git": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Git repository hosting the artifact",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GitArtifact"),
+						},
+					},
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource is generic template for K8s resource",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.K8SResource"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.FileArtifact", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GitArtifact", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.K8SResource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.S3Artifact", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.URLArtifact", "k8s.io/api/core/v1.ConfigMapKeySelector"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_AzureEventHubsTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "AzureEventHubsTrigger refers to specification of the Azure Event Hubs Trigger",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"fqdn": {
+						SchemaProps: spec.SchemaProps{
+							Description: "FQDN refers to the namespace dns of Azure Event Hubs to be used i.e. <namespace>.servicebus.windows.net",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"hubName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "HubName refers to the Azure Event Hub to send events to",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sharedAccessKeyName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SharedAccessKeyName refers to the name of the Shared Access Key",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"sharedAccessKey": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SharedAccessKey refers to a K8s secret containing the primary key for the",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"payload": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Payload is the list of key-value extracted from an event payload to construct the request payload.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Parameters is the list of key-value extracted from event's payload that are applied to the trigger resource.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"fqdn", "hubName", "sharedAccessKeyName", "payload"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter", "k8s.io/api/core/v1.SecretKeySelector"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_AzureEventsHubEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1290,13 +755,13 @@ func schema_pkg_apis_eventsource_v1alpha1_AzureEventsHubEventSource(ref common.R
 					},
 					"sharedAccessKeyName": {
 						SchemaProps: spec.SchemaProps{
-							Description: "SharedAccessKeyName is the name you chose for your application's SAS keys",
+							Description: "SharedAccessKeyName is the name you chose for your application's SAS keys. If both this field and SharedAccessKey are not provided it will try to access via Azure AD with DefaultAzureCredential, FQDN and HubName.",
 							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
 						},
 					},
 					"sharedAccessKey": {
 						SchemaProps: spec.SchemaProps{
-							Description: "SharedAccessKey is the generated value of the key",
+							Description: "SharedAccessKey is the generated value of the key. If both this field and SharedAccessKeyName are not provided it will try to access via Azure AD with DefaultAzureCredential, FQDN and HubName.",
 							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
 						},
 					},
@@ -1327,7 +792,7 @@ func schema_pkg_apis_eventsource_v1alpha1_AzureEventsHubEventSource(ref common.R
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 				},
@@ -1335,11 +800,11 @@ func schema_pkg_apis_eventsource_v1alpha1_AzureEventsHubEventSource(ref common.R
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_AzureQueueStorageEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_AzureQueueStorageEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1400,7 +865,7 @@ func schema_pkg_apis_eventsource_v1alpha1_AzureQueueStorageEventSource(ref commo
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 					"decodeMessage": {
@@ -1410,16 +875,23 @@ func schema_pkg_apis_eventsource_v1alpha1_AzureQueueStorageEventSource(ref commo
 							Format:      "",
 						},
 					},
+					"waitTimeInSeconds": {
+						SchemaProps: spec.SchemaProps{
+							Description: "WaitTimeInSeconds is the duration (in seconds) for which the event source waits between empty results from the queue. The default value is 3 seconds.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
 				},
 				Required: []string{"queueName"},
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_AzureServiceBusEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_AzureServiceBusEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1459,7 +931,7 @@ func schema_pkg_apis_eventsource_v1alpha1_AzureServiceBusEventSource(ref common.
 					"tls": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TLS configuration for the service bus client",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.TLSConfig"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"),
 						},
 					},
 					"jsonBody": {
@@ -1488,7 +960,7 @@ func schema_pkg_apis_eventsource_v1alpha1_AzureServiceBusEventSource(ref common.
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 					"fullyQualifiedNamespace": {
@@ -1498,16 +970,169 @@ func schema_pkg_apis_eventsource_v1alpha1_AzureServiceBusEventSource(ref common.
 							Format:      "",
 						},
 					},
+					"deferDelete": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DeferDelete controls when messages are removed from Azure Service Bus. If false (default), messages are received and deleted immediately before processing. If true, messages are locked and only deleted after successful processing, ensuring they are not lost if processing fails.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 				},
 				Required: []string{"queueName", "topicName", "subscriptionName"},
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_BitbucketAuth(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_AzureServiceBusTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"connectionString": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ConnectionString is the connection string for the Azure Service Bus",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"queueName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "QueueName is the name of the Azure Service Bus Queue",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"topicName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TopicName is the name of the Azure Service Bus Topic",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"subscriptionName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SubscriptionName is the name of the Azure Service Bus Topic Subscription",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"tls": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TLS configuration for the service bus client",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"),
+						},
+					},
+					"payload": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Payload is the list of key-value extracted from an event payload to construct the request payload.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Parameters is the list of key-value extracted from event's payload that are applied to the trigger resource.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"queueName", "topicName", "subscriptionName", "payload"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter", "k8s.io/api/core/v1.SecretKeySelector"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_Backoff(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Backoff for an operation",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"duration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The initial duration in nanoseconds or strings like \"1s\", \"3m\"",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Int64OrString"),
+						},
+					},
+					"factor": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Duration is multiplied by factor each iteration",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Amount"),
+						},
+					},
+					"jitter": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The amount of jitter applied each iteration",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Amount"),
+						},
+					},
+					"steps": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Exit with error after this many steps",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Amount", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Int64OrString"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_BasicAuth(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "BasicAuth contains the reference to K8s secrets that holds the username and password",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"username": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Username refers to the Kubernetes secret that holds the username required for basic auth.",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"password": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Password refers to the Kubernetes secret that holds the password required for basic auth.",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.SecretKeySelector"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_BitbucketAuth(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1517,7 +1142,7 @@ func schema_pkg_apis_eventsource_v1alpha1_BitbucketAuth(ref common.ReferenceCall
 					"basic": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Basic is BasicAuth auth strategy.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.BitbucketBasicAuth"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketBasicAuth"),
 						},
 					},
 					"oauthToken": {
@@ -1530,15 +1155,15 @@ func schema_pkg_apis_eventsource_v1alpha1_BitbucketAuth(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.BitbucketBasicAuth", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketBasicAuth", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_BitbucketBasicAuth(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_BitbucketBasicAuth(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "BasicAuth holds the information required to authenticate user via basic auth mechanism",
+				Description: "BitbucketBasicAuth holds the information required to authenticate user via basic auth mechanism",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"username": {
@@ -1562,7 +1187,7 @@ func schema_pkg_apis_eventsource_v1alpha1_BitbucketBasicAuth(ref common.Referenc
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_BitbucketEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_BitbucketEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1595,13 +1220,13 @@ func schema_pkg_apis_eventsource_v1alpha1_BitbucketEventSource(ref common.Refere
 					"webhook": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Webhook refers to the configuration required to run an http server",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookContext"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookContext"),
 						},
 					},
 					"auth": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Auth information required to connect to Bitbucket.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.BitbucketAuth"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketAuth"),
 						},
 					},
 					"events": {
@@ -1648,7 +1273,7 @@ func schema_pkg_apis_eventsource_v1alpha1_BitbucketEventSource(ref common.Refere
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.BitbucketRepository"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketRepository"),
 									},
 								},
 							},
@@ -1657,7 +1282,7 @@ func schema_pkg_apis_eventsource_v1alpha1_BitbucketEventSource(ref common.Refere
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 				},
@@ -1665,11 +1290,11 @@ func schema_pkg_apis_eventsource_v1alpha1_BitbucketEventSource(ref common.Refere
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.BitbucketAuth", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.BitbucketRepository", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookContext"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketAuth", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketRepository", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookContext"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_BitbucketRepository(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_BitbucketRepository(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1698,7 +1323,7 @@ func schema_pkg_apis_eventsource_v1alpha1_BitbucketRepository(ref common.Referen
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_BitbucketServerEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_BitbucketServerEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1707,33 +1332,48 @@ func schema_pkg_apis_eventsource_v1alpha1_BitbucketServerEventSource(ref common.
 				Properties: map[string]spec.Schema{
 					"webhook": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Webhook holds configuration to run a http server",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookContext"),
+							Description: "Webhook holds configuration to run a http server.",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookContext"),
 						},
 					},
 					"projectKey": {
 						SchemaProps: spec.SchemaProps{
-							Description: "DeprecatedProjectKey is the key of project for which integration needs to set up Deprecated: use Repositories instead. Will be unsupported in v1.8",
+							Description: "DeprecatedProjectKey is the key of project for which integration needs to set up. Deprecated: use Repositories instead. Will be unsupported in v1.8.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 					"repositorySlug": {
 						SchemaProps: spec.SchemaProps{
-							Description: "DeprecatedRepositorySlug is the slug of the repository for which integration needs to set up Deprecated: use Repositories instead. Will be unsupported in v1.8",
+							Description: "DeprecatedRepositorySlug is the slug of the repository for which integration needs to set up. Deprecated: use Repositories instead. Will be unsupported in v1.8.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
+					"projects": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Projects holds a list of projects for which integration needs to set up, this will add the webhook to all repositories in the project.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
 					"repositories": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Repositories holds a list of repositories for which integration needs to set up",
+							Description: "Repositories holds a list of repositories for which integration needs to set up.",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.BitbucketServerRepository"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketServerRepository"),
 									},
 								},
 							},
@@ -1754,21 +1394,35 @@ func schema_pkg_apis_eventsource_v1alpha1_BitbucketServerEventSource(ref common.
 							},
 						},
 					},
+					"skipBranchRefsChangedOnOpenPR": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SkipBranchRefsChangedOnOpenPR bypasses the event repo:refs_changed for branches whenever there's an associated open pull request. This helps in optimizing the event handling process by avoiding unnecessary triggers for branch reference changes that are already part of a pull request under review.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"oneEventPerChange": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OneEventPerChange controls whether to process each change in a repo:refs_changed webhook event as a separate event. This setting is useful when multiple tags are pushed simultaneously for the same commit, and each tag needs to independently trigger an action, such as a distinct workflow in Argo Workflows. When enabled, the BitbucketServerEventSource publishes an individual BitbucketServerEventData for each change, ensuring independent processing of each tag or reference update in a single webhook event.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 					"accessToken": {
 						SchemaProps: spec.SchemaProps{
-							Description: "AccessToken is reference to K8s secret which holds the bitbucket api access information",
+							Description: "AccessToken is reference to K8s secret which holds the bitbucket api access information.",
 							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
 						},
 					},
 					"webhookSecret": {
 						SchemaProps: spec.SchemaProps{
-							Description: "WebhookSecret is reference to K8s secret which holds the bitbucket webhook secret (for HMAC validation)",
+							Description: "WebhookSecret is reference to K8s secret which holds the bitbucket webhook secret (for HMAC validation).",
 							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
 						},
 					},
 					"bitbucketserverBaseURL": {
 						SchemaProps: spec.SchemaProps{
-							Description: "BitbucketServerBaseURL is the base URL for API requests to a custom endpoint",
+							Description: "BitbucketServerBaseURL is the base URL for API requests to a custom endpoint.",
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
@@ -1800,25 +1454,33 @@ func schema_pkg_apis_eventsource_v1alpha1_BitbucketServerEventSource(ref common.
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 					"tls": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TLS configuration for the bitbucketserver client.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.TLSConfig"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"),
+						},
+					},
+					"checkInterval": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CheckInterval is a duration in which to wait before checking that the webhooks exist, e.g. 1s, 30m, 2h... (defaults to 1m)",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 				},
-				Required: []string{"events", "bitbucketserverBaseURL"},
+				Required: []string{"bitbucketserverBaseURL"},
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.BitbucketServerRepository", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookContext", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketServerRepository", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookContext", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_BitbucketServerRepository(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_BitbucketServerRepository(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1826,7 +1488,7 @@ func schema_pkg_apis_eventsource_v1alpha1_BitbucketServerRepository(ref common.R
 				Properties: map[string]spec.Schema{
 					"projectKey": {
 						SchemaProps: spec.SchemaProps{
-							Description: "ProjectKey is the key of project for which integration needs to set up",
+							Description: "ProjectKey is the key of project for which integration needs to set up.",
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
@@ -1834,7 +1496,7 @@ func schema_pkg_apis_eventsource_v1alpha1_BitbucketServerRepository(ref common.R
 					},
 					"repositorySlug": {
 						SchemaProps: spec.SchemaProps{
-							Description: "RepositorySlug is the slug of the repository for which integration needs to set up",
+							Description: "RepositorySlug is the slug of the repository for which integration needs to set up.",
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
@@ -1847,7 +1509,37 @@ func schema_pkg_apis_eventsource_v1alpha1_BitbucketServerRepository(ref common.R
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_CalendarEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_BusConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "BusConfig has the finalized configuration for EventBus",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"nats": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSConfig"),
+						},
+					},
+					"jetstream": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.JetStreamConfig"),
+						},
+					},
+					"kafka": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.KafkaBus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.JetStreamConfig", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.KafkaBus", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSConfig"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_CalendarEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1911,24 +1603,24 @@ func schema_pkg_apis_eventsource_v1alpha1_CalendarEventSource(ref common.Referen
 					"persistence": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Persistence hold the configuration for event persistence",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventPersistence"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventPersistence"),
 						},
 					},
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventPersistence", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventPersistence", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_CatchupConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_CatchupConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1954,7 +1646,104 @@ func schema_pkg_apis_eventsource_v1alpha1_CatchupConfiguration(ref common.Refere
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_ConfigMapPersistence(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_Condition(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Condition contains details about resource state",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Condition type.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Condition status, True, False or Unknown.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"lastTransitionTime": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Last time the condition transitioned from one status to another.",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+					"reason": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Unique, this should be a short, machine understandable string that gives the reason for condition's last transition. For example, \"ImageNotFound\"",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Human-readable message indicating details about last transition.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"type", "status"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_ConditionsResetByTime(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"cron": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cron is a cron-like expression. For reference, see: https://en.wikipedia.org/wiki/Cron",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"timezone": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_ConditionsResetCriteria(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"byTime": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Schedule is a cron-like expression. For reference, see: https://en.wikipedia.org/wiki/Cron",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ConditionsResetByTime"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ConditionsResetByTime"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_ConfigMapPersistence(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1980,7 +1769,350 @@ func schema_pkg_apis_eventsource_v1alpha1_ConfigMapPersistence(ref common.Refere
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_EmitterEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_Container(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Container defines customized spec for a container",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"resources": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/api/core/v1.ResourceRequirements"),
+						},
+					},
+					"imagePullPolicy": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"securityContext": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.SecurityContext"),
+						},
+					},
+					"volumeMounts": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/core/v1.VolumeMount"),
+									},
+								},
+							},
+						},
+					},
+					"env": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/core/v1.EnvVar"),
+									},
+								},
+							},
+						},
+					},
+					"envFrom": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/core/v1.EnvFromSource"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.EnvFromSource", "k8s.io/api/core/v1.EnvVar", "k8s.io/api/core/v1.ResourceRequirements", "k8s.io/api/core/v1.SecurityContext", "k8s.io/api/core/v1.VolumeMount"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_ContainerTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ContainerTemplate defines customized spec for a container",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"resources": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/api/core/v1.ResourceRequirements"),
+						},
+					},
+					"imagePullPolicy": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"securityContext": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.SecurityContext"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.ResourceRequirements", "k8s.io/api/core/v1.SecurityContext"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_CustomTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "CustomTrigger refers to the specification of the custom trigger.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"serverURL": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ServerURL is the url of the gRPC server that executes custom trigger",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"secure": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Secure refers to type of the connection between sensor to custom trigger gRPC",
+							Default:     false,
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"certSecret": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CertSecret refers to the secret that contains cert for secure connection between sensor and custom trigger gRPC server.",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"serverNameOverride": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ServerNameOverride for the secure connection between sensor and custom trigger gRPC server.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Spec is the custom trigger resource specification that custom trigger gRPC server knows how to interpret.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Parameters is the list of parameters that is applied to resolved custom trigger trigger object.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+					"payload": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Payload is the list of key-value extracted from an event payload to construct the request payload.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"serverURL", "secure", "spec", "payload"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter", "k8s.io/api/core/v1.SecretKeySelector"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_DataFilter(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "DataFilter describes constraints and filters for event data.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"path": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Path is the JSONPath of the event's (JSON decoded) data key. Path is a series of keys separated by a dot. A key may contain wildcard characters '*' and '?'. To access an array value use the index as the key. The dot and wildcard characters can be escaped with '\\\\'. See https://github.com/tidwall/gjson#path-syntax for more information on how to use this.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Type contains the JSON type of the data",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"value": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Value is the allowed string values for this key. Booleans are parsed using strconv.ParseBool(), Numbers are parsed as float64 using strconv.ParseFloat(), Strings are treated as regular expressions, Nils value is ignored.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"comparator": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Comparator compares the event data with a user given value. Can be \">=\", \">\", \"=\", \"!=\", \"<\", or \"<=\". Is optional, and if left blank treated as equality \"=\".",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"template": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Template is a go-template for extracting a string from the event's data. A Template is evaluated with provided path, type and value. The templating follows the standard go-template syntax as well as sprig's extra functions. See https://pkg.go.dev/text/template and https://masterminds.github.io/sprig/",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"path", "type", "value"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_EmailTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "EmailTrigger refers to the specification of the email notification trigger.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Parameters is the list of key-value extracted from event's payload that are applied to the trigger resource.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+					"username": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Username refers to the username used to connect to the smtp server.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"smtpPassword": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SMTPPassword refers to the Kubernetes secret that holds the smtp password used to connect to smtp server.",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"host": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Host refers to the smtp host url to which email is send.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"port": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Port refers to the smtp server port to which email is send. Defaults to 0.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"to": {
+						SchemaProps: spec.SchemaProps{
+							Description: "To refers to the email addresses to which the emails are send.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"from": {
+						SchemaProps: spec.SchemaProps{
+							Description: "From refers to the address from which the email is send from.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"subject": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Subject refers to the subject line for the email send.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"body": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Body refers to the body/content of the email send.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter", "k8s.io/api/core/v1.SecretKeySelector"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_EmitterEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -2026,7 +2158,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EmitterEventSource(ref common.Referenc
 					"connectionBackoff": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Backoff holds parameters applied to connection.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.Backoff"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff"),
 						},
 					},
 					"jsonBody": {
@@ -2039,7 +2171,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EmitterEventSource(ref common.Referenc
 					"tls": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TLS configuration for the emitter client.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.TLSConfig"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"),
 						},
 					},
 					"metadata": {
@@ -2061,7 +2193,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EmitterEventSource(ref common.Referenc
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 				},
@@ -2069,11 +2201,447 @@ func schema_pkg_apis_eventsource_v1alpha1_EmitterEventSource(ref common.Referenc
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.Backoff", "github.com/argoproj/argo-events/pkg/apis/common.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_EventPersistence(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_Event(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Event represents the cloudevent received from an event source.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"context": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventContext"),
+						},
+					},
+					"data": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "byte",
+						},
+					},
+				},
+				Required: []string{"data"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventContext"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_EventBus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "EventBus is the definition of a eventbus resource",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventBusSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventBusStatus"),
+						},
+					},
+				},
+				Required: []string{"metadata", "spec"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventBusSpec", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventBusStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_EventBusList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "EventBusList is the list of eventbus resources",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventBus"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"metadata", "items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventBus", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_EventBusSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "EventBusSpec refers to specification of eventbus resource",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"nats": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NATS eventbus",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSBus"),
+						},
+					},
+					"jetstream": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.JetStreamBus"),
+						},
+					},
+					"kafka": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kafka eventbus",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.KafkaBus"),
+						},
+					},
+					"jetstreamExotic": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Exotic JetStream",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.JetStreamConfig"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.JetStreamBus", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.JetStreamConfig", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.KafkaBus", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSBus"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_EventBusStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "EventBusStatus holds the status of the eventbus resource",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"conditions": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-patch-merge-key": "type",
+								"x-kubernetes-patch-strategy":  "merge",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions are the latest available observations of a resource's current state.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Condition"),
+									},
+								},
+							},
+						},
+					},
+					"config": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Config holds the fininalized configuration of EventBus",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BusConfig"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BusConfig", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Condition"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_EventContext(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "EventContext holds the context of the cloudevent received from an event source.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"id": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ID of the event; must be non-empty and unique within the scope of the producer.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Source - A URI describing the event producer.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"specversion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SpecVersion - The version of the CloudEvents specification used by the event.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Type - The type of the occurrence which has happened.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"datacontenttype": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DataContentType - A MIME (RFC2046) string describing the media type of `data`.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"subject": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Subject - The subject of the event in the context of the event producer",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"time": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Time - A Timestamp when the event happened.",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+				},
+				Required: []string{"id", "source", "specversion", "type", "datacontenttype", "subject", "time"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_EventDependency(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "EventDependency describes a dependency",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is a unique name of this dependency",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"eventSourceName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "EventSourceName is the name of EventSource that Sensor depends on",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"eventName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "EventName is the name of the event",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"filters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Filters and rules governing toleration of success and constraints on the context and data of an event",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventDependencyFilter"),
+						},
+					},
+					"transform": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Transform transforms the event data",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventDependencyTransformer"),
+						},
+					},
+					"filtersLogicalOperator": {
+						SchemaProps: spec.SchemaProps{
+							Description: "FiltersLogicalOperator defines how different filters are evaluated together. Available values: and (&&), or (||) Is optional and if left blank treated as and (&&).",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"name", "eventSourceName", "eventName"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventDependencyFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventDependencyTransformer"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_EventDependencyFilter(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "EventDependencyFilter defines filters and constraints for a event.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"time": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Time filter on the event with escalation",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TimeFilter"),
+						},
+					},
+					"context": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Context filter constraints",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventContext"),
+						},
+					},
+					"data": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Data filter constraints with escalation",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.DataFilter"),
+									},
+								},
+							},
+						},
+					},
+					"exprs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Exprs contains the list of expressions evaluated against the event payload.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ExprFilter"),
+									},
+								},
+							},
+						},
+					},
+					"dataLogicalOperator": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DataLogicalOperator defines how multiple Data filters (if defined) are evaluated together. Available values: and (&&), or (||) Is optional and if left blank treated as and (&&).",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"exprLogicalOperator": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ExprLogicalOperator defines how multiple Exprs filters (if defined) are evaluated together. Available values: and (&&), or (||) Is optional and if left blank treated as and (&&).",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"script": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Script refers to a Lua script evaluated to determine the validity of an event.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.DataFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventContext", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ExprFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TimeFilter"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_EventDependencyTransformer(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "EventDependencyTransformer transforms the event",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"jq": {
+						SchemaProps: spec.SchemaProps{
+							Description: "JQ holds the jq command applied for transformation",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"script": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Script refers to a Lua script used to transform the event",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_EventPersistence(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -2082,24 +2650,24 @@ func schema_pkg_apis_eventsource_v1alpha1_EventPersistence(ref common.ReferenceC
 					"catchup": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Catchup enables to triggered the missed schedule when eventsource restarts",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.CatchupConfiguration"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.CatchupConfiguration"),
 						},
 					},
 					"configMap": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ConfigMap holds configmap details for persistence",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.ConfigMapPersistence"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ConfigMapPersistence"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.CatchupConfiguration", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.ConfigMapPersistence"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.CatchupConfiguration", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ConfigMapPersistence"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_EventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_EventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -2129,13 +2697,13 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSource(ref common.ReferenceCallba
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceSpec"),
+							Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceStatus"),
+							Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceStatus"),
 						},
 					},
 				},
@@ -2143,11 +2711,11 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSource(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceSpec", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceSpec", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_EventSourceFilter(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_EventSourceFilter(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -2165,7 +2733,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceFilter(ref common.Reference
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_EventSourceList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_EventSourceList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -2199,7 +2767,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceList(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSource"),
 									},
 								},
 							},
@@ -2210,11 +2778,11 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceList(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSource", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSource", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -2231,13 +2799,13 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 					"template": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Template is the pod specification for the event source",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.Template"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Template"),
 						},
 					},
 					"service": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Service is the specifications of the service to expose the event source",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.Service"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Service"),
 						},
 					},
 					"minio": {
@@ -2249,7 +2817,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/common.S3Artifact"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.S3Artifact"),
 									},
 								},
 							},
@@ -2264,7 +2832,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.CalendarEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.CalendarEventSource"),
 									},
 								},
 							},
@@ -2279,7 +2847,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.FileEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.FileEventSource"),
 									},
 								},
 							},
@@ -2294,7 +2862,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.ResourceEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ResourceEventSource"),
 									},
 								},
 							},
@@ -2309,7 +2877,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookEventSource"),
 									},
 								},
 							},
@@ -2324,7 +2892,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AMQPEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AMQPEventSource"),
 									},
 								},
 							},
@@ -2339,7 +2907,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.KafkaEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.KafkaEventSource"),
 									},
 								},
 							},
@@ -2354,7 +2922,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.MQTTEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.MQTTEventSource"),
 									},
 								},
 							},
@@ -2369,7 +2937,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.NATSEventsSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSEventsSource"),
 									},
 								},
 							},
@@ -2384,7 +2952,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.SNSEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SNSEventSource"),
 									},
 								},
 							},
@@ -2399,7 +2967,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.SQSEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SQSEventSource"),
 									},
 								},
 							},
@@ -2414,7 +2982,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.PubSubEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PubSubEventSource"),
 									},
 								},
 							},
@@ -2429,7 +2997,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.GithubEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GithubEventSource"),
 									},
 								},
 							},
@@ -2444,7 +3012,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.GitlabEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GitlabEventSource"),
 									},
 								},
 							},
@@ -2459,7 +3027,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.HDFSEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.HDFSEventSource"),
 									},
 								},
 							},
@@ -2474,7 +3042,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.SlackEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SlackEventSource"),
 									},
 								},
 							},
@@ -2489,7 +3057,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.StorageGridEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.StorageGridEventSource"),
 									},
 								},
 							},
@@ -2504,7 +3072,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AzureEventsHubEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureEventsHubEventSource"),
 									},
 								},
 							},
@@ -2519,7 +3087,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.StripeEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.StripeEventSource"),
 									},
 								},
 							},
@@ -2534,7 +3102,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EmitterEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EmitterEventSource"),
 									},
 								},
 							},
@@ -2549,7 +3117,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.RedisEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.RedisEventSource"),
 									},
 								},
 							},
@@ -2564,7 +3132,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.NSQEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NSQEventSource"),
 									},
 								},
 							},
@@ -2579,7 +3147,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.PulsarEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PulsarEventSource"),
 									},
 								},
 							},
@@ -2594,7 +3162,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.GenericEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GenericEventSource"),
 									},
 								},
 							},
@@ -2616,7 +3184,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.BitbucketServerEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketServerEventSource"),
 									},
 								},
 							},
@@ -2631,7 +3199,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.BitbucketEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketEventSource"),
 									},
 								},
 							},
@@ -2646,7 +3214,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.RedisStreamEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.RedisStreamEventSource"),
 									},
 								},
 							},
@@ -2661,7 +3229,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AzureServiceBusEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureServiceBusEventSource"),
 									},
 								},
 							},
@@ -2676,7 +3244,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AzureQueueStorageEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureQueueStorageEventSource"),
 									},
 								},
 							},
@@ -2691,7 +3259,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.SFTPEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SFTPEventSource"),
 									},
 								},
 							},
@@ -2706,7 +3274,22 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.GerritEventSource"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GerritEventSource"),
+									},
+								},
+							},
+						},
+					},
+					"mns": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MNS event sources",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.MNSEventSource"),
 									},
 								},
 							},
@@ -2716,11 +3299,11 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceSpec(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.S3Artifact", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AMQPEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AzureEventsHubEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AzureQueueStorageEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.AzureServiceBusEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.BitbucketEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.BitbucketServerEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.CalendarEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EmitterEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.FileEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.GenericEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.GerritEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.GithubEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.GitlabEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.HDFSEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.KafkaEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.MQTTEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.NATSEventsSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.NSQEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.PubSubEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.PulsarEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.RedisEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.RedisStreamEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.ResourceEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.SFTPEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.SNSEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.SQSEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.Service", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.SlackEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.StorageGridEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.StripeEventSource", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.Template", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookEventSource"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AMQPEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureEventsHubEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureQueueStorageEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureServiceBusEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketServerEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.CalendarEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EmitterEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.FileEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GenericEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GerritEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GithubEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GitlabEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.HDFSEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.KafkaEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.MNSEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.MQTTEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSEventsSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NSQEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PubSubEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PulsarEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.RedisEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.RedisStreamEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ResourceEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.S3Artifact", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SFTPEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SNSEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SQSEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Service", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SlackEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.StorageGridEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.StripeEventSource", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Template", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookEventSource"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_EventSourceStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_EventSourceStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -2741,7 +3324,7 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceStatus(ref common.Reference
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/common.Condition"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Condition"),
 									},
 								},
 							},
@@ -2751,11 +3334,67 @@ func schema_pkg_apis_eventsource_v1alpha1_EventSourceStatus(ref common.Reference
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.Condition"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Condition"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_FileEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_ExprFilter(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"expr": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Expr refers to the expression that determines the outcome of the filter.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"fields": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Fields refers to set of keys that refer to the paths within event payload.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PayloadField"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"expr", "fields"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PayloadField"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_FileArtifact(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "FileArtifact contains information about an artifact in a filesystem",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"path": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_FileEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -2774,7 +3413,7 @@ func schema_pkg_apis_eventsource_v1alpha1_FileEventSource(ref common.ReferenceCa
 						SchemaProps: spec.SchemaProps{
 							Description: "WatchPathConfig contains configuration about the file path to watch",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WatchPathConfig"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WatchPathConfig"),
 						},
 					},
 					"polling": {
@@ -2803,7 +3442,7 @@ func schema_pkg_apis_eventsource_v1alpha1_FileEventSource(ref common.ReferenceCa
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 				},
@@ -2811,11 +3450,11 @@ func schema_pkg_apis_eventsource_v1alpha1_FileEventSource(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WatchPathConfig"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WatchPathConfig"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_GenericEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_GenericEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -2877,7 +3516,7 @@ func schema_pkg_apis_eventsource_v1alpha1_GenericEventSource(ref common.Referenc
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 				},
@@ -2885,11 +3524,11 @@ func schema_pkg_apis_eventsource_v1alpha1_GenericEventSource(ref common.Referenc
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_GerritEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_GerritEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -2899,7 +3538,7 @@ func schema_pkg_apis_eventsource_v1alpha1_GerritEventSource(ref common.Reference
 					"webhook": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Webhook holds configuration to run a http server",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookContext"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookContext"),
 						},
 					},
 					"hookName": {
@@ -2928,7 +3567,7 @@ func schema_pkg_apis_eventsource_v1alpha1_GerritEventSource(ref common.Reference
 					"auth": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Auth hosts secret selectors for username and password",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.BasicAuth"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BasicAuth"),
 						},
 					},
 					"gerritBaseURL": {
@@ -2987,7 +3626,15 @@ func schema_pkg_apis_eventsource_v1alpha1_GerritEventSource(ref common.Reference
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
+						},
+					},
+					"maxTries": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MaxTries is number of attempts when posting an event to the target url",
+							Default:     0,
+							Type:        []string{"integer"},
+							Format:      "int64",
 						},
 					},
 				},
@@ -2995,11 +3642,159 @@ func schema_pkg_apis_eventsource_v1alpha1_GerritEventSource(ref common.Reference
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.BasicAuth", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookContext"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BasicAuth", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookContext"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_GithubAppCreds(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_GitArtifact(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "GitArtifact contains information about an artifact stored in git",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"url": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Git URL",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"cloneDirectory": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Directory to clone the repository. We clone complete directory because GitArtifact is not limited to any specific Git service providers. Hence we don't use any specific git provider client.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"creds": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Creds contain reference to git username and password",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GitCreds"),
+						},
+					},
+					"sshKeySecret": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SSHKeySecret refers to the secret that contains SSH key",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"filePath": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Path to file that contains trigger resource definition",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"branch": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Branch to use to pull trigger resource",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"tag": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Tag to use to pull trigger resource",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"ref": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Ref to use to pull trigger resource. Will result in a shallow clone and fetch.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"remote": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Remote to manage set of tracked repositories. Defaults to \"origin\". Refer https://git-scm.com/docs/git-remote",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GitRemoteConfig"),
+						},
+					},
+					"insecureIgnoreHostKey": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Whether to ignore host key",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"url", "cloneDirectory", "filePath"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GitCreds", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GitRemoteConfig", "k8s.io/api/core/v1.SecretKeySelector"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_GitCreds(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "GitCreds contain reference to git username and password",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"username": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"password": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.SecretKeySelector"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_GitRemoteConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "GitRemoteConfig contains the configuration of a Git remote",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the remote to fetch from.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"urls": {
+						SchemaProps: spec.SchemaProps{
+							Description: "URLs the URLs of a remote repository. It must be non-empty. Fetch will always use the first URL, while push will use all of them.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"name", "urls"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_GithubAppCreds(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3036,7 +3831,7 @@ func schema_pkg_apis_eventsource_v1alpha1_GithubAppCreds(ref common.ReferenceCal
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_GithubEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_GithubEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3054,7 +3849,7 @@ func schema_pkg_apis_eventsource_v1alpha1_GithubEventSource(ref common.Reference
 					"webhook": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Webhook refers to the configuration required to run a http server",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookContext"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookContext"),
 						},
 					},
 					"owner": {
@@ -3166,7 +3961,7 @@ func schema_pkg_apis_eventsource_v1alpha1_GithubEventSource(ref common.Reference
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.OwnedRepositories"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.OwnedRepositories"),
 									},
 								},
 							},
@@ -3190,13 +3985,13 @@ func schema_pkg_apis_eventsource_v1alpha1_GithubEventSource(ref common.Reference
 					"githubApp": {
 						SchemaProps: spec.SchemaProps{
 							Description: "GitHubApp holds the GitHub app credentials",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.GithubAppCreds"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GithubAppCreds"),
 						},
 					},
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 				},
@@ -3204,11 +3999,11 @@ func schema_pkg_apis_eventsource_v1alpha1_GithubEventSource(ref common.Reference
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.GithubAppCreds", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.OwnedRepositories", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookContext", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GithubAppCreds", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.OwnedRepositories", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookContext", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_GitlabEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_GitlabEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3218,7 +4013,7 @@ func schema_pkg_apis_eventsource_v1alpha1_GitlabEventSource(ref common.Reference
 					"webhook": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Webhook holds configuration to run a http server",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookContext"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookContext"),
 						},
 					},
 					"projectID": {
@@ -3289,7 +4084,7 @@ func schema_pkg_apis_eventsource_v1alpha1_GitlabEventSource(ref common.Reference
 					},
 					"projects": {
 						SchemaProps: spec.SchemaProps{
-							Description: "List of project IDs or project namespace paths like \"whynowy/test\". Projects and groups cannot be empty at the same time.",
+							Description: "List of project IDs or project namespace paths like \"whynowy/test\". If neither a project nor a group is defined, the EventSource will not manage webhooks.",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -3311,7 +4106,7 @@ func schema_pkg_apis_eventsource_v1alpha1_GitlabEventSource(ref common.Reference
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 					"groups": {
@@ -3334,11 +4129,11 @@ func schema_pkg_apis_eventsource_v1alpha1_GitlabEventSource(ref common.Reference
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookContext", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookContext", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_HDFSEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_HDFSEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3461,7 +4256,7 @@ func schema_pkg_apis_eventsource_v1alpha1_HDFSEventSource(ref common.ReferenceCa
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 				},
@@ -3469,11 +4264,485 @@ func schema_pkg_apis_eventsource_v1alpha1_HDFSEventSource(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.ConfigMapKeySelector", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.ConfigMapKeySelector", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_KafkaConsumerGroup(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_HTTPTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "HTTPTrigger is the trigger for the HTTP request",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"url": {
+						SchemaProps: spec.SchemaProps{
+							Description: "URL refers to the URL to send HTTP request to.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"payload": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+					"tls": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TLS configuration for the HTTP client.",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"),
+						},
+					},
+					"method": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Method refers to the type of the HTTP request. Refer https://golang.org/src/net/http/method.go for more info. Default value is POST.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Parameters is the list of key-value extracted from event's payload that are applied to the HTTP trigger resource.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+					"timeout": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Timeout refers to the HTTP request timeout in seconds. Default value is 60 seconds.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"basicAuth": {
+						SchemaProps: spec.SchemaProps{
+							Description: "BasicAuth configuration for the http request.",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BasicAuth"),
+						},
+					},
+					"headers": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Headers for the HTTP request.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"secureHeaders": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Secure Headers stored in Kubernetes Secrets for the HTTP requests.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SecureHeader"),
+									},
+								},
+							},
+						},
+					},
+					"dynamicHeaders": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Dynamic Headers for the request, sourced from the event. Same spec as Parameters.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+					"host": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Host refers to the domain name of the server (for virtual hosting).",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"url", "payload"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BasicAuth", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SecureHeader", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_Int64OrString(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type:   v1alpha1.Int64OrString{}.OpenAPISchemaType(),
+				Format: v1alpha1.Int64OrString{}.OpenAPISchemaFormat(),
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_JetStreamBus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "JetStreamBus holds the JetStream EventBus information",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "JetStream version, such as \"2.7.3\"",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"replicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "JetStream StatefulSet size",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"containerTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ContainerTemplate contains customized spec for Nats JetStream container",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ContainerTemplate"),
+						},
+					},
+					"reloaderContainerTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ReloaderContainerTemplate contains customized spec for config reloader container",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ContainerTemplate"),
+						},
+					},
+					"metricsContainerTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MetricsContainerTemplate contains customized spec for metrics container",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ContainerTemplate"),
+						},
+					},
+					"persistence": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PersistenceStrategy"),
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metadata sets the pods's metadata, i.e. annotations and labels",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Metadata"),
+						},
+					},
+					"nodeSelector": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"tolerations": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If specified, the pod's tolerations.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/core/v1.Toleration"),
+									},
+								},
+							},
+						},
+					},
+					"securityContext": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SecurityContext holds pod-level security attributes and common container settings. Optional: Defaults to empty.  See type description for default values of each field.",
+							Ref:         ref("k8s.io/api/core/v1.PodSecurityContext"),
+						},
+					},
+					"imagePullSecrets": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-patch-merge-key": "name",
+								"x-kubernetes-patch-strategy":  "merge",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "ImagePullSecrets is an optional list of references to secrets in the same namespace to use for pulling any of the images used by this PodSpec. If specified, these secrets will be passed to individual puller implementations for them to use. For example, in the case of docker, only DockerConfig type secrets are honored. More info: https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/core/v1.LocalObjectReference"),
+									},
+								},
+							},
+						},
+					},
+					"priorityClassName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If specified, indicates the Redis pod's priority. \"system-node-critical\" and \"system-cluster-critical\" are two special keywords which indicate the highest priorities with the former being the highest priority. Any other name must be defined by creating a PriorityClass object with that name. If not specified, the pod priority will be default or zero if there is no default. More info: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"priority": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The priority value. Various system components use this field to find the priority of the Redis pod. When Priority Admission Controller is enabled, it prevents users from setting this field. The admission controller populates this field from PriorityClassName. The higher the value, the higher the priority. More info: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"affinity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The pod's scheduling constraints More info: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/",
+							Ref:         ref("k8s.io/api/core/v1.Affinity"),
+						},
+					},
+					"serviceAccountName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ServiceAccountName to apply to the StatefulSet",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"settings": {
+						SchemaProps: spec.SchemaProps{
+							Description: "JetStream configuration, if not specified, global settings in controller-config will be used. See https://docs.nats.io/running-a-nats-service/configuration#jetstream. Only configure \"max_memory_store\" or \"max_file_store\", do not set \"store_dir\" as it has been hardcoded.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"startArgs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Optional arguments to start nats-server. For example, \"-D\" to enable debugging output, \"-DV\" to enable debugging and tracing. Check https://docs.nats.io/ for all the available arguments.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"streamConfig": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Optional configuration for the streams to be created in this JetStream service, if specified, it will be merged with the default configuration in controller-config. It accepts a YAML format configuration, available fields include, \"maxBytes\", \"maxMsgs\", \"maxAge\" (e.g. 72h), \"replicas\" (1, 3, 5), \"duplicates\" (e.g. 5m), \"retention\" (e.g.\u00a00: Limits (default), 1: Interest, 2: WorkQueue), \"Discard\" (e.g.\u00a00: DiscardOld (default), 1: DiscardNew).",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"maxPayload": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Maximum number of bytes in a message payload, 0 means unlimited. Defaults to 1MB",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ContainerTemplate", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Metadata", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PersistenceStrategy", "k8s.io/api/core/v1.Affinity", "k8s.io/api/core/v1.LocalObjectReference", "k8s.io/api/core/v1.PodSecurityContext", "k8s.io/api/core/v1.Toleration"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_JetStreamConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"url": {
+						SchemaProps: spec.SchemaProps{
+							Description: "JetStream (Nats) URL",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"accessSecret": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Secret for auth",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"streamConfig": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"tls": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SSL/TLS settings for the NATS client",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig", "k8s.io/api/core/v1.SecretKeySelector"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_K8SResource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "K8SResource represent arbitrary structured data.",
+				Type:        v1alpha1.K8SResource{}.OpenAPISchemaType(),
+				Format:      v1alpha1.K8SResource{}.OpenAPISchemaFormat(),
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_K8SResourcePolicy(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "K8SResourcePolicy refers to the policy used to check the state of K8s based triggers using labels",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"labels": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Labels required to identify whether a resource is in success state",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"backoff": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Backoff before checking resource state",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff"),
+						},
+					},
+					"errorOnBackoffTimeout": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ErrorOnBackoffTimeout determines whether sensor should transition to error state if the trigger policy is unable to determine the state of the resource",
+							Default:     false,
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"backoff", "errorOnBackoffTimeout"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_KafkaBus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "KafkaBus holds the KafkaBus EventBus information",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"url": {
+						SchemaProps: spec.SchemaProps{
+							Description: "URL to kafka cluster, multiple URLs separated by comma",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"topic": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Topic name, defaults to {namespace_name}-{eventbus_name}",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kafka version, sarama defaults to the oldest supported stable version",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"tls": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TLS configuration for the kafka client.",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"),
+						},
+					},
+					"sasl": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SASL configuration for the kafka client",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SASLConfig"),
+						},
+					},
+					"consumerGroup": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Consumer group for kafka client",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.KafkaConsumerGroup"),
+						},
+					},
+					"partitioner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Partitioner sets the Kafka producer partitioning strategy. Supported values: random, hash, roundrobin, manual. Defaults to random.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.KafkaConsumerGroup", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SASLConfig", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_KafkaConsumerGroup(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3509,7 +4778,7 @@ func schema_pkg_apis_eventsource_v1alpha1_KafkaConsumerGroup(ref common.Referenc
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_KafkaEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_KafkaEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3543,13 +4812,13 @@ func schema_pkg_apis_eventsource_v1alpha1_KafkaEventSource(ref common.ReferenceC
 					"connectionBackoff": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Backoff holds parameters applied to connection.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.Backoff"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff"),
 						},
 					},
 					"tls": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TLS configuration for the kafka client.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.TLSConfig"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"),
 						},
 					},
 					"jsonBody": {
@@ -3578,7 +4847,7 @@ func schema_pkg_apis_eventsource_v1alpha1_KafkaEventSource(ref common.ReferenceC
 					"consumerGroup": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Consumer group for kafka client",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.KafkaConsumerGroup"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.KafkaConsumerGroup"),
 						},
 					},
 					"limitEventsPerSecond": {
@@ -3599,13 +4868,13 @@ func schema_pkg_apis_eventsource_v1alpha1_KafkaEventSource(ref common.ReferenceC
 					"sasl": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SASL configuration for the kafka client",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.SASLConfig"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SASLConfig"),
 						},
 					},
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 					"config": {
@@ -3615,16 +4884,247 @@ func schema_pkg_apis_eventsource_v1alpha1_KafkaEventSource(ref common.ReferenceC
 							Format:      "",
 						},
 					},
+					"schemaRegistry": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Schema Registry configuration for consumer message with Avro format",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SchemaRegistryConfig"),
+						},
+					},
 				},
 				Required: []string{"url", "topic"},
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.Backoff", "github.com/argoproj/argo-events/pkg/apis/common.SASLConfig", "github.com/argoproj/argo-events/pkg/apis/common.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.KafkaConsumerGroup"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.KafkaConsumerGroup", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SASLConfig", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SchemaRegistryConfig", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_MQTTEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_KafkaTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "KafkaTrigger refers to the specification of the Kafka trigger.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"url": {
+						SchemaProps: spec.SchemaProps{
+							Description: "URL of the Kafka broker, multiple URLs separated by comma.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"topic": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the topic. More info at https://kafka.apache.org/documentation/#intro_topics",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"partition": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DEPRECATED",
+							Default:     0,
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Parameters is the list of parameters that is applied to resolved Kafka trigger object.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+					"requiredAcks": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RequiredAcks used in producer to tell the broker how many replica acknowledgements Defaults to 1 (Only wait for the leader to ack).",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"compress": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Compress determines whether to compress message or not. Defaults to false. If set to true, compresses message using snappy compression.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"flushFrequency": {
+						SchemaProps: spec.SchemaProps{
+							Description: "FlushFrequency refers to the frequency in milliseconds to flush batches. Defaults to 500 milliseconds.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"tls": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TLS configuration for the Kafka producer.",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"),
+						},
+					},
+					"payload": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Payload is the list of key-value extracted from an event payload to construct the request payload.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+					"partitioningKey": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The partitioning key for the messages put on the Kafka topic.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Specify what kafka version is being connected to enables certain features in sarama, defaults to 1.0.0",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sasl": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SASL configuration for the kafka client",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SASLConfig"),
+						},
+					},
+					"schemaRegistry": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Schema Registry configuration to producer message with avro format",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SchemaRegistryConfig"),
+						},
+					},
+					"headers": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Headers for the Kafka Messages.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"secureHeaders": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Secure Headers stored in Kubernetes Secrets for the Kafka messages.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SecureHeader"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"url", "topic", "payload"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SASLConfig", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SchemaRegistryConfig", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SecureHeader", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_LogTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"intervalSeconds": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Only print messages every interval. Useful to prevent logging too much data for busy events.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_MNSEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "MNSEventSource refers to event-source for AlibabaCloud MNS related events",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"accessKey": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AccessKey refers K8s secret containing AlibabaCloud access key",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"secretKey": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SecretKey refers K8s secret containing AlibabaCloud secret key",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"queue": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Queue is AlibabaCloud MNS queue to listen to for messages",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"jsonBody": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"endpoint": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Endpoint configures connection to a specific AlibabaCloud MNS endpoint",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"filter": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Filter",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
+						},
+					},
+				},
+				Required: []string{"queue"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.SecretKeySelector"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_MQTTEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3658,7 +5158,7 @@ func schema_pkg_apis_eventsource_v1alpha1_MQTTEventSource(ref common.ReferenceCa
 					"connectionBackoff": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ConnectionBackoff holds backoff applied to connection.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.Backoff"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff"),
 						},
 					},
 					"jsonBody": {
@@ -3671,7 +5171,7 @@ func schema_pkg_apis_eventsource_v1alpha1_MQTTEventSource(ref common.ReferenceCa
 					"tls": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TLS configuration for the mqtt client.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.TLSConfig"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"),
 						},
 					},
 					"metadata": {
@@ -3693,13 +5193,13 @@ func schema_pkg_apis_eventsource_v1alpha1_MQTTEventSource(ref common.ReferenceCa
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 					"auth": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Auth hosts secret selectors for username and password",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.BasicAuth"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BasicAuth"),
 						},
 					},
 				},
@@ -3707,11 +5207,54 @@ func schema_pkg_apis_eventsource_v1alpha1_MQTTEventSource(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.Backoff", "github.com/argoproj/argo-events/pkg/apis/common.BasicAuth", "github.com/argoproj/argo-events/pkg/apis/common.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BasicAuth", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_NATSAuth(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_Metadata(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Metadata holds the annotations and labels of an event source pod",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"annotations": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"labels": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_NATSAuth(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3721,7 +5264,7 @@ func schema_pkg_apis_eventsource_v1alpha1_NATSAuth(ref common.ReferenceCallback)
 					"basic": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Baisc auth with username and password",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.BasicAuth"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BasicAuth"),
 						},
 					},
 					"token": {
@@ -3746,11 +5289,80 @@ func schema_pkg_apis_eventsource_v1alpha1_NATSAuth(ref common.ReferenceCallback)
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.BasicAuth", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BasicAuth", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_NATSEventsSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_NATSBus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NATSBus holds the NATS eventbus information",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"native": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Native means to bring up a native NATS service",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NativeStrategy"),
+						},
+					},
+					"exotic": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Exotic holds an exotic NATS config",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSConfig"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSConfig", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NativeStrategy"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_NATSConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NATSConfig holds the config of NATS",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"url": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NATS streaming url",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cluster ID for nats streaming",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"auth": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Auth strategy, default to AuthStrategyNone",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"accessSecret": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Secret for auth",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.SecretKeySelector"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_NATSEventsSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3776,7 +5388,7 @@ func schema_pkg_apis_eventsource_v1alpha1_NATSEventsSource(ref common.ReferenceC
 					"connectionBackoff": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ConnectionBackoff holds backoff applied to connection.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.Backoff"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff"),
 						},
 					},
 					"jsonBody": {
@@ -3789,7 +5401,7 @@ func schema_pkg_apis_eventsource_v1alpha1_NATSEventsSource(ref common.ReferenceC
 					"tls": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TLS configuration for the nats client.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.TLSConfig"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"),
 						},
 					},
 					"metadata": {
@@ -3811,13 +5423,20 @@ func schema_pkg_apis_eventsource_v1alpha1_NATSEventsSource(ref common.ReferenceC
 					"auth": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Auth information",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.NATSAuth"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSAuth"),
 						},
 					},
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
+						},
+					},
+					"queue": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Queue is the name of the queue group to subscribe as if specified. Uses QueueSubscribe logic to subscribe as queue group. If the queue is empty, uses default Subscribe logic.",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 				},
@@ -3825,11 +5444,81 @@ func schema_pkg_apis_eventsource_v1alpha1_NATSEventsSource(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.Backoff", "github.com/argoproj/argo-events/pkg/apis/common.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.NATSAuth"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSAuth", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_NSQEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_NATSTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NATSTrigger refers to the specification of the NATS trigger.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"url": {
+						SchemaProps: spec.SchemaProps{
+							Description: "URL of the NATS cluster.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"subject": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the subject to put message on.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"payload": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+					"tls": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TLS configuration for the NATS producer.",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"),
+						},
+					},
+					"auth": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AuthInformation",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSAuth"),
+						},
+					},
+				},
+				Required: []string{"url", "subject", "payload"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSAuth", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_NSQEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3863,7 +5552,7 @@ func schema_pkg_apis_eventsource_v1alpha1_NSQEventSource(ref common.ReferenceCal
 					"connectionBackoff": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Backoff holds parameters applied to connection.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.Backoff"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff"),
 						},
 					},
 					"jsonBody": {
@@ -3876,7 +5565,7 @@ func schema_pkg_apis_eventsource_v1alpha1_NSQEventSource(ref common.ReferenceCal
 					"tls": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TLS configuration for the nsq client.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.TLSConfig"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"),
 						},
 					},
 					"metadata": {
@@ -3898,7 +5587,7 @@ func schema_pkg_apis_eventsource_v1alpha1_NSQEventSource(ref common.ReferenceCal
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 				},
@@ -3906,11 +5595,288 @@ func schema_pkg_apis_eventsource_v1alpha1_NSQEventSource(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.Backoff", "github.com/argoproj/argo-events/pkg/apis/common.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_OwnedRepositories(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_NativeStrategy(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NativeStrategy indicates to install a native NATS service",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"replicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Size is the NATS StatefulSet size",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"auth": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"persistence": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PersistenceStrategy"),
+						},
+					},
+					"containerTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ContainerTemplate contains customized spec for NATS container",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ContainerTemplate"),
+						},
+					},
+					"metricsContainerTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MetricsContainerTemplate contains customized spec for metrics container",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ContainerTemplate"),
+						},
+					},
+					"nodeSelector": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"tolerations": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If specified, the pod's tolerations.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/core/v1.Toleration"),
+									},
+								},
+							},
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metadata sets the pods's metadata, i.e. annotations and labels",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Metadata"),
+						},
+					},
+					"securityContext": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SecurityContext holds pod-level security attributes and common container settings. Optional: Defaults to empty.  See type description for default values of each field.",
+							Ref:         ref("k8s.io/api/core/v1.PodSecurityContext"),
+						},
+					},
+					"maxAge": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Max Age of existing messages, i.e. \"72h\", “4h35m”",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"imagePullSecrets": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-patch-merge-key": "name",
+								"x-kubernetes-patch-strategy":  "merge",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "ImagePullSecrets is an optional list of references to secrets in the same namespace to use for pulling any of the images used by this PodSpec. If specified, these secrets will be passed to individual puller implementations for them to use. For example, in the case of docker, only DockerConfig type secrets are honored. More info: https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/core/v1.LocalObjectReference"),
+									},
+								},
+							},
+						},
+					},
+					"serviceAccountName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ServiceAccountName to apply to NATS StatefulSet",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"priorityClassName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If specified, indicates the EventSource pod's priority. \"system-node-critical\" and \"system-cluster-critical\" are two special keywords which indicate the highest priorities with the former being the highest priority. Any other name must be defined by creating a PriorityClass object with that name. If not specified, the pod priority will be default or zero if there is no default. More info: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"priority": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The priority value. Various system components use this field to find the priority of the EventSource pod. When Priority Admission Controller is enabled, it prevents users from setting this field. The admission controller populates this field from PriorityClassName. The higher the value, the higher the priority. More info: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"affinity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The pod's scheduling constraints More info: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/",
+							Ref:         ref("k8s.io/api/core/v1.Affinity"),
+						},
+					},
+					"maxMsgs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Maximum number of messages per channel, 0 means unlimited. Defaults to 1000000",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"maxBytes": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Total size of messages per channel, 0 means unlimited. Defaults to 1GB",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"maxSubs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Maximum number of subscriptions per channel, 0 means unlimited. Defaults to 1000",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"maxPayload": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Maximum number of bytes in a message payload, 0 means unlimited. Defaults to 1MB",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"raftHeartbeatTimeout": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Specifies the time in follower state without a leader before attempting an election, i.e. \"72h\", “4h35m”. Defaults to 2s",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"raftElectionTimeout": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Specifies the time in candidate state without a leader before attempting an election, i.e. \"72h\", “4h35m”. Defaults to 2s",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"raftLeaseTimeout": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Specifies how long a leader waits without being able to contact a quorum of nodes before stepping down as leader, i.e. \"72h\", “4h35m”. Defaults to 1s",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"raftCommitTimeout": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Specifies the time without an Apply() operation before sending an heartbeat to ensure timely commit, i.e. \"72h\", “4h35m”. Defaults to 100ms",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ContainerTemplate", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Metadata", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PersistenceStrategy", "k8s.io/api/core/v1.Affinity", "k8s.io/api/core/v1.LocalObjectReference", "k8s.io/api/core/v1.PodSecurityContext", "k8s.io/api/core/v1.Toleration"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_OpenWhiskTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "OpenWhiskTrigger refers to the specification of the OpenWhisk trigger.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"host": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Host URL of the OpenWhisk.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version for the API. Defaults to v1.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Namespace for the action. Defaults to \"_\".",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"authToken": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AuthToken for authentication.",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"actionName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the action/function.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"payload": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Payload is the list of key-value extracted from an event payload to construct the request payload.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Parameters is the list of key-value extracted from event's payload that are applied to the trigger resource.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"host", "actionName", "payload"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter", "k8s.io/api/core/v1.SecretKeySelector"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_OwnedRepositories(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3944,7 +5910,72 @@ func schema_pkg_apis_eventsource_v1alpha1_OwnedRepositories(ref common.Reference
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_PubSubEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_PayloadField(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "PayloadField binds a value at path within the event payload against a name.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"path": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Path is the JSONPath of the event's (JSON decoded) data key Path is a series of keys separated by a dot. A key may contain wildcard characters '*' and '?'. To access an array value use the index as the key. The dot and wildcard characters can be escaped with '\\\\'. See https://github.com/tidwall/gjson#path-syntax for more information on how to use this.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name acts as key that holds the value at the path.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"path", "name"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_PersistenceStrategy(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "PersistenceStrategy defines the strategy of persistence",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"storageClassName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"accessMode": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Available access modes such as ReadWriteOnce, ReadWriteMany https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"volumeSize": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Volume size, e.g. 10Gi",
+							Ref:         ref("k8s.io/apimachinery/pkg/api/resource.Quantity"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/api/resource.Quantity"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_PubSubEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4022,18 +6053,18 @@ func schema_pkg_apis_eventsource_v1alpha1_PubSubEventSource(ref common.Reference
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_PulsarEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_PulsarEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4093,13 +6124,13 @@ func schema_pkg_apis_eventsource_v1alpha1_PulsarEventSource(ref common.Reference
 					"tls": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TLS configuration for the pulsar client.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.TLSConfig"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"),
 						},
 					},
 					"connectionBackoff": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Backoff holds parameters applied to connection.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.Backoff"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff"),
 						},
 					},
 					"jsonBody": {
@@ -4134,7 +6165,7 @@ func schema_pkg_apis_eventsource_v1alpha1_PulsarEventSource(ref common.Reference
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 					"authAthenzParams": {
@@ -4164,11 +6195,156 @@ func schema_pkg_apis_eventsource_v1alpha1_PulsarEventSource(ref common.Reference
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.Backoff", "github.com/argoproj/argo-events/pkg/apis/common.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_RedisEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_PulsarTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "PulsarTrigger refers to the specification of the Pulsar trigger.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"url": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Configure the service URL for the Pulsar service.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"topic": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the topic. See https://pulsar.apache.org/docs/en/concepts-messaging/",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Parameters is the list of parameters that is applied to resolved Kafka trigger object.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+					"payload": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Payload is the list of key-value extracted from an event payload to construct the request payload.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+					"tlsTrustCertsSecret": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Trusted TLS certificate secret.",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"tlsAllowInsecureConnection": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Whether the Pulsar client accept untrusted TLS certificate from broker.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"tlsValidateHostname": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Whether the Pulsar client verify the validity of the host name from broker.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"tls": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TLS configuration for the pulsar client.",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"),
+						},
+					},
+					"authTokenSecret": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Authentication token for the pulsar client. Either token or athenz can be set to use auth.",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"connectionBackoff": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Backoff holds parameters applied to connection.",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff"),
+						},
+					},
+					"authAthenzParams": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Authentication athenz parameters for the pulsar client. Refer https://github.com/apache/pulsar-client-go/blob/master/pulsar/auth/athenz.go Either token or athenz can be set to use auth.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"authAthenzSecret": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Authentication athenz privateKey secret for the pulsar client. AuthAthenzSecret must be set if AuthAthenzParams is used.",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+				},
+				Required: []string{"url", "topic", "payload"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter", "k8s.io/api/core/v1.SecretKeySelector"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_RateLimit(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"unit": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Defaults to Second",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"requestsPerUnit": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_RedisEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4220,7 +6396,7 @@ func schema_pkg_apis_eventsource_v1alpha1_RedisEventSource(ref common.ReferenceC
 					"tls": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TLS configuration for the redis client.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.TLSConfig"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"),
 						},
 					},
 					"metadata": {
@@ -4242,7 +6418,7 @@ func schema_pkg_apis_eventsource_v1alpha1_RedisEventSource(ref common.ReferenceC
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 					"jsonBody": {
@@ -4264,11 +6440,11 @@ func schema_pkg_apis_eventsource_v1alpha1_RedisEventSource(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_RedisStreamEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_RedisStreamEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4328,7 +6504,7 @@ func schema_pkg_apis_eventsource_v1alpha1_RedisStreamEventSource(ref common.Refe
 					"tls": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TLS configuration for the redis client.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.TLSConfig"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"),
 						},
 					},
 					"metadata": {
@@ -4350,7 +6526,7 @@ func schema_pkg_apis_eventsource_v1alpha1_RedisStreamEventSource(ref common.Refe
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 					"username": {
@@ -4365,11 +6541,11 @@ func schema_pkg_apis_eventsource_v1alpha1_RedisStreamEventSource(ref common.Refe
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_ResourceEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_ResourceEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4387,7 +6563,7 @@ func schema_pkg_apis_eventsource_v1alpha1_ResourceEventSource(ref common.Referen
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter is applied on the metadata of the resource If you apply filter, then the internal event informer will only monitor objects that pass the filter.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.ResourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ResourceFilter"),
 						},
 					},
 					"group": {
@@ -4447,11 +6623,11 @@ func schema_pkg_apis_eventsource_v1alpha1_ResourceEventSource(ref common.Referen
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.ResourceFilter"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ResourceFilter"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_ResourceFilter(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_ResourceFilter(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4473,7 +6649,7 @@ func schema_pkg_apis_eventsource_v1alpha1_ResourceFilter(ref common.ReferenceCal
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.Selector"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Selector"),
 									},
 								},
 							},
@@ -4487,7 +6663,7 @@ func schema_pkg_apis_eventsource_v1alpha1_ResourceFilter(ref common.ReferenceCal
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.Selector"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Selector"),
 									},
 								},
 							},
@@ -4510,11 +6686,189 @@ func schema_pkg_apis_eventsource_v1alpha1_ResourceFilter(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.Selector", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Selector", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_SFTPEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_S3Artifact(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "S3Artifact contains information about an S3 connection and bucket",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"endpoint": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"bucket": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.S3Bucket"),
+						},
+					},
+					"region": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"insecure": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"accessKey": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"secretKey": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"events": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"filter": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.S3Filter"),
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"caCertificate": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+				},
+				Required: []string{"endpoint", "bucket", "accessKey", "secretKey"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.S3Bucket", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.S3Filter", "k8s.io/api/core/v1.SecretKeySelector"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_S3Bucket(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "S3Bucket contains information to describe an S3 Bucket",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"key": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+				},
+				Required: []string{"name"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_S3Filter(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "S3Filter represents filters to apply to bucket notifications for specifying constraints on objects",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"prefix": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"suffix": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+				},
+				Required: []string{"prefix", "suffix"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_SASLConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SASLConfig refers to SASL configuration for a client",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"mechanism": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SASLMechanism is the name of the enabled SASL mechanism. Possible values: OAUTHBEARER, PLAIN (defaults to PLAIN).",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"userSecret": {
+						SchemaProps: spec.SchemaProps{
+							Description: "User is the authentication identity (authcid) to present for SASL/PLAIN or SASL/SCRAM authentication",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"passwordSecret": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Password for SASL/PLAIN authentication",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.SecretKeySelector"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_SFTPEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4533,7 +6887,7 @@ func schema_pkg_apis_eventsource_v1alpha1_SFTPEventSource(ref common.ReferenceCa
 						SchemaProps: spec.SchemaProps{
 							Description: "WatchPathConfig contains configuration about the file path to watch",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WatchPathConfig"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WatchPathConfig"),
 						},
 					},
 					"username": {
@@ -4550,7 +6904,7 @@ func schema_pkg_apis_eventsource_v1alpha1_SFTPEventSource(ref common.ReferenceCa
 					},
 					"sshKeySecret": {
 						SchemaProps: spec.SchemaProps{
-							Description: "SSHKeySecret refers to the secret that contains SSH key",
+							Description: "SSHKeySecret refers to the secret that contains SSH key. Key needs to contain private key and public key.",
 							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
 						},
 					},
@@ -4579,7 +6933,7 @@ func schema_pkg_apis_eventsource_v1alpha1_SFTPEventSource(ref common.ReferenceCa
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 					"pollIntervalDuration": {
@@ -4595,11 +6949,11 @@ func schema_pkg_apis_eventsource_v1alpha1_SFTPEventSource(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WatchPathConfig", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WatchPathConfig", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_SNSEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_SNSEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4609,7 +6963,7 @@ func schema_pkg_apis_eventsource_v1alpha1_SNSEventSource(ref common.ReferenceCal
 					"webhook": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Webhook configuration for http server",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookContext"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookContext"),
 						},
 					},
 					"topicArn": {
@@ -4673,7 +7027,7 @@ func schema_pkg_apis_eventsource_v1alpha1_SNSEventSource(ref common.ReferenceCal
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 					"endpoint": {
@@ -4689,11 +7043,11 @@ func schema_pkg_apis_eventsource_v1alpha1_SNSEventSource(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookContext", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookContext", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_SQSEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_SQSEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4783,7 +7137,7 @@ func schema_pkg_apis_eventsource_v1alpha1_SQSEventSource(ref common.ReferenceCal
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 					"endpoint": {
@@ -4805,11 +7159,77 @@ func schema_pkg_apis_eventsource_v1alpha1_SQSEventSource(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_Selector(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_SchemaRegistryConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SchemaRegistryConfig refers to configuration for a client",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"url": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Schema Registry URL.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"schemaId": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Schema ID",
+							Default:     0,
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"auth": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SchemaRegistry - basic authentication",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BasicAuth"),
+						},
+					},
+				},
+				Required: []string{"url"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BasicAuth"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_SecureHeader(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SecureHeader refers to HTTP Headers with auth tokens as values",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"valueFrom": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Values can be read from either secrets or configmaps",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ValueFromSource"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ValueFromSource"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_Selector(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4846,13 +7266,245 @@ func schema_pkg_apis_eventsource_v1alpha1_Selector(ref common.ReferenceCallback)
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_Service(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_Sensor(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Sensor is the definition of a sensor resource",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SensorSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SensorStatus"),
+						},
+					},
+				},
+				Required: []string{"metadata", "spec"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SensorSpec", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SensorStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_SensorList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SensorList is the list of Sensor resources",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Sensor"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"metadata", "items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Sensor", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_SensorSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SensorSpec represents desired sensor state",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"dependencies": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Dependencies is a list of the events that this sensor is dependent on.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventDependency"),
+									},
+								},
+							},
+						},
+					},
+					"triggers": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Triggers is a list of the things that this sensor evokes. These are the outputs from this sensor.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Trigger"),
+									},
+								},
+							},
+						},
+					},
+					"template": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Template is the pod specification for the sensor",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Template"),
+						},
+					},
+					"errorOnFailedRound": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ErrorOnFailedRound if set to true, marks sensor state as `error` if the previous trigger round fails. Once sensor state is set to `error`, no further triggers will be processed.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"eventBusName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "EventBusName references to a EventBus name. By default the value is \"default\"",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"replicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Replicas is the sensor deployment replicas",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"revisionHistoryLimit": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RevisionHistoryLimit specifies how many old deployment revisions to retain",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"loggingFields": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LoggingFields add additional key-value pairs when logging happens",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"dependencies", "triggers"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventDependency", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Template", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Trigger"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_SensorStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SensorStatus contains information about the status of a sensor.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"conditions": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-patch-merge-key": "type",
+								"x-kubernetes-patch-strategy":  "merge",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions are the latest available observations of a resource's current state.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Condition"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Condition"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_Service(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Description: "Service holds the service information eventsource exposes",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metadata sets the pods's metadata, i.e. annotations and labels default={annotations: {}, labels: {}}",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Metadata"),
+						},
+					},
 					"ports": {
 						VendorExtensible: spec.VendorExtensible{
 							Extensions: spec.Extensions{
@@ -4889,11 +7541,11 @@ func schema_pkg_apis_eventsource_v1alpha1_Service(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/api/core/v1.ServicePort"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Metadata", "k8s.io/api/core/v1.ServicePort"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_SlackEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_SlackEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4915,7 +7567,7 @@ func schema_pkg_apis_eventsource_v1alpha1_SlackEventSource(ref common.ReferenceC
 					"webhook": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Webhook holds configuration for a REST endpoint",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookContext"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookContext"),
 						},
 					},
 					"metadata": {
@@ -4937,18 +7589,266 @@ func schema_pkg_apis_eventsource_v1alpha1_SlackEventSource(ref common.ReferenceC
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookContext", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookContext", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_StorageGridEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_SlackSender(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"username": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Username is the Slack application's username",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"icon": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Icon is the Slack application's icon, e.g. :robot_face: or https://example.com/image.png",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_SlackThread(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"messageAggregationKey": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MessageAggregationKey allows to aggregate the messages to a thread by some key.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"broadcastMessageToChannel": {
+						SchemaProps: spec.SchemaProps{
+							Description: "BroadcastMessageToChannel allows to also broadcast the message from the thread to the channel",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_SlackTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SlackTrigger refers to the specification of the slack notification trigger.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Parameters is the list of key-value extracted from event's payload that are applied to the trigger resource.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+					"slackToken": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SlackToken refers to the Kubernetes secret that holds the slack token required to send messages.",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"channel": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Channel refers to which Slack channel to send Slack message.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message refers to the message to send to the Slack channel.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"attachments": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Attachments is a JSON format string that represents an array of Slack attachments according to the attachments API: https://api.slack.com/reference/messaging/attachments .",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"blocks": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Blocks is a JSON format string that represents an array of Slack blocks according to the blocks API: https://api.slack.com/reference/block-kit/blocks .",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"thread": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Thread refers to additional options for sending messages to a Slack thread.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SlackThread"),
+						},
+					},
+					"sender": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Sender refers to additional configuration of the Slack application that sends the message.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SlackSender"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SlackSender", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SlackThread", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter", "k8s.io/api/core/v1.SecretKeySelector"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_StandardK8STrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StandardK8STrigger is the standard Kubernetes resource trigger",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Source of the K8s resource file(s)",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ArtifactLocation"),
+						},
+					},
+					"operation": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Operation refers to the type of operation performed on the k8s resource. Default value is Create.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Parameters is the list of parameters that is applied to resolved K8s trigger object.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+									},
+								},
+							},
+						},
+					},
+					"patchStrategy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PatchStrategy controls the K8s object patching strategy when the trigger operation is specified as patch. possible values: \"application/json-patch+json\" \"application/merge-patch+json\" \"application/strategic-merge-patch+json\" \"application/apply-patch+yaml\". Defaults to \"application/merge-patch+json\"",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"liveObject": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LiveObject specifies whether the resource should be directly fetched from K8s instead of being marshaled from the resource artifact. If set to true, the resource artifact must contain the information required to uniquely identify the resource in the cluster, that is, you must specify \"apiVersion\", \"kind\" as well as \"name\" and \"namespace\" meta data. Only valid for operation type `update`",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ArtifactLocation", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_Status(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Status is a common structure which can be used for Status field.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"conditions": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-patch-merge-key": "type",
+								"x-kubernetes-patch-strategy":  "merge",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions are the latest available observations of a resource's current state.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Condition"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Condition"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_StatusPolicy(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StatusPolicy refers to the policy used to check the state of the trigger using response status",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"allow": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: 0,
+										Type:    []string{"integer"},
+										Format:  "int32",
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"allow"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_StorageGridEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4958,7 +7858,7 @@ func schema_pkg_apis_eventsource_v1alpha1_StorageGridEventSource(ref common.Refe
 					"webhook": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Webhook holds configuration for a REST endpoint",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookContext"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookContext"),
 						},
 					},
 					"events": {
@@ -4978,7 +7878,7 @@ func schema_pkg_apis_eventsource_v1alpha1_StorageGridEventSource(ref common.Refe
 					"filter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Filter on object key which caused the notification.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.StorageGridFilter"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.StorageGridFilter"),
 						},
 					},
 					"topicArn": {
@@ -5034,16 +7934,22 @@ func schema_pkg_apis_eventsource_v1alpha1_StorageGridEventSource(ref common.Refe
 							},
 						},
 					},
+					"tls": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TLS configuration for the service bus client",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig"),
+						},
+					},
 				},
 				Required: []string{"topicArn", "bucket", "authToken", "apiURL"},
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.StorageGridFilter", "github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookContext", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.StorageGridFilter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookContext", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_StorageGridFilter(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_StorageGridFilter(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5071,7 +7977,7 @@ func schema_pkg_apis_eventsource_v1alpha1_StorageGridFilter(ref common.Reference
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_StripeEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_StripeEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5081,7 +7987,7 @@ func schema_pkg_apis_eventsource_v1alpha1_StripeEventSource(ref common.Reference
 					"webhook": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Webhook holds configuration for a REST endpoint",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookContext"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookContext"),
 						},
 					},
 					"createWebhook": {
@@ -5132,1412 +8038,47 @@ func schema_pkg_apis_eventsource_v1alpha1_StripeEventSource(ref common.Reference
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.WebhookContext", "k8s.io/api/core/v1.SecretKeySelector"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookContext", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
-func schema_pkg_apis_eventsource_v1alpha1_Template(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_TLSConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "Template holds the information of an EventSource deployment template",
+				Description: "TLSConfig refers to TLS configuration for a client.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
-					"metadata": {
+					"caCertSecret": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Metadata sets the pods's metadata, i.e. annotations and labels",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.Metadata"),
-						},
-					},
-					"serviceAccountName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ServiceAccountName is the name of the ServiceAccount to use to run event source pod. More info: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"container": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Container is the main container image to run in the event source pod",
-							Ref:         ref("k8s.io/api/core/v1.Container"),
-						},
-					},
-					"volumes": {
-						VendorExtensible: spec.VendorExtensible{
-							Extensions: spec.Extensions{
-								"x-kubernetes-patch-merge-key": "name",
-								"x-kubernetes-patch-strategy":  "merge",
-							},
-						},
-						SchemaProps: spec.SchemaProps{
-							Description: "Volumes is a list of volumes that can be mounted by containers in an eventsource.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/api/core/v1.Volume"),
-									},
-								},
-							},
-						},
-					},
-					"securityContext": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SecurityContext holds pod-level security attributes and common container settings. Optional: Defaults to empty.  See type description for default values of each field.",
-							Ref:         ref("k8s.io/api/core/v1.PodSecurityContext"),
-						},
-					},
-					"affinity": {
-						SchemaProps: spec.SchemaProps{
-							Description: "If specified, the pod's scheduling constraints",
-							Ref:         ref("k8s.io/api/core/v1.Affinity"),
-						},
-					},
-					"tolerations": {
-						SchemaProps: spec.SchemaProps{
-							Description: "If specified, the pod's tolerations.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/api/core/v1.Toleration"),
-									},
-								},
-							},
-						},
-					},
-					"nodeSelector": {
-						SchemaProps: spec.SchemaProps{
-							Description: "NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"imagePullSecrets": {
-						VendorExtensible: spec.VendorExtensible{
-							Extensions: spec.Extensions{
-								"x-kubernetes-patch-merge-key": "name",
-								"x-kubernetes-patch-strategy":  "merge",
-							},
-						},
-						SchemaProps: spec.SchemaProps{
-							Description: "ImagePullSecrets is an optional list of references to secrets in the same namespace to use for pulling any of the images used by this PodSpec. If specified, these secrets will be passed to individual puller implementations for them to use. For example, in the case of docker, only DockerConfig type secrets are honored. More info: https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/api/core/v1.LocalObjectReference"),
-									},
-								},
-							},
-						},
-					},
-					"priorityClassName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "If specified, indicates the EventSource pod's priority. \"system-node-critical\" and \"system-cluster-critical\" are two special keywords which indicate the highest priorities with the former being the highest priority. Any other name must be defined by creating a PriorityClass object with that name. If not specified, the pod priority will be default or zero if there is no default. More info: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"priority": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The priority value. Various system components use this field to find the priority of the EventSource pod. When Priority Admission Controller is enabled, it prevents users from setting this field. The admission controller populates this field from PriorityClassName. The higher the value, the higher the priority. More info: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.Metadata", "k8s.io/api/core/v1.Affinity", "k8s.io/api/core/v1.Container", "k8s.io/api/core/v1.LocalObjectReference", "k8s.io/api/core/v1.PodSecurityContext", "k8s.io/api/core/v1.Toleration", "k8s.io/api/core/v1.Volume"},
-	}
-}
-
-func schema_pkg_apis_eventsource_v1alpha1_WatchPathConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"directory": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Directory to watch for events",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"path": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Path is relative path of object to watch with respect to the directory",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"pathRegexp": {
-						SchemaProps: spec.SchemaProps{
-							Description: "PathRegexp is regexp of relative path of object to watch with respect to the directory",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-				Required: []string{"directory"},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_eventsource_v1alpha1_WebhookContext(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "WebhookContext holds a general purpose REST API context",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"endpoint": {
-						SchemaProps: spec.SchemaProps{
-							Description: "REST API endpoint",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"method": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Method is HTTP request method that indicates the desired action to be performed for a given resource. See RFC7231 Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"port": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Port on which HTTP server is listening for incoming events.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"url": {
-						SchemaProps: spec.SchemaProps{
-							Description: "URL is the url of the server.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"serverCertSecret": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ServerCertPath refers the file that contains the cert.",
+							Description: "CACertSecret refers to the secret that contains the CA cert",
 							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
 						},
 					},
-					"serverKeySecret": {
+					"clientCertSecret": {
 						SchemaProps: spec.SchemaProps{
-							Description: "ServerKeyPath refers the file that contains private key",
+							Description: "ClientCertSecret refers to the secret that contains the client cert",
 							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
 						},
 					},
-					"metadata": {
+					"clientKeySecret": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Metadata holds the user defined metadata which will passed along the event payload.",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"authSecret": {
-						SchemaProps: spec.SchemaProps{
-							Description: "AuthSecret holds a secret selector that contains a bearer token for authentication",
+							Description: "ClientKeySecret refers to the secret that contains the client key",
 							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
 						},
 					},
-					"maxPayloadSize": {
+					"insecureSkipVerify": {
 						SchemaProps: spec.SchemaProps{
-							Description: "MaxPayloadSize is the maximum webhook payload size that the server will accept. Requests exceeding that limit will be rejected with \"request too large\" response. Default value: 1048576 (1MB).",
-							Type:        []string{"integer"},
-							Format:      "int64",
-						},
-					},
-				},
-				Required: []string{"endpoint", "method", "port", "url"},
-			},
-		},
-		Dependencies: []string{
-			"k8s.io/api/core/v1.SecretKeySelector"},
-	}
-}
-
-func schema_pkg_apis_eventsource_v1alpha1_WebhookEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "CalendarEventSource describes an HTTP based EventSource",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"endpoint": {
-						SchemaProps: spec.SchemaProps{
-							Description: "REST API endpoint",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"method": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Method is HTTP request method that indicates the desired action to be performed for a given resource. See RFC7231 Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"port": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Port on which HTTP server is listening for incoming events.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"url": {
-						SchemaProps: spec.SchemaProps{
-							Description: "URL is the url of the server.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"serverCertSecret": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ServerCertPath refers the file that contains the cert.",
-							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
-						},
-					},
-					"serverKeySecret": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ServerKeyPath refers the file that contains private key",
-							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Metadata holds the user defined metadata which will passed along the event payload.",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"authSecret": {
-						SchemaProps: spec.SchemaProps{
-							Description: "AuthSecret holds a secret selector that contains a bearer token for authentication",
-							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
-						},
-					},
-					"maxPayloadSize": {
-						SchemaProps: spec.SchemaProps{
-							Description: "MaxPayloadSize is the maximum webhook payload size that the server will accept. Requests exceeding that limit will be rejected with \"request too large\" response. Default value: 1048576 (1MB).",
-							Type:        []string{"integer"},
-							Format:      "int64",
-						},
-					},
-					"filter": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Filter",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter"),
-						},
-					},
-				},
-				Required: []string{"endpoint", "method", "port", "url"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/eventsource/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.SecretKeySelector"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_AWSLambdaTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "AWSLambdaTrigger refers to specification of the trigger to invoke an AWS Lambda function",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"functionName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "FunctionName refers to the name of the function to invoke.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"accessKey": {
-						SchemaProps: spec.SchemaProps{
-							Description: "AccessKey refers K8s secret containing aws access key",
-							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
-						},
-					},
-					"secretKey": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SecretKey refers K8s secret containing aws secret key",
-							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
-						},
-					},
-					"region": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Region is AWS region",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"payload": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Payload is the list of key-value extracted from an event payload to construct the request payload.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-					"parameters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Parameters is the list of key-value extracted from event's payload that are applied to the trigger resource.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-					"invocationType": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Choose from the following options.\n\n   * RequestResponse (default) - Invoke the function synchronously. Keep\n   the connection open until the function returns a response or times out.\n   The API response includes the function response and additional data.\n\n   * Event - Invoke the function asynchronously. Send events that fail multiple\n   times to the function's dead-letter queue (if it's configured). The API\n   response only includes a status code.\n\n   * DryRun - Validate parameter values and verify that the user or role\n   has permission to invoke the function.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"roleARN": {
-						SchemaProps: spec.SchemaProps{
-							Description: "RoleARN is the Amazon Resource Name (ARN) of the role to assume.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-				Required: []string{"functionName", "region", "payload"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter", "k8s.io/api/core/v1.SecretKeySelector"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_ArgoWorkflowTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "ArgoWorkflowTrigger is the trigger for the Argo Workflow",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"source": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Source of the K8s resource file(s)",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.ArtifactLocation"),
-						},
-					},
-					"operation": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Operation refers to the type of operation performed on the argo workflow resource. Default value is Submit.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"parameters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Parameters is the list of parameters to pass to resolved Argo Workflow object",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-					"args": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Args is the list of arguments to pass to the argo CLI",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.ArtifactLocation", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_ArtifactLocation(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "ArtifactLocation describes the source location for an external artifact",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"s3": {
-						SchemaProps: spec.SchemaProps{
-							Description: "S3 compliant artifact",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.S3Artifact"),
-						},
-					},
-					"inline": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Inline artifact is embedded in sensor spec as a string",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"file": {
-						SchemaProps: spec.SchemaProps{
-							Description: "File artifact is artifact stored in a file",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.FileArtifact"),
-						},
-					},
-					"url": {
-						SchemaProps: spec.SchemaProps{
-							Description: "URL to fetch the artifact from",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.URLArtifact"),
-						},
-					},
-					"configmap": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Configmap that stores the artifact",
-							Ref:         ref("k8s.io/api/core/v1.ConfigMapKeySelector"),
-						},
-					},
-					"git": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Git repository hosting the artifact",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.GitArtifact"),
-						},
-					},
-					"resource": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Resource is generic template for K8s resource",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.Resource"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.Resource", "github.com/argoproj/argo-events/pkg/apis/common.S3Artifact", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.FileArtifact", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.GitArtifact", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.URLArtifact", "k8s.io/api/core/v1.ConfigMapKeySelector"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_AzureEventHubsTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "AzureEventHubsTrigger refers to specification of the Azure Event Hubs Trigger",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"fqdn": {
-						SchemaProps: spec.SchemaProps{
-							Description: "FQDN refers to the namespace dns of Azure Event Hubs to be used i.e. <namespace>.servicebus.windows.net",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"hubName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "HubName refers to the Azure Event Hub to send events to",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"sharedAccessKeyName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SharedAccessKeyName refers to the name of the Shared Access Key",
-							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
-						},
-					},
-					"sharedAccessKey": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SharedAccessKey refers to a K8s secret containing the primary key for the",
-							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
-						},
-					},
-					"payload": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Payload is the list of key-value extracted from an event payload to construct the request payload.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-					"parameters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Parameters is the list of key-value extracted from event's payload that are applied to the trigger resource.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"fqdn", "hubName", "sharedAccessKeyName", "payload"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter", "k8s.io/api/core/v1.SecretKeySelector"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_AzureServiceBusTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"connectionString": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ConnectionString is the connection string for the Azure Service Bus",
-							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
-						},
-					},
-					"queueName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "QueueName is the name of the Azure Service Bus Queue",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"topicName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "TopicName is the name of the Azure Service Bus Topic",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"subscriptionName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SubscriptionName is the name of the Azure Service Bus Topic Subscription",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"tls": {
-						SchemaProps: spec.SchemaProps{
-							Description: "TLS configuration for the service bus client",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.TLSConfig"),
-						},
-					},
-					"payload": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Payload is the list of key-value extracted from an event payload to construct the request payload.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-					"parameters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Parameters is the list of key-value extracted from event's payload that are applied to the trigger resource.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"queueName", "topicName", "subscriptionName", "payload"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter", "k8s.io/api/core/v1.SecretKeySelector"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_ConditionsResetByTime(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"cron": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Cron is a cron-like expression. For reference, see: https://en.wikipedia.org/wiki/Cron",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"timezone": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_ConditionsResetCriteria(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"byTime": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Schedule is a cron-like expression. For reference, see: https://en.wikipedia.org/wiki/Cron",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.ConditionsResetByTime"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.ConditionsResetByTime"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_CustomTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "CustomTrigger refers to the specification of the custom trigger.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"serverURL": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ServerURL is the url of the gRPC server that executes custom trigger",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"secure": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Secure refers to type of the connection between sensor to custom trigger gRPC",
-							Default:     false,
+							Description: "If true, skips creation of TLSConfig with certs and creates an empty TLSConfig. (Defaults to false)",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
 					},
-					"certSecret": {
+					"enabled": {
 						SchemaProps: spec.SchemaProps{
-							Description: "CertSecret refers to the secret that contains cert for secure connection between sensor and custom trigger gRPC server.",
-							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
-						},
-					},
-					"serverNameOverride": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ServerNameOverride for the secure connection between sensor and custom trigger gRPC server.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Spec is the custom trigger resource specification that custom trigger gRPC server knows how to interpret.",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"parameters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Parameters is the list of parameters that is applied to resolved custom trigger trigger object.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-					"payload": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Payload is the list of key-value extracted from an event payload to construct the request payload.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"serverURL", "secure", "spec", "payload"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter", "k8s.io/api/core/v1.SecretKeySelector"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_DataFilter(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "DataFilter describes constraints and filters for event data Regular Expressions are purposefully not a feature as they are overkill for our uses here See Rob Pike's Post: https://commandcenter.blogspot.com/2011/08/regular-expressions-in-lexing-and.html",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"path": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Path is the JSONPath of the event's (JSON decoded) data key Path is a series of keys separated by a dot. A key may contain wildcard characters '*' and '?'. To access an array value use the index as the key. The dot and wildcard characters can be escaped with '\\\\'. See https://github.com/tidwall/gjson#path-syntax for more information on how to use this.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"type": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Type contains the JSON type of the data",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"value": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Value is the allowed string values for this key Booleans are passed using strconv.ParseBool() Numbers are parsed using as float64 using strconv.ParseFloat() Strings are taken as is Nils this value is ignored",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"comparator": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Comparator compares the event data with a user given value. Can be \">=\", \">\", \"=\", \"!=\", \"<\", or \"<=\". Is optional, and if left blank treated as equality \"=\".",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"template": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Template is a go-template for extracting a string from the event's data. A Template is evaluated with provided path, type and value. The templating follows the standard go-template syntax as well as sprig's extra functions. See https://pkg.go.dev/text/template and https://masterminds.github.io/sprig/",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-				Required: []string{"path", "type", "value"},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_EmailTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "EmailTrigger refers to the specification of the email notification trigger.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"parameters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Parameters is the list of key-value extracted from event's payload that are applied to the trigger resource.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-					"username": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Username refers to the username used to connect to the smtp server.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"smtpPassword": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SMTPPassword refers to the Kubernetes secret that holds the smtp password used to connect to smtp server.",
-							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
-						},
-					},
-					"host": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Host refers to the smtp host url to which email is send.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"port": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Port refers to the smtp server port to which email is send. Defaults to 0.",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"to": {
-						SchemaProps: spec.SchemaProps{
-							Description: "To refers to the email addresses to which the emails are send.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"from": {
-						SchemaProps: spec.SchemaProps{
-							Description: "From refers to the address from which the email is send from.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"subject": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Subject refers to the subject line for the email send.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"body": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Body refers to the body/content of the email send.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter", "k8s.io/api/core/v1.SecretKeySelector"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_Event(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "Event represents the cloudevent received from an event source.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"context": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.EventContext"),
-						},
-					},
-					"data": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "byte",
-						},
-					},
-				},
-				Required: []string{"data"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.EventContext"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_EventContext(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "EventContext holds the context of the cloudevent received from an event source.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"id": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ID of the event; must be non-empty and unique within the scope of the producer.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"source": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Source - A URI describing the event producer.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"specversion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SpecVersion - The version of the CloudEvents specification used by the event.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"type": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Type - The type of the occurrence which has happened.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"datacontenttype": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DataContentType - A MIME (RFC2046) string describing the media type of `data`.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"subject": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Subject - The subject of the event in the context of the event producer",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"time": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Time - A Timestamp when the event happened.",
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
-						},
-					},
-				},
-				Required: []string{"id", "source", "specversion", "type", "datacontenttype", "subject", "time"},
-			},
-		},
-		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_EventDependency(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "EventDependency describes a dependency",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name is a unique name of this dependency",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"eventSourceName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "EventSourceName is the name of EventSource that Sensor depends on",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"eventName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "EventName is the name of the event",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"filters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Filters and rules governing toleration of success and constraints on the context and data of an event",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.EventDependencyFilter"),
-						},
-					},
-					"transform": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Transform transforms the event data",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.EventDependencyTransformer"),
-						},
-					},
-					"filtersLogicalOperator": {
-						SchemaProps: spec.SchemaProps{
-							Description: "FiltersLogicalOperator defines how different filters are evaluated together. Available values: and (&&), or (||) Is optional and if left blank treated as and (&&).",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-				Required: []string{"name", "eventSourceName", "eventName"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.EventDependencyFilter", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.EventDependencyTransformer"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_EventDependencyFilter(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "EventDependencyFilter defines filters and constraints for a event.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"time": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Time filter on the event with escalation",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TimeFilter"),
-						},
-					},
-					"context": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Context filter constraints",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.EventContext"),
-						},
-					},
-					"data": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Data filter constraints with escalation",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.DataFilter"),
-									},
-								},
-							},
-						},
-					},
-					"exprs": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Exprs contains the list of expressions evaluated against the event payload.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.ExprFilter"),
-									},
-								},
-							},
-						},
-					},
-					"dataLogicalOperator": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DataLogicalOperator defines how multiple Data filters (if defined) are evaluated together. Available values: and (&&), or (||) Is optional and if left blank treated as and (&&).",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"exprLogicalOperator": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ExprLogicalOperator defines how multiple Exprs filters (if defined) are evaluated together. Available values: and (&&), or (||) Is optional and if left blank treated as and (&&).",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"script": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Script refers to a Lua script evaluated to determine the validity of an event.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.DataFilter", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.EventContext", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.ExprFilter", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TimeFilter"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_EventDependencyTransformer(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "EventDependencyTransformer transforms the event",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"jq": {
-						SchemaProps: spec.SchemaProps{
-							Description: "JQ holds the jq command applied for transformation",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"script": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Script refers to a Lua script used to transform the event",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_ExprFilter(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"expr": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Expr refers to the expression that determines the outcome of the filter.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"fields": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Fields refers to set of keys that refer to the paths within event payload.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.PayloadField"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"expr", "fields"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.PayloadField"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_FileArtifact(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "FileArtifact contains information about an artifact in a filesystem",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"path": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_GitArtifact(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GitArtifact contains information about an artifact stored in git",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"url": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Git URL",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"cloneDirectory": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Directory to clone the repository. We clone complete directory because GitArtifact is not limited to any specific Git service providers. Hence we don't use any specific git provider client.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"creds": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Creds contain reference to git username and password",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.GitCreds"),
-						},
-					},
-					"sshKeySecret": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SSHKeySecret refers to the secret that contains SSH key",
-							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
-						},
-					},
-					"filePath": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Path to file that contains trigger resource definition",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"branch": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Branch to use to pull trigger resource",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"tag": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Tag to use to pull trigger resource",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"ref": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Ref to use to pull trigger resource. Will result in a shallow clone and fetch.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"remote": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Remote to manage set of tracked repositories. Defaults to \"origin\". Refer https://git-scm.com/docs/git-remote",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.GitRemoteConfig"),
-						},
-					},
-					"insecureIgnoreHostKey": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Whether to ignore host key",
+							Description: "Enabled indicates if TLS is enabled. Added for compatibility proposes for Brokers that needs TLS without key authentication",
 							Type:        []string{"boolean"},
 							Format:      "",
-						},
-					},
-				},
-				Required: []string{"url", "cloneDirectory", "filePath"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.GitCreds", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.GitRemoteConfig", "k8s.io/api/core/v1.SecretKeySelector"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_GitCreds(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GitCreds contain reference to git username and password",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"username": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/api/core/v1.SecretKeySelector"),
-						},
-					},
-					"password": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/api/core/v1.SecretKeySelector"),
 						},
 					},
 				},
@@ -6548,1104 +8089,17 @@ func schema_pkg_apis_sensor_v1alpha1_GitCreds(ref common.ReferenceCallback) comm
 	}
 }
 
-func schema_pkg_apis_sensor_v1alpha1_GitRemoteConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_Template(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "GitRemoteConfig contains the configuration of a Git remote",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name of the remote to fetch from.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"urls": {
-						SchemaProps: spec.SchemaProps{
-							Description: "URLs the URLs of a remote repository. It must be non-empty. Fetch will always use the first URL, while push will use all of them.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"name", "urls"},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_HTTPTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "HTTPTrigger is the trigger for the HTTP request",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"url": {
-						SchemaProps: spec.SchemaProps{
-							Description: "URL refers to the URL to send HTTP request to.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"payload": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-					"tls": {
-						SchemaProps: spec.SchemaProps{
-							Description: "TLS configuration for the HTTP client.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.TLSConfig"),
-						},
-					},
-					"method": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Method refers to the type of the HTTP request. Refer https://golang.org/src/net/http/method.go for more info. Default value is POST.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"parameters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Parameters is the list of key-value extracted from event's payload that are applied to the HTTP trigger resource.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-					"timeout": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Timeout refers to the HTTP request timeout in seconds. Default value is 60 seconds.",
-							Type:        []string{"integer"},
-							Format:      "int64",
-						},
-					},
-					"basicAuth": {
-						SchemaProps: spec.SchemaProps{
-							Description: "BasicAuth configuration for the http request.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.BasicAuth"),
-						},
-					},
-					"headers": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Headers for the HTTP request.",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"secureHeaders": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Secure Headers stored in Kubernetes Secrets for the HTTP requests.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/argoproj/argo-events/pkg/apis/common.SecureHeader"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"url", "payload"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.BasicAuth", "github.com/argoproj/argo-events/pkg/apis/common.SecureHeader", "github.com/argoproj/argo-events/pkg/apis/common.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_K8SResourcePolicy(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "K8SResourcePolicy refers to the policy used to check the state of K8s based triggers using labels",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"labels": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Labels required to identify whether a resource is in success state",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"backoff": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Backoff before checking resource state",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.Backoff"),
-						},
-					},
-					"errorOnBackoffTimeout": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ErrorOnBackoffTimeout determines whether sensor should transition to error state if the trigger policy is unable to determine the state of the resource",
-							Default:     false,
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-				},
-				Required: []string{"backoff", "errorOnBackoffTimeout"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.Backoff"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_KafkaTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "KafkaTrigger refers to the specification of the Kafka trigger.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"url": {
-						SchemaProps: spec.SchemaProps{
-							Description: "URL of the Kafka broker, multiple URLs separated by comma.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"topic": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name of the topic. More info at https://kafka.apache.org/documentation/#intro_topics",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"partition": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DEPRECATED",
-							Default:     0,
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"parameters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Parameters is the list of parameters that is applied to resolved Kafka trigger object.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-					"requiredAcks": {
-						SchemaProps: spec.SchemaProps{
-							Description: "RequiredAcks used in producer to tell the broker how many replica acknowledgements Defaults to 1 (Only wait for the leader to ack).",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"compress": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Compress determines whether to compress message or not. Defaults to false. If set to true, compresses message using snappy compression.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"flushFrequency": {
-						SchemaProps: spec.SchemaProps{
-							Description: "FlushFrequency refers to the frequency in milliseconds to flush batches. Defaults to 500 milliseconds.",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"tls": {
-						SchemaProps: spec.SchemaProps{
-							Description: "TLS configuration for the Kafka producer.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.TLSConfig"),
-						},
-					},
-					"payload": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Payload is the list of key-value extracted from an event payload to construct the request payload.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-					"partitioningKey": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The partitioning key for the messages put on the Kafka topic.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"version": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Specify what kafka version is being connected to enables certain features in sarama, defaults to 1.0.0",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"sasl": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SASL configuration for the kafka client",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.SASLConfig"),
-						},
-					},
-					"schemaRegistry": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Schema Registry configuration to producer message with avro format",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.SchemaRegistryConfig"),
-						},
-					},
-				},
-				Required: []string{"url", "topic", "payload"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.SASLConfig", "github.com/argoproj/argo-events/pkg/apis/common.SchemaRegistryConfig", "github.com/argoproj/argo-events/pkg/apis/common.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_LogTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"intervalSeconds": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Only print messages every interval. Useful to prevent logging too much data for busy events.",
-							Type:        []string{"integer"},
-							Format:      "int64",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_NATSTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "NATSTrigger refers to the specification of the NATS trigger.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"url": {
-						SchemaProps: spec.SchemaProps{
-							Description: "URL of the NATS cluster.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"subject": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name of the subject to put message on.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"payload": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-					"parameters": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-					"tls": {
-						SchemaProps: spec.SchemaProps{
-							Description: "TLS configuration for the NATS producer.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.TLSConfig"),
-						},
-					},
-				},
-				Required: []string{"url", "subject", "payload"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_OpenWhiskTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "OpenWhiskTrigger refers to the specification of the OpenWhisk trigger.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"host": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Host URL of the OpenWhisk.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"version": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Version for the API. Defaults to v1.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"namespace": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Namespace for the action. Defaults to \"_\".",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"authToken": {
-						SchemaProps: spec.SchemaProps{
-							Description: "AuthToken for authentication.",
-							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
-						},
-					},
-					"actionName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name of the action/function.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"payload": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Payload is the list of key-value extracted from an event payload to construct the request payload.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-					"parameters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Parameters is the list of key-value extracted from event's payload that are applied to the trigger resource.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"host", "actionName", "payload"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter", "k8s.io/api/core/v1.SecretKeySelector"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_PayloadField(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "PayloadField binds a value at path within the event payload against a name.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"path": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Path is the JSONPath of the event's (JSON decoded) data key Path is a series of keys separated by a dot. A key may contain wildcard characters '*' and '?'. To access an array value use the index as the key. The dot and wildcard characters can be escaped with '\\\\'. See https://github.com/tidwall/gjson#path-syntax for more information on how to use this.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name acts as key that holds the value at the path.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-				Required: []string{"path", "name"},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_PulsarTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "PulsarTrigger refers to the specification of the Pulsar trigger.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"url": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Configure the service URL for the Pulsar service.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"topic": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name of the topic. See https://pulsar.apache.org/docs/en/concepts-messaging/",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"parameters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Parameters is the list of parameters that is applied to resolved Kafka trigger object.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-					"payload": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Payload is the list of key-value extracted from an event payload to construct the request payload.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-					"tlsTrustCertsSecret": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Trusted TLS certificate secret.",
-							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
-						},
-					},
-					"tlsAllowInsecureConnection": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Whether the Pulsar client accept untrusted TLS certificate from broker.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"tlsValidateHostname": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Whether the Pulsar client verify the validity of the host name from broker.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"tls": {
-						SchemaProps: spec.SchemaProps{
-							Description: "TLS configuration for the pulsar client.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.TLSConfig"),
-						},
-					},
-					"authTokenSecret": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Authentication token for the pulsar client. Either token or athenz can be set to use auth.",
-							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
-						},
-					},
-					"connectionBackoff": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Backoff holds parameters applied to connection.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.Backoff"),
-						},
-					},
-					"authAthenzParams": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Authentication athenz parameters for the pulsar client. Refer https://github.com/apache/pulsar-client-go/blob/master/pulsar/auth/athenz.go Either token or athenz can be set to use auth.",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"authAthenzSecret": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Authentication athenz privateKey secret for the pulsar client. AuthAthenzSecret must be set if AuthAthenzParams is used.",
-							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
-						},
-					},
-				},
-				Required: []string{"url", "topic", "payload"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.Backoff", "github.com/argoproj/argo-events/pkg/apis/common.TLSConfig", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter", "k8s.io/api/core/v1.SecretKeySelector"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_RateLimit(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"unit": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Defaults to Second",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"requestsPerUnit": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_Sensor(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "Sensor is the definition of a sensor resource",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.SensorSpec"),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.SensorStatus"),
-						},
-					},
-				},
-				Required: []string{"metadata", "spec"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.SensorSpec", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.SensorStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_SensorList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "SensorList is the list of Sensor resources",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.Sensor"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"metadata", "items"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.Sensor", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_SensorSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "SensorSpec represents desired sensor state",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"dependencies": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Dependencies is a list of the events that this sensor is dependent on.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.EventDependency"),
-									},
-								},
-							},
-						},
-					},
-					"triggers": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Triggers is a list of the things that this sensor evokes. These are the outputs from this sensor.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.Trigger"),
-									},
-								},
-							},
-						},
-					},
-					"template": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Template is the pod specification for the sensor",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.Template"),
-						},
-					},
-					"errorOnFailedRound": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ErrorOnFailedRound if set to true, marks sensor state as `error` if the previous trigger round fails. Once sensor state is set to `error`, no further triggers will be processed.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"eventBusName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "EventBusName references to a EventBus name. By default the value is \"default\"",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"replicas": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Replicas is the sensor deployment replicas",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"revisionHistoryLimit": {
-						SchemaProps: spec.SchemaProps{
-							Description: "RevisionHistoryLimit specifies how many old deployment revisions to retain",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"loggingFields": {
-						SchemaProps: spec.SchemaProps{
-							Description: "LoggingFields add additional key-value pairs when logging happens",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"dependencies", "triggers"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.EventDependency", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.Template", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.Trigger"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_SensorStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "SensorStatus contains information about the status of a sensor.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"conditions": {
-						VendorExtensible: spec.VendorExtensible{
-							Extensions: spec.Extensions{
-								"x-kubernetes-patch-merge-key": "type",
-								"x-kubernetes-patch-strategy":  "merge",
-							},
-						},
-						SchemaProps: spec.SchemaProps{
-							Description: "Conditions are the latest available observations of a resource's current state.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/common.Condition"),
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.Condition"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_SlackSender(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"username": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Username is the Slack application's username",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"icon": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Icon is the Slack application's icon, e.g. :robot_face: or https://example.com/image.png",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_SlackThread(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"messageAggregationKey": {
-						SchemaProps: spec.SchemaProps{
-							Description: "MessageAggregationKey allows to aggregate the messages to a thread by some key.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"broadcastMessageToChannel": {
-						SchemaProps: spec.SchemaProps{
-							Description: "BroadcastMessageToChannel allows to also broadcast the message from the thread to the channel",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_SlackTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "SlackTrigger refers to the specification of the slack notification trigger.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"parameters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Parameters is the list of key-value extracted from event's payload that are applied to the trigger resource.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-					"slackToken": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SlackToken refers to the Kubernetes secret that holds the slack token required to send messages.",
-							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
-						},
-					},
-					"channel": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Channel refers to which Slack channel to send Slack message.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"message": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Message refers to the message to send to the Slack channel.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"attachments": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Attachments is a JSON format string that represents an array of Slack attachments according to the attachments API: https://api.slack.com/reference/messaging/attachments .",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"blocks": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Blocks is a JSON format string that represents an array of Slack blocks according to the blocks API: https://api.slack.com/reference/block-kit/blocks .",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"thread": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Thread refers to additional options for sending messages to a Slack thread.",
-							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.SlackThread"),
-						},
-					},
-					"sender": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Sender refers to additional configuration of the Slack application that sends the message.",
-							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.SlackSender"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.SlackSender", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.SlackThread", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter", "k8s.io/api/core/v1.SecretKeySelector"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_StandardK8STrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "StandardK8STrigger is the standard Kubernetes resource trigger",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"source": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Source of the K8s resource file(s)",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.ArtifactLocation"),
-						},
-					},
-					"operation": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Operation refers to the type of operation performed on the k8s resource. Default value is Create.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"parameters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Parameters is the list of parameters that is applied to resolved K8s trigger object.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
-									},
-								},
-							},
-						},
-					},
-					"patchStrategy": {
-						SchemaProps: spec.SchemaProps{
-							Description: "PatchStrategy controls the K8s object patching strategy when the trigger operation is specified as patch. possible values: \"application/json-patch+json\" \"application/merge-patch+json\" \"application/strategic-merge-patch+json\" \"application/apply-patch+yaml\". Defaults to \"application/merge-patch+json\"",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"liveObject": {
-						SchemaProps: spec.SchemaProps{
-							Description: "LiveObject specifies whether the resource should be directly fetched from K8s instead of being marshaled from the resource artifact. If set to true, the resource artifact must contain the information required to uniquely identify the resource in the cluster, that is, you must specify \"apiVersion\", \"kind\" as well as \"name\" and \"namespace\" meta data. Only valid for operation type `update`",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.ArtifactLocation", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_StatusPolicy(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "StatusPolicy refers to the policy used to check the state of the trigger using response status",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"allow": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: 0,
-										Type:    []string{"integer"},
-										Format:  "int32",
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"allow"},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_sensor_v1alpha1_Template(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "Template holds the information of a sensor deployment template",
+				Description: "Template holds the information of a deployment template",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Metadata sets the pods's metadata, i.e. annotations and labels",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.Metadata"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Metadata"),
 						},
 					},
 					"serviceAccountName": {
@@ -7658,7 +8112,7 @@ func schema_pkg_apis_sensor_v1alpha1_Template(ref common.ReferenceCallback) comm
 					"container": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Container is the main container image to run in the sensor pod",
-							Ref:         ref("k8s.io/api/core/v1.Container"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Container"),
 						},
 					},
 					"volumes": {
@@ -7761,11 +8215,11 @@ func schema_pkg_apis_sensor_v1alpha1_Template(ref common.ReferenceCallback) comm
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.Metadata", "k8s.io/api/core/v1.Affinity", "k8s.io/api/core/v1.Container", "k8s.io/api/core/v1.LocalObjectReference", "k8s.io/api/core/v1.PodSecurityContext", "k8s.io/api/core/v1.Toleration", "k8s.io/api/core/v1.Volume"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Container", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Metadata", "k8s.io/api/core/v1.Affinity", "k8s.io/api/core/v1.LocalObjectReference", "k8s.io/api/core/v1.PodSecurityContext", "k8s.io/api/core/v1.Toleration", "k8s.io/api/core/v1.Volume"},
 	}
 }
 
-func schema_pkg_apis_sensor_v1alpha1_TimeFilter(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_TimeFilter(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -7788,6 +8242,13 @@ func schema_pkg_apis_sensor_v1alpha1_TimeFilter(ref common.ReferenceCallback) co
 							Format:      "",
 						},
 					},
+					"timezone": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Timezone specifies the timezone for the time window. If not specified, defaults to UTC. Format should be a valid IANA timezone name (e.g., \"America/New_York\", \"Europe/London\").",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 				},
 				Required: []string{"start", "stop"},
 			},
@@ -7795,7 +8256,7 @@ func schema_pkg_apis_sensor_v1alpha1_TimeFilter(ref common.ReferenceCallback) co
 	}
 }
 
-func schema_pkg_apis_sensor_v1alpha1_Trigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_Trigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -7805,7 +8266,7 @@ func schema_pkg_apis_sensor_v1alpha1_Trigger(ref common.ReferenceCallback) commo
 					"template": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Template describes the trigger specification.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerTemplate"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerTemplate"),
 						},
 					},
 					"parameters": {
@@ -7816,7 +8277,7 @@ func schema_pkg_apis_sensor_v1alpha1_Trigger(ref common.ReferenceCallback) commo
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -7825,19 +8286,19 @@ func schema_pkg_apis_sensor_v1alpha1_Trigger(ref common.ReferenceCallback) commo
 					"policy": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Policy to configure backoff and execution criteria for the trigger",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerPolicy"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerPolicy"),
 						},
 					},
 					"retryStrategy": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Retry strategy, defaults to no retry",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/common.Backoff"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff"),
 						},
 					},
 					"rateLimit": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Rate limit, default unit is Second",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.RateLimit"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.RateLimit"),
 						},
 					},
 					"atLeastOnce": {
@@ -7847,15 +8308,21 @@ func schema_pkg_apis_sensor_v1alpha1_Trigger(ref common.ReferenceCallback) commo
 							Format:      "",
 						},
 					},
+					"dlqTrigger": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If the trigger fails, it will retry up to the configured number of retries. If the maximum retries are reached and the trigger is set to execute atLeastOnce, the dead letter queue (DLQ) trigger will be invoked if specified.  Invoking the dead letter queue trigger helps prevent data loss.",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Trigger"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/common.Backoff", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.RateLimit", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameter", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerPolicy", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerTemplate"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Backoff", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.RateLimit", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Trigger", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerPolicy", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerTemplate"},
 	}
 }
 
-func schema_pkg_apis_sensor_v1alpha1_TriggerParameter(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_TriggerParameter(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -7865,7 +8332,7 @@ func schema_pkg_apis_sensor_v1alpha1_TriggerParameter(ref common.ReferenceCallba
 					"src": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Src contains a source reference to the value of the parameter from a dependency",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameterSource"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameterSource"),
 						},
 					},
 					"dest": {
@@ -7888,11 +8355,11 @@ func schema_pkg_apis_sensor_v1alpha1_TriggerParameter(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.TriggerParameterSource"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameterSource"},
 	}
 }
 
-func schema_pkg_apis_sensor_v1alpha1_TriggerParameterSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_TriggerParameterSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -7956,7 +8423,7 @@ func schema_pkg_apis_sensor_v1alpha1_TriggerParameterSource(ref common.Reference
 	}
 }
 
-func schema_pkg_apis_sensor_v1alpha1_TriggerPolicy(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_TriggerPolicy(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -7966,24 +8433,24 @@ func schema_pkg_apis_sensor_v1alpha1_TriggerPolicy(ref common.ReferenceCallback)
 					"k8s": {
 						SchemaProps: spec.SchemaProps{
 							Description: "K8SResourcePolicy refers to the policy used to check the state of K8s based triggers using using labels",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.K8SResourcePolicy"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.K8SResourcePolicy"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Status refers to the policy used to check the state of the trigger using response status",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.StatusPolicy"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.StatusPolicy"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.K8SResourcePolicy", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.StatusPolicy"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.K8SResourcePolicy", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.StatusPolicy"},
 	}
 }
 
-func schema_pkg_apis_sensor_v1alpha1_TriggerTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_TriggerTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -8008,73 +8475,73 @@ func schema_pkg_apis_sensor_v1alpha1_TriggerTemplate(ref common.ReferenceCallbac
 					"k8s": {
 						SchemaProps: spec.SchemaProps{
 							Description: "StandardK8STrigger refers to the trigger designed to create or update a generic Kubernetes resource.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.StandardK8STrigger"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.StandardK8STrigger"),
 						},
 					},
 					"argoWorkflow": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ArgoWorkflow refers to the trigger that can perform various operations on an Argo workflow.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.ArgoWorkflowTrigger"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ArgoWorkflowTrigger"),
 						},
 					},
 					"http": {
 						SchemaProps: spec.SchemaProps{
 							Description: "HTTP refers to the trigger designed to dispatch a HTTP request with on-the-fly constructable payload.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.HTTPTrigger"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.HTTPTrigger"),
 						},
 					},
 					"awsLambda": {
 						SchemaProps: spec.SchemaProps{
 							Description: "AWSLambda refers to the trigger designed to invoke AWS Lambda function with with on-the-fly constructable payload.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.AWSLambdaTrigger"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AWSLambdaTrigger"),
 						},
 					},
 					"custom": {
 						SchemaProps: spec.SchemaProps{
 							Description: "CustomTrigger refers to the trigger designed to connect to a gRPC trigger server and execute a custom trigger.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.CustomTrigger"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.CustomTrigger"),
 						},
 					},
 					"kafka": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Kafka refers to the trigger designed to place messages on Kafka topic.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.KafkaTrigger"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.KafkaTrigger"),
 						},
 					},
 					"nats": {
 						SchemaProps: spec.SchemaProps{
 							Description: "NATS refers to the trigger designed to place message on NATS subject.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.NATSTrigger"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSTrigger"),
 						},
 					},
 					"slack": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Slack refers to the trigger designed to send slack notification message.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.SlackTrigger"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SlackTrigger"),
 						},
 					},
 					"openWhisk": {
 						SchemaProps: spec.SchemaProps{
 							Description: "OpenWhisk refers to the trigger designed to invoke OpenWhisk action.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.OpenWhiskTrigger"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.OpenWhiskTrigger"),
 						},
 					},
 					"log": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Log refers to the trigger designed to invoke log the event.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.LogTrigger"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.LogTrigger"),
 						},
 					},
 					"azureEventHubs": {
 						SchemaProps: spec.SchemaProps{
 							Description: "AzureEventHubs refers to the trigger send an event to an Azure Event Hub.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.AzureEventHubsTrigger"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureEventHubsTrigger"),
 						},
 					},
 					"pulsar": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Pulsar refers to the trigger designed to place messages on Pulsar topic.",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.PulsarTrigger"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PulsarTrigger"),
 						},
 					},
 					"conditionsReset": {
@@ -8085,7 +8552,7 @@ func schema_pkg_apis_sensor_v1alpha1_TriggerTemplate(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.ConditionsResetCriteria"),
+										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ConditionsResetCriteria"),
 									},
 								},
 							},
@@ -8094,13 +8561,13 @@ func schema_pkg_apis_sensor_v1alpha1_TriggerTemplate(ref common.ReferenceCallbac
 					"azureServiceBus": {
 						SchemaProps: spec.SchemaProps{
 							Description: "AzureServiceBus refers to the trigger designed to place messages on Azure Service Bus",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.AzureServiceBusTrigger"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureServiceBusTrigger"),
 						},
 					},
 					"email": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Email refers to the trigger designed to send an email notification",
-							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.EmailTrigger"),
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EmailTrigger"),
 						},
 					},
 				},
@@ -8108,15 +8575,15 @@ func schema_pkg_apis_sensor_v1alpha1_TriggerTemplate(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.AWSLambdaTrigger", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.ArgoWorkflowTrigger", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.AzureEventHubsTrigger", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.AzureServiceBusTrigger", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.ConditionsResetCriteria", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.CustomTrigger", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.EmailTrigger", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.HTTPTrigger", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.KafkaTrigger", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.LogTrigger", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.NATSTrigger", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.OpenWhiskTrigger", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.PulsarTrigger", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.SlackTrigger", "github.com/argoproj/argo-events/pkg/apis/sensor/v1alpha1.StandardK8STrigger"},
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AWSLambdaTrigger", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ArgoWorkflowTrigger", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureEventHubsTrigger", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureServiceBusTrigger", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ConditionsResetCriteria", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.CustomTrigger", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EmailTrigger", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.HTTPTrigger", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.KafkaTrigger", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.LogTrigger", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSTrigger", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.OpenWhiskTrigger", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PulsarTrigger", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SlackTrigger", "github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.StandardK8STrigger"},
 	}
 }
 
-func schema_pkg_apis_sensor_v1alpha1_URLArtifact(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_events_v1alpha1_URLArtifact(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "URLArtifact contains information about an artifact at an http endpoint.",
+				Description: "URLArtifact contains information about an artifact at an HTTP endpoint.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"path": {
@@ -8138,5 +8605,249 @@ func schema_pkg_apis_sensor_v1alpha1_URLArtifact(ref common.ReferenceCallback) c
 				Required: []string{"path"},
 			},
 		},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_ValueFromSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ValueFromSource allows you to reference keys from either a Configmap or Secret",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"secretKeyRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"configMapKeyRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.ConfigMapKeySelector"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.ConfigMapKeySelector", "k8s.io/api/core/v1.SecretKeySelector"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_WatchPathConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"directory": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Directory to watch for events",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"path": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Path is relative path of object to watch with respect to the directory",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"pathRegexp": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PathRegexp is regexp of relative path of object to watch with respect to the directory",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"directory"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_WebhookContext(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "WebhookContext holds a general purpose REST API context",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"endpoint": {
+						SchemaProps: spec.SchemaProps{
+							Description: "REST API endpoint",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"method": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Method is HTTP request method that indicates the desired action to be performed for a given resource. See RFC7231 Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"port": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Port on which HTTP server is listening for incoming events.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"url": {
+						SchemaProps: spec.SchemaProps{
+							Description: "URL is the url of the server.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"serverCertSecret": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ServerCertPath refers the file that contains the cert.",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"serverKeySecret": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ServerKeyPath refers the file that contains private key",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metadata holds the user defined metadata which will passed along the event payload.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"authSecret": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AuthSecret holds a secret selector that contains a bearer token for authentication",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"maxPayloadSize": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MaxPayloadSize is the maximum webhook payload size that the server will accept. Requests exceeding that limit will be rejected with \"request too large\" response. Default value: 1048576 (1MB).",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+				},
+				Required: []string{"endpoint", "method", "port", "url"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.SecretKeySelector"},
+	}
+}
+
+func schema_pkg_apis_events_v1alpha1_WebhookEventSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "CalendarEventSource describes an HTTP based EventSource",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"endpoint": {
+						SchemaProps: spec.SchemaProps{
+							Description: "REST API endpoint",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"method": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Method is HTTP request method that indicates the desired action to be performed for a given resource. See RFC7231 Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"port": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Port on which HTTP server is listening for incoming events.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"url": {
+						SchemaProps: spec.SchemaProps{
+							Description: "URL is the url of the server.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"serverCertSecret": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ServerCertPath refers the file that contains the cert.",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"serverKeySecret": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ServerKeyPath refers the file that contains private key",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metadata holds the user defined metadata which will passed along the event payload.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"authSecret": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AuthSecret holds a secret selector that contains a bearer token for authentication",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+					"maxPayloadSize": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MaxPayloadSize is the maximum webhook payload size that the server will accept. Requests exceeding that limit will be rejected with \"request too large\" response. Default value: 1048576 (1MB).",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"filter": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Filter",
+							Ref:         ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter"),
+						},
+					},
+				},
+				Required: []string{"endpoint", "method", "port", "url"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSourceFilter", "k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }

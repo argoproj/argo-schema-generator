@@ -5474,59 +5474,6 @@
                     "version": "v1alpha1"
                 }
             ]
-        },
-        "io.argoproj.argocd.v1alpha1.objectMeta": {
-            "description": "objectMeta and corresponding GetMetadata() methods is a hack to allow us to use grpc-gateway side-by-side with k8s protobuf codegen. The grpc-gateway generated .gw.pb.go files expect a GetMetadata() method to be generated because it assumes the .proto files were generated from protoc --go_out=plugins=grpc. Instead, kubernetes uses go-to-protobuf to generate .proto files from go types, and this method is not auto-generated (presumably since ObjectMeta is embedded but is nested in the 'metadata' field in JSON form).",
-            "type": "object",
-            "required": [
-                "Name"
-            ],
-            "properties": {
-                "Name": {
-                    "type": "string"
-                }
-            },
-            "x-kubernetes-group-version-kind": [
-                {
-                    "group": "argoproj.io",
-                    "kind": "objectMeta",
-                    "version": "v1alpha1"
-                }
-            ]
-        },
-        "io.argoproj.argocd.v1alpha1.rawResourceOverride": {
-            "type": "object",
-            "properties": {
-                "actions": {
-                    "type": "string"
-                },
-                "health.lua": {
-                    "type": "string"
-                },
-                "health.lua.useOpenLibs": {
-                    "type": "boolean"
-                },
-                "ignoreDifferences": {
-                    "type": "string"
-                },
-                "ignoreResourceUpdates": {
-                    "type": "string"
-                },
-                "knownTypeFields": {
-                    "type": "array",
-                    "items": {
-                        "default": {},
-                        "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.KnownTypeField"
-                    }
-                }
-            },
-            "x-kubernetes-group-version-kind": [
-                {
-                    "group": "argoproj.io",
-                    "kind": "rawResourceOverride",
-                    "version": "v1alpha1"
-                }
-            ]
         }
     }
 }

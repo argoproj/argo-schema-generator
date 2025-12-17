@@ -180,8 +180,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.SyncWindow":                              schema_pkg_apis_application_v1alpha1_SyncWindow(ref),
 		"github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.TLSClientConfig":                         schema_pkg_apis_application_v1alpha1_TLSClientConfig(ref),
 		"github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.TagFilter":                               schema_pkg_apis_application_v1alpha1_TagFilter(ref),
-		"github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.objectMeta":                              schema_pkg_apis_application_v1alpha1_objectMeta(ref),
-		"github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.rawResourceOverride":                     schema_pkg_apis_application_v1alpha1_rawResourceOverride(ref),
 	}
 }
 
