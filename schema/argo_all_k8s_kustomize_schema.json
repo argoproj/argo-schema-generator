@@ -20975,13 +20975,8 @@
                     "x-kubernetes-list-type": "atomic"
                 },
                 "scope": {
-                    "description": "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
-                    "type": "string",
-                    "enum": [
-                        "*",
-                        "Cluster",
-                        "Namespaced"
-                    ]
+                    "description": "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+                    "type": "string"
                 }
             },
             "x-kubernetes-map-type": "atomic",
@@ -21059,13 +21054,8 @@
                     "x-kubernetes-list-type": "atomic"
                 },
                 "scope": {
-                    "description": "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
-                    "type": "string",
-                    "enum": [
-                        "*",
-                        "Cluster",
-                        "Namespaced"
-                    ]
+                    "description": "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+                    "type": "string"
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -21118,13 +21108,8 @@
                     "x-kubernetes-list-type": "atomic"
                 },
                 "scope": {
-                    "description": "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
-                    "type": "string",
-                    "enum": [
-                        "*",
-                        "Cluster",
-                        "Namespaced"
-                    ]
+                    "description": "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+                    "type": "string"
                 }
             },
             "x-kubernetes-group-version-kind": []
@@ -22003,13 +21988,8 @@
                     "x-kubernetes-list-type": "atomic"
                 },
                 "scope": {
-                    "description": "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
-                    "type": "string",
-                    "enum": [
-                        "*",
-                        "Cluster",
-                        "Namespaced"
-                    ]
+                    "description": "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+                    "type": "string"
                 }
             },
             "x-kubernetes-map-type": "atomic",
@@ -38515,13 +38495,7 @@
                     "$ref": "#/definitions/io.k8s.api.networking.v1beta1.IPAddressSpec"
                 }
             },
-            "x-kubernetes-group-version-kind": [
-                {
-                    "group": "networking.k8s.io",
-                    "kind": "IPAddress",
-                    "version": "v1beta1"
-                }
-            ]
+            "x-kubernetes-group-version-kind": []
         },
         "io.k8s.api.networking.v1beta1.IPAddressList": {
             "description": "IPAddressList contains a list of IPAddress.",
@@ -38552,13 +38526,7 @@
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
                 }
             },
-            "x-kubernetes-group-version-kind": [
-                {
-                    "group": "networking.k8s.io",
-                    "kind": "IPAddressList",
-                    "version": "v1beta1"
-                }
-            ]
+            "x-kubernetes-group-version-kind": []
         },
         "io.k8s.api.networking.v1beta1.IPAddressSpec": {
             "description": "IPAddressSpec describe the attributes in an IP Address.",
@@ -38998,13 +38966,7 @@
                     "$ref": "#/definitions/io.k8s.api.networking.v1beta1.ServiceCIDRStatus"
                 }
             },
-            "x-kubernetes-group-version-kind": [
-                {
-                    "group": "networking.k8s.io",
-                    "kind": "ServiceCIDR",
-                    "version": "v1beta1"
-                }
-            ]
+            "x-kubernetes-group-version-kind": []
         },
         "io.k8s.api.networking.v1beta1.ServiceCIDRList": {
             "description": "ServiceCIDRList contains a list of ServiceCIDR objects.",
@@ -39035,13 +38997,7 @@
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
                 }
             },
-            "x-kubernetes-group-version-kind": [
-                {
-                    "group": "networking.k8s.io",
-                    "kind": "ServiceCIDRList",
-                    "version": "v1beta1"
-                }
-            ]
+            "x-kubernetes-group-version-kind": []
         },
         "io.k8s.api.networking.v1beta1.ServiceCIDRSpec": {
             "description": "ServiceCIDRSpec define the CIDRs the user wants to use for allocating ClusterIPs for Services.",
@@ -42395,13 +42351,7 @@
                     }
                 }
             },
-            "x-kubernetes-group-version-kind": [
-                {
-                    "group": "storage.k8s.io",
-                    "kind": "VolumeAttributesClass",
-                    "version": "v1beta1"
-                }
-            ]
+            "x-kubernetes-group-version-kind": []
         },
         "io.k8s.api.storage.v1beta1.VolumeAttributesClassList": {
             "description": "VolumeAttributesClassList is a collection of VolumeAttributesClass objects.",
@@ -42432,13 +42382,7 @@
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
                 }
             },
-            "x-kubernetes-group-version-kind": [
-                {
-                    "group": "storage.k8s.io",
-                    "kind": "VolumeAttributesClassList",
-                    "version": "v1beta1"
-                }
-            ]
+            "x-kubernetes-group-version-kind": []
         },
         "io.k8s.api.storage.v1beta1.VolumeError": {
             "description": "VolumeError captures an error encountered during a volume operation.",

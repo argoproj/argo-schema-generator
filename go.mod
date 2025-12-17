@@ -141,7 +141,7 @@ require (
 	k8s.io/apimachinery v0.34.3 // indirect
 	k8s.io/apiserver v0.32.2 // indirect
 	k8s.io/cli-runtime v0.33.1 // indirect
-	k8s.io/client-go v0.34.3 // indirect
+	k8s.io/client-go v1.5.2 // indirect
 	k8s.io/component-base v0.33.1 // indirect
 	k8s.io/component-helpers v0.33.1 // indirect
 	k8s.io/gengo/v2 v2.0.0-20250604051438-85fd79dbfd9f // indirect
