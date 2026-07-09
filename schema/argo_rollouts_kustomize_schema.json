@@ -46,8 +46,7 @@
                     "description": "Ingresses refers to the name of an `Ingress` resource in the same namespace as the `Rollout` in a multi ingress scenario",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "rootService": {
@@ -84,8 +83,7 @@
                     "description": "Mappings refer to the name of the Ambassador Mappings used to route traffic to the service",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -177,7 +175,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisRun"
                     }
                 },
@@ -206,16 +203,14 @@
                     "description": "Annotations additional annotations to add to the AnalysisRun",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "labels": {
                     "description": "Labels Additional labels to add to the AnalysisRun",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -238,7 +233,6 @@
                     "description": "Args are the list of arguments used in this run",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Argument"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -248,7 +242,6 @@
                     "description": "DryRun object contains the settings for running the analysis in Dry-Run mode",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.DryRun"
                     },
                     "x-kubernetes-patch-merge-key": "metricName",
@@ -258,7 +251,6 @@
                     "description": "MeasurementRetention object contains the settings for retaining the number of measurements during the analysis",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.MeasurementRetention"
                     },
                     "x-kubernetes-patch-merge-key": "metricName",
@@ -268,7 +260,6 @@
                     "description": "Metrics contains the list of metrics to query as part of an analysis run",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Metric"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -314,7 +305,6 @@
                     "description": "MetricResults contains the metrics collected during the run",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.MetricResult"
                     }
                 },
@@ -411,7 +401,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisTemplate"
                     }
                 },
@@ -461,7 +450,6 @@
                     "description": "Args are the list of arguments to the template",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Argument"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -471,7 +459,6 @@
                     "description": "DryRun object contains the settings for running the analysis in Dry-Run mode",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.DryRun"
                     },
                     "x-kubernetes-patch-merge-key": "metricName",
@@ -481,7 +468,6 @@
                     "description": "MeasurementRetention object contains the settings for retaining the number of measurements during the analysis",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.MeasurementRetention"
                     },
                     "x-kubernetes-patch-merge-key": "metricName",
@@ -491,7 +477,6 @@
                     "description": "Metrics contains the list of metrics to query as part of an analysis run",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Metric"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -501,7 +486,6 @@
                     "description": "Templates reference to a list of analysis templates to combine with the rest of the metrics for an AnalysisRun",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisTemplateRef"
                     },
                     "x-kubernetes-patch-merge-key": "templateName",
@@ -551,8 +535,7 @@
                     "description": "RuleRef a list of the APISIX Route HTTP Rules used to route traffic to the service",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -664,8 +647,7 @@
                     "description": "Routes is list of HTTP routes within virtual router associated with virtual service to edit. If omitted, virtual service must have a single route of this type.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -1033,7 +1015,6 @@
                     "description": "Steps define the order of phases to execute the canary deployment",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.CanaryStep"
                     }
                 },
@@ -1063,7 +1044,6 @@
                 "metricDataQueries": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.CloudWatchMetricDataQuery"
                     }
                 }
@@ -1138,7 +1118,6 @@
                 "dimensions": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.CloudWatchMetricStatMetricDimension"
                     }
                 },
@@ -1222,7 +1201,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ClusterAnalysisTemplate"
                     }
                 },
@@ -1266,8 +1244,7 @@
                     "description": "Queries is a map of query_name_as_key: query. You can then use query_name_as_key inside Formula.Used for v2",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "query": {
@@ -1386,7 +1363,6 @@
                     "description": "Args are the arguments that will be added to the AnalysisRuns",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Argument"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -1483,7 +1459,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Experiment"
                     }
                 },
@@ -1515,7 +1490,6 @@
                     "description": "Analyses references AnalysisTemplates to run during the experiment",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ExperimentAnalysisTemplateRef"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -1530,7 +1504,6 @@
                     "description": "DryRun object contains the settings for running the analysis in Dry-Run mode",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.DryRun"
                     },
                     "x-kubernetes-patch-merge-key": "metricName",
@@ -1544,7 +1517,6 @@
                     "description": "MeasurementRetention object contains the settings for retaining the number of measurements during the analysis",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.MeasurementRetention"
                     },
                     "x-kubernetes-patch-merge-key": "metricName",
@@ -1564,7 +1536,6 @@
                     "description": "Templates are a list of PodSpecs that define the ReplicaSets that should be run during an experiment.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.TemplateSpec"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -1591,7 +1562,6 @@
                     "description": "AnalysisRuns tracks the status of AnalysisRuns associated with this Experiment",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ExperimentAnalysisRunStatus"
                     }
                 },
@@ -1603,7 +1573,6 @@
                     "description": "Conditions a list of conditions a experiment can have.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ExperimentCondition"
                     }
                 },
@@ -1619,7 +1588,6 @@
                     "description": "TemplateStatuses holds the ReplicaSet related statuses for individual templates",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.TemplateStatus"
                     }
                 }
@@ -1768,7 +1736,6 @@
                     "description": "VirtualServices references a list of Istio VirtualService to modify to shape traffic",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.IstioVirtualService"
                     }
                 }
@@ -1797,15 +1764,13 @@
                     "description": "A list of HTTP routes within VirtualService to edit. If omitted, VirtualService must have a single route of this type.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "tcpRoutes": {
                     "description": "A list of TCP routes within VirtualService to edit. If omitted, VirtualService must have a single route of this type.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.TCPRoute"
                     }
                 },
@@ -1813,7 +1778,6 @@
                     "description": "A list of TLS/HTTPS routes within VirtualService to edit. If omitted, VirtualService must have a single route of this type.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.TLSRoute"
                     }
                 }
@@ -1886,7 +1850,6 @@
                 "scopes": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.KayentaScope"
                     }
                 },
@@ -2000,8 +1963,7 @@
                     "description": "Metadata stores additional metadata about this metric result, used by the different providers (e.g. kayenta run ID, job name)",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "phase": {
@@ -2223,7 +2185,6 @@
                     "description": "Measurements holds the most recent measurements collected for the metric",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Measurement"
                     }
                 },
@@ -2235,8 +2196,7 @@
                     "description": "Metadata stores additional metadata about this metric. It is used by different providers to store the final state which gets used while taking measurements. For example, Prometheus uses this field to store the final resolved query after substituting the template arguments.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "name": {
@@ -2295,8 +2255,7 @@
                 "additionalIngressAnnotations": {
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "annotationPrefix": {
@@ -2311,8 +2270,7 @@
                     "description": "StableIngresses refers to the names of `Ingress` resources in the same namespace as the `Rollout` in a multi ingress scenario",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -2339,8 +2297,7 @@
                     "description": "OAuth2 scopes",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "tokenUrl": {
@@ -2444,16 +2401,14 @@
                     "description": "Annotations additional annotations to add to the experiment",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "labels": {
                     "description": "Labels Additional labels to add to the experiment",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -2504,7 +2459,6 @@
                     "description": "Headers are optional HTTP headers to use in the request",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.WebMetricHeader"
                     },
                     "x-kubernetes-patch-merge-key": "key",
@@ -2608,7 +2562,6 @@
                     "description": "Args the arguments that will be added to the AnalysisRuns",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisRunArgument"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -2618,7 +2571,6 @@
                     "description": "DryRun object contains the settings for running the analysis in Dry-Run mode",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.DryRun"
                     },
                     "x-kubernetes-patch-merge-key": "metricName",
@@ -2628,7 +2580,6 @@
                     "description": "MeasurementRetention object contains the settings for retaining the number of measurements during the analysis",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.MeasurementRetention"
                     },
                     "x-kubernetes-patch-merge-key": "metricName",
@@ -2638,7 +2589,6 @@
                     "description": "Templates reference to a list of analysis templates to combine for an AnalysisRun",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisTemplateRef"
                     },
                     "x-kubernetes-patch-merge-key": "templateName",
@@ -2666,7 +2616,6 @@
                     "description": "Args the arguments that will be added to the AnalysisRuns",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisRunArgument"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -2676,7 +2625,6 @@
                     "description": "DryRun object contains the settings for running the analysis in Dry-Run mode",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.DryRun"
                     },
                     "x-kubernetes-patch-merge-key": "metricName",
@@ -2686,7 +2634,6 @@
                     "description": "MeasurementRetention object contains the settings for retaining the number of measurements during the analysis",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.MeasurementRetention"
                     },
                     "x-kubernetes-patch-merge-key": "metricName",
@@ -2701,7 +2648,6 @@
                     "description": "Templates reference to a list of analysis templates to combine for an AnalysisRun",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisTemplateRef"
                     },
                     "x-kubernetes-patch-merge-key": "templateName",
@@ -2803,7 +2749,6 @@
                     "description": "Analyses reference which analysis templates to run with the experiment",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutExperimentStepAnalysisTemplateRef"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -2818,7 +2763,6 @@
                     "description": "DryRun object contains the settings for running the analysis in Dry-Run mode",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.DryRun"
                     },
                     "x-kubernetes-patch-merge-key": "metricName",
@@ -2832,7 +2776,6 @@
                     "description": "Templates what templates that should be added to the experiment. Should be non-nil",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutExperimentTemplate"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -2858,7 +2801,6 @@
                     "description": "Args the arguments that will be added to the AnalysisRuns",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.AnalysisRunArgument"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -2956,7 +2898,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.Rollout"
                     }
                 },
@@ -3090,7 +3031,6 @@
                     "description": "/ ALBs keeps information regarding multiple ALBs and TargetGroups in a multi ingress scenario",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.ALBStatus"
                     }
                 },
@@ -3118,7 +3058,6 @@
                     "description": "Conditions a list of conditions a rollout can have.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RolloutCondition"
                     }
                 },
@@ -3151,7 +3090,6 @@
                     "description": "PauseConditions is a list of reasons why rollout became automatically paused (e.g. CanaryPauseStep, BlueGreenPause, InconclusiveAnalysis). The items in this list are populated by the controller but are cleared by the user (e.g. plugin, argo-cd resume action) when they wish to unpause. If pause conditions is empty, but controllerPause is true, it indicates the user manually unpaused the Rollout",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.PauseCondition"
                     }
                 },
@@ -3250,7 +3188,6 @@
                     "description": "ManagedRoutes A list of HTTP routes that Argo Rollouts manages, the order of this array also becomes the precedence in the upstream traffic router.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.MangedRoutes"
                     }
                 },
@@ -3295,7 +3232,6 @@
                     "description": "Headers What request with matching headers should be mirrored",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.StringMatch"
                     }
                 },
@@ -3475,7 +3411,6 @@
                 "match": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.HeaderRoutingMatch"
                     }
                 },
@@ -3502,7 +3437,6 @@
                     "description": "Match Contains a list of rules that if mated will mirror the traffic to the services",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.RouteMatch"
                     }
                 },
@@ -3651,8 +3585,7 @@
                     "description": "A list of all the SNI Hosts of the TLS Route desired to be matched in the given Istio VirtualService.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -3860,7 +3793,6 @@
                     "description": "Additional holds the weights split to additional ReplicaSets such as experiment ReplicaSets",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.WeightDestination"
                     }
                 },
@@ -3947,7 +3879,6 @@
                     "description": "Headers are optional HTTP headers to use in the request",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.rollouts.v1alpha1.WebMetricHeader"
                     },
                     "x-kubernetes-patch-merge-key": "key",

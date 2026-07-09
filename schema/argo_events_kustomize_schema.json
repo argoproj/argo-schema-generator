@@ -74,8 +74,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "queueBind": {
@@ -197,7 +196,6 @@
                     "description": "Parameters is the list of key-value extracted from event's payload that are applied to the trigger resource.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -205,7 +203,6 @@
                     "description": "Payload is the list of key-value extracted from an event payload to construct the request payload.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -238,8 +235,7 @@
                     "description": "Args is the list of arguments to pass to the argo CLI",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "operation": {
@@ -250,7 +246,6 @@
                     "description": "Parameters is the list of parameters to pass to resolved Argo Workflow object",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -320,7 +315,6 @@
                     "description": "Parameters is the list of key-value extracted from event's payload that are applied to the trigger resource.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -328,7 +322,6 @@
                     "description": "Payload is the list of key-value extracted from an event payload to construct the request payload.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -369,8 +362,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "sharedAccessKey": {
@@ -415,8 +407,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "queueName": {
@@ -469,8 +460,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "queueName": {
@@ -512,7 +502,6 @@
                     "description": "Parameters is the list of key-value extracted from event's payload that are applied to the trigger resource.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -520,7 +509,6 @@
                     "description": "Payload is the list of key-value extracted from an event payload to construct the request payload.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -640,8 +628,7 @@
                     "description": "Events this webhook is subscribed to.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "filter": {
@@ -652,8 +639,7 @@
                     "description": "Metadata holds the user defined metadata which will be passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "owner": {
@@ -668,7 +654,6 @@
                     "description": "Repositories holds a list of repositories for which integration needs to set up",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.BitbucketRepository"
                     }
                 },
@@ -732,8 +717,7 @@
                     "description": "Events are bitbucket event to listen to. Refer https://confluence.atlassian.com/bitbucketserver/event-payload-938025882.html",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "filter": {
@@ -744,8 +728,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "oneEventPerChange": {
@@ -760,15 +743,13 @@
                     "description": "Projects holds a list of projects for which integration needs to set up, this will add the webhook to all repositories in the project.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "repositories": {
                     "description": "Repositories holds a list of repositories for which integration needs to set up.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.BitbucketServerRepository"
                     }
                 },
@@ -839,8 +820,7 @@
                     "description": "ExclusionDates defines the list of DATE-TIME exceptions for recurring events.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "filter": {
@@ -856,8 +836,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "persistence": {
@@ -967,14 +946,12 @@
                 "env": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.EnvVar"
                     }
                 },
                 "envFrom": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.EnvFromSource"
                     }
                 },
@@ -991,7 +968,6 @@
                 "volumeMounts": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.VolumeMount"
                     }
                 }
@@ -1033,7 +1009,6 @@
                     "description": "Parameters is the list of parameters that is applied to resolved custom trigger trigger object.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -1041,7 +1016,6 @@
                     "description": "Payload is the list of key-value extracted from an event payload to construct the request payload.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -1063,8 +1037,7 @@
                     "description": "Spec is the custom trigger resource specification that custom trigger gRPC server knows how to interpret.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -1101,8 +1074,7 @@
                     "description": "Value is the allowed string values for this key. Booleans are parsed using strconv.ParseBool(), Numbers are parsed as float64 using strconv.ParseFloat(), Strings are treated as regular expressions, Nils value is ignored.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -1128,7 +1100,6 @@
                     "description": "Parameters is the list of key-value extracted from event's payload that are applied to the trigger resource.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -1149,8 +1120,7 @@
                     "description": "To refers to the email addresses to which the emails are send.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "username": {
@@ -1200,8 +1170,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "password": {
@@ -1282,7 +1251,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.EventBus"
                     }
                 },
@@ -1327,7 +1295,6 @@
                     "description": "Conditions are the latest available observations of a resource's current state.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.Condition"
                     },
                     "x-kubernetes-patch-merge-key": "type",
@@ -1442,7 +1409,6 @@
                     "description": "Data filter constraints with escalation",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.DataFilter"
                     }
                 },
@@ -1458,7 +1424,6 @@
                     "description": "Exprs contains the list of expressions evaluated against the event payload.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.ExprFilter"
                     }
                 },
@@ -1557,7 +1522,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.EventSource"
                     }
                 },
@@ -1580,7 +1544,6 @@
                     "description": "AMQP event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.AMQPEventSource"
                     }
                 },
@@ -1588,7 +1551,6 @@
                     "description": "AzureEventsHub event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.AzureEventsHubEventSource"
                     }
                 },
@@ -1596,7 +1558,6 @@
                     "description": "AzureQueueStorage event source",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.AzureQueueStorageEventSource"
                     }
                 },
@@ -1604,7 +1565,6 @@
                     "description": "Azure Service Bus event source",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.AzureServiceBusEventSource"
                     }
                 },
@@ -1612,7 +1572,6 @@
                     "description": "Bitbucket event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.BitbucketEventSource"
                     }
                 },
@@ -1620,7 +1579,6 @@
                     "description": "Bitbucket Server event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.BitbucketServerEventSource"
                     }
                 },
@@ -1628,7 +1586,6 @@
                     "description": "Calendar event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.CalendarEventSource"
                     }
                 },
@@ -1636,7 +1593,6 @@
                     "description": "Emitter event source",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.EmitterEventSource"
                     }
                 },
@@ -1648,7 +1604,6 @@
                     "description": "File event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.FileEventSource"
                     }
                 },
@@ -1656,7 +1611,6 @@
                     "description": "Generic event source",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.GenericEventSource"
                     }
                 },
@@ -1664,7 +1618,6 @@
                     "description": "Gerrit event source",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.GerritEventSource"
                     }
                 },
@@ -1672,7 +1625,6 @@
                     "description": "Github event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.GithubEventSource"
                     }
                 },
@@ -1680,7 +1632,6 @@
                     "description": "Gitlab event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.GitlabEventSource"
                     }
                 },
@@ -1688,7 +1639,6 @@
                     "description": "HDFS event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.HDFSEventSource"
                     }
                 },
@@ -1696,7 +1646,6 @@
                     "description": "Kafka event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.KafkaEventSource"
                     }
                 },
@@ -1704,7 +1653,6 @@
                     "description": "Minio event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.S3Artifact"
                     }
                 },
@@ -1712,7 +1660,6 @@
                     "description": "MNS event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.MNSEventSource"
                     }
                 },
@@ -1720,7 +1667,6 @@
                     "description": "MQTT event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.MQTTEventSource"
                     }
                 },
@@ -1728,7 +1674,6 @@
                     "description": "NATS event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.NATSEventsSource"
                     }
                 },
@@ -1736,7 +1681,6 @@
                     "description": "NSQ event source",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.NSQEventSource"
                     }
                 },
@@ -1744,7 +1688,6 @@
                     "description": "PubSub event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.PubSubEventSource"
                     }
                 },
@@ -1752,7 +1695,6 @@
                     "description": "Pulsar event source",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.PulsarEventSource"
                     }
                 },
@@ -1760,7 +1702,6 @@
                     "description": "Redis event source",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.RedisEventSource"
                     }
                 },
@@ -1768,7 +1709,6 @@
                     "description": "Redis stream source",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.RedisStreamEventSource"
                     }
                 },
@@ -1781,7 +1721,6 @@
                     "description": "Resource event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.ResourceEventSource"
                     }
                 },
@@ -1793,7 +1732,6 @@
                     "description": "SFTP event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.SFTPEventSource"
                     }
                 },
@@ -1801,7 +1739,6 @@
                     "description": "Slack event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.SlackEventSource"
                     }
                 },
@@ -1809,7 +1746,6 @@
                     "description": "SNS event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.SNSEventSource"
                     }
                 },
@@ -1817,7 +1753,6 @@
                     "description": "SQS event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.SQSEventSource"
                     }
                 },
@@ -1825,7 +1760,6 @@
                     "description": "StorageGrid event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.StorageGridEventSource"
                     }
                 },
@@ -1833,7 +1767,6 @@
                     "description": "Stripe event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.StripeEventSource"
                     }
                 },
@@ -1845,7 +1778,6 @@
                     "description": "Webhook event sources",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.WebhookEventSource"
                     }
                 }
@@ -1860,7 +1792,6 @@
                     "description": "Conditions are the latest available observations of a resource's current state.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.Condition"
                     },
                     "x-kubernetes-patch-merge-key": "type",
@@ -1885,7 +1816,6 @@
                     "description": "Fields refers to set of keys that refer to the paths within event payload.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.PayloadField"
                     }
                 }
@@ -1923,8 +1853,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "polling": {
@@ -1972,8 +1901,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "url": {
@@ -2005,8 +1933,7 @@
                     "description": "Events are gerrit event to listen to. Refer https://gerrit-review.googlesource.com/Documentation/cmd-stream-events.html#events",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "filter": {
@@ -2033,16 +1960,14 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "projects": {
                     "description": "List of project namespace paths like \"whynowy/test\".",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "sslVerify": {
@@ -2141,8 +2066,7 @@
                     "description": "URLs the URLs of a remote repository. It must be non-empty. Fetch will always use the first URL, while push will use all of them.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -2202,8 +2126,7 @@
                     "description": "Events refer to Github events to which the event source will subscribe",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "filter": {
@@ -2236,16 +2159,14 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "organizations": {
                     "description": "Organizations holds the names of organizations (used for organization level webhooks). Not required if Repositories is set.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "owner": {
@@ -2257,7 +2178,6 @@
                     "description": "Repositories holds the information of repositories, which uses repo owner as the key, and list of repo names as the value. Not required if Organizations is set.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.OwnedRepositories"
                     }
                 },
@@ -2301,8 +2221,7 @@
                     "description": "Events are gitlab event to listen to. Refer https://github.com/xanzy/go-gitlab/blob/bf34eca5d13a9f4c3f501d8a97b8ac226d55e4d9/projects.go#L794.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "filter": {
@@ -2318,16 +2237,14 @@
                     "description": "List of group IDs or group name like \"test\". Group level hook available in Premium and Ultimate Gitlab.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "metadata": {
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "projectID": {
@@ -2338,8 +2255,7 @@
                     "description": "List of project IDs or project namespace paths like \"whynowy/test\". If neither a project nor a group is defined, the EventSource will not manage webhooks.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "secretToken": {
@@ -2365,8 +2281,7 @@
                 "addresses": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "checkInterval": {
@@ -2414,8 +2329,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "path": {
@@ -2450,7 +2364,6 @@
                     "description": "Dynamic Headers for the request, sourced from the event. Same spec as Parameters.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -2458,8 +2371,7 @@
                     "description": "Headers for the HTTP request.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "host": {
@@ -2475,14 +2387,12 @@
                     "description": "Parameters is the list of key-value extracted from event's payload that are applied to the HTTP trigger resource.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
                 "payload": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -2531,7 +2441,6 @@
                     "description": "ImagePullSecrets is an optional list of references to secrets in the same namespace to use for pulling any of the images used by this PodSpec. If specified, these secrets will be passed to individual puller implementations for them to use. For example, in the case of docker, only DockerConfig type secrets are honored. More info: https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.LocalObjectReference"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -2553,8 +2462,7 @@
                     "description": "NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "persistence": {
@@ -2594,8 +2502,7 @@
                     "description": "Optional arguments to start nats-server. For example, \"-D\" to enable debugging output, \"-DV\" to enable debugging and tracing. Check https://docs.nats.io/ for all the available arguments.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "streamConfig": {
@@ -2606,7 +2513,6 @@
                     "description": "If specified, the pod's tolerations.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.Toleration"
                     }
                 },
@@ -2664,8 +2570,7 @@
                     "description": "Labels required to identify whether a resource is in success state",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -2766,8 +2671,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "partition": {
@@ -2827,15 +2731,13 @@
                     "description": "Headers for the Kafka Messages.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "parameters": {
                     "description": "Parameters is the list of parameters that is applied to resolved Kafka trigger object.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -2853,7 +2755,6 @@
                     "description": "Payload is the list of key-value extracted from an event payload to construct the request payload.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -2978,8 +2879,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "tls": {
@@ -3006,15 +2906,13 @@
                 "annotations": {
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "labels": {
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -3109,8 +3007,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "queue": {
@@ -3150,14 +3047,12 @@
                 "parameters": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
                 "payload": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -3213,8 +3108,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "tls": {
@@ -3248,7 +3142,6 @@
                     "description": "ImagePullSecrets is an optional list of references to secrets in the same namespace to use for pulling any of the images used by this PodSpec. If specified, these secrets will be passed to individual puller implementations for them to use. For example, in the case of docker, only DockerConfig type secrets are honored. More info: https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.LocalObjectReference"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -3288,8 +3181,7 @@
                     "description": "NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "persistence": {
@@ -3337,7 +3229,6 @@
                     "description": "If specified, the pod's tolerations.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.Toleration"
                     }
                 }
@@ -3375,7 +3266,6 @@
                     "description": "Parameters is the list of key-value extracted from event's payload that are applied to the trigger resource.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -3383,7 +3273,6 @@
                     "description": "Payload is the list of key-value extracted from an event payload to construct the request payload.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -3401,8 +3290,7 @@
                     "description": "Repository names",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "owner": {
@@ -3476,8 +3364,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "projectID": {
@@ -3515,8 +3402,7 @@
                     "description": "Authentication athenz parameters for the pulsar client. Refer https://github.com/apache/pulsar-client-go/blob/master/pulsar/auth/athenz.go Either token or athenz can be set to use auth.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "authAthenzSecret": {
@@ -3543,8 +3429,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "tls": {
@@ -3567,8 +3452,7 @@
                     "description": "Name of the topics to subscribe to.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "type": {
@@ -3596,8 +3480,7 @@
                     "description": "Authentication athenz parameters for the pulsar client. Refer https://github.com/apache/pulsar-client-go/blob/master/pulsar/auth/athenz.go Either token or athenz can be set to use auth.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "authAthenzSecret": {
@@ -3616,7 +3499,6 @@
                     "description": "Parameters is the list of parameters that is applied to resolved Kafka trigger object.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -3624,7 +3506,6 @@
                     "description": "Payload is the list of key-value extracted from an event payload to construct the request payload.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -3682,8 +3563,7 @@
                 "channels": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "db": {
@@ -3708,8 +3588,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "namespace": {
@@ -3766,8 +3645,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "password": {
@@ -3778,8 +3656,7 @@
                     "description": "Streams to look for entries. XREADGROUP is used on all streams using a single consumer group.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "tls": {
@@ -3808,8 +3685,7 @@
                     "description": "EventTypes is the list of event type to watch. Possible values are - ADD, UPDATE and DELETE.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "filter": {
@@ -3824,8 +3700,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "namespace": {
@@ -3860,7 +3735,6 @@
                     "description": "Fields provide field filters similar to K8s field selector (see https://kubernetes.io/docs/concepts/overview/working-with-objects/field-selectors/). Unlike K8s field selector, it supports arbitrary fileds like \"spec.serviceAccountName\", and the value could be a string or a regex. Same as K8s field selector, operator \"=\", \"==\" and \"!=\" are supported.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.Selector"
                     }
                 },
@@ -3868,7 +3742,6 @@
                     "description": "Labels provide listing options to K8s API to watch resource/s. Refer https://kubernetes.io/docs/concepts/overview/working-with-objects/label-selectors/ for more info. Unlike K8s field selector, multiple values are passed as comma separated values instead of list of values. Eg: value: value1,value2. Same as K8s label selector, operator \"=\", \"==\", \"!=\", \"exists\", \"!\", \"notin\", \"in\", \"gt\" and \"lt\" are supported",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.Selector"
                     }
                 },
@@ -3905,8 +3778,7 @@
                 "events": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "filter": {
@@ -3918,8 +3790,7 @@
                 "metadata": {
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "region": {
@@ -4011,8 +3882,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "password": {
@@ -4065,8 +3935,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "region": {
@@ -4132,8 +4001,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "queue": {
@@ -4282,7 +4150,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.Sensor"
                     }
                 },
@@ -4309,7 +4176,6 @@
                     "description": "Dependencies is a list of the events that this sensor is dependent on.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.EventDependency"
                     }
                 },
@@ -4325,8 +4191,7 @@
                     "description": "LoggingFields add additional key-value pairs when logging happens",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "replicas": {
@@ -4347,7 +4212,6 @@
                     "description": "Triggers is a list of the things that this sensor evokes. These are the outputs from this sensor.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.Trigger"
                     }
                 }
@@ -4362,7 +4226,6 @@
                     "description": "Conditions are the latest available observations of a resource's current state.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.Condition"
                     },
                     "x-kubernetes-patch-merge-key": "type",
@@ -4387,7 +4250,6 @@
                     "description": "The list of ports that are exposed by this ClusterIP service.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.ServicePort"
                     },
                     "x-kubernetes-list-map-keys": [
@@ -4413,8 +4275,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "signingSecret": {
@@ -4484,7 +4345,6 @@
                     "description": "Parameters is the list of key-value extracted from event's payload that are applied to the trigger resource.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -4521,7 +4381,6 @@
                     "description": "Parameters is the list of parameters that is applied to resolved K8s trigger object.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -4544,7 +4403,6 @@
                     "description": "Conditions are the latest available observations of a resource's current state.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.Condition"
                     },
                     "x-kubernetes-patch-merge-key": "type",
@@ -4564,8 +4422,7 @@
                     "type": "array",
                     "items": {
                         "type": "integer",
-                        "format": "int32",
-                        "default": 0
+                        "format": "int32"
                     }
                 }
             },
@@ -4598,8 +4455,7 @@
                 "events": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "filter": {
@@ -4610,8 +4466,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "region": {
@@ -4669,16 +4524,14 @@
                     "description": "EventFilter describes the type of events to listen to. If not specified, all types of events will be processed. More info at https://stripe.com/docs/api/events/list",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "metadata": {
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "webhook": {
@@ -4731,7 +4584,6 @@
                     "description": "ImagePullSecrets is an optional list of references to secrets in the same namespace to use for pulling any of the images used by this PodSpec. If specified, these secrets will be passed to individual puller implementations for them to use. For example, in the case of docker, only DockerConfig type secrets are honored. More info: https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.LocalObjectReference"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -4745,8 +4597,7 @@
                     "description": "NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "priority": {
@@ -4770,7 +4621,6 @@
                     "description": "If specified, the pod's tolerations.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.Toleration"
                     }
                 },
@@ -4778,7 +4628,6 @@
                     "description": "Volumes is a list of volumes that can be mounted by containers in a workflow.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.Volume"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -4828,7 +4677,6 @@
                     "description": "Parameters is the list of parameters applied to the trigger template definition",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.TriggerParameter"
                     }
                 },
@@ -4959,7 +4807,6 @@
                     "description": "Criteria to reset the conditons",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/com.github.argoproj.argo-events.pkg.apis.events.v1alpha1.ConditionsResetCriteria"
                     }
                 },
@@ -5093,8 +4940,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "method": {
@@ -5155,8 +5001,7 @@
                     "description": "Metadata holds the user defined metadata which will passed along the event payload.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "method": {

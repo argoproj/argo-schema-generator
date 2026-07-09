@@ -278,9 +278,8 @@ func schema_pkg_apis_events_v1alpha1_AMQPEventSource(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -495,8 +494,7 @@ func schema_pkg_apis_events_v1alpha1_AWSLambdaTrigger(ref common.ReferenceCallba
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -509,8 +507,7 @@ func schema_pkg_apis_events_v1alpha1_AWSLambdaTrigger(ref common.ReferenceCallba
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -578,8 +575,7 @@ func schema_pkg_apis_events_v1alpha1_ArgoWorkflowTrigger(ref common.ReferenceCal
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -592,9 +588,8 @@ func schema_pkg_apis_events_v1alpha1_ArgoWorkflowTrigger(ref common.ReferenceCal
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -708,8 +703,7 @@ func schema_pkg_apis_events_v1alpha1_AzureEventHubsTrigger(ref common.ReferenceC
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -722,8 +716,7 @@ func schema_pkg_apis_events_v1alpha1_AzureEventHubsTrigger(ref common.ReferenceC
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -781,9 +774,8 @@ func schema_pkg_apis_events_v1alpha1_AzureEventsHubEventSource(ref common.Refere
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -854,9 +846,8 @@ func schema_pkg_apis_events_v1alpha1_AzureQueueStorageEventSource(ref common.Ref
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -949,9 +940,8 @@ func schema_pkg_apis_events_v1alpha1_AzureServiceBusEventSource(ref common.Refer
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -1035,8 +1025,7 @@ func schema_pkg_apis_events_v1alpha1_AzureServiceBusTrigger(ref common.Reference
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -1049,8 +1038,7 @@ func schema_pkg_apis_events_v1alpha1_AzureServiceBusTrigger(ref common.Reference
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -1209,9 +1197,8 @@ func schema_pkg_apis_events_v1alpha1_BitbucketEventSource(ref common.ReferenceCa
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -1236,9 +1223,8 @@ func schema_pkg_apis_events_v1alpha1_BitbucketEventSource(ref common.ReferenceCa
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -1272,8 +1258,7 @@ func schema_pkg_apis_events_v1alpha1_BitbucketEventSource(ref common.ReferenceCa
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketRepository"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketRepository"),
 									},
 								},
 							},
@@ -1357,9 +1342,8 @@ func schema_pkg_apis_events_v1alpha1_BitbucketServerEventSource(ref common.Refer
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -1372,8 +1356,7 @@ func schema_pkg_apis_events_v1alpha1_BitbucketServerEventSource(ref common.Refer
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketServerRepository"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketServerRepository"),
 									},
 								},
 							},
@@ -1386,9 +1369,8 @@ func schema_pkg_apis_events_v1alpha1_BitbucketServerEventSource(ref common.Refer
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -1443,9 +1425,8 @@ func schema_pkg_apis_events_v1alpha1_BitbucketServerEventSource(ref common.Refer
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -1569,9 +1550,8 @@ func schema_pkg_apis_events_v1alpha1_CalendarEventSource(ref common.ReferenceCal
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -1592,9 +1572,8 @@ func schema_pkg_apis_events_v1alpha1_CalendarEventSource(ref common.ReferenceCal
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -1799,8 +1778,7 @@ func schema_pkg_apis_events_v1alpha1_Container(ref common.ReferenceCallback) com
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/api/core/v1.VolumeMount"),
+										Ref: ref("k8s.io/api/core/v1.VolumeMount"),
 									},
 								},
 							},
@@ -1812,8 +1790,7 @@ func schema_pkg_apis_events_v1alpha1_Container(ref common.ReferenceCallback) com
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/api/core/v1.EnvVar"),
+										Ref: ref("k8s.io/api/core/v1.EnvVar"),
 									},
 								},
 							},
@@ -1825,8 +1802,7 @@ func schema_pkg_apis_events_v1alpha1_Container(ref common.ReferenceCallback) com
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/api/core/v1.EnvFromSource"),
+										Ref: ref("k8s.io/api/core/v1.EnvFromSource"),
 									},
 								},
 							},
@@ -1916,9 +1892,8 @@ func schema_pkg_apis_events_v1alpha1_CustomTrigger(ref common.ReferenceCallback)
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -1931,8 +1906,7 @@ func schema_pkg_apis_events_v1alpha1_CustomTrigger(ref common.ReferenceCallback)
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -1945,8 +1919,7 @@ func schema_pkg_apis_events_v1alpha1_CustomTrigger(ref common.ReferenceCallback)
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -1991,9 +1964,8 @@ func schema_pkg_apis_events_v1alpha1_DataFilter(ref common.ReferenceCallback) co
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -2034,8 +2006,7 @@ func schema_pkg_apis_events_v1alpha1_EmailTrigger(ref common.ReferenceCallback) 
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -2075,9 +2046,8 @@ func schema_pkg_apis_events_v1alpha1_EmailTrigger(ref common.ReferenceCallback) 
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -2182,9 +2152,8 @@ func schema_pkg_apis_events_v1alpha1_EmitterEventSource(ref common.ReferenceCall
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -2313,8 +2282,7 @@ func schema_pkg_apis_events_v1alpha1_EventBusList(ref common.ReferenceCallback) 
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventBus"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventBus"),
 									},
 								},
 							},
@@ -2387,8 +2355,7 @@ func schema_pkg_apis_events_v1alpha1_EventBusStatus(ref common.ReferenceCallback
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Condition"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Condition"),
 									},
 								},
 							},
@@ -2564,8 +2531,7 @@ func schema_pkg_apis_events_v1alpha1_EventDependencyFilter(ref common.ReferenceC
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.DataFilter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.DataFilter"),
 									},
 								},
 							},
@@ -2578,8 +2544,7 @@ func schema_pkg_apis_events_v1alpha1_EventDependencyFilter(ref common.ReferenceC
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ExprFilter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ExprFilter"),
 									},
 								},
 							},
@@ -2766,8 +2731,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceList(ref common.ReferenceCallbac
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventSource"),
 									},
 								},
 							},
@@ -2816,8 +2780,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.S3Artifact"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.S3Artifact"),
 									},
 								},
 							},
@@ -2831,8 +2794,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.CalendarEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.CalendarEventSource"),
 									},
 								},
 							},
@@ -2846,8 +2808,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.FileEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.FileEventSource"),
 									},
 								},
 							},
@@ -2861,8 +2822,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ResourceEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ResourceEventSource"),
 									},
 								},
 							},
@@ -2876,8 +2836,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.WebhookEventSource"),
 									},
 								},
 							},
@@ -2891,8 +2850,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AMQPEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AMQPEventSource"),
 									},
 								},
 							},
@@ -2906,8 +2864,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.KafkaEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.KafkaEventSource"),
 									},
 								},
 							},
@@ -2921,8 +2878,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.MQTTEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.MQTTEventSource"),
 									},
 								},
 							},
@@ -2936,8 +2892,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSEventsSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NATSEventsSource"),
 									},
 								},
 							},
@@ -2951,8 +2906,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SNSEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SNSEventSource"),
 									},
 								},
 							},
@@ -2966,8 +2920,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SQSEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SQSEventSource"),
 									},
 								},
 							},
@@ -2981,8 +2934,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PubSubEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PubSubEventSource"),
 									},
 								},
 							},
@@ -2996,8 +2948,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GithubEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GithubEventSource"),
 									},
 								},
 							},
@@ -3011,8 +2962,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GitlabEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GitlabEventSource"),
 									},
 								},
 							},
@@ -3026,8 +2976,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.HDFSEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.HDFSEventSource"),
 									},
 								},
 							},
@@ -3041,8 +2990,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SlackEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SlackEventSource"),
 									},
 								},
 							},
@@ -3056,8 +3004,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.StorageGridEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.StorageGridEventSource"),
 									},
 								},
 							},
@@ -3071,8 +3018,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureEventsHubEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureEventsHubEventSource"),
 									},
 								},
 							},
@@ -3086,8 +3032,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.StripeEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.StripeEventSource"),
 									},
 								},
 							},
@@ -3101,8 +3046,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EmitterEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EmitterEventSource"),
 									},
 								},
 							},
@@ -3116,8 +3060,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.RedisEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.RedisEventSource"),
 									},
 								},
 							},
@@ -3131,8 +3074,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NSQEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.NSQEventSource"),
 									},
 								},
 							},
@@ -3146,8 +3088,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PulsarEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PulsarEventSource"),
 									},
 								},
 							},
@@ -3161,8 +3102,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GenericEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GenericEventSource"),
 									},
 								},
 							},
@@ -3183,8 +3123,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketServerEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketServerEventSource"),
 									},
 								},
 							},
@@ -3198,8 +3137,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.BitbucketEventSource"),
 									},
 								},
 							},
@@ -3213,8 +3151,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.RedisStreamEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.RedisStreamEventSource"),
 									},
 								},
 							},
@@ -3228,8 +3165,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureServiceBusEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureServiceBusEventSource"),
 									},
 								},
 							},
@@ -3243,8 +3179,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureQueueStorageEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.AzureQueueStorageEventSource"),
 									},
 								},
 							},
@@ -3258,8 +3193,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SFTPEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.SFTPEventSource"),
 									},
 								},
 							},
@@ -3273,8 +3207,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GerritEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.GerritEventSource"),
 									},
 								},
 							},
@@ -3288,8 +3221,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceSpec(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.MNSEventSource"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.MNSEventSource"),
 									},
 								},
 							},
@@ -3323,8 +3255,7 @@ func schema_pkg_apis_events_v1alpha1_EventSourceStatus(ref common.ReferenceCallb
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Condition"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Condition"),
 									},
 								},
 							},
@@ -3359,8 +3290,7 @@ func schema_pkg_apis_events_v1alpha1_ExprFilter(ref common.ReferenceCallback) co
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PayloadField"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.PayloadField"),
 									},
 								},
 							},
@@ -3431,9 +3361,8 @@ func schema_pkg_apis_events_v1alpha1_FileEventSource(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -3499,9 +3428,8 @@ func schema_pkg_apis_events_v1alpha1_GenericEventSource(ref common.ReferenceCall
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -3556,9 +3484,8 @@ func schema_pkg_apis_events_v1alpha1_GerritEventSource(ref common.ReferenceCallb
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -3593,9 +3520,8 @@ func schema_pkg_apis_events_v1alpha1_GerritEventSource(ref common.ReferenceCallb
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -3608,9 +3534,8 @@ func schema_pkg_apis_events_v1alpha1_GerritEventSource(ref common.ReferenceCallb
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -3779,9 +3704,8 @@ func schema_pkg_apis_events_v1alpha1_GitRemoteConfig(ref common.ReferenceCallbac
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -3875,9 +3799,8 @@ func schema_pkg_apis_events_v1alpha1_GithubEventSource(ref common.ReferenceCallb
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -3945,9 +3868,8 @@ func schema_pkg_apis_events_v1alpha1_GithubEventSource(ref common.ReferenceCallb
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -3960,8 +3882,7 @@ func schema_pkg_apis_events_v1alpha1_GithubEventSource(ref common.ReferenceCallb
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.OwnedRepositories"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.OwnedRepositories"),
 									},
 								},
 							},
@@ -3974,9 +3895,8 @@ func schema_pkg_apis_events_v1alpha1_GithubEventSource(ref common.ReferenceCallb
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -4030,9 +3950,8 @@ func schema_pkg_apis_events_v1alpha1_GitlabEventSource(ref common.ReferenceCallb
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -4074,9 +3993,8 @@ func schema_pkg_apis_events_v1alpha1_GitlabEventSource(ref common.ReferenceCallb
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -4089,9 +4007,8 @@ func schema_pkg_apis_events_v1alpha1_GitlabEventSource(ref common.ReferenceCallb
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -4116,9 +4033,8 @@ func schema_pkg_apis_events_v1alpha1_GitlabEventSource(ref common.ReferenceCallb
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -4183,9 +4099,8 @@ func schema_pkg_apis_events_v1alpha1_HDFSEventSource(ref common.ReferenceCallbac
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -4245,9 +4160,8 @@ func schema_pkg_apis_events_v1alpha1_HDFSEventSource(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -4289,8 +4203,7 @@ func schema_pkg_apis_events_v1alpha1_HTTPTrigger(ref common.ReferenceCallback) c
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -4316,8 +4229,7 @@ func schema_pkg_apis_events_v1alpha1_HTTPTrigger(ref common.ReferenceCallback) c
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -4344,9 +4256,8 @@ func schema_pkg_apis_events_v1alpha1_HTTPTrigger(ref common.ReferenceCallback) c
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -4372,8 +4283,7 @@ func schema_pkg_apis_events_v1alpha1_HTTPTrigger(ref common.ReferenceCallback) c
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -4465,9 +4375,8 @@ func schema_pkg_apis_events_v1alpha1_JetStreamBus(ref common.ReferenceCallback) 
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -4480,8 +4389,7 @@ func schema_pkg_apis_events_v1alpha1_JetStreamBus(ref common.ReferenceCallback) 
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/api/core/v1.Toleration"),
+										Ref: ref("k8s.io/api/core/v1.Toleration"),
 									},
 								},
 							},
@@ -4506,8 +4414,7 @@ func schema_pkg_apis_events_v1alpha1_JetStreamBus(ref common.ReferenceCallback) 
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/api/core/v1.LocalObjectReference"),
+										Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
 									},
 								},
 							},
@@ -4554,9 +4461,8 @@ func schema_pkg_apis_events_v1alpha1_JetStreamBus(ref common.ReferenceCallback) 
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -4650,9 +4556,8 @@ func schema_pkg_apis_events_v1alpha1_K8SResourcePolicy(ref common.ReferenceCallb
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -4836,9 +4741,8 @@ func schema_pkg_apis_events_v1alpha1_KafkaEventSource(ref common.ReferenceCallba
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -4937,8 +4841,7 @@ func schema_pkg_apis_events_v1alpha1_KafkaTrigger(ref common.ReferenceCallback) 
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -4978,8 +4881,7 @@ func schema_pkg_apis_events_v1alpha1_KafkaTrigger(ref common.ReferenceCallback) 
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -5019,9 +4921,8 @@ func schema_pkg_apis_events_v1alpha1_KafkaTrigger(ref common.ReferenceCallback) 
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -5182,9 +5083,8 @@ func schema_pkg_apis_events_v1alpha1_MQTTEventSource(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -5225,9 +5125,8 @@ func schema_pkg_apis_events_v1alpha1_Metadata(ref common.ReferenceCallback) comm
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -5240,9 +5139,8 @@ func schema_pkg_apis_events_v1alpha1_Metadata(ref common.ReferenceCallback) comm
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -5412,9 +5310,8 @@ func schema_pkg_apis_events_v1alpha1_NATSEventsSource(ref common.ReferenceCallba
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -5477,8 +5374,7 @@ func schema_pkg_apis_events_v1alpha1_NATSTrigger(ref common.ReferenceCallback) c
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -5490,8 +5386,7 @@ func schema_pkg_apis_events_v1alpha1_NATSTrigger(ref common.ReferenceCallback) c
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -5576,9 +5471,8 @@ func schema_pkg_apis_events_v1alpha1_NSQEventSource(ref common.ReferenceCallback
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -5644,9 +5538,8 @@ func schema_pkg_apis_events_v1alpha1_NativeStrategy(ref common.ReferenceCallback
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -5659,8 +5552,7 @@ func schema_pkg_apis_events_v1alpha1_NativeStrategy(ref common.ReferenceCallback
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/api/core/v1.Toleration"),
+										Ref: ref("k8s.io/api/core/v1.Toleration"),
 									},
 								},
 							},
@@ -5698,8 +5590,7 @@ func schema_pkg_apis_events_v1alpha1_NativeStrategy(ref common.ReferenceCallback
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/api/core/v1.LocalObjectReference"),
+										Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
 									},
 								},
 							},
@@ -5846,8 +5737,7 @@ func schema_pkg_apis_events_v1alpha1_OpenWhiskTrigger(ref common.ReferenceCallba
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -5860,8 +5750,7 @@ func schema_pkg_apis_events_v1alpha1_OpenWhiskTrigger(ref common.ReferenceCallba
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -5896,9 +5785,8 @@ func schema_pkg_apis_events_v1alpha1_OwnedRepositories(ref common.ReferenceCallb
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -6042,9 +5930,8 @@ func schema_pkg_apis_events_v1alpha1_PubSubEventSource(ref common.ReferenceCallb
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -6078,9 +5965,8 @@ func schema_pkg_apis_events_v1alpha1_PulsarEventSource(ref common.ReferenceCallb
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -6148,9 +6034,8 @@ func schema_pkg_apis_events_v1alpha1_PulsarEventSource(ref common.ReferenceCallb
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -6176,9 +6061,8 @@ func schema_pkg_apis_events_v1alpha1_PulsarEventSource(ref common.ReferenceCallb
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -6229,8 +6113,7 @@ func schema_pkg_apis_events_v1alpha1_PulsarTrigger(ref common.ReferenceCallback)
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -6243,8 +6126,7 @@ func schema_pkg_apis_events_v1alpha1_PulsarTrigger(ref common.ReferenceCallback)
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -6296,9 +6178,8 @@ func schema_pkg_apis_events_v1alpha1_PulsarTrigger(ref common.ReferenceCallback)
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -6385,9 +6266,8 @@ func schema_pkg_apis_events_v1alpha1_RedisEventSource(ref common.ReferenceCallba
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -6407,9 +6287,8 @@ func schema_pkg_apis_events_v1alpha1_RedisEventSource(ref common.ReferenceCallba
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -6479,9 +6358,8 @@ func schema_pkg_apis_events_v1alpha1_RedisStreamEventSource(ref common.Reference
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -6515,9 +6393,8 @@ func schema_pkg_apis_events_v1alpha1_RedisStreamEventSource(ref common.Reference
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -6594,9 +6471,8 @@ func schema_pkg_apis_events_v1alpha1_ResourceEventSource(ref common.ReferenceCal
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -6610,9 +6486,8 @@ func schema_pkg_apis_events_v1alpha1_ResourceEventSource(ref common.ReferenceCal
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -6648,8 +6523,7 @@ func schema_pkg_apis_events_v1alpha1_ResourceFilter(ref common.ReferenceCallback
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Selector"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Selector"),
 									},
 								},
 							},
@@ -6662,8 +6536,7 @@ func schema_pkg_apis_events_v1alpha1_ResourceFilter(ref common.ReferenceCallback
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Selector"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Selector"),
 									},
 								},
 							},
@@ -6737,9 +6610,8 @@ func schema_pkg_apis_events_v1alpha1_S3Artifact(ref common.ReferenceCallback) co
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -6757,9 +6629,8 @@ func schema_pkg_apis_events_v1alpha1_S3Artifact(ref common.ReferenceCallback) co
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -6922,9 +6793,8 @@ func schema_pkg_apis_events_v1alpha1_SFTPEventSource(ref common.ReferenceCallbac
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -7009,9 +6879,8 @@ func schema_pkg_apis_events_v1alpha1_SNSEventSource(ref common.ReferenceCallback
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -7119,9 +6988,8 @@ func schema_pkg_apis_events_v1alpha1_SQSEventSource(ref common.ReferenceCallback
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -7347,8 +7215,7 @@ func schema_pkg_apis_events_v1alpha1_SensorList(ref common.ReferenceCallback) co
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Sensor"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Sensor"),
 									},
 								},
 							},
@@ -7377,8 +7244,7 @@ func schema_pkg_apis_events_v1alpha1_SensorSpec(ref common.ReferenceCallback) co
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventDependency"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.EventDependency"),
 									},
 								},
 							},
@@ -7391,8 +7257,7 @@ func schema_pkg_apis_events_v1alpha1_SensorSpec(ref common.ReferenceCallback) co
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Trigger"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Trigger"),
 									},
 								},
 							},
@@ -7440,9 +7305,8 @@ func schema_pkg_apis_events_v1alpha1_SensorSpec(ref common.ReferenceCallback) co
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -7477,8 +7341,7 @@ func schema_pkg_apis_events_v1alpha1_SensorStatus(ref common.ReferenceCallback) 
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Condition"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Condition"),
 									},
 								},
 							},
@@ -7523,8 +7386,7 @@ func schema_pkg_apis_events_v1alpha1_Service(ref common.ReferenceCallback) commo
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/api/core/v1.ServicePort"),
+										Ref: ref("k8s.io/api/core/v1.ServicePort"),
 									},
 								},
 							},
@@ -7578,9 +7440,8 @@ func schema_pkg_apis_events_v1alpha1_SlackEventSource(ref common.ReferenceCallba
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -7666,8 +7527,7 @@ func schema_pkg_apis_events_v1alpha1_SlackTrigger(ref common.ReferenceCallback) 
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -7756,8 +7616,7 @@ func schema_pkg_apis_events_v1alpha1_StandardK8STrigger(ref common.ReferenceCall
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -7805,8 +7664,7 @@ func schema_pkg_apis_events_v1alpha1_Status(ref common.ReferenceCallback) common
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Condition"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.Condition"),
 									},
 								},
 							},
@@ -7833,9 +7691,8 @@ func schema_pkg_apis_events_v1alpha1_StatusPolicy(ref common.ReferenceCallback) 
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: 0,
-										Type:    []string{"integer"},
-										Format:  "int32",
+										Type:   []string{"integer"},
+										Format: "int32",
 									},
 								},
 							},
@@ -7867,9 +7724,8 @@ func schema_pkg_apis_events_v1alpha1_StorageGridEventSource(ref common.Reference
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -7926,9 +7782,8 @@ func schema_pkg_apis_events_v1alpha1_StorageGridEventSource(ref common.Reference
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -8010,9 +7865,8 @@ func schema_pkg_apis_events_v1alpha1_StripeEventSource(ref common.ReferenceCallb
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -8026,9 +7880,8 @@ func schema_pkg_apis_events_v1alpha1_StripeEventSource(ref common.ReferenceCallb
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -8128,8 +7981,7 @@ func schema_pkg_apis_events_v1alpha1_Template(ref common.ReferenceCallback) comm
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/api/core/v1.Volume"),
+										Ref: ref("k8s.io/api/core/v1.Volume"),
 									},
 								},
 							},
@@ -8149,9 +8001,8 @@ func schema_pkg_apis_events_v1alpha1_Template(ref common.ReferenceCallback) comm
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -8164,8 +8015,7 @@ func schema_pkg_apis_events_v1alpha1_Template(ref common.ReferenceCallback) comm
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/api/core/v1.Toleration"),
+										Ref: ref("k8s.io/api/core/v1.Toleration"),
 									},
 								},
 							},
@@ -8184,8 +8034,7 @@ func schema_pkg_apis_events_v1alpha1_Template(ref common.ReferenceCallback) comm
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/api/core/v1.LocalObjectReference"),
+										Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
 									},
 								},
 							},
@@ -8276,8 +8125,7 @@ func schema_pkg_apis_events_v1alpha1_Trigger(ref common.ReferenceCallback) commo
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.TriggerParameter"),
 									},
 								},
 							},
@@ -8551,8 +8399,7 @@ func schema_pkg_apis_events_v1alpha1_TriggerTemplate(ref common.ReferenceCallbac
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ConditionsResetCriteria"),
+										Ref: ref("github.com/argoproj/argo-events/pkg/apis/events/v1alpha1.ConditionsResetCriteria"),
 									},
 								},
 							},
@@ -8727,9 +8574,8 @@ func schema_pkg_apis_events_v1alpha1_WebhookContext(ref common.ReferenceCallback
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},
@@ -8816,9 +8662,8 @@ func schema_pkg_apis_events_v1alpha1_WebhookEventSource(ref common.ReferenceCall
 								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Type:   []string{"string"},
+										Format: "",
 									},
 								},
 							},

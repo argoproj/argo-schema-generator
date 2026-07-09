@@ -77,7 +77,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.AppProject"
                     }
                 },
@@ -106,7 +105,6 @@
                     "description": "ClusterResourceBlacklist contains list of blacklisted cluster level resources",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.GroupKind"
                     }
                 },
@@ -114,7 +112,6 @@
                     "description": "ClusterResourceWhitelist contains list of whitelisted cluster level resources",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.GroupKind"
                     }
                 },
@@ -126,7 +123,6 @@
                     "description": "Destinations contains list of destinations available for deployment",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationDestination"
                     }
                 },
@@ -134,7 +130,6 @@
                     "description": "NamespaceResourceBlacklist contains list of blacklisted namespace level resources",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.GroupKind"
                     }
                 },
@@ -142,7 +137,6 @@
                     "description": "NamespaceResourceWhitelist contains list of whitelisted namespace level resources",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.GroupKind"
                     }
                 },
@@ -158,7 +152,6 @@
                     "description": "Roles are user defined RBAC roles associated with this project",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ProjectRole"
                     }
                 },
@@ -166,7 +159,6 @@
                     "description": "SignatureKeys contains a list of PGP key IDs that commits in Git must be signed with in order to be allowed for sync",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SignatureKey"
                     }
                 },
@@ -174,16 +166,14 @@
                     "description": "SourceNamespaces defines the namespaces application resources are allowed to be created in",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "sourceRepos": {
                     "description": "SourceRepos contains list of repository URLs which can be used for deployment",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "syncWindows": {
@@ -210,7 +200,6 @@
                     "description": "JWTTokensByRole contains a list of JWT tokens issued for a given role",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.JWTTokens"
                     }
                 }
@@ -334,7 +323,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.Application"
                     }
                 },
@@ -367,8 +355,7 @@
                 "values": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -386,15 +373,13 @@
                 "annotations": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "labels": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -587,7 +572,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSet"
                     }
                 },
@@ -662,16 +646,14 @@
                     "description": "JQPathExpressions is a list of JQ path expressions to fields to ignore differences for.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "jsonPointers": {
                     "description": "JSONPointers is a list of JSON pointers to fields to ignore differences for.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "name": {
@@ -693,7 +675,6 @@
                 "matchExpressions": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationMatchExpression"
                     }
                 },
@@ -715,7 +696,6 @@
                 "steps": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetRolloutStep"
                     }
                 }
@@ -743,7 +723,6 @@
                 "generators": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetGenerator"
                     }
                 },
@@ -753,14 +732,12 @@
                 "goTemplateOptions": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "ignoreApplicationDifferences": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetResourceIgnoreDifferences"
                     }
                 },
@@ -796,7 +773,6 @@
                 "applicationStatus": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetApplicationStatus"
                     }
                 },
@@ -804,7 +780,6 @@
                     "description": "INSERT ADDITIONAL STATUS FIELD - define observed state of cluster Important: Run \"make\" to regenerate code after modifying this file",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetCondition"
                     }
                 }
@@ -889,22 +864,19 @@
                 "annotations": {
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "finalizers": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "labels": {
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "name": {
@@ -1051,7 +1023,6 @@
                     "description": "FileParameters are file parameters to the helm template",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.HelmFileParameter"
                     }
                 },
@@ -1063,7 +1034,6 @@
                     "description": "Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.HelmParameter"
                     }
                 },
@@ -1083,8 +1053,7 @@
                     "description": "ValuesFiles is a list of Helm value files to use when generating a template",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "values": {
@@ -1117,7 +1086,6 @@
                     "description": "ExtVars is a list of Jsonnet External Variables",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.JsonnetVar"
                     }
                 },
@@ -1125,15 +1093,13 @@
                     "description": "Additional library search dirs",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "tlas": {
                     "description": "TLAS is a list of Jsonnet Top-level Arguments",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.JsonnetVar"
                     }
                 }
@@ -1154,8 +1120,7 @@
                     "description": "CommonAnnotations is a list of additional annotations to add to rendered manifests",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "commonAnnotationsEnvsubst": {
@@ -1166,16 +1131,14 @@
                     "description": "CommonLabels is a list of additional labels to add to rendered manifests",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "components": {
                     "description": "Components specifies a list of kustomize components to add to the kustomization before building",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "forceCommonAnnotations": {
@@ -1190,8 +1153,7 @@
                     "description": "Images is a list of Kustomize image override specifications",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "labelWithoutSelector": {
@@ -1214,7 +1176,6 @@
                     "description": "Patches is a list of Kustomize patches",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.KustomizePatch"
                     }
                 },
@@ -1222,7 +1183,6 @@
                     "description": "Replicas is a list of Kustomize Replicas override specifications",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.KustomizeReplica"
                     }
                 },
@@ -1255,7 +1215,6 @@
                 "parameters": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSourcePluginParameter"
                     }
                 }
@@ -1271,6 +1230,20 @@
         "io.argoproj.argocd.v1alpha1.ApplicationSourcePluginParameter": {
             "type": "object",
             "properties": {
+                "array": {
+                    "description": "Array is the value of an array type parameter.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "map": {
+                    "description": "Map is the value of a map type parameter.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
                 "name": {
                     "description": "Name is the name identifying a parameter.",
                     "type": "string"
@@ -1305,7 +1278,6 @@
                     "description": "IgnoreDifferences is a list of resources and their fields which should be ignored during comparison",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ResourceIgnoreDifferences"
                     }
                 },
@@ -1313,7 +1285,6 @@
                     "description": "Info contains a list of information (URLs, email addresses, and plain text) that relates to the application",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.Info"
                     }
                 },
@@ -1335,7 +1306,6 @@
                     "description": "Sources is a reference to the location of the application's manifests or chart",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSource"
                     }
                 },
@@ -1360,7 +1330,6 @@
                     "description": "Conditions is a list of currently observed application conditions",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationCondition"
                     }
                 },
@@ -1377,7 +1346,6 @@
                     "description": "History contains information about the application's sync history",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.RevisionHistory"
                     }
                 },
@@ -1401,7 +1369,6 @@
                     "description": "Resources is a list of Kubernetes resources managed by this application",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ResourceStatus"
                     }
                 },
@@ -1413,8 +1380,7 @@
                     "description": "SourceTypes specifies the type of the sources included in the application",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "summary": {
@@ -1444,16 +1410,14 @@
                     "description": "ExternalURLs holds all external URLs of application child resources.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "images": {
                     "description": "Images holds all images of application child resources.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -1473,7 +1437,6 @@
                     "description": "Hosts holds list of Kubernetes nodes that run application related pods",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.HostInfo"
                     }
                 },
@@ -1481,7 +1444,6 @@
                     "description": "Nodes contains list of nodes which either directly managed by the application and children of directly managed nodes.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ResourceNode"
                     }
                 },
@@ -1489,7 +1451,6 @@
                     "description": "OrphanedNodes contains if or orphaned nodes: nodes which are not managed by the app but in the same namespace. List is populated only if orphaned resources enabled in app project.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ResourceNode"
                     }
                 }
@@ -1615,8 +1576,7 @@
                     "description": "List of maintainer details, name and email, e.g. [\"John Doe \u003cjohn_doe@my-company.com\u003e\"]",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -1641,8 +1601,7 @@
                     "description": "Annotations for cluster secret metadata",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "clusterResources": {
@@ -1668,8 +1627,7 @@
                     "description": "Labels for cluster secret metadata",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "name": {
@@ -1681,8 +1639,7 @@
                     "description": "Holds list of namespaces which are accessible in that cluster. Cluster level resources will be ignored if namespace list is not empty.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "project": {
@@ -1800,8 +1757,7 @@
                     "description": "Values contains key/value pairs which are passed directly as parameters to the template",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -1824,8 +1780,7 @@
                     "description": "APIVersions contains list of API versions supported by the cluster",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "applicationsCount": {
@@ -1867,7 +1822,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.Cluster"
                     }
                 },
@@ -1891,15 +1845,13 @@
                 "args": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "command": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -1927,7 +1879,6 @@
                     "description": "IgnoreDifferences is a reference to the application's ignored differences used for comparison",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ResourceIgnoreDifferences"
                     }
                 },
@@ -1940,7 +1891,6 @@
                     "description": "Sources is a reference to the application's multiple sources used for comparison",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSource"
                     }
                 }
@@ -2075,8 +2025,7 @@
                     "description": "Values contains key/value pairs which are passed directly as parameters to the template",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -2156,8 +2105,7 @@
                     "description": "Arguments to pass to the command when executing it",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "command": {
@@ -2168,8 +2116,7 @@
                     "description": "Env defines additional environment variables to expose to the process",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "installHint": {
@@ -2236,14 +2183,12 @@
                 "directories": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.GitDirectoryGeneratorItem"
                     }
                 },
                 "files": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.GitFileGeneratorItem"
                     }
                 },
@@ -2270,8 +2215,7 @@
                     "description": "Values contains key/value pairs which are passed directly as parameters to the template",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -2334,7 +2278,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.GnuPGPublicKey"
                     }
                 },
@@ -2403,8 +2346,7 @@
                 "ValuesFileSchemes": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -2451,7 +2393,6 @@
                 "resourcesInfo": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.HostResourceInfo"
                     }
                 },
@@ -2575,7 +2516,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.JWTToken"
                     }
                 }
@@ -2689,8 +2629,7 @@
                 "options": {
                     "type": "object",
                     "additionalProperties": {
-                        "type": "boolean",
-                        "default": false
+                        "type": "boolean"
                     }
                 },
                 "patch": {
@@ -2831,15 +2770,13 @@
                 "annotations": {
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "labels": {
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -2861,7 +2798,6 @@
                 "generators": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetNestedGenerator"
                     }
                 },
@@ -2889,15 +2825,13 @@
                 "generators": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetNestedGenerator"
                     }
                 },
                 "mergeKeys": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "template": {
@@ -2923,7 +2857,6 @@
                 "generators": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetTerminalGenerator"
                     }
                 }
@@ -2947,15 +2880,13 @@
                 "generators": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSetTerminalGenerator"
                     }
                 },
                 "mergeKeys": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -3078,8 +3009,7 @@
                     "description": "Array is the value of an array type parameter.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -3098,8 +3028,7 @@
                     "description": "Map is the value of a map type parameter.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -3141,7 +3070,6 @@
                     "description": "Ignore contains a list of resources that are to be excluded from orphaned resources monitoring",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.OrphanedResourceKey"
                     }
                 },
@@ -3171,24 +3099,21 @@
                     "description": "JQPathExpressions is a JQ path list that will be evaludated during the diff process",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "jsonPointers": {
                     "description": "JSONPointers is a JSON path list following the format defined in RFC4627 (https://datatracker.ietf.org/doc/html/rfc6902#section-3)",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "managedFieldsManagers": {
                     "description": "ManagedFieldsManagers is a list of trusted managers. Fields mutated by those managers will take precedence over the desired state defined in the SCM and won't be displayed in diffs",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -3248,8 +3173,7 @@
                     "description": "Values contains key/value pairs which are passed directly as parameters to the template. These values will not be sent as parameters to the plugin.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -3295,15 +3219,13 @@
                     "description": "Groups are a list of OIDC group claims bound to this role",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "jwtTokens": {
                     "description": "JWTTokens are a list of generated JWT tokens bound to this role",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.JWTToken"
                     }
                 },
@@ -3316,8 +3238,7 @@
                     "description": "Policies Stores a list of casbin formatted strings that define access policies for the role in the project",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -3347,7 +3268,6 @@
                     "description": "Filters for which pull requests should be considered.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.PullRequestGeneratorFilter"
                     }
                 },
@@ -3396,8 +3316,7 @@
                     "description": "Labels is used to filter the PRs that you want to target",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "organization": {
@@ -3542,8 +3461,7 @@
                     "description": "Labels is used to filter the MRs that you want to target",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "project": {
@@ -3629,8 +3547,7 @@
                     "description": "Labels is used to filter the PRs that you want to target",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "owner": {
@@ -3774,7 +3691,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.RepoCreds"
                     }
                 },
@@ -3955,7 +3871,6 @@
                     "description": "List of certificates to be processed",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.RepositoryCertificate"
                     }
                 },
@@ -4016,7 +3931,6 @@
                 "params": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ResourceActionParam"
                     }
                 }
@@ -4083,7 +3997,6 @@
                 "definitions": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ResourceActionDefinition"
                     }
                 },
@@ -4166,15 +4079,13 @@
                 "jqPathExpressions": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "jsonPointers": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "kind": {
@@ -4185,8 +4096,7 @@
                     "description": "ManagedFieldsManagers is a list of trusted managers. Fields mutated by those managers will take precedence over the desired state defined in the SCM and won't be displayed in diffs",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "name": {
@@ -4212,35 +4122,30 @@
                     "description": "ExternalURLs holds list of URLs which should be available externally. List is populated for ingress resources using rules hostnames.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "ingress": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.LoadBalancerIngress"
                     }
                 },
                 "labels": {
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "targetLabels": {
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "targetRefs": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ResourceRef"
                     }
                 }
@@ -4269,14 +4174,12 @@
                 "images": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "info": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.InfoItem"
                     }
                 },
@@ -4295,7 +4198,6 @@
                 "parentRefs": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ResourceRef"
                     }
                 },
@@ -4348,7 +4250,6 @@
                 "KnownTypeFields": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.KnownTypeField"
                     }
                 },
@@ -4562,8 +4463,7 @@
                     "description": "Revisions holds the revision of each source in sources field the sync was performed against",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "source": {
@@ -4575,7 +4475,6 @@
                     "description": "Sources is a reference to the application sources used for the sync operation",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSource"
                     }
                 }
@@ -4615,8 +4514,7 @@
                     "description": "Tags specifies any tags currently attached to the revision Floating tags can move from one revision to another",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -4652,7 +4550,6 @@
                     "description": "Filters for which repos should be considered.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SCMProviderGeneratorFilter"
                     }
                 },
@@ -4679,8 +4576,7 @@
                     "description": "Values contains key/value pairs which are passed directly as parameters to the template",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -4851,16 +4747,14 @@
                     "description": "An array of paths, all of which must not exist.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "pathsExist": {
                     "description": "An array of paths, all of which must exist.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "repositoryMatch": {
@@ -5059,8 +4953,7 @@
                     "description": "Manifests is an optional field that overrides sync source with a local directory for development",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "prune": {
@@ -5071,7 +4964,6 @@
                     "description": "Resources describes which resources shall be part of the sync",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.SyncOperationResource"
                     }
                 },
@@ -5083,8 +4975,7 @@
                     "description": "Revisions is the list of revision (Git) or chart version (Helm) which to sync each source in sources field for the application to If omitted, will use the revision specified in app spec.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "source": {
@@ -5095,7 +4986,6 @@
                     "description": "Sources overrides the source definition set in the application. This is typically set in a Rollback operation and is nil during a Sync operation",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSource"
                     }
                 },
@@ -5103,8 +4993,7 @@
                     "description": "SyncOptions provide per-sync sync-options, e.g. Validate=false",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "syncStrategy": {
@@ -5178,8 +5067,7 @@
                     "description": "Revisions holds the revision this sync operation was performed for respective indexed source in sources field",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "source": {
@@ -5191,7 +5079,6 @@
                     "description": "Source records the application source information of the sync, used for comparing auto-sync",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.argocd.v1alpha1.ApplicationSource"
                     }
                 }
@@ -5224,8 +5111,7 @@
                     "description": "Options allow you to specify whole app sync-options",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -5283,8 +5169,7 @@
                     "description": "Revisions contains information about the revisions of multiple sources the comparison has been performed to",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "status": {
@@ -5364,16 +5249,14 @@
                     "description": "Applications contains a list of applications that the window will apply to",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "clusters": {
                     "description": "Clusters contains a list of clusters that the window will apply to",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "duration": {
@@ -5392,8 +5275,7 @@
                     "description": "Namespaces contains a list of namespaces that the window will apply to",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "schedule": {

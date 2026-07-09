@@ -41,7 +41,6 @@
                     "description": "Artifacts is the list of artifacts to pass to the template or workflow",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Artifact"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -51,7 +50,6 @@
                     "description": "Parameters is the list of parameters to pass to the template or workflow",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Parameter"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -78,16 +76,14 @@
                     "description": "have completed Pods been processed? (mapped by Pod name) used to prevent re-processing the Status of a Pod more than once",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "boolean",
-                        "default": false
+                        "type": "boolean"
                     }
                 },
                 "strategiesProcessed": {
                     "description": "have Pods been started to perform this strategy? (enables us not to re-process what we've already done)",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "boolean",
-                        "default": false
+                        "type": "boolean"
                     }
                 }
             },
@@ -238,7 +234,6 @@
                     "description": "ArtifactsByNode maps Node name to information pertaining to Artifacts on that Node",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtifactNodeSpec"
                     }
                 }
@@ -259,7 +254,6 @@
                     "description": "ArtifactResultsByNode maps Node name to result",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtifactResultNodeStatus"
                     }
                 }
@@ -337,7 +331,6 @@
                     "description": "Artifacts maps artifact name to Artifact description",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Artifact"
                     }
                 }
@@ -586,7 +579,6 @@
                     "description": "ArtifactResults maps Artifact name to result of the deletion",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ArtifactResult"
                     }
                 }
@@ -605,8 +597,7 @@
                 "artifactGCStrategies": {
                     "type": "object",
                     "additionalProperties": {
-                        "type": "boolean",
-                        "default": false
+                        "type": "boolean"
                     }
                 },
                 "artifactName": {
@@ -621,8 +612,7 @@
                 "nodeTypes": {
                     "type": "object",
                     "additionalProperties": {
-                        "type": "boolean",
-                        "default": false
+                        "type": "boolean"
                     }
                 },
                 "templateName": {
@@ -992,7 +982,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ClusterWorkflowTemplate"
                     }
                 },
@@ -1082,8 +1071,7 @@
                     "description": "Arguments to the entrypoint. The container image's CMD is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. \"$$(VAR_NAME)\" will produce the string literal \"$(VAR_NAME)\". Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     },
                     "x-kubernetes-list-type": "atomic"
                 },
@@ -1091,23 +1079,20 @@
                     "description": "Entrypoint array. Not executed within a shell. The container image's ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. \"$$(VAR_NAME)\" will produce the string literal \"$(VAR_NAME)\". Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     },
                     "x-kubernetes-list-type": "atomic"
                 },
                 "dependencies": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "env": {
                     "description": "List of environment variables to set in the container. Cannot be updated.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.EnvVar"
                     },
                     "x-kubernetes-list-map-keys": [
@@ -1121,7 +1106,6 @@
                     "description": "List of sources to populate environment variables in the container. The keys defined within a source must be a C_IDENTIFIER. All invalid keys will be reported as an event when the container is starting. When a key exists in multiple sources, the value associated with the last source will take precedence. Values defined by an Env with a duplicate key will take precedence. Cannot be updated.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.EnvFromSource"
                     },
                     "x-kubernetes-list-type": "atomic"
@@ -1151,7 +1135,6 @@
                     "description": "List of ports to expose from the container. Not specifying a port here DOES NOT prevent that port from being exposed. Any port which is listening on the default \"0.0.0.0\" address inside a container will be accessible from the network. Modifying this array with strategic merge patch may corrupt the data. For more information See https://github.com/kubernetes/kubernetes/issues/108255. Cannot be updated.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.ContainerPort"
                     },
                     "x-kubernetes-list-map-keys": [
@@ -1170,7 +1153,6 @@
                     "description": "Resources resize policy for the container.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.ContainerResizePolicy"
                     },
                     "x-kubernetes-list-type": "atomic"
@@ -1216,7 +1198,6 @@
                     "description": "volumeDevices is the list of block devices to be used by the container.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.VolumeDevice"
                     },
                     "x-kubernetes-list-map-keys": [
@@ -1230,7 +1211,6 @@
                     "description": "Pod volumes to mount into the container's filesystem. Cannot be updated.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.VolumeMount"
                     },
                     "x-kubernetes-list-map-keys": [
@@ -1286,7 +1266,6 @@
                 "containers": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.ContainerNode"
                     }
                 },
@@ -1297,7 +1276,6 @@
                 "volumeMounts": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.VolumeMount"
                     }
                 }
@@ -1419,7 +1397,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.CronWorkflow"
                     }
                 },
@@ -1464,8 +1441,7 @@
                     "description": "v3.6 and after: Schedules is a list of schedules to run the Workflow in Cron format",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "startingDeadlineSeconds": {
@@ -1520,7 +1496,6 @@
                     "description": "Active is a list of active workflows stemming from this CronWorkflow",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.ObjectReference"
                     }
                 },
@@ -1528,7 +1503,6 @@
                     "description": "Conditions is a list of conditions the CronWorkflow may have",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Condition"
                     }
                 },
@@ -1582,8 +1556,7 @@
                     "description": "Dependencies are name of other targets which this depends on",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "depends": {
@@ -1594,7 +1567,6 @@
                     "description": "Hooks hold the lifecycle hook which is invoked at lifecycle of task, irrespective of the success, failure, or error status of the primary task",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.LifecycleHook"
                     }
                 },
@@ -1666,7 +1638,6 @@
                     "description": "Tasks are a list of DAG tasks",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.DAGTask"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -1698,7 +1669,6 @@
                     "description": "Transformation applies a set of transformations",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.TransformationStep"
                     }
                 }
@@ -1894,8 +1864,7 @@
                     "description": "Fetch specifies a number of refs that should be fetched before checkout",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "insecureIgnoreHostKey": {
@@ -1951,8 +1920,7 @@
                     "description": "Addresses is accessible addresses of HDFS name nodes",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "dataTransferProtection": {
@@ -2013,8 +1981,7 @@
                     "description": "Addresses is accessible addresses of HDFS name nodes",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "dataTransferProtection": {
@@ -2074,8 +2041,7 @@
                     "description": "Addresses is accessible addresses of HDFS name nodes",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "dataTransferProtection": {
@@ -2174,7 +2140,6 @@
                     "description": "Headers are an optional list of headers to send with HTTP requests",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.HTTPHeader"
                     }
                 },
@@ -2224,7 +2189,6 @@
                     "description": "Headers are an optional list of headers to send with HTTP requests for artifacts",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Header"
                     }
                 },
@@ -2387,7 +2351,6 @@
                     "description": "Artifact are a list of artifacts passed as inputs",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Artifact"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -2397,7 +2360,6 @@
                     "description": "Parameters are a list of parameters passed as inputs",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Parameter"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -2429,8 +2391,7 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -2468,8 +2429,7 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -2636,15 +2596,13 @@
                 "annotations": {
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "labels": {
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 }
             },
@@ -2758,7 +2716,6 @@
                     "description": "Holding is a list of mutexes and their respective objects that are held by mutex lock for this workflow.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.MutexHolding"
                     },
                     "x-kubernetes-list-type": "atomic"
@@ -2767,7 +2724,6 @@
                     "description": "Waiting is a list of mutexes and their respective objects this workflow is waiting for.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.MutexHolding"
                     },
                     "x-kubernetes-list-type": "atomic"
@@ -2842,8 +2798,7 @@
                     "description": "Children is a list of child node IDs",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "daemoned": {
@@ -2897,8 +2852,7 @@
                     "description": "OutboundNodes tracks the node IDs which are considered \"outbound\" nodes to a template invocation. For every invocation of a template, there are nodes which we considered as \"outbound\". Essentially, these are last nodes in the execution sequence to run, before the template is considered completed. These nodes are then connected as parents to a following step.\n\nIn the case of single pod steps (i.e. container, script, resource templates), this list will be nil since the pod itself is already considered the \"outbound\" node. In the case of DAGs, outbound nodes are the \"target\" tasks (tasks with no children). In the case of steps, outbound nodes are all the containers involved in the last step group. NOTE: since templates are composable, the list of outbound nodes are carried upwards when a DAG/steps template invokes another DAG/steps template. In other words, the outbound nodes of a template, will be a superset of the outbound nodes of its last children.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "outputs": {
@@ -2922,8 +2876,7 @@
                     "type": "object",
                     "additionalProperties": {
                         "type": "integer",
-                        "format": "int64",
-                        "default": 0
+                        "format": "int64"
                     }
                 },
                 "startedAt": {
@@ -3005,15 +2958,13 @@
                 "endpointParams": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.OAuth2EndpointParam"
                     }
                 },
                 "scopes": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "tokenURLSecret": {
@@ -3241,7 +3192,6 @@
                     "description": "Artifacts holds the list of output artifacts produced by a step",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Artifact"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -3255,7 +3205,6 @@
                     "description": "Parameters holds the list of output parameters produced by a step",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Parameter"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -3304,8 +3253,7 @@
                     "description": "Enum holds a list of string values to choose from, for the actual value of the parameter",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "globalName": {
@@ -3461,8 +3409,7 @@
                     "description": "Flags is a set of additional options passed to kubectl before submitting a resource I.e. to disable resource validation: flags: [\n\t\"--validate=false\"  # disable resource validation\n]",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "manifest": {
@@ -3786,8 +3733,7 @@
                     "description": "Arguments to the entrypoint. The container image's CMD is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. \"$$(VAR_NAME)\" will produce the string literal \"$(VAR_NAME)\". Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     },
                     "x-kubernetes-list-type": "atomic"
                 },
@@ -3795,8 +3741,7 @@
                     "description": "Entrypoint array. Not executed within a shell. The container image's ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. \"$$(VAR_NAME)\" will produce the string literal \"$(VAR_NAME)\". Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     },
                     "x-kubernetes-list-type": "atomic"
                 },
@@ -3804,7 +3749,6 @@
                     "description": "List of environment variables to set in the container. Cannot be updated.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.EnvVar"
                     },
                     "x-kubernetes-list-map-keys": [
@@ -3818,7 +3762,6 @@
                     "description": "List of sources to populate environment variables in the container. The keys defined within a source must be a C_IDENTIFIER. All invalid keys will be reported as an event when the container is starting. When a key exists in multiple sources, the value associated with the last source will take precedence. Values defined by an Env with a duplicate key will take precedence. Cannot be updated.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.EnvFromSource"
                     },
                     "x-kubernetes-list-type": "atomic"
@@ -3848,7 +3791,6 @@
                     "description": "List of ports to expose from the container. Not specifying a port here DOES NOT prevent that port from being exposed. Any port which is listening on the default \"0.0.0.0\" address inside a container will be accessible from the network. Modifying this array with strategic merge patch may corrupt the data. For more information See https://github.com/kubernetes/kubernetes/issues/108255. Cannot be updated.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.ContainerPort"
                     },
                     "x-kubernetes-list-map-keys": [
@@ -3867,7 +3809,6 @@
                     "description": "Resources resize policy for the container.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.ContainerResizePolicy"
                     },
                     "x-kubernetes-list-type": "atomic"
@@ -3918,7 +3859,6 @@
                     "description": "volumeDevices is the list of block devices to be used by the container.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.VolumeDevice"
                     },
                     "x-kubernetes-list-map-keys": [
@@ -3932,7 +3872,6 @@
                     "description": "Pod volumes to mount into the container's filesystem. Cannot be updated.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.VolumeMount"
                     },
                     "x-kubernetes-list-map-keys": [
@@ -3962,8 +3901,7 @@
                     "description": "Holders stores the list of current holder names in the workflow.",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     },
                     "x-kubernetes-list-type": "atomic"
                 },
@@ -4012,7 +3950,6 @@
                     "description": "Holding stores the list of resource acquired synchronization lock for workflows.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.SemaphoreHolding"
                     }
                 },
@@ -4020,7 +3957,6 @@
                     "description": "Waiting indicates the list of current synchronization lock holders.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.SemaphoreHolding"
                     }
                 }
@@ -4148,8 +4084,7 @@
                     "description": "Parameters passes input parameters to workflow",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "podPriorityClassName": {
@@ -4343,8 +4278,7 @@
                     "description": "Annotations is a list of annotations to add to the template at runtime",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "archiveLocation": {
@@ -4387,7 +4321,6 @@
                     "description": "HostAliases is an optional list of hosts and IPs that will be injected into the pod spec",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.HostAlias"
                     },
                     "x-kubernetes-patch-merge-key": "ip",
@@ -4401,7 +4334,6 @@
                     "description": "InitContainers is a list of containers which run before the main container.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.UserContainer"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -4433,8 +4365,7 @@
                     "description": "NodeSelector is a selector to schedule this step of the workflow to be run on the selected node(s). Overrides the selector set at the workflow level.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "outputs": {
@@ -4487,7 +4418,6 @@
                     "description": "Sidecars is a list of containers which run alongside the main container Sidecars are automatically killed when the main container completes",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.UserContainer"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -4516,7 +4446,6 @@
                     "description": "Tolerations to apply to workflow pods.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.Toleration"
                     },
                     "x-kubernetes-patch-merge-key": "key",
@@ -4526,7 +4455,6 @@
                     "description": "Volumes is a list of volumes that can be mounted by containers in a template.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.Volume"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -4597,8 +4525,7 @@
                     "description": "Arguments to the entrypoint. The container image's CMD is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. \"$$(VAR_NAME)\" will produce the string literal \"$(VAR_NAME)\". Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     },
                     "x-kubernetes-list-type": "atomic"
                 },
@@ -4606,8 +4533,7 @@
                     "description": "Entrypoint array. Not executed within a shell. The container image's ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. \"$$(VAR_NAME)\" will produce the string literal \"$(VAR_NAME)\". Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell",
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     },
                     "x-kubernetes-list-type": "atomic"
                 },
@@ -4615,7 +4541,6 @@
                     "description": "List of environment variables to set in the container. Cannot be updated.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.EnvVar"
                     },
                     "x-kubernetes-list-map-keys": [
@@ -4629,7 +4554,6 @@
                     "description": "List of sources to populate environment variables in the container. The keys defined within a source must be a C_IDENTIFIER. All invalid keys will be reported as an event when the container is starting. When a key exists in multiple sources, the value associated with the last source will take precedence. Values defined by an Env with a duplicate key will take precedence. Cannot be updated.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.EnvFromSource"
                     },
                     "x-kubernetes-list-type": "atomic"
@@ -4663,7 +4587,6 @@
                     "description": "List of ports to expose from the container. Not specifying a port here DOES NOT prevent that port from being exposed. Any port which is listening on the default \"0.0.0.0\" address inside a container will be accessible from the network. Modifying this array with strategic merge patch may corrupt the data. For more information See https://github.com/kubernetes/kubernetes/issues/108255. Cannot be updated.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.ContainerPort"
                     },
                     "x-kubernetes-list-map-keys": [
@@ -4682,7 +4605,6 @@
                     "description": "Resources resize policy for the container.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.ContainerResizePolicy"
                     },
                     "x-kubernetes-list-type": "atomic"
@@ -4728,7 +4650,6 @@
                     "description": "volumeDevices is the list of block devices to be used by the container.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.VolumeDevice"
                     },
                     "x-kubernetes-list-map-keys": [
@@ -4742,7 +4663,6 @@
                     "description": "Pod volumes to mount into the container's filesystem. Cannot be updated.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.VolumeMount"
                     },
                     "x-kubernetes-list-map-keys": [
@@ -4974,7 +4894,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.WorkflowArtifactGCTask"
                     }
                 },
@@ -5043,7 +4962,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.WorkflowEventBinding"
                     }
                 },
@@ -5136,7 +5054,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Workflow"
                     }
                 },
@@ -5163,21 +5080,18 @@
                 "annotations": {
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "labels": {
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "labelsFrom": {
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.LabelValueFrom"
                     }
                 }
@@ -5244,14 +5158,12 @@
                     "description": "Hooks holds the lifecycle hook which is invoked at lifecycle of step, irrespective of the success, failure, or error status of the primary step",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.LifecycleHook"
                     }
                 },
                 "hostAliases": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.HostAlias"
                     },
                     "x-kubernetes-patch-merge-key": "ip",
@@ -5265,7 +5177,6 @@
                     "description": "ImagePullSecrets is a list of references to secrets in the same namespace to use for pulling any images in pods that reference this ServiceAccount. ImagePullSecrets are distinct from Secrets because Secrets can be mounted in the pod, but ImagePullSecrets are only accessed by the kubelet. More info: https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.LocalObjectReference"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -5279,8 +5190,7 @@
                     "description": "NodeSelector is a selector which will result in all pods of the workflow to be scheduled on the selected node(s). This is able to be overridden by a nodeSelector specified in the template.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "string",
-                        "default": ""
+                        "type": "string"
                     }
                 },
                 "onExit": {
@@ -5353,7 +5263,6 @@
                     "description": "Templates is a list of workflow templates used in a workflow",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Template"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -5363,7 +5272,6 @@
                     "description": "Tolerations to apply to workflow pods.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.Toleration"
                     },
                     "x-kubernetes-patch-merge-key": "key",
@@ -5381,7 +5289,6 @@
                     "description": "VolumeClaimTemplates is a list of claims that containers are allowed to reference. The Workflow controller will create the claims at the beginning of the workflow and delete the claims upon completion of the workflow",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.PersistentVolumeClaim"
                     }
                 },
@@ -5389,7 +5296,6 @@
                     "description": "Volumes is a list of volumes that can be mounted by containers in a workflow.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.Volume"
                     },
                     "x-kubernetes-patch-merge-key": "name",
@@ -5432,7 +5338,6 @@
                     "description": "Conditions is a list of conditions the Workflow may have",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Condition"
                     }
                 },
@@ -5453,7 +5358,6 @@
                     "description": "Nodes is a mapping between a node ID and the node's status.",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.NodeStatus"
                     }
                 },
@@ -5469,7 +5373,6 @@
                     "description": "PersistentVolumeClaims tracks all PVCs that were created as part of the workflow. The contents of this list are drained at the end of the workflow.",
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.k8s.api.core.v1.Volume"
                     }
                 },
@@ -5486,8 +5389,7 @@
                     "type": "object",
                     "additionalProperties": {
                         "type": "integer",
-                        "format": "int64",
-                        "default": 0
+                        "format": "int64"
                     }
                 },
                 "startedAt": {
@@ -5498,7 +5400,6 @@
                     "description": "StoredTemplates is a mapping between a template ref and the node's status.",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Template"
                     }
                 },
@@ -5514,8 +5415,7 @@
                     "description": "TaskResultsCompletionStatus tracks task result completion status (mapped by node ID). Used to prevent premature archiving and garbage collection.",
                     "type": "object",
                     "additionalProperties": {
-                        "type": "boolean",
-                        "default": false
+                        "type": "boolean"
                     }
                 }
             },
@@ -5544,7 +5444,6 @@
                     "description": "Hooks holds the lifecycle hook which is invoked at lifecycle of step, irrespective of the success, failure, or error status of the primary step",
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.LifecycleHook"
                     }
                 },
@@ -5650,7 +5549,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.WorkflowTaskResult"
                     }
                 },
@@ -5721,7 +5619,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.WorkflowTaskSet"
                     }
                 },
@@ -5748,7 +5645,6 @@
                 "tasks": {
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Template"
                     }
                 }
@@ -5767,7 +5663,6 @@
                 "nodes": {
                     "type": "object",
                     "additionalProperties": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.NodeResult"
                     }
                 }
@@ -5828,7 +5723,6 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "default": {},
                         "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.WorkflowTemplate"
                     }
                 },
