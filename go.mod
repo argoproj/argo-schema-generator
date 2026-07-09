@@ -1,6 +1,6 @@
 module github.com/zachaller/argo-schema-generator
 
-go 1.24.10
+go 1.25
 
 require (
 	github.com/argoproj/argo-cd/v2 v2.11.0
